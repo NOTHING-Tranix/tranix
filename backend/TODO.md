@@ -8,7 +8,7 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 | 0 Foundation | 10 | 10 |
 | 1 Auth and profile | 12 | 12 |
 | 2 Verification and documents | 8 | 7 |
-| 3 Wallet | 8 | 0 |
+| 3 Wallet | 8 | 8 |
 | 4 Loads (shipper) | 9 | 0 |
 | 5 Fleet and driver setup | 9 | 0 |
 | 6 Matching and acceptance | 7 | 0 |
@@ -17,7 +17,7 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 | 8 Payments, ratings, Trust Score | 8 | 0 |
 | 9 Farmer Network | 4 | 0 |
 | 10 Receiver and public pages | 6 | 0 |
-| 11 Notifications and support | 7 | 0 |
+| 11 Notifications and support | 7 | 2 |
 | 12 Admin API | 12 | 0 |
 | 13 Real integrations | 7 | 0 |
 | 14 Hardening and release | 8 | 0 |
@@ -59,14 +59,14 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 - [x] **B-208** Tests: profile completion per role, guard blocks unverified users. (2026-11-21)
 
 ## Phase 3 — Wallet
-- [ ] **B-301** `wallet_account`, append-only `wallet_entry`, cached balance with row lock.
-- [ ] **B-302** `GET /wallet`, `GET /wallet/transactions` (filters), statement PDF (simple).
-- [ ] **B-303** `POST /wallet/topup-link` → signed token (15 min) → `/p/wallet/topup?t=` page (Thymeleaf) → gateway checkout (fake in dev).
-- [ ] **B-304** `POST /webhooks/payments`: signature check, idempotent by gateway payment id, `TOPUP` entry, push notification.
-- [ ] **B-305** `WalletApi.hasBalance(account, chargeType)` and `WalletApi.charge(...)` (idempotent per load + type).
-- [ ] **B-306** Admin credit/refund with reason (audited).
-- [ ] **B-307** Low-balance notification.
-- [ ] **B-308** Concurrency tests: two charges at once can't overdraw.
+- [x] **B-301** `wallet_account`, append-only `wallet_entry`, cached balance with row lock. (2026-11-21)
+- [x] **B-302** `GET /wallet`, `GET /wallet/transactions` (filters), statement PDF (simple). (2026-11-21)
+- [x] **B-303** `POST /wallet/topup-link` → signed token (15 min) → `/p/wallet/topup?t=` page (Thymeleaf) → gateway checkout (fake in dev). (2026-11-21)
+- [x] **B-304** `POST /webhooks/payments`: signature check, idempotent by gateway payment id, `TOPUP` entry, push notification. (2026-11-21)
+- [x] **B-305** `WalletApi.hasBalance(account, chargeType)` and `WalletApi.charge(...)` (idempotent per load + type). (2026-11-21)
+- [x] **B-306** Admin credit/refund with reason (audited). (2026-11-21)
+- [x] **B-307** Low-balance notification. (2026-11-21)
+- [x] **B-308** Concurrency tests: two charges at once can't overdraw. (2026-11-21)
 
 ## Phase 4 — Loads (shipper)
 - [ ] **B-401** `loads_load`, `loads_timeline`, load code generator (`TRX-000123`).
@@ -145,8 +145,8 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 - [ ] **B-1006** Link page never shows the delivery OTP (test).
 
 ## Phase 11 — Notifications and support
-- [ ] **B-1101** Notification inbox with tabs + `summary` (latest Tranix message, latest trip update).
-- [ ] **B-1102** Event → template (en/ta/hi) → FCM push and/or SMS router.
+- [x] **B-1101** Notification inbox with tabs + `summary` (latest Tranix message, latest trip update). (2026-11-21)
+- [x] **B-1102** Event → template (en/ta/hi) → FCM push and/or SMS router. (2026-11-21)
 - [ ] **B-1103** Broadcasts (all/role/district/user; scheduled) → inbox + push.
 - [ ] **B-1104** Tickets: create, list, detail, messages, reopen within 7 days.
 - [ ] **B-1105** Unread reply indicators.

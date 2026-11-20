@@ -1,0 +1,35 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${p.language}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Tranix</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 0; background: #f4f6f9; color: #1b1b1f; }
+    main { max-width: 420px; margin: 0 auto; padding: 24px 16px; }
+    .card { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+    h1 { font-size: 20px; color: #1F4E79; margin-top: 0; }
+    .amount { font-size: 32px; font-weight: 700; margin: 12px 0; }
+    a.pay, button { display: block; width: 100%; padding: 14px; font-size: 18px; background: #1F4E79; color: #fff;
+      border: 0; border-radius: 8px; text-align: center; text-decoration: none; }
+    .muted { color: #5f6368; }
+  </style>
+</head>
+<body>
+<main>
+  <div class="card">
+    <h1 th:text="${t.title}">Add money</h1>
+    <div th:if="${p.state == 'READY'}">
+      <p class="muted"><span th:text="${t.for}">For</span>: <span th:text="${p.name}">Name</span></p>
+      <div class="muted" th:text="${t.amount}">Amount</div>
+      <div class="amount" th:text="'₹' + ${#numbers.formatInteger(p.amountInr, 1, 'COMMA')}">₹500</div>
+      <a class="pay" th:href="${p.checkoutUrl}" th:text="${t.pay}">Pay now</a>
+    </div>
+    <p th:if="${p.state == 'PAID'}" th:text="${t.paid}">Paid</p>
+    <p th:if="${p.state == 'EXPIRED'}" th:text="${t.expired}">Expired</p>
+    <p th:if="${p.state == 'INVALID'}" th:text="${t.invalid}">Invalid</p>
+  </div>
+</main>
+</body>
+</html>

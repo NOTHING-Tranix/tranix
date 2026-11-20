@@ -108,10 +108,10 @@ Language: en | ta | hi
 | Method & path | Notes |
 | --- | --- |
 | `GET /wallet` | `{balanceInr, postingChargeInr, tripChargeInr, lowBalance}` |
-| `GET /wallet/transactions?type=&month=&page=` | `[{txnId, at, amountInr, direction: CREDIT\|DEBIT, type, loadId?, note?}]` |
-| `POST /wallet/topup-link` | `{amountInr}` → `{url, expiresAt}` — app opens `url` in the browser (server page `/p/wallet/topup?t=...`) |
-| `POST /webhooks/payments` | Gateway webhook (signature-verified, idempotent). Not called by the app |
-| `GET /wallet/statement?month=` | PDF download |
+| `GET /wallet/transactions?type=&month=YYYY-MM&page=&size=` | Paged `[{txnId, at, amountInr, direction: CREDIT|DEBIT, type, loadId?, note?}]` |\|DEBIT, type, loadId?, note?}]` |
+| `POST /wallet/topup-link` | `{amountInr}` (₹100–₹50,000, settings) → `{url, expiresAt}` — app opens `url` in the browser (server page `/p/wallet/topup?t=...`, 15 min). `RECEIVER`/`ADMIN` have no wallet → `403 FORBIDDEN` |
+| `POST /webhooks/payments` | Gateway webhook, header `X-Signature` (signature-verified, idempotent by event and order). Not called by the app |
+| `GET /wallet/statement?month=YYYY-MM` | PDF download (JWT) |
 
 ## 6. Loads (shipper side: LOAD_PROVIDER, FARMER_NETWORK)
 
@@ -211,7 +211,7 @@ LoadDetail = LoadSummary + { pickup, drop, senderName, senderMobile, receiverNam
 | `POST /ratings/{loadId}/later` | One "Later" per pending rating |
 | `GET /trust-score` | `{score, updatedAt, trend[]}` |
 | `GET /trust-score/events?page=` | `[{at, loadId?, event, points, reason}]` |
-| `GET /notifications?tab=&page=` · `POST /notifications/{id}/read` · `POST /notifications/read-all` · `GET /notifications/summary` | `{unreadByTab, latestTranixMessage, latestTripUpdate}` |
+| `GET /notifications?tab=&page=` · `POST /notifications/{id}/read` · `POST /notifications/read-all` · `GET /notifications/summary` | Item `{id, tab, type, title, body, route?, read, createdAt}` (paged). Summary `{unreadByTab, latestTranixMessage?, latestTripUpdate?}` (items or null). Push data: `{notificationId, tab, route?}` |
 | `GET /tickets` · `POST /tickets` `{type, otherText?, loadId?, description, fileIds[]}` · `GET /tickets/{id}` · `POST /tickets/{id}/messages` · `POST /tickets/{id}/reopen` | |
 
 ## 12. Settings for clients
