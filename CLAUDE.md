@@ -19,7 +19,8 @@ Claude Code is run **from this folder**. This file is read first; `backend/CLAUD
 ├── backend/             ← Spring Boot (Java 21) — CLAUDE.md, TODO.md (B-xxx), docs/domain-model.md
 └── frontend/            ← Flutter (Android first) — CLAUDE.md, TODO.md (A-xxx), docs/screens.md, architecture.md, ui-guidelines.md
 ```
-If the real folder names differ (e.g. `tranix_backend`, `app`), update the paths in this file, `ROADMAP.md` and both sub-CLAUDE.md files in the first session.
+Folder names checked on 2026-11-21: `backend/` and `frontend/` (renamed from `tranix-backend`/`tranix-frontend`). One git repo for the whole project: `NOTHING-Tranix/tranix` (private).
+On this Windows machine use `mvnw.cmd` in `backend/`, with `JAVA_HOME` = JDK 21 (the default `java` on PATH is 24).
 
 ## 2. Source of truth and precedence
 
