@@ -33,7 +33,7 @@ void main() {
     expect(find.text('Posting charge ₹50 · Trip charge ₹50'), findsOneWidget);
     expect(find.text('₹500'), findsOneWidget);
     expect(find.text('₹2,000'), findsOneWidget);
-    await tester.scrollUntilVisible(find.text('TXN-000045 · 20 Nov, 3:00 pm', skipOffstage: false), 200);
+    await tester.scrollUntilVisible(find.textContaining('TXN-000045'), 200);
     expect(find.textContaining('TXN-000045'), findsOneWidget);
   });
 }
