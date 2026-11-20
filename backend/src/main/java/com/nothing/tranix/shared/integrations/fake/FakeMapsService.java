@@ -22,4 +22,15 @@ public class FakeMapsService implements MapsService {
         int minutes = (int) Math.ceil(km / SPEED_KMH * 60);
         return new RouteEstimate(rounded, minutes);
     }
+
+    /** Fake: the last two comma-separated parts of the address (e.g. "Oddanchatram, Dindigul"). */
+    @Override
+    public String area(GeoPoint point, String address) {
+        String[] parts = address == null ? new String[0] : address.split(",");
+        java.util.List<String> clean = java.util.Arrays.stream(parts).map(String::trim).filter(s -> !s.isEmpty() && !s.matches("[0-9]{6}")).toList();
+        if (clean.isEmpty()) {
+            return String.format("%.2f, %.2f", point.lat(), point.lng());
+        }
+        return String.join(", ", clean.subList(Math.max(0, clean.size() - 2), clean.size()));
+    }
 }

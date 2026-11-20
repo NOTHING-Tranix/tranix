@@ -117,12 +117,12 @@ Language: en | ta | hi
 
 | Method & path | Notes |
 | --- | --- |
-| `POST /loads/estimate` | `{pickup, drop, pickupWindowStart}` → `{distanceKm, driveMinutes, deliveryEta, suggestedAmountRange?}` |
+| `POST /loads/estimate` | `{pickup:{lat,lng}, drop:{lat,lng}, pickupWindowStart, vehicleType?}` → `{distanceKm, driveMinutes, deliveryEta, suggestedAmountRange?: {minInr, maxInr}}` |
 | `POST /loads` | `LoadCreate` → `Load`. Checks `NOT_VERIFIED`, `INSUFFICIENT_BALANCE` |
 | `GET /loads?scope=ONGOING\|HISTORY&farmerId=&q=&page=` | `[LoadSummary]` |
 | `GET /loads/{id}` | `LoadDetail` |
 | `PUT /loads/{id}` | Only `NOT_ACCEPTED` |
-| `POST /loads/{id}/cancel` | `{reason, note?}` → `LoadDetail` (shows rule outcome) |
+| `POST /loads/{id}/cancel` | `{reason, note?}` → `LoadDetail`. `reason` from settings `lists.cancel_reasons_shipper` (note required for OTHER). After pickup → `INVALID_STATE` (support only). `LoadDetail.cancelInfo = {chargesKept, trustScorePenalty, supportOnly}` shows the outcome before confirming |
 | `POST /loads/{id}/repost` | → new `Load` |
 | `GET /loads/{id}/tracking` | `{driverLocation{lat,lng,at}, etaAt, routeStatus}` (poll 30 s) |
 | `GET /loads/{id}/otp` | `{purpose, code, expiresAt}` — only for the sender (pickup) / registered receiver (delivery) while active |

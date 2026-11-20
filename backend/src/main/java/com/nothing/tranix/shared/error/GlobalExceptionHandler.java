@@ -49,6 +49,15 @@ public class GlobalExceptionHandler {
         return respond(Problems.of(ErrorCode.VALIDATION_FAILED, "Some fields are invalid", fields));
     }
 
+    @ExceptionHandler(org.springframework.web.method.annotation.HandlerMethodValidationException.class)
+    ResponseEntity<Problems.Problem> invalidParameters(org.springframework.web.method.annotation.HandlerMethodValidationException ex) {
+        List<ApiException.FieldError> fields = ex.getParameterValidationResults().stream()
+                .flatMap(r -> r.getResolvableErrors().stream().map(e -> new ApiException.FieldError(
+                        r.getMethodParameter().getParameterName(), e.getDefaultMessage())))
+                .toList();
+        return respond(Problems.of(ErrorCode.VALIDATION_FAILED, "Some fields are invalid", fields));
+    }
+
     @ExceptionHandler({HttpMessageNotReadableException.class, MethodArgumentTypeMismatchException.class,
             MissingServletRequestParameterException.class, MissingServletRequestPartException.class})
     ResponseEntity<Problems.Problem> badRequest(Exception ex) {

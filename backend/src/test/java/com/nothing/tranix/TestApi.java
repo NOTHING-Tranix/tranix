@@ -29,8 +29,11 @@ public class TestApi {
     private final FakeSmsSender sms;
     private final JsonMapper json;
     private final JdbcTemplate jdbc;
+    private final com.nothing.tranix.wallet.internal.WalletService wallet;
 
-    public TestApi(MockMvc mvc, FakeSmsSender sms, JsonMapper json, JdbcTemplate jdbc) {
+    public TestApi(MockMvc mvc, FakeSmsSender sms, JsonMapper json, JdbcTemplate jdbc,
+                   com.nothing.tranix.wallet.internal.WalletService wallet) {
+        this.wallet = wallet;
         this.mvc = mvc;
         this.sms = sms;
         this.json = json;
@@ -83,6 +86,11 @@ public class TestApi {
                 .file(new org.springframework.mock.web.MockMultipartFile("file", "a.png", "image/png", png))
                 .header("Authorization", "Bearer " + as.accessToken())).andReturn().getResponse().getContentAsString();
         return JsonPath.read(body, "$.fileId");
+    }
+
+    /** Credits the wallet directly (test setup). */
+    public void fund(Session s, long amountInr) {
+        wallet.adminCredit(s.userId(), amountInr, "test funding", null);
     }
 
     public ResultActions send(String path, Object body, Session as) throws Exception {

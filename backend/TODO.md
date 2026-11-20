@@ -9,7 +9,7 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 | 1 Auth and profile | 12 | 12 |
 | 2 Verification and documents | 8 | 7 |
 | 3 Wallet | 8 | 8 |
-| 4 Loads (shipper) | 9 | 0 |
+| 4 Loads (shipper) | 9 | 8 |
 | 5 Fleet and driver setup | 9 | 0 |
 | 6 Matching and acceptance | 7 | 0 |
 | 6A Wish list | 6 | 0 |
@@ -69,15 +69,15 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 - [x] **B-308** Concurrency tests: two charges at once can't overdraw. (2026-11-21)
 
 ## Phase 4 — Loads (shipper)
-- [ ] **B-401** `loads_load`, `loads_timeline`, load code generator (`TRX-000123`).
-- [ ] **B-402** `POST /loads/estimate` via `MapsService` (distance, drive time, ETA with loading buffer; suggested range when history exists).
-- [ ] **B-403** `POST /loads` with validation, verified guard, balance check (no deduction), receiver user link if mobile registered.
-- [ ] **B-404** `GET /loads?scope=ONGOING|HISTORY` and `GET /loads/{id}` (fields per contract; driver block only after acceptance).
-- [ ] **B-405** `PUT /loads/{id}` only `NOT_ACCEPTED`.
-- [ ] **B-406** Cancel per rules table (before/after acceptance, charges kept, cancellation case, Trust Score event) + repost.
-- [ ] **B-407** Status machine in one domain method with allowed transitions + timeline rows.
-- [ ] **B-408** `GET /loads/{id}/otp` for sender/registered receiver while active.
-- [ ] **B-409** Tests for transitions and cancellation outcomes.
+- [x] **B-401** `loads_load`, `loads_timeline`, load code generator (`TRX-000123`). (2026-11-21)
+- [x] **B-402** `POST /loads/estimate` via `MapsService` (distance, drive time, ETA with loading buffer; suggested range when history exists). (2026-11-21)
+- [x] **B-403** `POST /loads` with validation, verified guard, balance check (no deduction), receiver user link if mobile registered. (2026-11-21)
+- [x] **B-404** `GET /loads?scope=ONGOING|HISTORY` and `GET /loads/{id}` (fields per contract; driver block only after acceptance). (2026-11-21)
+- [x] **B-405** `PUT /loads/{id}` only `NOT_ACCEPTED`. (2026-11-21)
+- [x] **B-406** Cancel per rules table (before/after acceptance, charges kept, cancellation case, Trust Score event) + repost. (2026-11-21)
+- [x] **B-407** Status machine in one domain method with allowed transitions + timeline rows. (2026-11-21)
+- [ ] **B-408** `GET /loads/{id}/otp` for sender/registered receiver while active. — moved to M7 (needs trip OTPs)
+- [x] **B-409** Tests for transitions and cancellation outcomes. (2026-11-21)
 
 ## Phase 5 — Fleet and driver setup
 - [ ] **B-501** `fleet_truck` + owner-driver `POST/PUT /driver/truck` (one truck only) + truck documents. Also add dev seed trucks in `db/dev` (from B-010).
