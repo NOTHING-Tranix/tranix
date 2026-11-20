@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./mvnw:*)",
+      "Bash(mvn:*)",
+      "Bash(docker compose:*)",
+      "Bash(flutter:*)",
+      "Bash(dart:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git log:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)"
+    ],
+    "deny": [
+      "Bash(git push --force:*)",
+      "Bash(rm -rf:*)",
+      "Read(./.env)",
+      "Read(./**/.env)",
+      "Read(./backend/src/main/resources/application-local.yml)"
+    ]
+  }
+}
