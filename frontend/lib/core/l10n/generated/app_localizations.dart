@@ -561,6 +561,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong. Please try again.'**
   String get errorGeneric;
+
+  /// No description provided for @mobileLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile number'**
+  String get mobileLabel;
+
+  /// No description provided for @mobileInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid 10-digit mobile number'**
+  String get mobileInvalid;
+
+  /// No description provided for @nameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Full name'**
+  String get nameLabel;
+
+  /// No description provided for @nameInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Name must be 2 to 60 characters'**
+  String get nameInvalid;
+
+  /// No description provided for @roleQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a'**
+  String get roleQuestion;
+
+  /// No description provided for @roleRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose who you are'**
+  String get roleRequired;
+
+  /// No description provided for @consentText.
+  ///
+  /// In en, this message translates to:
+  /// **'I agree to the Terms of Use and Privacy Policy'**
+  String get consentText;
+
+  /// No description provided for @consentRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please accept to continue'**
+  String get consentRequired;
+
+  /// No description provided for @sendOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Send OTP'**
+  String get sendOtp;
+
+  /// No description provided for @otpTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter OTP'**
+  String get otpTitle;
+
+  /// No description provided for @otpSentTo.
+  ///
+  /// In en, this message translates to:
+  /// **'We sent a 6-digit code to +91 {mobile}'**
+  String otpSentTo(String mobile);
+
+  /// No description provided for @resendIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend OTP in {seconds} s'**
+  String resendIn(int seconds);
+
+  /// No description provided for @resendOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend OTP'**
+  String get resendOtp;
+
+  /// No description provided for @verify.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify'**
+  String get verify;
+
+  /// No description provided for @signInInstead.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in instead'**
+  String get signInInstead;
+
+  /// No description provided for @noAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'New to Tranix? Sign up'**
+  String get noAccount;
+
+  /// No description provided for @completeProfileBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete your profile to start'**
+  String get completeProfileBanner;
+
+  /// No description provided for @otpSent.
+  ///
+  /// In en, this message translates to:
+  /// **'OTP sent'**
+  String get otpSent;
 }
 
 class _AppLocalizationsDelegate

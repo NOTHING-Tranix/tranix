@@ -3,6 +3,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/auth/presentation/auth_screens.dart';
 import '../../features/auth/presentation/placeholder_auth_screens.dart';
 import '../../features/onboarding/presentation/splash_screen.dart';
 import '../../features/onboarding/presentation/welcome_screen.dart';
@@ -49,8 +50,10 @@ final routerProvider = Provider<GoRouter>((ref) {
     routes: [
       GoRoute(path: Routes.splash, builder: (_, _) => const SplashScreen()),
       GoRoute(path: Routes.welcome, builder: (_, _) => const WelcomeScreen()),
-      GoRoute(path: Routes.signUp, builder: (_, _) => const SignUpPlaceholderScreen()),
-      GoRoute(path: Routes.signIn, builder: (_, _) => const SignInPlaceholderScreen()),
+      GoRoute(path: Routes.signUp, builder: (_, _) => const SignUpScreen()),
+      GoRoute(path: Routes.signUpOtp, builder: (_, _) => const OtpScreen()),
+      GoRoute(path: Routes.signIn, builder: (_, _) => const SignInScreen()),
+      GoRoute(path: Routes.signInOtp, builder: (_, _) => const OtpScreen()),
       GoRoute(path: Routes.unsupported, builder: (_, _) => const UnsupportedRoleScreen()),
       for (final entry in RoleTabs.byShell.entries) _shell(entry.value),
     ],

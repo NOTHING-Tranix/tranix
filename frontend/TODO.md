@@ -6,7 +6,7 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 | Phase | Tasks | Done |
 | --- | --- | --- |
 | 0 Foundation | 12 | 12 |
-| 1 Auth and onboarding | 6 | 0 |
+| 1 Auth and onboarding | 6 | 6 |
 | 2 Profile and verification | 7 | 0 |
 | 3 Wallet, notifications, support | 7 | 0 |
 | 4 Load Provider | 10 | 0 |
@@ -33,12 +33,12 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 - [x] **A-012** CI: GitHub Actions running `flutter analyze` and `flutter test`. (2026-11-21)
 
 ## Phase 1 — Auth and onboarding (needs B-102…B-106)
-- [ ] **A-101** Splash (S-01) with refresh + `GET /me` routing.
-- [ ] **A-102** Welcome + language (S-02).
-- [ ] **A-103** Sign up pages + OTP input with SMS autofill (S-03).
-- [ ] **A-104** Sign in + OTP (S-04); lockout message.
-- [ ] **A-105** Secure token storage, deviceId, sign-out.
-- [ ] **A-106** Widget tests for sign-up/sign-in validation.
+- [x] **A-101** Splash (S-01) with refresh + `GET /me` routing. (2026-11-21)
+- [x] **A-102** Welcome + language (S-02). (2026-11-21)
+- [x] **A-103** Sign up pages + OTP input with SMS autofill (S-03). (2026-11-21)
+- [x] **A-104** Sign in + OTP (S-04); lockout message. (2026-11-21)
+- [x] **A-105** Secure token storage, deviceId, sign-out. (2026-11-21)
+- [x] **A-106** Widget tests for sign-up/sign-in validation. (2026-11-21)
 
 ## Phase 2 — Profile and verification (needs B-108…B-111, B-201…B-206)
 - [ ] **A-201** Profile screen (S-05) with completion ring and common fields.

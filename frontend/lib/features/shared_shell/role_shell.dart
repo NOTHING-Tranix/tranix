@@ -1,8 +1,11 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/l10n/generated/app_localizations.dart';
 import '../../core/router/routes.dart';
+import '../../core/session/session_controller.dart';
+import '../../shared/models/enums.dart';
 import '../../core/widgets/widgets.dart';
 
 /// Bottom-navigation scaffold of a role (`StatefulShellRoute`), with the offline banner on top.
@@ -19,6 +22,7 @@ class RoleShell extends StatelessWidget {
       body: Column(
         children: [
           const OfflineBanner(),
+          const _ProfileBanner(),
           Expanded(child: navigationShell),
         ],
       ),
@@ -67,3 +71,31 @@ IconData tabIcon(TabLabel label) => switch (label) {
       TabLabel.loads => Icons.inventory_2_outlined,
       TabLabel.notifications => Icons.notifications_none,
     };
+
+/// "Complete your profile to start" until the account is VERIFIED (S-03 → role shell).
+class _ProfileBanner extends ConsumerWidget {
+  const _ProfileBanner();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final session = ref.watch(sessionProvider);
+    if (session is! SignedIn || session.me.verificationStatus == VerificationStatus.verified) {
+      return const SizedBox.shrink();
+    }
+    final scheme = Theme.of(context).colorScheme;
+    return Material(
+      color: scheme.secondaryContainer,
+      child: SafeArea(
+        bottom: false,
+        child: ListTile(
+          dense: true,
+          leading: Icon(Icons.badge_outlined, color: scheme.onSecondaryContainer),
+          title: Text(
+            AppLocalizations.of(context).completeProfileBanner,
+            style: TextStyle(color: scheme.onSecondaryContainer),
+          ),
+        ),
+      ),
+    );
+  }
+}

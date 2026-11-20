@@ -253,4 +253,63 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get errorGeneric => 'ஏதோ தவறு நடந்தது. மீண்டும் முயற்சிக்கவும்.';
+
+  @override
+  String get mobileLabel => 'மொபைல் எண்';
+
+  @override
+  String get mobileInvalid => 'சரியான 10 இலக்க மொபைல் எண்ணை உள்ளிடவும்';
+
+  @override
+  String get nameLabel => 'முழுப் பெயர்';
+
+  @override
+  String get nameInvalid => 'பெயர் 2 முதல் 60 எழுத்துகள் இருக்க வேண்டும்';
+
+  @override
+  String get roleQuestion => 'நான் ஒரு';
+
+  @override
+  String get roleRequired => 'நீங்கள் யார் என்பதைத் தேர்ந்தெடுக்கவும்';
+
+  @override
+  String get consentText =>
+      'பயன்பாட்டு விதிமுறைகள் மற்றும் தனியுரிமைக் கொள்கையை ஏற்கிறேன்';
+
+  @override
+  String get consentRequired => 'தொடர ஏற்றுக்கொள்ளவும்';
+
+  @override
+  String get sendOtp => 'OTP அனுப்பு';
+
+  @override
+  String get otpTitle => 'OTP-ஐ உள்ளிடவும்';
+
+  @override
+  String otpSentTo(String mobile) {
+    return '+91 $mobile எண்ணுக்கு 6 இலக்கக் குறியீடு அனுப்பப்பட்டது';
+  }
+
+  @override
+  String resendIn(int seconds) {
+    return '$seconds வினாடிகளில் மீண்டும் அனுப்பலாம்';
+  }
+
+  @override
+  String get resendOtp => 'OTP-ஐ மீண்டும் அனுப்பு';
+
+  @override
+  String get verify => 'சரிபார்';
+
+  @override
+  String get signInInstead => 'உள்நுழையவும்';
+
+  @override
+  String get noAccount => 'டிரானிக்ஸில் புதியவரா? பதிவு செய்யவும்';
+
+  @override
+  String get completeProfileBanner => 'தொடங்க உங்கள் சுயவிவரத்தை முடிக்கவும்';
+
+  @override
+  String get otpSent => 'OTP அனுப்பப்பட்டது';
 }

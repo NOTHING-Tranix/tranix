@@ -247,4 +247,62 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errorGeneric => 'Something went wrong. Please try again.';
+
+  @override
+  String get mobileLabel => 'Mobile number';
+
+  @override
+  String get mobileInvalid => 'Enter a valid 10-digit mobile number';
+
+  @override
+  String get nameLabel => 'Full name';
+
+  @override
+  String get nameInvalid => 'Name must be 2 to 60 characters';
+
+  @override
+  String get roleQuestion => 'I am a';
+
+  @override
+  String get roleRequired => 'Choose who you are';
+
+  @override
+  String get consentText => 'I agree to the Terms of Use and Privacy Policy';
+
+  @override
+  String get consentRequired => 'Please accept to continue';
+
+  @override
+  String get sendOtp => 'Send OTP';
+
+  @override
+  String get otpTitle => 'Enter OTP';
+
+  @override
+  String otpSentTo(String mobile) {
+    return 'We sent a 6-digit code to +91 $mobile';
+  }
+
+  @override
+  String resendIn(int seconds) {
+    return 'Resend OTP in $seconds s';
+  }
+
+  @override
+  String get resendOtp => 'Resend OTP';
+
+  @override
+  String get verify => 'Verify';
+
+  @override
+  String get signInInstead => 'Sign in instead';
+
+  @override
+  String get noAccount => 'New to Tranix? Sign up';
+
+  @override
+  String get completeProfileBanner => 'Complete your profile to start';
+
+  @override
+  String get otpSent => 'OTP sent';
 }

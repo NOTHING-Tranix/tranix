@@ -6,6 +6,8 @@ abstract final class Routes {
   static const welcome = '/welcome';
   static const signUp = '/sign-up';
   static const signIn = '/sign-in';
+  static const signUpOtp = '/sign-up/otp';
+  static const signInOtp = '/sign-in/otp';
   static const unsupported = '/unsupported';
 
   static const lp = '/lp';
@@ -15,7 +17,7 @@ abstract final class Routes {
   static const receiver = '/receiver';
 
   /// Pages reachable without signing in.
-  static const public = {splash, welcome, signUp, signIn};
+  static const public = {splash, welcome, signUp, signIn, signUpOtp, signInOtp};
 
   /// Home of each role's shell; ADMIN has no Android app (D-15).
   static String homeFor(Role role) => switch (role) {

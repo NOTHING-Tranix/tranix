@@ -9,6 +9,7 @@ import '../../../core/network/mock_interceptor.dart';
 import '../../../core/providers.dart';
 import '../../../core/router/routes.dart';
 import '../../../core/session/session_controller.dart';
+import '../../../core/settings_provider.dart';
 import '../../../core/widgets/widgets.dart';
 import '../../../shared/models/models.dart';
 import '../../shared_shell/tab_screens.dart';
@@ -24,6 +25,7 @@ class WelcomeScreen extends ConsumerWidget {
     final l = AppLocalizations.of(context);
     final language = ref.watch(languageProvider);
     final useMock = ref.watch(appConfigProvider).useMock;
+    ref.watch(publicSettingsProvider); // warm up: OTP timer and forms need it
     return Scaffold(
       body: SafeArea(
         child: ListView(
