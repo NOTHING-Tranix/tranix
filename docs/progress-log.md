@@ -13,6 +13,11 @@ Newest first. Claude adds an entry at the end of every session and at every mile
 
 ---
 
+## 2026-11-21 — M3 Wallet and notifications basics (done, A-303 [!])
+- Done: B-301…B-308, B-1101, B-1102, A-301, A-302, A-304. A-303 push code ready, needs Firebase (F-4). D-25 assumed.
+- Contract: wallet transactions paging/month format, top-up limits, webhook `X-Signature`, notification item shape.
+- Demo: sign in as 9000000001 → Profile → Wallet → tap ₹500 → browser opens top-up page → Pay now → "Simulate successful payment" → back in app balance shows ₹500 (polls 3×) → bell shows "Wallet topped up". Swagger admin: `POST /api/v1/admin/wallet/{userId}/credit {amountInr, reason}`.
+
 ## 2026-11-21 — M2 Profile and verification (done, B-204 [!])
 - Done: B-201…B-203, B-205…B-208, A-201…A-207. B-204 Aadhaar: endpoint + storage ready, provider blocked on Q-04 (founder-review F-3).
 - Contract: `aadhaarEnabled` in public settings; document rules/item keys documented. D-24 assumed (status derived from document decisions).

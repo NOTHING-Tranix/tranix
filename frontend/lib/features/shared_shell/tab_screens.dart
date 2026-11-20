@@ -9,11 +9,13 @@ import '../../core/utils/formatters.dart';
 import '../../core/widgets/widgets.dart';
 import '../../shared/models/models.dart';
 import '../profile/presentation/profile_screens.dart';
+import '../notifications/notifications_feature.dart';
 import 'role_shell.dart';
 
 /// M0: every tab is a placeholder; real screens replace these per milestone (screens.md).
 Widget tabScreenFor(ShellTab tab) => switch (tab.label) {
       TabLabel.profile => const ProfileScreen(),
+      TabLabel.notifications => const NotificationsScreen(),
       TabLabel.home when tab.path == Routes.lp || tab.path == Routes.fn => HomeWithLoadsPlaceholder(tab: tab),
       _ => PlaceholderTab(tab: tab),
     };
@@ -27,7 +29,7 @@ class PlaceholderTab extends StatelessWidget {
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(title: Text(tabLabel(l, tab.label)), actions: const [ProfileAvatarButton()]),
+      appBar: AppBar(title: Text(tabLabel(l, tab.label)), actions: const [NotificationBell(), ProfileAvatarButton()]),
       body: EmptyState(icon: tabIcon(tab.label), message: l.comingSoon),
     );
   }
@@ -52,7 +54,7 @@ class HomeWithLoadsPlaceholder extends ConsumerWidget {
     final l = AppLocalizations.of(context);
     final loads = ref.watch(ongoingLoadsProvider);
     return Scaffold(
-      appBar: AppBar(title: Text(tabLabel(l, tab.label)), actions: const [ProfileAvatarButton()]),
+      appBar: AppBar(title: Text(tabLabel(l, tab.label)), actions: const [NotificationBell(), ProfileAvatarButton()]),
       body: RefreshIndicator(
         onRefresh: () => ref.refresh(ongoingLoadsProvider.future),
         child: AsyncView(
@@ -62,9 +64,9 @@ class HomeWithLoadsPlaceholder extends ConsumerWidget {
               ? const EmptyState()
               : ListView.separated(
                   padding: const EdgeInsets.all(16),
-                  itemCount: page.items.length,
+                  itemCount: page.items.length + 1,
                   separatorBuilder: (_, _) => const SizedBox(height: 8),
-                  itemBuilder: (context, i) => _LoadCard(load: page.items[i]),
+                  itemBuilder: (context, i) => i == 0 ? const HomeNotificationCards() : _LoadCard(load: page.items[i - 1]),
                 ),
         ),
       ),

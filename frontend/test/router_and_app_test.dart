@@ -52,7 +52,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Murugan Traders'), findsOneWidget);
 
-    await tester.ensureVisible(find.text('Sign out'));
+    await tester.scrollUntilVisible(find.text('Sign out'), 200);
     await tester.pumpAndSettle();
     await tester.tap(find.text('Sign out'));
     await tester.pumpAndSettle();

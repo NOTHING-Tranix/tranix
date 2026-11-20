@@ -574,4 +574,88 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get mobileChanged => 'மொபைல் எண் மாற்றப்பட்டது';
+
+  @override
+  String postingChargeIs(int amount) {
+    return 'பதிவுக் கட்டணம் ₹$amount';
+  }
+
+  @override
+  String tripChargeIs(int amount) {
+    return 'பயணக் கட்டணம் ₹$amount';
+  }
+
+  @override
+  String get lowBalanceWarning =>
+      'இருப்பு குறைவு. தொடர்ந்து பயன்படுத்த டாப் அப் செய்யவும்.';
+
+  @override
+  String get topUp => 'டாப் அப்';
+
+  @override
+  String get otherAmount => 'வேறு தொகை (₹)';
+
+  @override
+  String get amountInvalid => 'தொகையை உள்ளிடவும்';
+
+  @override
+  String get transactions => 'பரிவர்த்தனைகள்';
+
+  @override
+  String get allTypes => 'அனைத்தும்';
+
+  @override
+  String get txnTopup => 'டாப் அப்';
+
+  @override
+  String get txnPostingCharge => 'பதிவுக் கட்டணம்';
+
+  @override
+  String get txnTripCharge => 'பயணக் கட்டணம்';
+
+  @override
+  String get txnRefund => 'திருப்பித் தொகை';
+
+  @override
+  String get txnAdminCredit => 'டிரானிக்ஸ் வரவு';
+
+  @override
+  String get month => 'மாதம்';
+
+  @override
+  String get downloadStatement => 'அறிக்கையைப் பதிவிறக்கு';
+
+  @override
+  String get statementSaved => 'அறிக்கை சேமிக்கப்பட்டது';
+
+  @override
+  String get noTransactions => 'இன்னும் பரிவர்த்தனைகள் இல்லை';
+
+  @override
+  String get openingPayment =>
+      'உலாவியில் பணம் செலுத்தி, பிறகு திரும்பி வரவும்.';
+
+  @override
+  String get tabTrips => 'பயணங்கள்';
+
+  @override
+  String get tabWallet => 'வாலட்';
+
+  @override
+  String get tabTranix => 'டிரானிக்ஸ்';
+
+  @override
+  String get tabAccount => 'கணக்கு';
+
+  @override
+  String get markAllRead => 'அனைத்தையும் படித்ததாகக் குறி';
+
+  @override
+  String get noNotifications => 'அறிவிப்புகள் இல்லை';
+
+  @override
+  String get latestTranixMessage => 'டிரானிக்ஸிடமிருந்து';
+
+  @override
+  String get latestTripUpdate => 'சமீபத்திய பயணப் புதுப்பிப்பு';
 }

@@ -566,4 +566,87 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mobileChanged => 'Mobile number changed';
+
+  @override
+  String postingChargeIs(int amount) {
+    return 'Posting charge ₹$amount';
+  }
+
+  @override
+  String tripChargeIs(int amount) {
+    return 'Trip charge ₹$amount';
+  }
+
+  @override
+  String get lowBalanceWarning => 'Low balance. Top up to keep using Tranix.';
+
+  @override
+  String get topUp => 'Top up';
+
+  @override
+  String get otherAmount => 'Other amount (₹)';
+
+  @override
+  String get amountInvalid => 'Enter an amount';
+
+  @override
+  String get transactions => 'Transactions';
+
+  @override
+  String get allTypes => 'All';
+
+  @override
+  String get txnTopup => 'Top-up';
+
+  @override
+  String get txnPostingCharge => 'Posting charge';
+
+  @override
+  String get txnTripCharge => 'Trip charge';
+
+  @override
+  String get txnRefund => 'Refund';
+
+  @override
+  String get txnAdminCredit => 'Tranix credit';
+
+  @override
+  String get month => 'Month';
+
+  @override
+  String get downloadStatement => 'Download statement';
+
+  @override
+  String get statementSaved => 'Statement saved';
+
+  @override
+  String get noTransactions => 'No transactions yet';
+
+  @override
+  String get openingPayment =>
+      'Complete the payment in your browser, then come back.';
+
+  @override
+  String get tabTrips => 'Trips';
+
+  @override
+  String get tabWallet => 'Wallet';
+
+  @override
+  String get tabTranix => 'Tranix';
+
+  @override
+  String get tabAccount => 'Account';
+
+  @override
+  String get markAllRead => 'Mark all read';
+
+  @override
+  String get noNotifications => 'No notifications';
+
+  @override
+  String get latestTranixMessage => 'From Tranix';
+
+  @override
+  String get latestTripUpdate => 'Latest trip update';
 }

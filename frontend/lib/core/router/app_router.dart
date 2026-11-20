@@ -7,7 +7,8 @@ import '../../features/auth/presentation/auth_screens.dart';
 import '../../features/auth/presentation/placeholder_auth_screens.dart';
 import '../../features/onboarding/presentation/splash_screen.dart';
 import '../../features/profile/presentation/profile_screens.dart';
-import '../../features/shared_shell/placeholders.dart';
+import '../../features/notifications/notifications_feature.dart';
+import '../../features/wallet/wallet_feature.dart';
 import '../../features/onboarding/presentation/welcome_screen.dart';
 import '../../features/shared_shell/role_shell.dart';
 import '../../features/shared_shell/tab_screens.dart';
@@ -69,7 +70,8 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(path: Routes.profileMobile, builder: (_, _) => const ChangeMobileScreen()),
       GoRoute(path: Routes.verification, builder: (_, _) => const VerificationScreen()),
-      GoRoute(path: Routes.wallet, builder: (_, _) => const ComingSoonScreen()),
+      GoRoute(path: Routes.wallet, builder: (_, _) => const WalletScreen()),
+      GoRoute(path: Routes.notifications, builder: (_, _) => const NotificationsScreen()),
       for (final entry in RoleTabs.byShell.entries) _shell(entry.value),
     ],
   );

@@ -72,6 +72,8 @@ class ProfileScreen extends ConsumerWidget {
               _tile(context, Icons.description_outlined, l.documents, () => context.push(Routes.verification)),
               _tile(context, Icons.verified_outlined, l.verificationTitle, () => context.push(Routes.verification),
                   trailing: verificationChip(context, m.verificationStatus)),
+              _tile(context, Icons.account_balance_wallet_outlined, l.wallet, () => context.push(Routes.wallet)),
+              _tile(context, Icons.notifications_none, l.navNotifications, () => context.push(Routes.notifications)),
               _tile(context, Icons.phone_android, l.changeMobile, () => context.push(Routes.profileMobile)),
               _tile(context, Icons.translate, l.language, () => _pickLanguage(context, ref)),
               _tile(context, Icons.logout, l.actionSignOut, () => ref.read(sessionProvider.notifier).signOut()),

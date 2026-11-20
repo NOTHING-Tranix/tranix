@@ -1167,6 +1167,162 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Mobile number changed'**
   String get mobileChanged;
+
+  /// No description provided for @postingChargeIs.
+  ///
+  /// In en, this message translates to:
+  /// **'Posting charge ₹{amount}'**
+  String postingChargeIs(int amount);
+
+  /// No description provided for @tripChargeIs.
+  ///
+  /// In en, this message translates to:
+  /// **'Trip charge ₹{amount}'**
+  String tripChargeIs(int amount);
+
+  /// No description provided for @lowBalanceWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Low balance. Top up to keep using Tranix.'**
+  String get lowBalanceWarning;
+
+  /// No description provided for @topUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Top up'**
+  String get topUp;
+
+  /// No description provided for @otherAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Other amount (₹)'**
+  String get otherAmount;
+
+  /// No description provided for @amountInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter an amount'**
+  String get amountInvalid;
+
+  /// No description provided for @transactions.
+  ///
+  /// In en, this message translates to:
+  /// **'Transactions'**
+  String get transactions;
+
+  /// No description provided for @allTypes.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get allTypes;
+
+  /// No description provided for @txnTopup.
+  ///
+  /// In en, this message translates to:
+  /// **'Top-up'**
+  String get txnTopup;
+
+  /// No description provided for @txnPostingCharge.
+  ///
+  /// In en, this message translates to:
+  /// **'Posting charge'**
+  String get txnPostingCharge;
+
+  /// No description provided for @txnTripCharge.
+  ///
+  /// In en, this message translates to:
+  /// **'Trip charge'**
+  String get txnTripCharge;
+
+  /// No description provided for @txnRefund.
+  ///
+  /// In en, this message translates to:
+  /// **'Refund'**
+  String get txnRefund;
+
+  /// No description provided for @txnAdminCredit.
+  ///
+  /// In en, this message translates to:
+  /// **'Tranix credit'**
+  String get txnAdminCredit;
+
+  /// No description provided for @month.
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get month;
+
+  /// No description provided for @downloadStatement.
+  ///
+  /// In en, this message translates to:
+  /// **'Download statement'**
+  String get downloadStatement;
+
+  /// No description provided for @statementSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Statement saved'**
+  String get statementSaved;
+
+  /// No description provided for @noTransactions.
+  ///
+  /// In en, this message translates to:
+  /// **'No transactions yet'**
+  String get noTransactions;
+
+  /// No description provided for @openingPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete the payment in your browser, then come back.'**
+  String get openingPayment;
+
+  /// No description provided for @tabTrips.
+  ///
+  /// In en, this message translates to:
+  /// **'Trips'**
+  String get tabTrips;
+
+  /// No description provided for @tabWallet.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet'**
+  String get tabWallet;
+
+  /// No description provided for @tabTranix.
+  ///
+  /// In en, this message translates to:
+  /// **'Tranix'**
+  String get tabTranix;
+
+  /// No description provided for @tabAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get tabAccount;
+
+  /// No description provided for @markAllRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark all read'**
+  String get markAllRead;
+
+  /// No description provided for @noNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'No notifications'**
+  String get noNotifications;
+
+  /// No description provided for @latestTranixMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'From Tranix'**
+  String get latestTranixMessage;
+
+  /// No description provided for @latestTripUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest trip update'**
+  String get latestTripUpdate;
 }
 
 class _AppLocalizationsDelegate

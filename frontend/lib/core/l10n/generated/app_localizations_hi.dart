@@ -569,4 +569,87 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get mobileChanged => 'मोबाइल नंबर बदल दिया गया';
+
+  @override
+  String postingChargeIs(int amount) {
+    return 'पोस्टिंग शुल्क ₹$amount';
+  }
+
+  @override
+  String tripChargeIs(int amount) {
+    return 'यात्रा शुल्क ₹$amount';
+  }
+
+  @override
+  String get lowBalanceWarning =>
+      'बैलेंस कम है। इस्तेमाल जारी रखने के लिए टॉप अप करें।';
+
+  @override
+  String get topUp => 'टॉप अप';
+
+  @override
+  String get otherAmount => 'दूसरी राशि (₹)';
+
+  @override
+  String get amountInvalid => 'राशि डालें';
+
+  @override
+  String get transactions => 'लेन-देन';
+
+  @override
+  String get allTypes => 'सभी';
+
+  @override
+  String get txnTopup => 'टॉप अप';
+
+  @override
+  String get txnPostingCharge => 'पोस्टिंग शुल्क';
+
+  @override
+  String get txnTripCharge => 'यात्रा शुल्क';
+
+  @override
+  String get txnRefund => 'रिफ़ंड';
+
+  @override
+  String get txnAdminCredit => 'ट्रानिक्स क्रेडिट';
+
+  @override
+  String get month => 'महीना';
+
+  @override
+  String get downloadStatement => 'स्टेटमेंट डाउनलोड करें';
+
+  @override
+  String get statementSaved => 'स्टेटमेंट सेव हो गया';
+
+  @override
+  String get noTransactions => 'अभी कोई लेन-देन नहीं';
+
+  @override
+  String get openingPayment => 'ब्राउज़र में भुगतान पूरा करें, फिर वापस आएँ।';
+
+  @override
+  String get tabTrips => 'यात्राएँ';
+
+  @override
+  String get tabWallet => 'वॉलेट';
+
+  @override
+  String get tabTranix => 'ट्रानिक्स';
+
+  @override
+  String get tabAccount => 'खाता';
+
+  @override
+  String get markAllRead => 'सभी पढ़ा हुआ करें';
+
+  @override
+  String get noNotifications => 'कोई सूचना नहीं';
+
+  @override
+  String get latestTranixMessage => 'ट्रानिक्स की ओर से';
+
+  @override
+  String get latestTripUpdate => 'ताज़ा यात्रा अपडेट';
 }

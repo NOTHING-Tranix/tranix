@@ -1,5 +1,5 @@
 {
   "unreadByTab": { "TRIPS": 2, "WALLET": 0, "TRANIX": 1, "ACCOUNT": 0 },
-  "latestTranixMessage": { "title": "Welcome to Tranix", "body": "Verified trucks, fair loads.", "at": "2026-11-20T06:00:00Z" },
-  "latestTripUpdate": { "title": "TRX-000123 picked up", "body": "Ravi Kumar picked up your load.", "at": "2026-11-21T03:41:00Z", "route": "/lp/loads/a1b2c3d4-0000-4000-8000-000000000123" }
+  "latestTranixMessage": { "id": "n0000000-0000-4000-8000-000000000001", "tab": "TRANIX", "type": "BROADCAST", "title": "Welcome to Tranix", "body": "Verified trucks, fair loads.", "route": null, "read": false, "createdAt": "2026-11-20T06:00:00Z" },
+  "latestTripUpdate": { "id": "n0000000-0000-4000-8000-000000000002", "tab": "TRIPS", "type": "PICKED_UP", "title": "TRX-000123 picked up", "body": "Ravi Kumar picked up your load.", "route": "/lp/loads/a1b2c3d4-0000-4000-8000-000000000123", "read": false, "createdAt": "2026-11-21T03:41:00Z" }
 }

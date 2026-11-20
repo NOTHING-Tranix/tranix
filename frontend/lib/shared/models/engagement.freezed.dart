@@ -1159,7 +1159,7 @@ as Role,
 /// @nodoc
 mixin _$NotificationSummary {
 
- Map<String, int> get unreadByTab; Map<String, dynamic>? get latestTranixMessage; Map<String, dynamic>? get latestTripUpdate;
+ Map<String, int> get unreadByTab; AppNotification? get latestTranixMessage; AppNotification? get latestTripUpdate;
 /// Create a copy of NotificationSummary
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1173,14 +1173,14 @@ $NotificationSummaryCopyWith<NotificationSummary> get copyWith => _$Notification
 @override
 bool operator ==(Object other) {
   final _this = this as NotificationSummary;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NotificationSummary&&const DeepCollectionEquality().equals(other.unreadByTab, _this.unreadByTab)&&const DeepCollectionEquality().equals(other.latestTranixMessage, _this.latestTranixMessage)&&const DeepCollectionEquality().equals(other.latestTripUpdate, _this.latestTripUpdate));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NotificationSummary&&const DeepCollectionEquality().equals(other.unreadByTab, _this.unreadByTab)&&(identical(other.latestTranixMessage, _this.latestTranixMessage) || other.latestTranixMessage == _this.latestTranixMessage)&&(identical(other.latestTripUpdate, _this.latestTripUpdate) || other.latestTripUpdate == _this.latestTripUpdate));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as NotificationSummary;
-  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.unreadByTab),const DeepCollectionEquality().hash(_this.latestTranixMessage),const DeepCollectionEquality().hash(_this.latestTripUpdate));
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.unreadByTab),_this.latestTranixMessage,_this.latestTripUpdate);
 }
 
 @override
@@ -1197,11 +1197,11 @@ abstract mixin class $NotificationSummaryCopyWith<$Res>  {
   factory $NotificationSummaryCopyWith(NotificationSummary value, $Res Function(NotificationSummary) _then) = _$NotificationSummaryCopyWithImpl;
 @useResult
 $Res call({
- Map<String, int> unreadByTab, Map<String, dynamic>? latestTranixMessage, Map<String, dynamic>? latestTripUpdate
+ Map<String, int> unreadByTab, AppNotification? latestTranixMessage, AppNotification? latestTripUpdate
 });
 
 
-
+$AppNotificationCopyWith<$Res>? get latestTranixMessage;$AppNotificationCopyWith<$Res>? get latestTripUpdate;
 
 }
 /// @nodoc
@@ -1218,11 +1218,35 @@ class _$NotificationSummaryCopyWithImpl<$Res>
   return _then(NotificationSummary(
 unreadByTab: null == unreadByTab ? _self.unreadByTab : unreadByTab // ignore: cast_nullable_to_non_nullable
 as Map<String, int>,latestTranixMessage: freezed == latestTranixMessage ? _self.latestTranixMessage : latestTranixMessage // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>?,latestTripUpdate: freezed == latestTripUpdate ? _self.latestTripUpdate : latestTripUpdate // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>?,
+as AppNotification?,latestTripUpdate: freezed == latestTripUpdate ? _self.latestTripUpdate : latestTripUpdate // ignore: cast_nullable_to_non_nullable
+as AppNotification?,
   ));
 }
+/// Create a copy of NotificationSummary
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$AppNotificationCopyWith<$Res>? get latestTranixMessage {
+    if (_self.latestTranixMessage == null) {
+    return null;
+  }
 
+  return $AppNotificationCopyWith<$Res>(_self.latestTranixMessage!, (value) {
+    return _then(_self.copyWith(latestTranixMessage: value));
+  });
+}/// Create a copy of NotificationSummary
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$AppNotificationCopyWith<$Res>? get latestTripUpdate {
+    if (_self.latestTripUpdate == null) {
+    return null;
+  }
+
+  return $AppNotificationCopyWith<$Res>(_self.latestTripUpdate!, (value) {
+    return _then(_self.copyWith(latestTripUpdate: value));
+  });
+}
 }
 
 
@@ -1304,7 +1328,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Map<String, int> unreadByTab,  Map<String, dynamic>? latestTranixMessage,  Map<String, dynamic>? latestTripUpdate)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Map<String, int> unreadByTab,  AppNotification? latestTranixMessage,  AppNotification? latestTripUpdate)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _NotificationSummary() when $default != null:
 return $default(_that.unreadByTab,_that.latestTranixMessage,_that.latestTripUpdate);case _:
@@ -1325,7 +1349,7 @@ return $default(_that.unreadByTab,_that.latestTranixMessage,_that.latestTripUpda
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Map<String, int> unreadByTab,  Map<String, dynamic>? latestTranixMessage,  Map<String, dynamic>? latestTripUpdate)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Map<String, int> unreadByTab,  AppNotification? latestTranixMessage,  AppNotification? latestTripUpdate)  $default,) {final _that = this;
 switch (_that) {
 case _NotificationSummary():
 return $default(_that.unreadByTab,_that.latestTranixMessage,_that.latestTripUpdate);case _:
@@ -1345,7 +1369,7 @@ return $default(_that.unreadByTab,_that.latestTranixMessage,_that.latestTripUpda
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Map<String, int> unreadByTab,  Map<String, dynamic>? latestTranixMessage,  Map<String, dynamic>? latestTripUpdate)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Map<String, int> unreadByTab,  AppNotification? latestTranixMessage,  AppNotification? latestTripUpdate)?  $default,) {final _that = this;
 switch (_that) {
 case _NotificationSummary() when $default != null:
 return $default(_that.unreadByTab,_that.latestTranixMessage,_that.latestTripUpdate);case _:
@@ -1360,7 +1384,7 @@ return $default(_that.unreadByTab,_that.latestTranixMessage,_that.latestTripUpda
 @JsonSerializable()
 
 class _NotificationSummary implements NotificationSummary {
-  const _NotificationSummary({ Map<String, int> unreadByTab = const <String, int>{},  Map<String, dynamic>? latestTranixMessage,  Map<String, dynamic>? latestTripUpdate}): _unreadByTab = unreadByTab,_latestTranixMessage = latestTranixMessage,_latestTripUpdate = latestTripUpdate;
+  const _NotificationSummary({ Map<String, int> unreadByTab = const <String, int>{}, this.latestTranixMessage, this.latestTripUpdate}): _unreadByTab = unreadByTab;
   factory _NotificationSummary.fromJson(Map<String, dynamic> json) => _$NotificationSummaryFromJson(json);
 
  final  Map<String, int> _unreadByTab;
@@ -1370,24 +1394,8 @@ class _NotificationSummary implements NotificationSummary {
   return EqualUnmodifiableMapView(_unreadByTab);
 }
 
- final  Map<String, dynamic>? _latestTranixMessage;
-@override Map<String, dynamic>? get latestTranixMessage {
-  final value = _latestTranixMessage;
-  if (value == null) return null;
-  if (_latestTranixMessage is EqualUnmodifiableMapView) return _latestTranixMessage;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(value);
-}
-
- final  Map<String, dynamic>? _latestTripUpdate;
-@override Map<String, dynamic>? get latestTripUpdate {
-  final value = _latestTripUpdate;
-  if (value == null) return null;
-  if (_latestTripUpdate is EqualUnmodifiableMapView) return _latestTripUpdate;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(value);
-}
-
+@override final  AppNotification? latestTranixMessage;
+@override final  AppNotification? latestTripUpdate;
 
 /// Create a copy of NotificationSummary
 /// with the given fields replaced by the non-null parameter values.
@@ -1402,13 +1410,13 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _NotificationSummary&&const DeepCollectionEquality().equals(other.unreadByTab, _unreadByTab)&&const DeepCollectionEquality().equals(other.latestTranixMessage, _latestTranixMessage)&&const DeepCollectionEquality().equals(other.latestTripUpdate, _latestTripUpdate));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _NotificationSummary&&const DeepCollectionEquality().equals(other.unreadByTab, _unreadByTab)&&(identical(other.latestTranixMessage, latestTranixMessage) || other.latestTranixMessage == latestTranixMessage)&&(identical(other.latestTripUpdate, latestTripUpdate) || other.latestTripUpdate == latestTripUpdate));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_unreadByTab),const DeepCollectionEquality().hash(_latestTranixMessage),const DeepCollectionEquality().hash(_latestTripUpdate));
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_unreadByTab),latestTranixMessage,latestTripUpdate);
 }
 
 @override
@@ -1424,11 +1432,11 @@ abstract mixin class _$NotificationSummaryCopyWith<$Res> implements $Notificatio
   factory _$NotificationSummaryCopyWith(_NotificationSummary value, $Res Function(_NotificationSummary) _then) = __$NotificationSummaryCopyWithImpl;
 @override @useResult
 $Res call({
- Map<String, int> unreadByTab, Map<String, dynamic>? latestTranixMessage, Map<String, dynamic>? latestTripUpdate
+ Map<String, int> unreadByTab, AppNotification? latestTranixMessage, AppNotification? latestTripUpdate
 });
 
 
-
+@override $AppNotificationCopyWith<$Res>? get latestTranixMessage;@override $AppNotificationCopyWith<$Res>? get latestTripUpdate;
 
 }
 /// @nodoc
@@ -1444,9 +1452,324 @@ class __$NotificationSummaryCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? unreadByTab = null,Object? latestTranixMessage = freezed,Object? latestTripUpdate = freezed,}) {
   return _then(_NotificationSummary(
 unreadByTab: null == unreadByTab ? _self._unreadByTab : unreadByTab // ignore: cast_nullable_to_non_nullable
-as Map<String, int>,latestTranixMessage: freezed == latestTranixMessage ? _self._latestTranixMessage : latestTranixMessage // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>?,latestTripUpdate: freezed == latestTripUpdate ? _self._latestTripUpdate : latestTripUpdate // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>?,
+as Map<String, int>,latestTranixMessage: freezed == latestTranixMessage ? _self.latestTranixMessage : latestTranixMessage // ignore: cast_nullable_to_non_nullable
+as AppNotification?,latestTripUpdate: freezed == latestTripUpdate ? _self.latestTripUpdate : latestTripUpdate // ignore: cast_nullable_to_non_nullable
+as AppNotification?,
+  ));
+}
+
+/// Create a copy of NotificationSummary
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$AppNotificationCopyWith<$Res>? get latestTranixMessage {
+    if (_self.latestTranixMessage == null) {
+    return null;
+  }
+
+  return $AppNotificationCopyWith<$Res>(_self.latestTranixMessage!, (value) {
+    return _then(_self.copyWith(latestTranixMessage: value));
+  });
+}/// Create a copy of NotificationSummary
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$AppNotificationCopyWith<$Res>? get latestTripUpdate {
+    if (_self.latestTripUpdate == null) {
+    return null;
+  }
+
+  return $AppNotificationCopyWith<$Res>(_self.latestTripUpdate!, (value) {
+    return _then(_self.copyWith(latestTripUpdate: value));
+  });
+}
+}
+
+
+/// @nodoc
+mixin _$AppNotification {
+
+ String get id;@JsonKey(unknownEnumValue: NotificationTab.unknown) NotificationTab get tab; String get type; String get title; String get body; String? get route; bool get read; DateTime get createdAt;
+/// Create a copy of AppNotification
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$AppNotificationCopyWith<AppNotification> get copyWith => _$AppNotificationCopyWithImpl<AppNotification>(this as AppNotification, _$identity);
+
+  /// Serializes this AppNotification to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  final _this = this as AppNotification;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppNotification&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.tab, _this.tab) || other.tab == _this.tab)&&(identical(other.type, _this.type) || other.type == _this.type)&&(identical(other.title, _this.title) || other.title == _this.title)&&(identical(other.body, _this.body) || other.body == _this.body)&&(identical(other.route, _this.route) || other.route == _this.route)&&(identical(other.read, _this.read) || other.read == _this.read)&&(identical(other.createdAt, _this.createdAt) || other.createdAt == _this.createdAt));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+  final _this = this as AppNotification;
+  return Object.hash(runtimeType,_this.id,_this.tab,_this.type,_this.title,_this.body,_this.route,_this.read,_this.createdAt);
+}
+
+@override
+String toString() {
+  final _this = this as AppNotification;
+  return 'AppNotification(id: ${_this.id}, tab: ${_this.tab}, type: ${_this.type}, title: ${_this.title}, body: ${_this.body}, route: ${_this.route}, read: ${_this.read}, createdAt: ${_this.createdAt})';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $AppNotificationCopyWith<$Res>  {
+  factory $AppNotificationCopyWith(AppNotification value, $Res Function(AppNotification) _then) = _$AppNotificationCopyWithImpl;
+@useResult
+$Res call({
+ String id,@JsonKey(unknownEnumValue: NotificationTab.unknown) NotificationTab tab, String type, String title, String body, String? route, bool read, DateTime createdAt
+});
+
+
+
+
+}
+/// @nodoc
+class _$AppNotificationCopyWithImpl<$Res>
+    implements $AppNotificationCopyWith<$Res> {
+  _$AppNotificationCopyWithImpl(this._self, this._then);
+
+  final AppNotification _self;
+  final $Res Function(AppNotification) _then;
+
+/// Create a copy of AppNotification
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? tab = null,Object? type = null,Object? title = null,Object? body = null,Object? route = freezed,Object? read = null,Object? createdAt = null,}) {
+  return _then(AppNotification(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,tab: null == tab ? _self.tab : tab // ignore: cast_nullable_to_non_nullable
+as NotificationTab,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String,body: null == body ? _self.body : body // ignore: cast_nullable_to_non_nullable
+as String,route: freezed == route ? _self.route : route // ignore: cast_nullable_to_non_nullable
+as String?,read: null == read ? _self.read : read // ignore: cast_nullable_to_non_nullable
+as bool,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [AppNotification].
+extension AppNotificationPatterns on AppNotification {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _AppNotification value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _AppNotification() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _AppNotification value)  $default,){
+final _that = this;
+switch (_that) {
+case _AppNotification():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _AppNotification value)?  $default,){
+final _that = this;
+switch (_that) {
+case _AppNotification() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id, @JsonKey(unknownEnumValue: NotificationTab.unknown)  NotificationTab tab,  String type,  String title,  String body,  String? route,  bool read,  DateTime createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _AppNotification() when $default != null:
+return $default(_that.id,_that.tab,_that.type,_that.title,_that.body,_that.route,_that.read,_that.createdAt);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id, @JsonKey(unknownEnumValue: NotificationTab.unknown)  NotificationTab tab,  String type,  String title,  String body,  String? route,  bool read,  DateTime createdAt)  $default,) {final _that = this;
+switch (_that) {
+case _AppNotification():
+return $default(_that.id,_that.tab,_that.type,_that.title,_that.body,_that.route,_that.read,_that.createdAt);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id, @JsonKey(unknownEnumValue: NotificationTab.unknown)  NotificationTab tab,  String type,  String title,  String body,  String? route,  bool read,  DateTime createdAt)?  $default,) {final _that = this;
+switch (_that) {
+case _AppNotification() when $default != null:
+return $default(_that.id,_that.tab,_that.type,_that.title,_that.body,_that.route,_that.read,_that.createdAt);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _AppNotification implements AppNotification {
+  const _AppNotification({required this.id, @JsonKey(unknownEnumValue: NotificationTab.unknown) required this.tab, required this.type, required this.title, required this.body, this.route, this.read = false, required this.createdAt});
+  factory _AppNotification.fromJson(Map<String, dynamic> json) => _$AppNotificationFromJson(json);
+
+@override final  String id;
+@override@JsonKey(unknownEnumValue: NotificationTab.unknown) final  NotificationTab tab;
+@override final  String type;
+@override final  String title;
+@override final  String body;
+@override final  String? route;
+@override@JsonKey() final  bool read;
+@override final  DateTime createdAt;
+
+/// Create a copy of AppNotification
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$AppNotificationCopyWith<_AppNotification> get copyWith => __$AppNotificationCopyWithImpl<_AppNotification>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$AppNotificationToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppNotification&&(identical(other.id, id) || other.id == id)&&(identical(other.tab, tab) || other.tab == tab)&&(identical(other.type, type) || other.type == type)&&(identical(other.title, title) || other.title == title)&&(identical(other.body, body) || other.body == body)&&(identical(other.route, route) || other.route == route)&&(identical(other.read, read) || other.read == read)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+    return Object.hash(runtimeType,id,tab,type,title,body,route,read,createdAt);
+}
+
+@override
+String toString() {
+    return 'AppNotification(id: $id, tab: $tab, type: $type, title: $title, body: $body, route: $route, read: $read, createdAt: $createdAt)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$AppNotificationCopyWith<$Res> implements $AppNotificationCopyWith<$Res> {
+  factory _$AppNotificationCopyWith(_AppNotification value, $Res Function(_AppNotification) _then) = __$AppNotificationCopyWithImpl;
+@override @useResult
+$Res call({
+ String id,@JsonKey(unknownEnumValue: NotificationTab.unknown) NotificationTab tab, String type, String title, String body, String? route, bool read, DateTime createdAt
+});
+
+
+
+
+}
+/// @nodoc
+class __$AppNotificationCopyWithImpl<$Res>
+    implements _$AppNotificationCopyWith<$Res> {
+  __$AppNotificationCopyWithImpl(this._self, this._then);
+
+  final _AppNotification _self;
+  final $Res Function(_AppNotification) _then;
+
+/// Create a copy of AppNotification
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? tab = null,Object? type = null,Object? title = null,Object? body = null,Object? route = freezed,Object? read = null,Object? createdAt = null,}) {
+  return _then(_AppNotification(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,tab: null == tab ? _self.tab : tab // ignore: cast_nullable_to_non_nullable
+as NotificationTab,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String,body: null == body ? _self.body : body // ignore: cast_nullable_to_non_nullable
+as String,route: freezed == route ? _self.route : route // ignore: cast_nullable_to_non_nullable
+as String?,read: null == read ? _self.read : read // ignore: cast_nullable_to_non_nullable
+as bool,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,
   ));
 }
 

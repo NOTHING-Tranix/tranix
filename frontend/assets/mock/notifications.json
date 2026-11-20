@@ -1,0 +1,7 @@
+{
+  "items": [
+    { "id": "n0000000-0000-4000-8000-000000000002", "tab": "TRIPS", "type": "PICKED_UP", "title": "TRX-000123 picked up", "body": "Ravi Kumar picked up your load.", "route": null, "read": false, "createdAt": "2026-11-21T03:41:00Z" },
+    { "id": "n0000000-0000-4000-8000-000000000003", "tab": "WALLET", "type": "TOPUP_SUCCESS", "title": "Wallet topped up", "body": "₹1000 added. Balance ₹1250.", "route": "/wallet", "read": true, "createdAt": "2026-11-19T05:10:00Z" }
+  ],
+  "page": 0, "size": 20, "total": 2
+}

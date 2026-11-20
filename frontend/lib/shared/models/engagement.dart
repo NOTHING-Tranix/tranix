@@ -69,9 +69,26 @@ abstract class PendingRating with _$PendingRating {
 abstract class NotificationSummary with _$NotificationSummary {
   const factory NotificationSummary({
     @Default(<String, int>{}) Map<String, int> unreadByTab,
-    Map<String, dynamic>? latestTranixMessage,
-    Map<String, dynamic>? latestTripUpdate,
+    AppNotification? latestTranixMessage,
+    AppNotification? latestTripUpdate,
   }) = _NotificationSummary;
 
   factory NotificationSummary.fromJson(Map<String, dynamic> json) => _$NotificationSummaryFromJson(json);
+}
+
+/// One inbox item (`GET /notifications`).
+@freezed
+abstract class AppNotification with _$AppNotification {
+  const factory AppNotification({
+    required String id,
+    @JsonKey(unknownEnumValue: NotificationTab.unknown) required NotificationTab tab,
+    required String type,
+    required String title,
+    required String body,
+    String? route,
+    @Default(false) bool read,
+    required DateTime createdAt,
+  }) = _AppNotification;
+
+  factory AppNotification.fromJson(Map<String, dynamic> json) => _$AppNotificationFromJson(json);
 }

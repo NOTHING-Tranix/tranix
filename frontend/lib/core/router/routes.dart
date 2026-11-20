@@ -16,6 +16,7 @@ abstract final class Routes {
   static const profileMobile = '/profile/mobile';
   static const verification = '/verification';
   static const wallet = '/wallet';
+  static const notifications = '/notifications';
 
   static const lp = '/lp';
   static const fn = '/fn';

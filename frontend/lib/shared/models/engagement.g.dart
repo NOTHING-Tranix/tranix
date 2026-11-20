@@ -131,14 +131,58 @@ _NotificationSummary _$NotificationSummaryFromJson(Map<String, dynamic> json) =>
             (k, e) => MapEntry(k, (e as num).toInt()),
           ) ??
           const <String, int>{},
-      latestTranixMessage: json['latestTranixMessage'] as Map<String, dynamic>?,
-      latestTripUpdate: json['latestTripUpdate'] as Map<String, dynamic>?,
+      latestTranixMessage: json['latestTranixMessage'] == null
+          ? null
+          : AppNotification.fromJson(
+              json['latestTranixMessage'] as Map<String, dynamic>,
+            ),
+      latestTripUpdate: json['latestTripUpdate'] == null
+          ? null
+          : AppNotification.fromJson(
+              json['latestTripUpdate'] as Map<String, dynamic>,
+            ),
     );
 
 Map<String, dynamic> _$NotificationSummaryToJson(
   _NotificationSummary instance,
 ) => <String, dynamic>{
   'unreadByTab': instance.unreadByTab,
-  'latestTranixMessage': ?instance.latestTranixMessage,
-  'latestTripUpdate': ?instance.latestTripUpdate,
+  'latestTranixMessage': ?instance.latestTranixMessage?.toJson(),
+  'latestTripUpdate': ?instance.latestTripUpdate?.toJson(),
+};
+
+_AppNotification _$AppNotificationFromJson(Map<String, dynamic> json) =>
+    _AppNotification(
+      id: json['id'] as String,
+      tab: $enumDecode(
+        _$NotificationTabEnumMap,
+        json['tab'],
+        unknownValue: NotificationTab.unknown,
+      ),
+      type: json['type'] as String,
+      title: json['title'] as String,
+      body: json['body'] as String,
+      route: json['route'] as String?,
+      read: json['read'] as bool? ?? false,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+    );
+
+Map<String, dynamic> _$AppNotificationToJson(_AppNotification instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'tab': _$NotificationTabEnumMap[instance.tab]!,
+      'type': instance.type,
+      'title': instance.title,
+      'body': instance.body,
+      'route': ?instance.route,
+      'read': instance.read,
+      'createdAt': instance.createdAt.toIso8601String(),
+    };
+
+const _$NotificationTabEnumMap = {
+  NotificationTab.trips: 'TRIPS',
+  NotificationTab.wallet: 'WALLET',
+  NotificationTab.tranix: 'TRANIX',
+  NotificationTab.account: 'ACCOUNT',
+  NotificationTab.unknown: 'UNKNOWN',
 };

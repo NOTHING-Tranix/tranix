@@ -8,7 +8,7 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 | 0 Foundation | 12 | 12 |
 | 1 Auth and onboarding | 6 | 6 |
 | 2 Profile and verification | 7 | 7 |
-| 3 Wallet, notifications, support | 7 | 0 |
+| 3 Wallet, notifications, support | 7 | 3 |
 | 4 Load Provider | 10 | 0 |
 | 5 Driver | 12 | 0 |
 | 6 Ratings and Trust Score | 3 | 0 |
@@ -50,10 +50,10 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 - [x] **A-207** Change mobile with OTP. (2026-11-21)
 
 ## Phase 3 — Wallet, notifications, support (needs B-301…B-304, B-1101…B-1104)
-- [ ] **A-301** Wallet screen (S-08) + transactions with filters.
-- [ ] **A-302** Top-up via external browser link; refresh on resume.
-- [ ] **A-303** FCM setup, token registration, foreground notifications, tap routing.
-- [ ] **A-304** Notifications screen with tabs (S-09) + home cards.
+- [x] **A-301** Wallet screen (S-08) + transactions with filters. (2026-11-21)
+- [x] **A-302** Top-up via external browser link; refresh on resume. (2026-11-21)
+- [!] **A-303** FCM setup, token registration, foreground notifications, tap routing. — code done (PushService); needs Firebase project + google-services.json (founder-review F-4)
+- [x] **A-304** Notifications screen with tabs (S-09) + home cards. (2026-11-21)
 - [ ] **A-305** Support new ticket, list, thread, reopen (S-10).
 - [ ] **A-306** Home cards: latest Tranix message and trip update.
 - [ ] **A-307** Low-balance and verification banners on homes.
