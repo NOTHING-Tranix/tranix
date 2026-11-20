@@ -19,5 +19,6 @@ public record PublicSettings(
         List<String> vehicleTypes,
         List<String> ticketTypes,
         List<String> rejectReasons,
-        List<String> supportedLanguages) {
+        List<String> supportedLanguages,
+        boolean aadhaarEnabled) {
 }

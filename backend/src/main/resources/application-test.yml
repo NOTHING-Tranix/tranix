@@ -9,3 +9,5 @@ tranix:
   files:
     storage-dir: ${java.io.tmpdir}/tranix-test-files
     signing-secret: test-only-files-secret-0123456789abcdef
+  jobs:
+    enabled: false

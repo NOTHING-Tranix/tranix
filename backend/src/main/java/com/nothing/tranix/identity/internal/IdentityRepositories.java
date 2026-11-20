@@ -20,6 +20,8 @@ interface UserRepository extends JpaRepository<User, UUID> {
     Optional<User> findByMobile(String mobile);
 
     boolean existsByMobile(String mobile);
+
+    List<User> findByVerificationStatusAndRoleInOrderByUpdatedAt(com.nothing.tranix.shared.types.VerificationStatus status, java.util.Collection<com.nothing.tranix.shared.types.Role> roles);
 }
 
 interface AddressRepository extends JpaRepository<Address, UUID> {

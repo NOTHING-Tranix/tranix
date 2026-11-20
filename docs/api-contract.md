@@ -88,11 +88,11 @@ Language: en | ta | hi
 | `PUT /me/role-profile` | Role-specific fields (see §4.1) |
 | `POST /files` (multipart `file`) | → `{fileId}`; PDF/JPG/PNG ≤ 10 MB (type checked by content) |
 | `GET /files/{id}/content?exp=&sig=` | No JWT. The signed `viewUrl` returned with documents/receipts points here; valid 5 min, else `403 FORBIDDEN` |
-| `POST /me/documents` | `{type, fileIds[], number?, expiresOn?}` → `Document` |
+| `POST /me/documents` | `{type, fileIds[], number?, expiresOn?}` → `Document`. Creates or replaces the one document of that type. Allowed: PHOTO, PAN, VOTER_ID, DRIVING_LICENCE (+ FN/ORG registration cert, GST_CERT by role). Number required for PAN/VOTER_ID/DRIVING_LICENCE/GST_CERT; expiry for DRIVING_LICENCE |
 | `PUT /me/documents/{id}` | Replace a rejected/expiring document |
 | `GET /me/documents` | `[Document{id, type, numberMasked, expiresOn, status, rejectReason, viewUrl (signed, 5 min)}]` |
 | `POST /me/aadhaar/offline` | `{qrPayload \| ekycZip+shareCode}` → `{verified, last4, name}` (provider adapter; see open questions) |
-| `GET /me/verification` | `{status, items:[{key, label, done, weight}], documents[], estimatedReviewHours}` |
+| `GET /me/verification` | `{status, items:[{key, label, done, weight}], documents[], estimatedReviewHours}`. Item keys: NAME, PHOTO, ADDRESS, ID_PROOF, ROLE_PROFILE, FN_REGISTRATION_CERT, DRIVING_LICENCE, ORG_REGISTRATION_CERT |
 | `POST /me/verification/submit` | Only at 100% → `UNDER_REVIEW` |
 | `POST /me/devices` | `{fcmToken, platform: ANDROID}` |
 
@@ -216,7 +216,7 @@ LoadDetail = LoadSummary + { pickup, drop, senderName, senderMobile, receiverNam
 
 ## 12. Settings for clients
 
-`GET /settings/public` → `{postingChargeInr, tripChargeInr, topupChips:[500,1000,2000], otpTtlSeconds:300, otpResendSeconds:30, revisionLimit:5, revisionResponseMinutes:15, geofenceMeters:500, wishlistMax:20, wishlistFirstMinutes:15, wishlistOnlyNotifyMinutes:30, goodsTypes[], vehicleTypes[], ticketTypes[], rejectReasons[], supportedLanguages[]}`
+`GET /settings/public` → `{postingChargeInr, tripChargeInr, topupChips:[500,1000,2000], otpTtlSeconds:300, otpResendSeconds:30, revisionLimit:5, revisionResponseMinutes:15, geofenceMeters:500, wishlistMax:20, wishlistFirstMinutes:15, wishlistOnlyNotifyMinutes:30, goodsTypes[], vehicleTypes[], ticketTypes[], rejectReasons[], supportedLanguages[], aadhaarEnabled}` — `aadhaarEnabled` hides the Aadhaar option until a provider is set up (Q-04)
 
 ## 13. Admin (`/api/v1/admin/**`, role ADMIN)
 

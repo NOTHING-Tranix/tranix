@@ -67,6 +67,24 @@ public class TestApi {
         return s;
     }
 
+    /** A user whose role is ADMIN (role changed in the DB, then signed in again for a token with role ADMIN). */
+    public Session admin() throws Exception {
+        Session s = verified("RECEIVER");
+        jdbc.update("update identity_user set role = 'ADMIN' where id = ?", s.userId());
+        send("/api/v1/auth/otp/send", Map.of("mobile", s.mobile(), "purpose", "SIGN_IN"), null);
+        String body = body(send("/api/v1/auth/sign-in", Map.of("mobile", s.mobile(), "otp", lastOtp(s.mobile())), null));
+        return new Session(s.userId(), s.mobile(), JsonPath.read(body, "$.accessToken"), JsonPath.read(body, "$.refreshToken"));
+    }
+
+    /** Uploads a tiny PNG as {@code as} and returns its fileId. */
+    public String uploadPng(Session as) throws Exception {
+        byte[] png = {(byte) 0x89, 'P', 'N', 'G', 0x0D, 0x0A, 0x1A, 0x0A, 0, 0, 0, 13};
+        String body = mvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart("/api/v1/files")
+                .file(new org.springframework.mock.web.MockMultipartFile("file", "a.png", "image/png", png))
+                .header("Authorization", "Bearer " + as.accessToken())).andReturn().getResponse().getContentAsString();
+        return JsonPath.read(body, "$.fileId");
+    }
+
     public ResultActions send(String path, Object body, Session as) throws Exception {
         return mvc.perform(auth(post(path), as).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsString(body)));
     }

@@ -7,7 +7,7 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 | --- | --- | --- |
 | 0 Foundation | 10 | 10 |
 | 1 Auth and profile | 12 | 12 |
-| 2 Verification and documents | 8 | 0 |
+| 2 Verification and documents | 8 | 7 |
 | 3 Wallet | 8 | 0 |
 | 4 Loads (shipper) | 9 | 0 |
 | 5 Fleet and driver setup | 9 | 0 |
@@ -49,14 +49,14 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 - [x] **B-112** `POST /me/devices` (FCM token). (2026-11-21)
 
 ## Phase 2 — Verification and documents
-- [ ] **B-201** `identity_document` + `POST/PUT/GET /me/documents` with masked numbers and expiry.
-- [ ] **B-202** `POST /me/verification/submit` (only at 100%) → `UNDER_REVIEW`.
-- [ ] **B-203** Admin verification queue by tab + approve/reject per document with reason → user `VERIFIED` / `NOT_VERIFIED`.
-- [ ] **B-204** Aadhaar: `AadhaarVerifier` interface + `POST /me/aadhaar/offline` storing last 4 + result only (real provider in Phase 13, Q-04).
-- [ ] **B-205** Document expiry job: reminders 30/7/1 days; expired → pause matching for driver/truck.
-- [ ] **B-206** Re-upload flow: `PUT /me/documents/{id}` returns user to `UNDER_REVIEW`.
-- [ ] **B-207** Notification events for verification results (consumed in Phase 11).
-- [ ] **B-208** Tests: profile completion per role, guard blocks unverified users.
+- [x] **B-201** `identity_document` + `POST/PUT/GET /me/documents` with masked numbers and expiry. (2026-11-21)
+- [x] **B-202** `POST /me/verification/submit` (only at 100%) → `UNDER_REVIEW`. (2026-11-21)
+- [x] **B-203** Admin verification queue by tab + approve/reject per document with reason → user `VERIFIED` / `NOT_VERIFIED`. (2026-11-21)
+- [!] **B-204** Aadhaar: `AadhaarVerifier` interface + `POST /me/aadhaar/offline` storing last 4 + result only (real provider in Phase 13, Q-04). (2026-11-21) — endpoint + storage done; real provider needs Q-04 (see founder-review F-3)
+- [x] **B-205** Document expiry job: reminders 30/7/1 days; expired → pause matching for driver/truck. (2026-11-21)
+- [x] **B-206** Re-upload flow: `PUT /me/documents/{id}` returns user to `UNDER_REVIEW`. (2026-11-21)
+- [x] **B-207** Notification events for verification results (consumed in Phase 11). (2026-11-21)
+- [x] **B-208** Tests: profile completion per role, guard blocks unverified users. (2026-11-21)
 
 ## Phase 3 — Wallet
 - [ ] **B-301** `wallet_account`, append-only `wallet_entry`, cached balance with row lock.

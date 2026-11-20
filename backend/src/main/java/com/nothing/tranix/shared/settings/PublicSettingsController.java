@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 class PublicSettingsController {
 
     private final Settings settings;
+    private final com.nothing.tranix.shared.integrations.AadhaarVerifier aadhaar;
 
-    PublicSettingsController(Settings settings) {
+    PublicSettingsController(Settings settings, com.nothing.tranix.shared.integrations.AadhaarVerifier aadhaar) {
+        this.aadhaar = aadhaar;
         this.settings = settings;
     }
 
@@ -46,7 +48,8 @@ class PublicSettingsController {
                 names(VehicleType.values()),
                 names(TicketType.values()),
                 names(SuggestionRejectReason.values()),
-                settings.getStringList(SettingKeys.SUPPORTED_LANGUAGES));
+                settings.getStringList(SettingKeys.SUPPORTED_LANGUAGES),
+                aadhaar.enabled());
     }
 
     private static List<String> names(Enum<?>[] values) {
