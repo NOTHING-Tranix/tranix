@@ -70,7 +70,7 @@ Language: en | ta | hi
 | Method & path | Body → Response | Notes |
 | --- | --- | --- |
 | `POST /auth/otp/send` | `{mobile, purpose: SIGN_UP\|SIGN_IN}` → `204` | Always 204 for SIGN_IN (no account enumeration). 30 s resend cooldown |
-| `POST /auth/sign-up` | `{mobile, otp, name, role, consent: true, language}` → `AuthTokens` | Role ≠ ADMIN. `MOBILE_IN_USE` |
+| `POST /auth/sign-up` | `{mobile, otp, name, role, consent: true, language, deviceId?}` → `AuthTokens` | Role ≠ ADMIN. `MOBILE_IN_USE`. Resend cooldown → `429 RATE_LIMITED` |
 | `POST /auth/sign-in` | `{mobile, otp, deviceId}` → `AuthTokens` | |
 | `POST /auth/refresh` | `{refreshToken}` → `AuthTokens` | Rotates refresh token |
 | `POST /auth/sign-out` | `{refreshToken}` → `204` | |
@@ -83,7 +83,8 @@ Language: en | ta | hi
 | --- | --- |
 | `GET /me` | `Me = {id, name, mobile, role, language, photoUrl, verificationStatus, profileCompletion (0–100), trustScore, walletBalanceInr?, pendingRatingsCount, unreadNotifications}` |
 | `PUT /me` | `{name, email?, language, address{line, village, district, state, pin}}` |
-| `POST /me/mobile/change` + `POST /me/mobile/verify` | OTP flow for a new mobile |
+| `POST /me/mobile/change` `{mobile}` → 204 + `POST /me/mobile/verify` `{mobile, otp}` → `Me` | OTP to the new mobile; `MOBILE_IN_USE`; audited |
+| `GET /me/address` · `GET /me/role-profile` | Saved address / role-profile fields (to prefill forms) |
 | `PUT /me/role-profile` | Role-specific fields (see §4.1) |
 | `POST /files` (multipart `file`) | → `{fileId}`; PDF/JPG/PNG ≤ 10 MB (type checked by content) |
 | `GET /files/{id}/content?exp=&sig=` | No JWT. The signed `viewUrl` returned with documents/receipts points here; valid 5 min, else `403 FORBIDDEN` |

@@ -5,6 +5,7 @@ Items Claude could not finish or decided on its own while working in autopilot. 
 ## Assumptions to review (decisions marked "assumed by Claude")
 
 | ID | Summary | Where |
+| D-23 | Completion weights, OTP 5 sends/hour, review 24 h, licence format | docs/decisions.md |
 | --- | --- | --- |
 
 ## Actions only the founder can do

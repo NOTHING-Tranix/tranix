@@ -6,7 +6,7 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 | Phase | Tasks | Done |
 | --- | --- | --- |
 | 0 Foundation | 10 | 10 |
-| 1 Auth and profile | 12 | 0 |
+| 1 Auth and profile | 12 | 12 |
 | 2 Verification and documents | 8 | 0 |
 | 3 Wallet | 8 | 0 |
 | 4 Loads (shipper) | 9 | 0 |
@@ -35,18 +35,18 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 - [x] **B-010** Swagger UI with JWT "Authorize" button; dev seed data (one user per role, sample trucks). (2026-11-21) — Swagger + JWT Authorize done; `db/dev` seed location ready, rows added with B-101 (users) and B-501 (trucks)
 
 ## Phase 1 — Auth and profile
-- [ ] **B-101** `identity_user`, roles, verification status, profile completion columns. Also add dev seed users (one per role) in `db/dev` (from B-010).
-- [ ] **B-102** OTP service: 6 digits, hashed, 5 min TTL, 5 attempts, 30 s resend cooldown, rate limits; dev code `123456` only in `dev`.
-- [ ] **B-103** `POST /auth/otp/send` (SIGN_UP/SIGN_IN, no enumeration).
-- [ ] **B-104** `POST /auth/sign-up` (mobile, otp, name, role ≠ ADMIN, consent, language).
-- [ ] **B-105** `POST /auth/sign-in` → JWT access (15 min) + refresh (30 days) with device id.
-- [ ] **B-106** `POST /auth/refresh` (rotation, reuse detection) and `/auth/sign-out`.
-- [ ] **B-107** Security config: role-based access, `NOT_VERIFIED` guard annotation/aspect for business actions.
-- [ ] **B-108** `GET/PUT /me`, address, language.
-- [ ] **B-109** Change mobile with OTP (`/me/mobile/change`, `/me/mobile/verify`), audited.
-- [ ] **B-110** `PUT /me/role-profile` for all five roles (validation: CIN/PAN/GSTIN formats, licence).
-- [ ] **B-111** Profile completion calculator per role (weighted items) + `GET /me/verification`.
-- [ ] **B-112** `POST /me/devices` (FCM token).
+- [x] **B-101** `identity_user`, roles, verification status, profile completion columns. Also add dev seed users (one per role) in `db/dev` (from B-010). (2026-11-21)
+- [x] **B-102** OTP service: 6 digits, hashed, 5 min TTL, 5 attempts, 30 s resend cooldown, rate limits; dev code `123456` only in `dev`. (2026-11-21)
+- [x] **B-103** `POST /auth/otp/send` (SIGN_UP/SIGN_IN, no enumeration). (2026-11-21)
+- [x] **B-104** `POST /auth/sign-up` (mobile, otp, name, role ≠ ADMIN, consent, language). (2026-11-21)
+- [x] **B-105** `POST /auth/sign-in` → JWT access (15 min) + refresh (30 days) with device id. (2026-11-21)
+- [x] **B-106** `POST /auth/refresh` (rotation, reuse detection) and `/auth/sign-out`. (2026-11-21)
+- [x] **B-107** Security config: role-based access, `NOT_VERIFIED` guard annotation/aspect for business actions. (2026-11-21)
+- [x] **B-108** `GET/PUT /me`, address, language. (2026-11-21)
+- [x] **B-109** Change mobile with OTP (`/me/mobile/change`, `/me/mobile/verify`), audited. (2026-11-21)
+- [x] **B-110** `PUT /me/role-profile` for all five roles (validation: CIN/PAN/GSTIN formats, licence). (2026-11-21)
+- [x] **B-111** Profile completion calculator per role (weighted items) + `GET /me/verification`. (2026-11-21)
+- [x] **B-112** `POST /me/devices` (FCM token). (2026-11-21)
 
 ## Phase 2 — Verification and documents
 - [ ] **B-201** `identity_document` + `POST/PUT/GET /me/documents` with masked numbers and expiry.
