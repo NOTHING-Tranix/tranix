@@ -652,4 +652,250 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get latestTripUpdate => 'ताज़ा यात्रा अपडेट';
+
+  @override
+  String get postLoad => 'लोड पोस्ट करें';
+
+  @override
+  String get pickupSection => 'पिकअप';
+
+  @override
+  String get goodsSection => 'माल';
+
+  @override
+  String get dropSection => 'ड्रॉप';
+
+  @override
+  String get receiverSection => 'प्राप्तकर्ता';
+
+  @override
+  String get paymentSection => 'भुगतान';
+
+  @override
+  String get offerTo => 'किसे ऑफ़र करें';
+
+  @override
+  String get pickupDate => 'पिकअप की तारीख';
+
+  @override
+  String get windowFrom => 'से';
+
+  @override
+  String get windowTo => 'तक';
+
+  @override
+  String get setLocation => 'स्थान चुनें';
+
+  @override
+  String get useCurrentLocation => 'मेरा मौजूदा स्थान इस्तेमाल करें';
+
+  @override
+  String get locationNotSet => 'स्थान नहीं चुना गया';
+
+  @override
+  String get addressLabel => 'पता';
+
+  @override
+  String get landmarkOptional => 'पहचान चिह्न (वैकल्पिक)';
+
+  @override
+  String get senderName => 'भेजने वाले का नाम';
+
+  @override
+  String get senderMobile => 'भेजने वाले का मोबाइल';
+
+  @override
+  String get goodsType => 'माल का प्रकार';
+
+  @override
+  String get descriptionOptional => 'विवरण (वैकल्पिक)';
+
+  @override
+  String get quantity => 'मात्रा';
+
+  @override
+  String get unit => 'इकाई';
+
+  @override
+  String get weightTonnes => 'अनुमानित वज़न (टन)';
+
+  @override
+  String get vehicleType => 'वाहन का प्रकार';
+
+  @override
+  String get receiverName => 'प्राप्तकर्ता का नाम';
+
+  @override
+  String get receiverMobile => 'प्राप्तकर्ता का मोबाइल';
+
+  @override
+  String get freightPaidBy => 'भाड़ा कौन देगा';
+
+  @override
+  String get paidByMe => 'मैं';
+
+  @override
+  String get paidByReceiver => 'प्राप्तकर्ता';
+
+  @override
+  String get amountInr => 'राशि (₹)';
+
+  @override
+  String suggestedRange(String min, String max) {
+    return 'मिलती-जुलती यात्राएँ: $min – $max';
+  }
+
+  @override
+  String estimateLine(String km, String hours, String eta) {
+    return '$km · $hours घंटे का सफ़र · $eta तक डिलीवरी';
+  }
+
+  @override
+  String get offerEveryone => 'सभी को';
+
+  @override
+  String get offerWishlistFirst => 'पहले पसंदीदा सूची (15 मिनट, फिर सभी को)';
+
+  @override
+  String get offerWishlistOnly => 'सिर्फ़ पसंदीदा सूची';
+
+  @override
+  String get reviewTitle => 'जाँचें';
+
+  @override
+  String postingChargeNote(String amount) {
+    return 'पोस्टिंग शुल्क $amount — सिर्फ़ ड्राइवर के स्वीकार करने पर कटेगा';
+  }
+
+  @override
+  String get confirmPost => 'लोड पोस्ट करें';
+
+  @override
+  String get posted => 'लोड पोस्ट हो गया';
+
+  @override
+  String get saveChanges => 'बदलाव सेव करें';
+
+  @override
+  String topUpToPost(String amount) {
+    return 'पोस्ट करने के लिए $amount टॉप अप करें';
+  }
+
+  @override
+  String get editLoad => 'बदलें';
+
+  @override
+  String get cancelLoad => 'लोड रद्द करें';
+
+  @override
+  String get cancelReason => 'कारण';
+
+  @override
+  String get noteLabel => 'नोट';
+
+  @override
+  String get cancelOutcomeFree =>
+      'कोई शुल्क नहीं। आपके ट्रस्ट स्कोर पर असर नहीं।';
+
+  @override
+  String cancelOutcomeKept(String points) {
+    return 'शुल्क वापस नहीं होगा। दूसरे पक्ष की गलती न हो तो ट्रस्ट स्कोर $points।';
+  }
+
+  @override
+  String get cancelSupportOnly =>
+      'पिकअप के बाद रद्द करना सिर्फ़ सहायता के ज़रिए।';
+
+  @override
+  String get postAgain => 'फिर से पोस्ट करें';
+
+  @override
+  String get timeline => 'समयरेखा';
+
+  @override
+  String get deliveryEstimate => 'डिलीवरी का अनुमान';
+
+  @override
+  String get ongoingLoads => 'चालू लोड';
+
+  @override
+  String get noLoads => 'अभी कोई लोड नहीं';
+
+  @override
+  String get unitBags => 'बोरी';
+
+  @override
+  String get unitCrates => 'क्रेट';
+
+  @override
+  String get unitBoxes => 'डिब्बे';
+
+  @override
+  String get unitTonnes => 'टन';
+
+  @override
+  String get unitLitres => 'लीटर';
+
+  @override
+  String get vehOpenBody => 'ओपन बॉडी';
+
+  @override
+  String get vehClosedBody => 'क्लोज़्ड बॉडी';
+
+  @override
+  String get vehContainer => 'कंटेनर';
+
+  @override
+  String get vehRefrigerated => 'रेफ़्रिजरेटेड';
+
+  @override
+  String get vehTanker => 'टैंकर';
+
+  @override
+  String get vehAny => 'कोई भी';
+
+  @override
+  String get crPlansChanged => 'मेरी योजना बदल गई';
+
+  @override
+  String get crGoodsNotReady => 'माल तैयार नहीं';
+
+  @override
+  String get crFoundOtherTruck => 'दूसरा ट्रक मिल गया';
+
+  @override
+  String get crDriverNotReachable => 'ड्राइवर से संपर्क नहीं हो रहा';
+
+  @override
+  String get crDriverDidNotCome => 'ड्राइवर नहीं आया';
+
+  @override
+  String get crDriverAskedMore => 'ड्राइवर ने ज़्यादा पैसे माँगे';
+
+  @override
+  String get crTruckBreakdown => 'ट्रक खराब';
+
+  @override
+  String get crEmergency => 'आपातकाल';
+
+  @override
+  String get crShipperChangedDetails => 'भेजने वाले ने विवरण बदला';
+
+  @override
+  String get crAmountNotAgreed => 'राशि पर सहमति नहीं';
+
+  @override
+  String get crTooFar => 'बहुत दूर';
+
+  @override
+  String get crOther => 'अन्य';
+
+  @override
+  String get loadDetails => 'लोड का विवरण';
+
+  @override
+  String get sender => 'भेजने वाला';
+
+  @override
+  String get receiver => 'प्राप्तकर्ता';
 }

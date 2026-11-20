@@ -9,7 +9,7 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 | 1 Auth and onboarding | 6 | 6 |
 | 2 Profile and verification | 7 | 7 |
 | 3 Wallet, notifications, support | 7 | 3 |
-| 4 Load Provider | 10 | 0 |
+| 4 Load Provider | 10 | 3 |
 | 5 Driver | 12 | 0 |
 | 6 Ratings and Trust Score | 3 | 0 |
 | 7 Farmer Network | 4 | 0 |
@@ -59,9 +59,9 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 - [ ] **A-307** Low-balance and verification banners on homes.
 
 ## Phase 4 — Load Provider (needs B-401…B-409, B-702, B-801)
-- [ ] **A-401** LP home (LP-01).
-- [ ] **A-402** Post a load form with map pin picker and estimate (LP-02).
-- [ ] **A-403** Review + post; insufficient balance / not verified sheets keeping form data.
+- [x] **A-401** LP home (LP-01). (2026-11-21)
+- [x] **A-402** Post a load form with map pin picker and estimate (LP-02). (2026-11-21)
+- [x] **A-403** Review + post; insufficient balance / not verified sheets keeping form data. (2026-11-21)
 - [ ] **A-404** Tracking list + load detail with timeline, live map polling, driver block, call (LP-03/04).
 - [ ] **A-405** Amount request card confirm/reject; pickup OTP card.
 - [ ] **A-406** Edit (not accepted), cancel with rule preview, repost.

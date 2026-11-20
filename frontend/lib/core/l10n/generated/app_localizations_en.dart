@@ -649,4 +649,249 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get latestTripUpdate => 'Latest trip update';
+
+  @override
+  String get postLoad => 'Post a load';
+
+  @override
+  String get pickupSection => 'Pickup';
+
+  @override
+  String get goodsSection => 'Goods';
+
+  @override
+  String get dropSection => 'Drop';
+
+  @override
+  String get receiverSection => 'Receiver';
+
+  @override
+  String get paymentSection => 'Payment';
+
+  @override
+  String get offerTo => 'Offer to';
+
+  @override
+  String get pickupDate => 'Pickup date';
+
+  @override
+  String get windowFrom => 'From';
+
+  @override
+  String get windowTo => 'To';
+
+  @override
+  String get setLocation => 'Set location';
+
+  @override
+  String get useCurrentLocation => 'Use my current location';
+
+  @override
+  String get locationNotSet => 'Location not set';
+
+  @override
+  String get addressLabel => 'Address';
+
+  @override
+  String get landmarkOptional => 'Landmark (optional)';
+
+  @override
+  String get senderName => 'Sender name';
+
+  @override
+  String get senderMobile => 'Sender mobile';
+
+  @override
+  String get goodsType => 'Goods type';
+
+  @override
+  String get descriptionOptional => 'Description (optional)';
+
+  @override
+  String get quantity => 'Quantity';
+
+  @override
+  String get unit => 'Unit';
+
+  @override
+  String get weightTonnes => 'Approx. weight (tonnes)';
+
+  @override
+  String get vehicleType => 'Vehicle type';
+
+  @override
+  String get receiverName => 'Receiver name';
+
+  @override
+  String get receiverMobile => 'Receiver mobile';
+
+  @override
+  String get freightPaidBy => 'Freight paid by';
+
+  @override
+  String get paidByMe => 'Me';
+
+  @override
+  String get paidByReceiver => 'Receiver';
+
+  @override
+  String get amountInr => 'Amount (₹)';
+
+  @override
+  String suggestedRange(String min, String max) {
+    return 'Similar trips: $min – $max';
+  }
+
+  @override
+  String estimateLine(String km, String hours, String eta) {
+    return '$km · $hours h drive · Delivery by $eta';
+  }
+
+  @override
+  String get offerEveryone => 'Everyone';
+
+  @override
+  String get offerWishlistFirst => 'Wish list first (15 min, then everyone)';
+
+  @override
+  String get offerWishlistOnly => 'Wish list only';
+
+  @override
+  String get reviewTitle => 'Review';
+
+  @override
+  String postingChargeNote(String amount) {
+    return 'Posting charge $amount — charged only when a driver accepts';
+  }
+
+  @override
+  String get confirmPost => 'Post load';
+
+  @override
+  String get posted => 'Load posted';
+
+  @override
+  String get saveChanges => 'Save changes';
+
+  @override
+  String topUpToPost(String amount) {
+    return 'Top up $amount to post';
+  }
+
+  @override
+  String get editLoad => 'Edit';
+
+  @override
+  String get cancelLoad => 'Cancel load';
+
+  @override
+  String get cancelReason => 'Reason';
+
+  @override
+  String get noteLabel => 'Note';
+
+  @override
+  String get cancelOutcomeFree =>
+      'No charges. Your Trust Score is not affected.';
+
+  @override
+  String cancelOutcomeKept(String points) {
+    return 'Charges are kept. Trust Score $points unless the other party was at fault.';
+  }
+
+  @override
+  String get cancelSupportOnly => 'After pickup, cancel only through Support.';
+
+  @override
+  String get postAgain => 'Post again';
+
+  @override
+  String get timeline => 'Timeline';
+
+  @override
+  String get deliveryEstimate => 'Delivery estimate';
+
+  @override
+  String get ongoingLoads => 'Ongoing loads';
+
+  @override
+  String get noLoads => 'No loads yet';
+
+  @override
+  String get unitBags => 'Bags';
+
+  @override
+  String get unitCrates => 'Crates';
+
+  @override
+  String get unitBoxes => 'Boxes';
+
+  @override
+  String get unitTonnes => 'Tonnes';
+
+  @override
+  String get unitLitres => 'Litres';
+
+  @override
+  String get vehOpenBody => 'Open body';
+
+  @override
+  String get vehClosedBody => 'Closed body';
+
+  @override
+  String get vehContainer => 'Container';
+
+  @override
+  String get vehRefrigerated => 'Refrigerated';
+
+  @override
+  String get vehTanker => 'Tanker';
+
+  @override
+  String get vehAny => 'Any';
+
+  @override
+  String get crPlansChanged => 'My plans changed';
+
+  @override
+  String get crGoodsNotReady => 'Goods not ready';
+
+  @override
+  String get crFoundOtherTruck => 'Found another truck';
+
+  @override
+  String get crDriverNotReachable => 'Driver not reachable';
+
+  @override
+  String get crDriverDidNotCome => 'Driver did not come';
+
+  @override
+  String get crDriverAskedMore => 'Driver asked for more money';
+
+  @override
+  String get crTruckBreakdown => 'Truck breakdown';
+
+  @override
+  String get crEmergency => 'Emergency';
+
+  @override
+  String get crShipperChangedDetails => 'Shipper changed the details';
+
+  @override
+  String get crAmountNotAgreed => 'Amount not agreed';
+
+  @override
+  String get crTooFar => 'Too far';
+
+  @override
+  String get crOther => 'Other';
+
+  @override
+  String get loadDetails => 'Load details';
+
+  @override
+  String get sender => 'Sender';
+
+  @override
+  String get receiver => 'Receiver';
 }

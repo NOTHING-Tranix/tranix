@@ -1323,6 +1323,474 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Latest trip update'**
   String get latestTripUpdate;
+
+  /// No description provided for @postLoad.
+  ///
+  /// In en, this message translates to:
+  /// **'Post a load'**
+  String get postLoad;
+
+  /// No description provided for @pickupSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup'**
+  String get pickupSection;
+
+  /// No description provided for @goodsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Goods'**
+  String get goodsSection;
+
+  /// No description provided for @dropSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Drop'**
+  String get dropSection;
+
+  /// No description provided for @receiverSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Receiver'**
+  String get receiverSection;
+
+  /// No description provided for @paymentSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment'**
+  String get paymentSection;
+
+  /// No description provided for @offerTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Offer to'**
+  String get offerTo;
+
+  /// No description provided for @pickupDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup date'**
+  String get pickupDate;
+
+  /// No description provided for @windowFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'From'**
+  String get windowFrom;
+
+  /// No description provided for @windowTo.
+  ///
+  /// In en, this message translates to:
+  /// **'To'**
+  String get windowTo;
+
+  /// No description provided for @setLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Set location'**
+  String get setLocation;
+
+  /// No description provided for @useCurrentLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Use my current location'**
+  String get useCurrentLocation;
+
+  /// No description provided for @locationNotSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Location not set'**
+  String get locationNotSet;
+
+  /// No description provided for @addressLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get addressLabel;
+
+  /// No description provided for @landmarkOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Landmark (optional)'**
+  String get landmarkOptional;
+
+  /// No description provided for @senderName.
+  ///
+  /// In en, this message translates to:
+  /// **'Sender name'**
+  String get senderName;
+
+  /// No description provided for @senderMobile.
+  ///
+  /// In en, this message translates to:
+  /// **'Sender mobile'**
+  String get senderMobile;
+
+  /// No description provided for @goodsType.
+  ///
+  /// In en, this message translates to:
+  /// **'Goods type'**
+  String get goodsType;
+
+  /// No description provided for @descriptionOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Description (optional)'**
+  String get descriptionOptional;
+
+  /// No description provided for @quantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity'**
+  String get quantity;
+
+  /// No description provided for @unit.
+  ///
+  /// In en, this message translates to:
+  /// **'Unit'**
+  String get unit;
+
+  /// No description provided for @weightTonnes.
+  ///
+  /// In en, this message translates to:
+  /// **'Approx. weight (tonnes)'**
+  String get weightTonnes;
+
+  /// No description provided for @vehicleType.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle type'**
+  String get vehicleType;
+
+  /// No description provided for @receiverName.
+  ///
+  /// In en, this message translates to:
+  /// **'Receiver name'**
+  String get receiverName;
+
+  /// No description provided for @receiverMobile.
+  ///
+  /// In en, this message translates to:
+  /// **'Receiver mobile'**
+  String get receiverMobile;
+
+  /// No description provided for @freightPaidBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Freight paid by'**
+  String get freightPaidBy;
+
+  /// No description provided for @paidByMe.
+  ///
+  /// In en, this message translates to:
+  /// **'Me'**
+  String get paidByMe;
+
+  /// No description provided for @paidByReceiver.
+  ///
+  /// In en, this message translates to:
+  /// **'Receiver'**
+  String get paidByReceiver;
+
+  /// No description provided for @amountInr.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount (₹)'**
+  String get amountInr;
+
+  /// No description provided for @suggestedRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Similar trips: {min} – {max}'**
+  String suggestedRange(String min, String max);
+
+  /// No description provided for @estimateLine.
+  ///
+  /// In en, this message translates to:
+  /// **'{km} · {hours} h drive · Delivery by {eta}'**
+  String estimateLine(String km, String hours, String eta);
+
+  /// No description provided for @offerEveryone.
+  ///
+  /// In en, this message translates to:
+  /// **'Everyone'**
+  String get offerEveryone;
+
+  /// No description provided for @offerWishlistFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Wish list first (15 min, then everyone)'**
+  String get offerWishlistFirst;
+
+  /// No description provided for @offerWishlistOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Wish list only'**
+  String get offerWishlistOnly;
+
+  /// No description provided for @reviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Review'**
+  String get reviewTitle;
+
+  /// No description provided for @postingChargeNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Posting charge {amount} — charged only when a driver accepts'**
+  String postingChargeNote(String amount);
+
+  /// No description provided for @confirmPost.
+  ///
+  /// In en, this message translates to:
+  /// **'Post load'**
+  String get confirmPost;
+
+  /// No description provided for @posted.
+  ///
+  /// In en, this message translates to:
+  /// **'Load posted'**
+  String get posted;
+
+  /// No description provided for @saveChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get saveChanges;
+
+  /// No description provided for @topUpToPost.
+  ///
+  /// In en, this message translates to:
+  /// **'Top up {amount} to post'**
+  String topUpToPost(String amount);
+
+  /// No description provided for @editLoad.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get editLoad;
+
+  /// No description provided for @cancelLoad.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel load'**
+  String get cancelLoad;
+
+  /// No description provided for @cancelReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get cancelReason;
+
+  /// No description provided for @noteLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Note'**
+  String get noteLabel;
+
+  /// No description provided for @cancelOutcomeFree.
+  ///
+  /// In en, this message translates to:
+  /// **'No charges. Your Trust Score is not affected.'**
+  String get cancelOutcomeFree;
+
+  /// No description provided for @cancelOutcomeKept.
+  ///
+  /// In en, this message translates to:
+  /// **'Charges are kept. Trust Score {points} unless the other party was at fault.'**
+  String cancelOutcomeKept(String points);
+
+  /// No description provided for @cancelSupportOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'After pickup, cancel only through Support.'**
+  String get cancelSupportOnly;
+
+  /// No description provided for @postAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Post again'**
+  String get postAgain;
+
+  /// No description provided for @timeline.
+  ///
+  /// In en, this message translates to:
+  /// **'Timeline'**
+  String get timeline;
+
+  /// No description provided for @deliveryEstimate.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery estimate'**
+  String get deliveryEstimate;
+
+  /// No description provided for @ongoingLoads.
+  ///
+  /// In en, this message translates to:
+  /// **'Ongoing loads'**
+  String get ongoingLoads;
+
+  /// No description provided for @noLoads.
+  ///
+  /// In en, this message translates to:
+  /// **'No loads yet'**
+  String get noLoads;
+
+  /// No description provided for @unitBags.
+  ///
+  /// In en, this message translates to:
+  /// **'Bags'**
+  String get unitBags;
+
+  /// No description provided for @unitCrates.
+  ///
+  /// In en, this message translates to:
+  /// **'Crates'**
+  String get unitCrates;
+
+  /// No description provided for @unitBoxes.
+  ///
+  /// In en, this message translates to:
+  /// **'Boxes'**
+  String get unitBoxes;
+
+  /// No description provided for @unitTonnes.
+  ///
+  /// In en, this message translates to:
+  /// **'Tonnes'**
+  String get unitTonnes;
+
+  /// No description provided for @unitLitres.
+  ///
+  /// In en, this message translates to:
+  /// **'Litres'**
+  String get unitLitres;
+
+  /// No description provided for @vehOpenBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Open body'**
+  String get vehOpenBody;
+
+  /// No description provided for @vehClosedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed body'**
+  String get vehClosedBody;
+
+  /// No description provided for @vehContainer.
+  ///
+  /// In en, this message translates to:
+  /// **'Container'**
+  String get vehContainer;
+
+  /// No description provided for @vehRefrigerated.
+  ///
+  /// In en, this message translates to:
+  /// **'Refrigerated'**
+  String get vehRefrigerated;
+
+  /// No description provided for @vehTanker.
+  ///
+  /// In en, this message translates to:
+  /// **'Tanker'**
+  String get vehTanker;
+
+  /// No description provided for @vehAny.
+  ///
+  /// In en, this message translates to:
+  /// **'Any'**
+  String get vehAny;
+
+  /// No description provided for @crPlansChanged.
+  ///
+  /// In en, this message translates to:
+  /// **'My plans changed'**
+  String get crPlansChanged;
+
+  /// No description provided for @crGoodsNotReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Goods not ready'**
+  String get crGoodsNotReady;
+
+  /// No description provided for @crFoundOtherTruck.
+  ///
+  /// In en, this message translates to:
+  /// **'Found another truck'**
+  String get crFoundOtherTruck;
+
+  /// No description provided for @crDriverNotReachable.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver not reachable'**
+  String get crDriverNotReachable;
+
+  /// No description provided for @crDriverDidNotCome.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver did not come'**
+  String get crDriverDidNotCome;
+
+  /// No description provided for @crDriverAskedMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver asked for more money'**
+  String get crDriverAskedMore;
+
+  /// No description provided for @crTruckBreakdown.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck breakdown'**
+  String get crTruckBreakdown;
+
+  /// No description provided for @crEmergency.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency'**
+  String get crEmergency;
+
+  /// No description provided for @crShipperChangedDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipper changed the details'**
+  String get crShipperChangedDetails;
+
+  /// No description provided for @crAmountNotAgreed.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount not agreed'**
+  String get crAmountNotAgreed;
+
+  /// No description provided for @crTooFar.
+  ///
+  /// In en, this message translates to:
+  /// **'Too far'**
+  String get crTooFar;
+
+  /// No description provided for @crOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get crOther;
+
+  /// No description provided for @loadDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Load details'**
+  String get loadDetails;
+
+  /// No description provided for @sender.
+  ///
+  /// In en, this message translates to:
+  /// **'Sender'**
+  String get sender;
+
+  /// No description provided for @receiver.
+  ///
+  /// In en, this message translates to:
+  /// **'Receiver'**
+  String get receiver;
 }
 
 class _AppLocalizationsDelegate

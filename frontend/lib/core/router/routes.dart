@@ -17,6 +17,9 @@ abstract final class Routes {
   static const verification = '/verification';
   static const wallet = '/wallet';
   static const notifications = '/notifications';
+  static const postLoad = '/post';
+  static const postLoadReview = '/post/review';
+  static String loadDetail(String id) => '/loads/$id';
 
   static const lp = '/lp';
   static const fn = '/fn';

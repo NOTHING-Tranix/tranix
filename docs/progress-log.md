@@ -13,6 +13,11 @@ Newest first. Claude adds an entry at the end of every session and at every mile
 
 ---
 
+## 2026-11-21 — M4 Post a load (done; B-408 moved to M7)
+- Done: B-401…B-407, B-409, A-401…A-403 (+ tracking/history lists and basic load detail with edit/cancel/post again). D-26 assumed.
+- Maps: pin picker uses Google Maps only with a key (F-5); otherwise device location + typed address.
+- Demo: sign in 9000000001 (verified), top up ≥ ₹50 → Home → Post a load → set date, pickup/drop (Use my current location + address), goods, receiver, amount → Continue → Review shows estimate + "Posting charge ₹50 — charged only when a driver accepts" → Post load → load detail (Not accepted, timeline). Edit or Cancel (shows outcome first); Tracking tab lists it.
+
 ## 2026-11-21 — M3 Wallet and notifications basics (done, A-303 [!])
 - Done: B-301…B-308, B-1101, B-1102, A-301, A-302, A-304. A-303 push code ready, needs Firebase (F-4). D-25 assumed.
 - Contract: wallet transactions paging/month format, top-up limits, webhook `X-Signature`, notification item shape.

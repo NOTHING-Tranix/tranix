@@ -658,4 +658,251 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get latestTripUpdate => 'சமீபத்திய பயணப் புதுப்பிப்பு';
+
+  @override
+  String get postLoad => 'சரக்கைப் பதிவு செய்';
+
+  @override
+  String get pickupSection => 'ஏற்றும் இடம்';
+
+  @override
+  String get goodsSection => 'சரக்கு';
+
+  @override
+  String get dropSection => 'இறக்கும் இடம்';
+
+  @override
+  String get receiverSection => 'பெறுநர்';
+
+  @override
+  String get paymentSection => 'கட்டணம்';
+
+  @override
+  String get offerTo => 'யாருக்கு வழங்க';
+
+  @override
+  String get pickupDate => 'ஏற்றும் தேதி';
+
+  @override
+  String get windowFrom => 'முதல்';
+
+  @override
+  String get windowTo => 'வரை';
+
+  @override
+  String get setLocation => 'இடத்தை அமை';
+
+  @override
+  String get useCurrentLocation => 'என் தற்போதைய இடத்தைப் பயன்படுத்து';
+
+  @override
+  String get locationNotSet => 'இடம் அமைக்கப்படவில்லை';
+
+  @override
+  String get addressLabel => 'முகவரி';
+
+  @override
+  String get landmarkOptional => 'அடையாளக் குறி (விருப்பம்)';
+
+  @override
+  String get senderName => 'அனுப்புநர் பெயர்';
+
+  @override
+  String get senderMobile => 'அனுப்புநர் மொபைல்';
+
+  @override
+  String get goodsType => 'சரக்கு வகை';
+
+  @override
+  String get descriptionOptional => 'விவரம் (விருப்பம்)';
+
+  @override
+  String get quantity => 'அளவு';
+
+  @override
+  String get unit => 'அலகு';
+
+  @override
+  String get weightTonnes => 'தோராய எடை (டன்)';
+
+  @override
+  String get vehicleType => 'வாகன வகை';
+
+  @override
+  String get receiverName => 'பெறுநர் பெயர்';
+
+  @override
+  String get receiverMobile => 'பெறுநர் மொபைல்';
+
+  @override
+  String get freightPaidBy => 'சரக்குக் கட்டணம் செலுத்துபவர்';
+
+  @override
+  String get paidByMe => 'நான்';
+
+  @override
+  String get paidByReceiver => 'பெறுநர்';
+
+  @override
+  String get amountInr => 'தொகை (₹)';
+
+  @override
+  String suggestedRange(String min, String max) {
+    return 'ஒத்த பயணங்கள்: $min – $max';
+  }
+
+  @override
+  String estimateLine(String km, String hours, String eta) {
+    return '$km · $hours மணி பயணம் · $eta-க்குள் சேரும்';
+  }
+
+  @override
+  String get offerEveryone => 'அனைவருக்கும்';
+
+  @override
+  String get offerWishlistFirst =>
+      'முதலில் விருப்பப் பட்டியல் (15 நிமிடம், பின் அனைவருக்கும்)';
+
+  @override
+  String get offerWishlistOnly => 'விருப்பப் பட்டியலுக்கு மட்டும்';
+
+  @override
+  String get reviewTitle => 'சரிபார்';
+
+  @override
+  String postingChargeNote(String amount) {
+    return 'பதிவுக் கட்டணம் $amount — ஓட்டுநர் ஏற்றுக்கொண்டால் மட்டுமே';
+  }
+
+  @override
+  String get confirmPost => 'சரக்கைப் பதிவு செய்';
+
+  @override
+  String get posted => 'சரக்கு பதிவு செய்யப்பட்டது';
+
+  @override
+  String get saveChanges => 'மாற்றங்களைச் சேமி';
+
+  @override
+  String topUpToPost(String amount) {
+    return 'பதிவு செய்ய $amount டாப் அப் செய்யவும்';
+  }
+
+  @override
+  String get editLoad => 'திருத்து';
+
+  @override
+  String get cancelLoad => 'சரக்கை ரத்து செய்';
+
+  @override
+  String get cancelReason => 'காரணம்';
+
+  @override
+  String get noteLabel => 'குறிப்பு';
+
+  @override
+  String get cancelOutcomeFree =>
+      'கட்டணம் இல்லை. நம்பிக்கை மதிப்பெண் பாதிக்காது.';
+
+  @override
+  String cancelOutcomeKept(String points) {
+    return 'கட்டணம் திருப்பித் தரப்படாது. மற்றவர் தவறு இல்லையெனில் நம்பிக்கை மதிப்பெண் $points.';
+  }
+
+  @override
+  String get cancelSupportOnly =>
+      'ஏற்றிய பிறகு உதவி மையம் மூலம் மட்டுமே ரத்து செய்யலாம்.';
+
+  @override
+  String get postAgain => 'மீண்டும் பதிவு செய்';
+
+  @override
+  String get timeline => 'நிலை வரலாறு';
+
+  @override
+  String get deliveryEstimate => 'சேரும் நேரம் (மதிப்பீடு)';
+
+  @override
+  String get ongoingLoads => 'நடப்பு சரக்குகள்';
+
+  @override
+  String get noLoads => 'இன்னும் சரக்குகள் இல்லை';
+
+  @override
+  String get unitBags => 'மூட்டைகள்';
+
+  @override
+  String get unitCrates => 'கிரேட்கள்';
+
+  @override
+  String get unitBoxes => 'பெட்டிகள்';
+
+  @override
+  String get unitTonnes => 'டன்';
+
+  @override
+  String get unitLitres => 'லிட்டர்';
+
+  @override
+  String get vehOpenBody => 'திறந்த பாடி';
+
+  @override
+  String get vehClosedBody => 'மூடிய பாடி';
+
+  @override
+  String get vehContainer => 'கண்டெய்னர்';
+
+  @override
+  String get vehRefrigerated => 'குளிர்சாதன வாகனம்';
+
+  @override
+  String get vehTanker => 'டேங்கர்';
+
+  @override
+  String get vehAny => 'ஏதேனும்';
+
+  @override
+  String get crPlansChanged => 'என் திட்டம் மாறியது';
+
+  @override
+  String get crGoodsNotReady => 'சரக்கு தயாராக இல்லை';
+
+  @override
+  String get crFoundOtherTruck => 'வேறு லாரி கிடைத்தது';
+
+  @override
+  String get crDriverNotReachable => 'ஓட்டுநரைத் தொடர்பு கொள்ள முடியவில்லை';
+
+  @override
+  String get crDriverDidNotCome => 'ஓட்டுநர் வரவில்லை';
+
+  @override
+  String get crDriverAskedMore => 'ஓட்டுநர் அதிகப் பணம் கேட்டார்';
+
+  @override
+  String get crTruckBreakdown => 'லாரி பழுது';
+
+  @override
+  String get crEmergency => 'அவசரம்';
+
+  @override
+  String get crShipperChangedDetails => 'அனுப்புநர் விவரங்களை மாற்றினார்';
+
+  @override
+  String get crAmountNotAgreed => 'தொகை ஒப்புக்கொள்ளப்படவில்லை';
+
+  @override
+  String get crTooFar => 'மிகத் தொலைவு';
+
+  @override
+  String get crOther => 'மற்றவை';
+
+  @override
+  String get loadDetails => 'சரக்கு விவரங்கள்';
+
+  @override
+  String get sender => 'அனுப்புநர்';
+
+  @override
+  String get receiver => 'பெறுநர்';
 }

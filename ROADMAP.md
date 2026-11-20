@@ -9,7 +9,7 @@ Status: `[ ]` not started · `[~]` in progress · `[x]` done. Claude updates thi
 | M1 | Sign up and sign in | B-101 – B-112 | A-101 – A-106 | Sign up with OTP on the phone, stay signed in, sign out | [x] |
 | M2 | Profile and verification | B-201 – B-208 | A-201 – A-207 | Fill profile to 100%, submit; approve in Swagger; app shows Verified | [x] |
 | M3 | Wallet and notifications basics | B-301 – B-308, B-1101, B-1102 | A-301 – A-304 | Top up via browser page (fake gateway), see balance and notification | [x] |
-| M4 | Post a load | B-401 – B-409 | A-401 – A-403 | Load Provider posts a load with estimate; sees it in Tracking | [~] |
+| M4 | Post a load | B-401 – B-409 | A-401 – A-403 | Load Provider posts a load with estimate; sees it in Tracking | [x] |
 | M5 | Driver and fleet setup (backend) + driver profile | B-501 – B-509 | A-501, A-502 | Driver adds own truck, goes on duty; org invite accepted | [ ] |
 | M6 | Matching and acceptance | B-601 – B-607 | A-503, A-404 | Driver sees suggestion, accepts; shipper sees driver details | [ ] |
 | M7 | Trip execution | B-701 – B-711 | A-504 – A-511, A-405, A-406 | Full trip: amount request, Reached, pickup OTP, live map, delivery OTP | [ ] |
