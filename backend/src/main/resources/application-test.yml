@@ -1,0 +1,11 @@
+# Automated tests. The database comes from Testcontainers (@ServiceConnection).
+spring:
+  flyway:
+    locations: classpath:db/migration
+
+tranix:
+  jwt:
+    secret: test-only-jwt-secret-0123456789abcdef0123
+  files:
+    storage-dir: ${java.io.tmpdir}/tranix-test-files
+    signing-secret: test-only-files-secret-0123456789abcdef

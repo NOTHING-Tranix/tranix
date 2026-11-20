@@ -1,0 +1,70 @@
+# Shared configuration. Profile files: application-dev.yml, application-test.yml, application-prod.yml.
+# Local overrides go in application-local.yml or .env (both git-ignored).
+spring:
+  application:
+    name: tranix
+  config:
+    import:
+      - optional:file:.env[.properties]
+      - optional:classpath:application-local.yml
+  profiles:
+    default: dev
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:tranixdb}
+    username: ${DB_USERNAME:tranix}
+    password: ${DB_PASSWORD:tranix}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate.jdbc.time_zone: UTC
+  flyway:
+    locations: classpath:db/migration
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 11MB
+  mvc:
+    problemdetails:
+      enabled: false
+
+server:
+  port: ${SERVER_PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+
+tranix:
+  # Base URL used in links the server hands out (signed file URLs, top-up and tracking pages).
+  public-base-url: ${PUBLIC_BASE_URL:http://localhost:8080}
+  jwt:
+    # HS256 secret, at least 32 bytes. Set JWT_SECRET outside dev/test.
+    secret: ${JWT_SECRET:}
+    access-ttl: 15m
+    refresh-ttl: 30d
+  files:
+    storage-dir: ${FILES_DIR:./data/files}
+    # Secret for signed, short-lived file view URLs.
+    signing-secret: ${FILES_SIGNING_SECRET:}
+    view-url-ttl: 5m
+  integrations:
+    sms: fake
+    push: fake
+    maps: fake
+    payments: fake
+    files: local
+    aadhaar: disabled
+
+logging:
+  level:
+    org.flywaydb: INFO

@@ -1,0 +1,20 @@
+# Local development. Start PostgreSQL with `docker compose up -d`.
+spring:
+  flyway:
+    locations: classpath:db/migration,classpath:db/dev
+  jpa:
+    show-sql: false
+
+tranix:
+  jwt:
+    # Dev-only value; never used outside the dev profile.
+    secret: ${JWT_SECRET:dev-only-jwt-secret-change-me-0123456789abcdef}
+  files:
+    signing-secret: ${FILES_SIGNING_SECRET:dev-only-files-secret-0123456789abcdef}
+  dev:
+    # Fake SMS accepts this OTP in dev only (B-102).
+    otp: "123456"
+
+logging:
+  level:
+    com.nothing.tranix: DEBUG

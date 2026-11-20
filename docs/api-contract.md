@@ -85,7 +85,8 @@ Language: en | ta | hi
 | `PUT /me` | `{name, email?, language, address{line, village, district, state, pin}}` |
 | `POST /me/mobile/change` + `POST /me/mobile/verify` | OTP flow for a new mobile |
 | `PUT /me/role-profile` | Role-specific fields (see §4.1) |
-| `POST /files` (multipart `file`) | → `{fileId}`; PDF/JPG/PNG ≤ 10 MB |
+| `POST /files` (multipart `file`) | → `{fileId}`; PDF/JPG/PNG ≤ 10 MB (type checked by content) |
+| `GET /files/{id}/content?exp=&sig=` | No JWT. The signed `viewUrl` returned with documents/receipts points here; valid 5 min, else `403 FORBIDDEN` |
 | `POST /me/documents` | `{type, fileIds[], number?, expiresOn?}` → `Document` |
 | `PUT /me/documents/{id}` | Replace a rejected/expiring document |
 | `GET /me/documents` | `[Document{id, type, numberMasked, expiresOn, status, rejectReason, viewUrl (signed, 5 min)}]` |

@@ -44,14 +44,14 @@ Precedence: `decisions.md` > `product-spec.md` > `api-contract.md` > `domain-mod
 
 ## 4. Stack
 
-Java 21 · Spring Boot 3.x · Maven wrapper · PostgreSQL 16 + Flyway · Spring Security + JWT (access 15 min, refresh 30 days rotated) · Spring Data JPA · Bean Validation · springdoc-openapi · Thymeleaf (only for `/p/**` public pages) · Spring Modulith (module boundary tests) · JUnit 5, Mockito, Testcontainers · Docker / docker-compose · AWS later.
+Java 21 · Spring Boot 4.1.x (D-21) · Maven wrapper · PostgreSQL 16 + Flyway · Spring Security + JWT (access 15 min, refresh 30 days rotated) · Spring Data JPA · Bean Validation · springdoc-openapi · Thymeleaf (only for `/p/**` public pages) · Spring Modulith (module boundary tests) · JUnit 5, Mockito, Testcontainers · Docker / docker-compose · AWS later.
 Outside services behind interfaces, **fake implementations first** (selected by profile/property): `SmsSender`, `PushSender` (FCM), `MapsService`, `PaymentGateway`, `FileStorage` (local disk → S3), `AadhaarVerifier`.
 
-## 5. Modules (package `com.tranix`; adjust if the project uses another base package)
+## 5. Modules (base package `com.nothing.tranix`, D-21)
 
 ```
-com.tranix
-├── shared        ids, Money, GeoPoint + Haversine, Clock, ProblemDetail errors, audit base, settings access
+com.nothing.tranix
+├── shared        (open module) ids, base entity, GeoPoint + Haversine, Clock, problem errors, security/JWT, contract enums, files, settings access, outside-service interfaces + fakes
 ├── identity      users, roles, OTP, JWT, devices, profile, role profiles, documents, verification, Aadhaar adapter
 ├── fleet         trucks, organization drivers, invitations, allocations, driver duty
 ├── farmers       Farmer Network farmers
@@ -91,8 +91,8 @@ Status markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]
 ## 8. Commands
 
 ```bash
-docker compose up -d                 # PostgreSQL
+docker compose up -d                 # PostgreSQL 16 (reads DB_* from backend/.env)
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
-./mvnw verify                        # must pass before a task is done
+./mvnw verify                        # unit + Testcontainers *IT (Docker must be running); Windows: mvnw.cmd, JAVA_HOME = JDK 21
 ```
-Dev profile: fake SMS logs OTPs and accepts `123456`; fake gateway has `POST /dev/payments/{orderId}/succeed`; seed data via `dev` Flyway location.
+Dev profile: fake SMS keeps messages in memory (never logs OTPs, root rule 3) and the dev OTP is `123456`; fake gateway has `POST /dev/payments/{orderId}/succeed`; seed data via `dev` Flyway location.

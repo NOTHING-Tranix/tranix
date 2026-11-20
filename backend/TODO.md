@@ -5,7 +5,7 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 
 | Phase | Tasks | Done |
 | --- | --- | --- |
-| 0 Foundation | 10 | 0 |
+| 0 Foundation | 10 | 10 |
 | 1 Auth and profile | 12 | 0 |
 | 2 Verification and documents | 8 | 0 |
 | 3 Wallet | 8 | 0 |
@@ -23,19 +23,19 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 | 14 Hardening and release | 8 | 0 |
 
 ## Phase 0 — Foundation
-- [ ] **B-001** Verify the existing Spring Boot project against CLAUDE.md (Java 21, Boot 3, base package, Maven wrapper); fix differences or update CLAUDE.md.
-- [ ] **B-002** Dependencies: web, validation, security, data-jpa, postgresql, flyway, actuator, springdoc-openapi, thymeleaf, spring-modulith, testcontainers, jjwt (or spring-security-oauth2-resource-server for JWT).
-- [ ] **B-003** `docker-compose.yml` (PostgreSQL 16); profiles `dev`, `test`, `prod`; `application-local.yml` git-ignored.
-- [ ] **B-004** Module packages from CLAUDE.md §5 + Spring Modulith verification test.
-- [ ] **B-005** `shared`: base entity (UUID, timestamps, version), `Clock` bean, `GeoPoint` + Haversine util with tests, ProblemDetail handler with error codes from the contract.
-- [ ] **B-006** `admin_setting` table + `SettingsService` (typed getters, cache) seeded with all defaults from product spec (incl. wish-list settings); `GET /settings/public`.
-- [ ] **B-007** Fake adapters: `SmsSender`, `PushSender`, `MapsService`, `PaymentGateway`, `FileStorage` (local), `AadhaarVerifier` (disabled).
-- [ ] **B-008** `POST /files` upload (type/size checks, private storage, signed short-lived view URLs).
-- [ ] **B-009** GitHub Actions: `./mvnw verify` with Testcontainers on every push/PR.
-- [ ] **B-010** Swagger UI with JWT "Authorize" button; dev seed data (one user per role, sample trucks).
+- [x] **B-001** Verify the existing Spring Boot project against CLAUDE.md (Java 21, Boot 3, base package, Maven wrapper); fix differences or update CLAUDE.md. (2026-11-21)
+- [x] **B-002** Dependencies: web, validation, security, data-jpa, postgresql, flyway, actuator, springdoc-openapi, thymeleaf, spring-modulith, testcontainers, jjwt (or spring-security-oauth2-resource-server for JWT). (2026-11-21)
+- [x] **B-003** `docker-compose.yml` (PostgreSQL 16); profiles `dev`, `test`, `prod`; `application-local.yml` git-ignored. (2026-11-21)
+- [x] **B-004** Module packages from CLAUDE.md §5 + Spring Modulith verification test. (2026-11-21)
+- [x] **B-005** `shared`: base entity (UUID, timestamps, version), `Clock` bean, `GeoPoint` + Haversine util with tests, ProblemDetail handler with error codes from the contract. (2026-11-21)
+- [x] **B-006** `admin_setting` table + `SettingsService` (typed getters, cache) seeded with all defaults from product spec (incl. wish-list settings); `GET /settings/public`. (2026-11-21)
+- [x] **B-007** Fake adapters: `SmsSender`, `PushSender`, `MapsService`, `PaymentGateway`, `FileStorage` (local), `AadhaarVerifier` (disabled). (2026-11-21)
+- [x] **B-008** `POST /files` upload (type/size checks, private storage, signed short-lived view URLs). (2026-11-21)
+- [x] **B-009** GitHub Actions: `./mvnw verify` with Testcontainers on every push/PR. (2026-11-21)
+- [x] **B-010** Swagger UI with JWT "Authorize" button; dev seed data (one user per role, sample trucks). (2026-11-21) — Swagger + JWT Authorize done; `db/dev` seed location ready, rows added with B-101 (users) and B-501 (trucks)
 
 ## Phase 1 — Auth and profile
-- [ ] **B-101** `identity_user`, roles, verification status, profile completion columns.
+- [ ] **B-101** `identity_user`, roles, verification status, profile completion columns. Also add dev seed users (one per role) in `db/dev` (from B-010).
 - [ ] **B-102** OTP service: 6 digits, hashed, 5 min TTL, 5 attempts, 30 s resend cooldown, rate limits; dev code `123456` only in `dev`.
 - [ ] **B-103** `POST /auth/otp/send` (SIGN_UP/SIGN_IN, no enumeration).
 - [ ] **B-104** `POST /auth/sign-up` (mobile, otp, name, role ≠ ADMIN, consent, language).
@@ -80,7 +80,7 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 - [ ] **B-409** Tests for transitions and cancellation outcomes.
 
 ## Phase 5 — Fleet and driver setup
-- [ ] **B-501** `fleet_truck` + owner-driver `POST/PUT /driver/truck` (one truck only) + truck documents.
+- [ ] **B-501** `fleet_truck` + owner-driver `POST/PUT /driver/truck` (one truck only) + truck documents. Also add dev seed trucks in `db/dev` (from B-010).
 - [ ] **B-502** Org trucks CRUD, deactivate, documents, status.
 - [ ] **B-503** Org driver invitation by mobile (SMS) + `GET/POST /driver/invitations/{id}/accept|reject`.
 - [ ] **B-504** Allocation create/update/remove with DB unique constraints and `ALLOCATION_CONFLICT`; no change during active trip.

@@ -1,0 +1,21 @@
+# Local PostgreSQL for the dev profile. Values come from backend/.env when present.
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: tranix-postgres
+    environment:
+      POSTGRES_DB: ${DB_NAME:-tranixdb}
+      POSTGRES_USER: ${DB_USERNAME:-tranix}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-tranix}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - tranix-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  tranix-pgdata:
