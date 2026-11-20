@@ -1,0 +1,23 @@
+{
+  "items": [
+    {
+      "id": "a1b2c3d4-0000-4000-8000-000000000123", "code": "TRX-000123", "status": "TRAVELING",
+      "goodsType": "Vegetables", "description": "Tomatoes, fresh", "quantity": 120, "quantityUnit": "CRATES",
+      "pickupArea": "Oddanchatram, Dindigul", "dropArea": "Koyambedu, Chennai",
+      "pickupWindowStart": "2026-11-21T03:30:00Z", "agreedAmountInr": 18500, "paymentStatus": "PENDING", "postedForFarmerName": null
+    },
+    {
+      "id": "a1b2c3d4-0000-4000-8000-000000000124", "code": "TRX-000124", "status": "AMOUNT_NEGOTIATION",
+      "goodsType": "Grains", "description": null, "quantity": 9, "quantityUnit": "TONNES",
+      "pickupArea": "Thanjavur", "dropArea": "Madurai",
+      "pickupWindowStart": "2026-11-22T01:00:00Z", "agreedAmountInr": 14000, "paymentStatus": null, "postedForFarmerName": null
+    },
+    {
+      "id": "a1b2c3d4-0000-4000-8000-000000000125", "code": "TRX-000125", "status": "NOT_ACCEPTED",
+      "goodsType": "Fruits", "description": "Bananas", "quantity": 300, "quantityUnit": "BOXES",
+      "pickupArea": "Theni", "dropArea": "Coimbatore",
+      "pickupWindowStart": "2026-11-23T02:00:00Z", "agreedAmountInr": 9000, "paymentStatus": null, "postedForFarmerName": null
+    }
+  ],
+  "page": 0, "size": 20, "total": 3
+}

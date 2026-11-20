@@ -1,0 +1,32 @@
+name: frontend
+
+on:
+  push:
+    branches: [main]
+    paths: ["frontend/**", "docs/api-contract.md", ".github/workflows/frontend.yml"]
+  pull_request:
+    paths: ["frontend/**", "docs/api-contract.md", ".github/workflows/frontend.yml"]
+
+concurrency:
+  group: frontend-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - run: dart run build_runner build --delete-conflicting-outputs
+      - run: flutter gen-l10n
+      - name: Generated code is committed and up to date
+        run: git diff --exit-code -- lib
+      - run: flutter analyze
+      - run: flutter test

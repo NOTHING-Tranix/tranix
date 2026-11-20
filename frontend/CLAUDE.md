@@ -38,7 +38,7 @@ Precedence: `decisions.md` > `product-spec.md` > `api-contract.md` > `screens.md
 
 ## 4. Stack (D-16)
 
-Flutter stable (Dart 3) · flutter_riverpod + riverpod_annotation/generator · go_router · dio (+ interceptors) · freezed + json_serializable · flutter_secure_storage · shared_preferences (non-secret prefs) · firebase_core + firebase_messaging + flutter_local_notifications · google_maps_flutter · geolocator + a background-location solution (foreground service on Android) · url_launcher · image_picker + file_picker · intl + flutter_localizations (ARB) · connectivity_plus · cached_network_image · mocktail + flutter_test (+ integration_test).
+Flutter stable (3.50, Dart 3.14) · **material_ui** package (import `package:material_ui/material_ui.dart`; `package:flutter/material.dart` is deprecated since 3.47 — use `GlobalMaterialLocalizations.delegates` from material_ui) · flutter_riverpod + riverpod_annotation/generator · go_router · dio (+ interceptors) · freezed + json_serializable · flutter_secure_storage · shared_preferences (non-secret prefs) · firebase_core + firebase_messaging + flutter_local_notifications · google_maps_flutter · geolocator + a background-location solution (foreground service on Android) · url_launcher · image_picker + file_picker · intl + flutter_localizations (ARB) · connectivity_plus · cached_network_image · mocktail + flutter_test (+ integration_test).
 
 ## 5. Folder structure (feature-first)
 
@@ -89,3 +89,8 @@ flutter run --dart-define=API_BASE_URL=http://10.0.2.2:8080/api/v1      # Androi
 flutter run --dart-define=USE_MOCK=true
 flutter analyze && flutter test
 ```
+
+## 9. Notes (2026-11-21)
+- App id `in.tranix.app`; flavors `dev` (default, id suffix `.dev`, http allowed to the local backend) and `prod` (`--flavor prod --dart-define=ENV=prod`).
+- Generated code (`*.freezed.dart`, `*.g.dart`, `lib/core/l10n/generated/`) is committed; CI fails if it is stale.
+- Mock demo: `flutter run --dart-define=USE_MOCK=true` → Welcome → "Open as <role>".

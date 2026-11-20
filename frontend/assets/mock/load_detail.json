@@ -1,0 +1,30 @@
+{
+  "id": "a1b2c3d4-0000-4000-8000-000000000123", "code": "TRX-000123", "status": "TRAVELING",
+  "goodsType": "Vegetables", "description": "Tomatoes, fresh", "quantity": 120, "quantityUnit": "CRATES",
+  "pickupArea": "Oddanchatram, Dindigul", "dropArea": "Koyambedu, Chennai",
+  "pickupWindowStart": "2026-11-21T03:30:00Z", "agreedAmountInr": 18500, "paymentStatus": "PENDING", "postedForFarmerName": null,
+  "pickup": { "lat": 10.4893, "lng": 77.7471, "address": "Gandhi Market, Oddanchatram", "landmark": "Near bus stand" },
+  "drop": { "lat": 13.0694, "lng": 80.1948, "address": "Koyambedu Wholesale Market, Chennai", "landmark": "Gate 7" },
+  "senderName": "Murugan Traders", "senderMobile": "9876543210",
+  "receiverName": "Selvi Vegetables", "receiverMobile": "9123456780",
+  "weightTonnes": 3.6, "vehicleType": "OPEN_BODY", "freightPaidBy": "SHIPPER", "postedAmountInr": 18000,
+  "deliveryEta": "2026-11-21T13:45:00Z",
+  "timeline": [
+    { "status": "NOT_ACCEPTED", "at": "2026-11-20T09:30:00Z" },
+    { "status": "ACCEPTED", "at": "2026-11-20T10:02:00Z" },
+    { "status": "WAITING_FOR_PICKUP", "at": "2026-11-20T10:02:00Z" },
+    { "status": "LOCATION_REACHED", "at": "2026-11-21T03:20:00Z" },
+    { "status": "PICKED_UP", "at": "2026-11-21T03:41:00Z" },
+    { "status": "TRAVELING", "at": "2026-11-21T03:41:00Z" }
+  ],
+  "driver": { "id": "d0d0d0d0-0000-4000-8000-000000000001", "name": "Ravi Kumar", "photoUrl": null, "mobile": "9000011111", "trustScore": 81, "truckNumber": "TN 57 AB 1234", "vehicleType": "OPEN_BODY" },
+  "revisions": [
+    { "id": "r0000000-0000-4000-8000-000000000001", "requestedAmountInr": 18500, "reason": "Toll charges increased", "status": "CONFIRMED", "createdAt": "2026-11-20T11:00:00Z", "respondBy": "2026-11-20T11:15:00Z" }
+  ],
+  "revisionsUsed": 1,
+  "payment": { "status": "PENDING", "amountInr": null, "mode": null, "reference": null, "paidAt": null, "confirmedAt": null, "disputeReason": null },
+  "otpEvents": [],
+  "locationExceptions": [],
+  "canEdit": false, "canCancel": false, "cancelInfo": null,
+  "audience": "EVERYONE", "wishlistUntil": null, "openedToEveryoneAt": null
+}

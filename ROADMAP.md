@@ -5,7 +5,7 @@ Status: `[ ]` not started · `[~]` in progress · `[x]` done. Claude updates thi
 
 | # | Milestone | Backend tasks | Frontend tasks | Demo at the end | Status |
 | --- | --- | --- | --- | --- | --- |
-| M0 | Foundations | B-001 – B-010 | A-001 – A-012 | Both projects build; CI green; app opens with mock data | [~] |
+| M0 | Foundations | B-001 – B-010 | A-001 – A-012 | Both projects build; CI green; app opens with mock data | [x] |
 | M1 | Sign up and sign in | B-101 – B-112 | A-101 – A-106 | Sign up with OTP on the phone, stay signed in, sign out | [ ] |
 | M2 | Profile and verification | B-201 – B-208 | A-201 – A-207 | Fill profile to 100%, submit; approve in Swagger; app shows Verified | [ ] |
 | M3 | Wallet and notifications basics | B-301 – B-308, B-1101, B-1102 | A-301 – A-304 | Top up via browser page (fake gateway), see balance and notification | [ ] |

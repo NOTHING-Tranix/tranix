@@ -5,7 +5,7 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 
 | Phase | Tasks | Done |
 | --- | --- | --- |
-| 0 Foundation | 12 | 0 |
+| 0 Foundation | 12 | 12 |
 | 1 Auth and onboarding | 6 | 0 |
 | 2 Profile and verification | 7 | 0 |
 | 3 Wallet, notifications, support | 7 | 0 |
@@ -19,18 +19,18 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 | 11 Later: Flutter web + Admin | 3 | 0 |
 
 ## Phase 0 — Foundation
-- [ ] **A-001** Verify the existing Flutter project (Dart 3, Android minSdk 23+, package name `in.tranix.app` or chosen id); update CLAUDE.md if different.
-- [ ] **A-002** Add packages from CLAUDE.md §4; analysis_options with flutter_lints.
-- [ ] **A-003** Folder structure from CLAUDE.md §5 with empty feature folders.
-- [ ] **A-004** Env config via `--dart-define` (API_BASE_URL, USE_MOCK, ENV); flavors dev/prod.
-- [ ] **A-005** Theme (Material 3 tokens from ui-guidelines) + shared widgets skeletons.
-- [ ] **A-006** Localisation: ARB en/ta/hi, `flutter gen-l10n`, language provider.
-- [ ] **A-007** Dio provider + interceptors (language, auth, refresh single-flight, error → AppException, mock).
-- [ ] **A-008** `shared/models`: all enums + DTOs from `api-contract.md` (freezed/json) with unknown-enum fallback; unit tests for parsing.
-- [ ] **A-009** Error code → localised message map; `ErrorState`, `OfflineBanner` (connectivity_plus).
-- [ ] **A-010** go_router with role shells and redirects; route constants.
-- [ ] **A-011** Mock fixtures in `assets/mock/` for auth, me, wallet, loads, suggestions.
-- [ ] **A-012** CI: GitHub Actions running `flutter analyze` and `flutter test`.
+- [x] **A-001** Verify the existing Flutter project (Dart 3, Android minSdk 23+, package name `in.tranix.app` or chosen id); update CLAUDE.md if different. (2026-11-21) — app id `in.tranix.app` (+ `.dev` for the dev flavor), minSdk ≥ 23
+- [x] **A-002** Add packages from CLAUDE.md §4; analysis_options with flutter_lints. (2026-11-21)
+- [x] **A-003** Folder structure from CLAUDE.md §5 with empty feature folders. (2026-11-21)
+- [x] **A-004** Env config via `--dart-define` (API_BASE_URL, USE_MOCK, ENV); flavors dev/prod. (2026-11-21) — Gradle flavors dev (default via pubspec `default-flavor`) / prod; dev allows http to 10.0.2.2
+- [x] **A-005** Theme (Material 3 tokens from ui-guidelines) + shared widgets skeletons. (2026-11-21)
+- [x] **A-006** Localisation: ARB en/ta/hi, `flutter gen-l10n`, language provider. (2026-11-21)
+- [x] **A-007** Dio provider + interceptors (language, auth, refresh single-flight, error → AppException, mock). (2026-11-21)
+- [x] **A-008** `shared/models`: all enums + DTOs from `api-contract.md` (freezed/json) with unknown-enum fallback; unit tests for parsing. (2026-11-21)
+- [x] **A-009** Error code → localised message map; `ErrorState`, `OfflineBanner` (connectivity_plus). (2026-11-21)
+- [x] **A-010** go_router with role shells and redirects; route constants. (2026-11-21) — tabs are placeholders; LP/FN home lists ongoing loads (mock)
+- [x] **A-011** Mock fixtures in `assets/mock/` for auth, me, wallet, loads, suggestions. (2026-11-21)
+- [x] **A-012** CI: GitHub Actions running `flutter analyze` and `flutter test`. (2026-11-21)
 
 ## Phase 1 — Auth and onboarding (needs B-102…B-106)
 - [ ] **A-101** Splash (S-01) with refresh + `GET /me` routing.

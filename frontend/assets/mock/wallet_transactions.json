@@ -1,0 +1,7 @@
+{
+  "items": [
+    { "txnId": "TXN-000045", "at": "2026-11-20T09:30:00Z", "amountInr": 50, "direction": "DEBIT", "type": "POSTING_CHARGE", "loadId": "a1b2c3d4-0000-4000-8000-000000000123", "note": null },
+    { "txnId": "TXN-000044", "at": "2026-11-19T05:10:00Z", "amountInr": 1000, "direction": "CREDIT", "type": "TOPUP", "loadId": null, "note": "UPI" }
+  ],
+  "page": 0, "size": 20, "total": 2
+}

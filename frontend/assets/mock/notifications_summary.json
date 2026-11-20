@@ -1,0 +1,5 @@
+{
+  "unreadByTab": { "TRIPS": 2, "WALLET": 0, "TRANIX": 1, "ACCOUNT": 0 },
+  "latestTranixMessage": { "title": "Welcome to Tranix", "body": "Verified trucks, fair loads.", "at": "2026-11-20T06:00:00Z" },
+  "latestTripUpdate": { "title": "TRX-000123 picked up", "body": "Ravi Kumar picked up your load.", "at": "2026-11-21T03:41:00Z", "route": "/lp/loads/a1b2c3d4-0000-4000-8000-000000000123" }
+}

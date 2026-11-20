@@ -1,0 +1,8 @@
+[
+  {
+    "loadId": "a1b2c3d4-0000-4000-8000-000000000125", "goodsType": "Fruits", "description": "Bananas",
+    "quantity": 300, "unit": "BOXES", "weightTonnes": 6, "pickupArea": "Theni", "dropArea": "Coimbatore",
+    "pickupWindowStart": "2026-11-23T02:00:00Z", "distanceToPickupKm": 12.4, "minutesToPickup": 25,
+    "deliveryEta": "2026-11-23T08:30:00Z", "amountInr": 9000, "shipperTrustScore": 74, "preferredByShipper": true
+  }
+]

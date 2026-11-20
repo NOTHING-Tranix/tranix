@@ -1,0 +1,18 @@
+{
+  "postingChargeInr": 50,
+  "tripChargeInr": 50,
+  "topupChips": [500, 1000, 2000],
+  "otpTtlSeconds": 300,
+  "otpResendSeconds": 30,
+  "revisionLimit": 5,
+  "revisionResponseMinutes": 15,
+  "geofenceMeters": 500,
+  "wishlistMax": 20,
+  "wishlistFirstMinutes": 15,
+  "wishlistOnlyNotifyMinutes": 30,
+  "goodsTypes": ["Vegetables", "Fruits", "Grains", "Pulses", "Spices", "Fertilizer", "Building material", "FMCG", "Other"],
+  "vehicleTypes": ["OPEN_BODY", "CLOSED_BODY", "CONTAINER", "REFRIGERATED", "TANKER", "ANY"],
+  "ticketTypes": ["COMPLAINT", "FEEDBACK", "WALLET", "PAYMENT_DISPUTE", "OTHERS"],
+  "rejectReasons": ["TOO_FAR", "LOW_AMOUNT", "WRONG_TRUCK", "OTHER"],
+  "supportedLanguages": ["en", "ta", "hi"]
+}

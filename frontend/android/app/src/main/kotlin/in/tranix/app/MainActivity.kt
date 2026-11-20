@@ -1,4 +1,4 @@
-package `in`.tranix.tranix_app
+package `in`.tranix.app
 
 import io.flutter.embedding.android.FlutterActivity
 
