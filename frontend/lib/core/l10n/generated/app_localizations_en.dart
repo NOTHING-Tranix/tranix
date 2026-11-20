@@ -305,4 +305,265 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get otpSent => 'OTP sent';
+
+  @override
+  String get photo => 'Photo';
+
+  @override
+  String get addPhoto => 'Add photo';
+
+  @override
+  String get camera => 'Camera';
+
+  @override
+  String get gallery => 'Gallery';
+
+  @override
+  String get pdfFile => 'PDF file';
+
+  @override
+  String get basicDetails => 'Name, email and address';
+
+  @override
+  String get emailLabel => 'Email (optional)';
+
+  @override
+  String get emailInvalid => 'Enter a valid email';
+
+  @override
+  String get address => 'Address';
+
+  @override
+  String get addressLine => 'House / street';
+
+  @override
+  String get village => 'Village / town';
+
+  @override
+  String get district => 'District';
+
+  @override
+  String get state => 'State';
+
+  @override
+  String get pinCode => 'PIN code';
+
+  @override
+  String get pinInvalid => 'Enter a 6-digit PIN code';
+
+  @override
+  String get fieldRequired => 'Required';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get saved => 'Saved';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get roleDetails => 'Account details';
+
+  @override
+  String get idProof => 'ID proof';
+
+  @override
+  String get documents => 'Documents';
+
+  @override
+  String get changeMobile => 'Change mobile number';
+
+  @override
+  String get newMobile => 'New mobile number';
+
+  @override
+  String get verificationTitle => 'Verification';
+
+  @override
+  String get submitForVerification => 'Submit for verification';
+
+  @override
+  String get statusNotSubmitted => 'Not submitted';
+
+  @override
+  String get statusUnderReview => 'Under review';
+
+  @override
+  String get statusVerified => 'Verified';
+
+  @override
+  String get statusNotVerified => 'Not verified';
+
+  @override
+  String underReviewInfo(int hours) {
+    return 'We are checking your details. This usually takes about $hours hours.';
+  }
+
+  @override
+  String get notVerifiedInfo => 'Some documents need to be uploaded again.';
+
+  @override
+  String get verifiedInfo => 'You are verified. You can now use all features.';
+
+  @override
+  String get notSubmittedInfo =>
+      'Complete every item below, then submit for verification.';
+
+  @override
+  String get checkUpdates => 'Check updates';
+
+  @override
+  String get uploadAgain => 'Upload again';
+
+  @override
+  String get docPan => 'PAN card';
+
+  @override
+  String get docVoterId => 'Voter ID';
+
+  @override
+  String get docDrivingLicence => 'Driving licence';
+
+  @override
+  String get docPhoto => 'Photo';
+
+  @override
+  String get docFnRegistrationCert => 'Registration certificate';
+
+  @override
+  String get docOrgRegistrationCert => 'Registration certificate';
+
+  @override
+  String get docGstCert => 'GST certificate';
+
+  @override
+  String get docAadhaar => 'Aadhaar (offline check)';
+
+  @override
+  String get docRc => 'RC book';
+
+  @override
+  String get docInsurance => 'Insurance';
+
+  @override
+  String get docNationalPermit => 'National permit';
+
+  @override
+  String get documentType => 'Document';
+
+  @override
+  String get docNumber => 'Document number';
+
+  @override
+  String get expiresOn => 'Valid until';
+
+  @override
+  String get chooseFile => 'Choose file';
+
+  @override
+  String uploading(int percent) {
+    return 'Uploading… $percent%';
+  }
+
+  @override
+  String fileChosen(int count) {
+    return '$count file(s) chosen';
+  }
+
+  @override
+  String get docPending => 'Pending review';
+
+  @override
+  String get docApproved => 'Approved';
+
+  @override
+  String get docRejected => 'Rejected';
+
+  @override
+  String rejectedReason(String reason) {
+    return 'Reason: $reason';
+  }
+
+  @override
+  String expiresOnDate(String date) {
+    return 'Valid until $date';
+  }
+
+  @override
+  String get addDocument => 'Add document';
+
+  @override
+  String get completeVerificationTitle => 'Complete verification';
+
+  @override
+  String get completeVerificationBody =>
+      'You need a verified account to do this. Complete your profile and submit it for verification.';
+
+  @override
+  String get goToProfile => 'Go to profile';
+
+  @override
+  String get accountType => 'Account type';
+
+  @override
+  String get individual => 'Individual';
+
+  @override
+  String get business => 'Business';
+
+  @override
+  String get businessName => 'Business name';
+
+  @override
+  String get businessNameOptional => 'Business name (optional)';
+
+  @override
+  String get gstinOptional => 'GSTIN (optional)';
+
+  @override
+  String get panOptional => 'PAN (optional)';
+
+  @override
+  String get networkName => 'Network name';
+
+  @override
+  String get registrationNumber => 'Registration number';
+
+  @override
+  String get idType => 'ID type';
+
+  @override
+  String get idNumber => 'ID number';
+
+  @override
+  String get contactPerson => 'Contact person';
+
+  @override
+  String get licenceNumber => 'Licence number';
+
+  @override
+  String get licenceValidUntil => 'Licence valid until';
+
+  @override
+  String get vehicleClasses => 'Vehicle classes (e.g. HGMV, LMV)';
+
+  @override
+  String get emergencyContact => 'Emergency contact (optional)';
+
+  @override
+  String get orgName => 'Organization name';
+
+  @override
+  String get pickDate => 'Pick a date';
+
+  @override
+  String get wallet => 'Wallet';
+
+  @override
+  String get support => 'Support';
+
+  @override
+  String get mobileChanged => 'Mobile number changed';
 }

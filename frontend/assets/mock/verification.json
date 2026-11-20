@@ -1,0 +1,15 @@
+{
+  "status": "UNDER_REVIEW",
+  "items": [
+    {"key": "NAME", "label": "Name", "done": true, "weight": 10},
+    {"key": "PHOTO", "label": "Photo", "done": true, "weight": 10},
+    {"key": "ADDRESS", "label": "Address", "done": true, "weight": 15},
+    {"key": "ID_PROOF", "label": "ID proof", "done": true, "weight": 25},
+    {"key": "ROLE_PROFILE", "label": "Account details", "done": true, "weight": 40}
+  ],
+  "documents": [
+    {"id": "d0000000-0000-4000-8000-000000000001", "type": "PAN", "numberMasked": "XXXXXX234F", "expiresOn": null, "status": "APPROVED", "rejectReason": null, "viewUrl": null},
+    {"id": "d0000000-0000-4000-8000-000000000002", "type": "PHOTO", "numberMasked": null, "expiresOn": null, "status": "REJECTED", "rejectReason": "Face not clear", "viewUrl": null}
+  ],
+  "estimatedReviewHours": 24
+}

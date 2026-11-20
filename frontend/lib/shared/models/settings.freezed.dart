@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PublicSettings {
 
- int get postingChargeInr; int get tripChargeInr; List<int> get topupChips; int get otpTtlSeconds; int get otpResendSeconds; int get revisionLimit; int get revisionResponseMinutes; int get geofenceMeters; int get wishlistMax; int get wishlistFirstMinutes; int get wishlistOnlyNotifyMinutes; List<String> get goodsTypes; List<String> get vehicleTypes; List<String> get ticketTypes; List<String> get rejectReasons; List<String> get supportedLanguages;
+ int get postingChargeInr; int get tripChargeInr; List<int> get topupChips; int get otpTtlSeconds; int get otpResendSeconds; int get revisionLimit; int get revisionResponseMinutes; int get geofenceMeters; int get wishlistMax; int get wishlistFirstMinutes; int get wishlistOnlyNotifyMinutes; List<String> get goodsTypes; List<String> get vehicleTypes; List<String> get ticketTypes; List<String> get rejectReasons; List<String> get supportedLanguages; bool get aadhaarEnabled;
 /// Create a copy of PublicSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,20 +30,20 @@ $PublicSettingsCopyWith<PublicSettings> get copyWith => _$PublicSettingsCopyWith
 @override
 bool operator ==(Object other) {
   final _this = this as PublicSettings;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PublicSettings&&(identical(other.postingChargeInr, _this.postingChargeInr) || other.postingChargeInr == _this.postingChargeInr)&&(identical(other.tripChargeInr, _this.tripChargeInr) || other.tripChargeInr == _this.tripChargeInr)&&const DeepCollectionEquality().equals(other.topupChips, _this.topupChips)&&(identical(other.otpTtlSeconds, _this.otpTtlSeconds) || other.otpTtlSeconds == _this.otpTtlSeconds)&&(identical(other.otpResendSeconds, _this.otpResendSeconds) || other.otpResendSeconds == _this.otpResendSeconds)&&(identical(other.revisionLimit, _this.revisionLimit) || other.revisionLimit == _this.revisionLimit)&&(identical(other.revisionResponseMinutes, _this.revisionResponseMinutes) || other.revisionResponseMinutes == _this.revisionResponseMinutes)&&(identical(other.geofenceMeters, _this.geofenceMeters) || other.geofenceMeters == _this.geofenceMeters)&&(identical(other.wishlistMax, _this.wishlistMax) || other.wishlistMax == _this.wishlistMax)&&(identical(other.wishlistFirstMinutes, _this.wishlistFirstMinutes) || other.wishlistFirstMinutes == _this.wishlistFirstMinutes)&&(identical(other.wishlistOnlyNotifyMinutes, _this.wishlistOnlyNotifyMinutes) || other.wishlistOnlyNotifyMinutes == _this.wishlistOnlyNotifyMinutes)&&const DeepCollectionEquality().equals(other.goodsTypes, _this.goodsTypes)&&const DeepCollectionEquality().equals(other.vehicleTypes, _this.vehicleTypes)&&const DeepCollectionEquality().equals(other.ticketTypes, _this.ticketTypes)&&const DeepCollectionEquality().equals(other.rejectReasons, _this.rejectReasons)&&const DeepCollectionEquality().equals(other.supportedLanguages, _this.supportedLanguages));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PublicSettings&&(identical(other.postingChargeInr, _this.postingChargeInr) || other.postingChargeInr == _this.postingChargeInr)&&(identical(other.tripChargeInr, _this.tripChargeInr) || other.tripChargeInr == _this.tripChargeInr)&&const DeepCollectionEquality().equals(other.topupChips, _this.topupChips)&&(identical(other.otpTtlSeconds, _this.otpTtlSeconds) || other.otpTtlSeconds == _this.otpTtlSeconds)&&(identical(other.otpResendSeconds, _this.otpResendSeconds) || other.otpResendSeconds == _this.otpResendSeconds)&&(identical(other.revisionLimit, _this.revisionLimit) || other.revisionLimit == _this.revisionLimit)&&(identical(other.revisionResponseMinutes, _this.revisionResponseMinutes) || other.revisionResponseMinutes == _this.revisionResponseMinutes)&&(identical(other.geofenceMeters, _this.geofenceMeters) || other.geofenceMeters == _this.geofenceMeters)&&(identical(other.wishlistMax, _this.wishlistMax) || other.wishlistMax == _this.wishlistMax)&&(identical(other.wishlistFirstMinutes, _this.wishlistFirstMinutes) || other.wishlistFirstMinutes == _this.wishlistFirstMinutes)&&(identical(other.wishlistOnlyNotifyMinutes, _this.wishlistOnlyNotifyMinutes) || other.wishlistOnlyNotifyMinutes == _this.wishlistOnlyNotifyMinutes)&&const DeepCollectionEquality().equals(other.goodsTypes, _this.goodsTypes)&&const DeepCollectionEquality().equals(other.vehicleTypes, _this.vehicleTypes)&&const DeepCollectionEquality().equals(other.ticketTypes, _this.ticketTypes)&&const DeepCollectionEquality().equals(other.rejectReasons, _this.rejectReasons)&&const DeepCollectionEquality().equals(other.supportedLanguages, _this.supportedLanguages)&&(identical(other.aadhaarEnabled, _this.aadhaarEnabled) || other.aadhaarEnabled == _this.aadhaarEnabled));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as PublicSettings;
-  return Object.hash(runtimeType,_this.postingChargeInr,_this.tripChargeInr,const DeepCollectionEquality().hash(_this.topupChips),_this.otpTtlSeconds,_this.otpResendSeconds,_this.revisionLimit,_this.revisionResponseMinutes,_this.geofenceMeters,_this.wishlistMax,_this.wishlistFirstMinutes,_this.wishlistOnlyNotifyMinutes,const DeepCollectionEquality().hash(_this.goodsTypes),const DeepCollectionEquality().hash(_this.vehicleTypes),const DeepCollectionEquality().hash(_this.ticketTypes),const DeepCollectionEquality().hash(_this.rejectReasons),const DeepCollectionEquality().hash(_this.supportedLanguages));
+  return Object.hash(runtimeType,_this.postingChargeInr,_this.tripChargeInr,const DeepCollectionEquality().hash(_this.topupChips),_this.otpTtlSeconds,_this.otpResendSeconds,_this.revisionLimit,_this.revisionResponseMinutes,_this.geofenceMeters,_this.wishlistMax,_this.wishlistFirstMinutes,_this.wishlistOnlyNotifyMinutes,const DeepCollectionEquality().hash(_this.goodsTypes),const DeepCollectionEquality().hash(_this.vehicleTypes),const DeepCollectionEquality().hash(_this.ticketTypes),const DeepCollectionEquality().hash(_this.rejectReasons),const DeepCollectionEquality().hash(_this.supportedLanguages),_this.aadhaarEnabled);
 }
 
 @override
 String toString() {
   final _this = this as PublicSettings;
-  return 'PublicSettings(postingChargeInr: ${_this.postingChargeInr}, tripChargeInr: ${_this.tripChargeInr}, topupChips: ${_this.topupChips}, otpTtlSeconds: ${_this.otpTtlSeconds}, otpResendSeconds: ${_this.otpResendSeconds}, revisionLimit: ${_this.revisionLimit}, revisionResponseMinutes: ${_this.revisionResponseMinutes}, geofenceMeters: ${_this.geofenceMeters}, wishlistMax: ${_this.wishlistMax}, wishlistFirstMinutes: ${_this.wishlistFirstMinutes}, wishlistOnlyNotifyMinutes: ${_this.wishlistOnlyNotifyMinutes}, goodsTypes: ${_this.goodsTypes}, vehicleTypes: ${_this.vehicleTypes}, ticketTypes: ${_this.ticketTypes}, rejectReasons: ${_this.rejectReasons}, supportedLanguages: ${_this.supportedLanguages})';
+  return 'PublicSettings(postingChargeInr: ${_this.postingChargeInr}, tripChargeInr: ${_this.tripChargeInr}, topupChips: ${_this.topupChips}, otpTtlSeconds: ${_this.otpTtlSeconds}, otpResendSeconds: ${_this.otpResendSeconds}, revisionLimit: ${_this.revisionLimit}, revisionResponseMinutes: ${_this.revisionResponseMinutes}, geofenceMeters: ${_this.geofenceMeters}, wishlistMax: ${_this.wishlistMax}, wishlistFirstMinutes: ${_this.wishlistFirstMinutes}, wishlistOnlyNotifyMinutes: ${_this.wishlistOnlyNotifyMinutes}, goodsTypes: ${_this.goodsTypes}, vehicleTypes: ${_this.vehicleTypes}, ticketTypes: ${_this.ticketTypes}, rejectReasons: ${_this.rejectReasons}, supportedLanguages: ${_this.supportedLanguages}, aadhaarEnabled: ${_this.aadhaarEnabled})';
 }
 
 
@@ -54,7 +54,7 @@ abstract mixin class $PublicSettingsCopyWith<$Res>  {
   factory $PublicSettingsCopyWith(PublicSettings value, $Res Function(PublicSettings) _then) = _$PublicSettingsCopyWithImpl;
 @useResult
 $Res call({
- int postingChargeInr, int tripChargeInr, List<int> topupChips, int otpTtlSeconds, int otpResendSeconds, int revisionLimit, int revisionResponseMinutes, int geofenceMeters, int wishlistMax, int wishlistFirstMinutes, int wishlistOnlyNotifyMinutes, List<String> goodsTypes, List<String> vehicleTypes, List<String> ticketTypes, List<String> rejectReasons, List<String> supportedLanguages
+ int postingChargeInr, int tripChargeInr, List<int> topupChips, int otpTtlSeconds, int otpResendSeconds, int revisionLimit, int revisionResponseMinutes, int geofenceMeters, int wishlistMax, int wishlistFirstMinutes, int wishlistOnlyNotifyMinutes, List<String> goodsTypes, List<String> vehicleTypes, List<String> ticketTypes, List<String> rejectReasons, List<String> supportedLanguages, bool aadhaarEnabled
 });
 
 
@@ -71,7 +71,7 @@ class _$PublicSettingsCopyWithImpl<$Res>
 
 /// Create a copy of PublicSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? postingChargeInr = null,Object? tripChargeInr = null,Object? topupChips = null,Object? otpTtlSeconds = null,Object? otpResendSeconds = null,Object? revisionLimit = null,Object? revisionResponseMinutes = null,Object? geofenceMeters = null,Object? wishlistMax = null,Object? wishlistFirstMinutes = null,Object? wishlistOnlyNotifyMinutes = null,Object? goodsTypes = null,Object? vehicleTypes = null,Object? ticketTypes = null,Object? rejectReasons = null,Object? supportedLanguages = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? postingChargeInr = null,Object? tripChargeInr = null,Object? topupChips = null,Object? otpTtlSeconds = null,Object? otpResendSeconds = null,Object? revisionLimit = null,Object? revisionResponseMinutes = null,Object? geofenceMeters = null,Object? wishlistMax = null,Object? wishlistFirstMinutes = null,Object? wishlistOnlyNotifyMinutes = null,Object? goodsTypes = null,Object? vehicleTypes = null,Object? ticketTypes = null,Object? rejectReasons = null,Object? supportedLanguages = null,Object? aadhaarEnabled = null,}) {
   return _then(PublicSettings(
 postingChargeInr: null == postingChargeInr ? _self.postingChargeInr : postingChargeInr // ignore: cast_nullable_to_non_nullable
 as int,tripChargeInr: null == tripChargeInr ? _self.tripChargeInr : tripChargeInr // ignore: cast_nullable_to_non_nullable
@@ -89,7 +89,8 @@ as List<String>,vehicleTypes: null == vehicleTypes ? _self.vehicleTypes : vehicl
 as List<String>,ticketTypes: null == ticketTypes ? _self.ticketTypes : ticketTypes // ignore: cast_nullable_to_non_nullable
 as List<String>,rejectReasons: null == rejectReasons ? _self.rejectReasons : rejectReasons // ignore: cast_nullable_to_non_nullable
 as List<String>,supportedLanguages: null == supportedLanguages ? _self.supportedLanguages : supportedLanguages // ignore: cast_nullable_to_non_nullable
-as List<String>,
+as List<String>,aadhaarEnabled: null == aadhaarEnabled ? _self.aadhaarEnabled : aadhaarEnabled // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -174,10 +175,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int postingChargeInr,  int tripChargeInr,  List<int> topupChips,  int otpTtlSeconds,  int otpResendSeconds,  int revisionLimit,  int revisionResponseMinutes,  int geofenceMeters,  int wishlistMax,  int wishlistFirstMinutes,  int wishlistOnlyNotifyMinutes,  List<String> goodsTypes,  List<String> vehicleTypes,  List<String> ticketTypes,  List<String> rejectReasons,  List<String> supportedLanguages)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int postingChargeInr,  int tripChargeInr,  List<int> topupChips,  int otpTtlSeconds,  int otpResendSeconds,  int revisionLimit,  int revisionResponseMinutes,  int geofenceMeters,  int wishlistMax,  int wishlistFirstMinutes,  int wishlistOnlyNotifyMinutes,  List<String> goodsTypes,  List<String> vehicleTypes,  List<String> ticketTypes,  List<String> rejectReasons,  List<String> supportedLanguages,  bool aadhaarEnabled)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PublicSettings() when $default != null:
-return $default(_that.postingChargeInr,_that.tripChargeInr,_that.topupChips,_that.otpTtlSeconds,_that.otpResendSeconds,_that.revisionLimit,_that.revisionResponseMinutes,_that.geofenceMeters,_that.wishlistMax,_that.wishlistFirstMinutes,_that.wishlistOnlyNotifyMinutes,_that.goodsTypes,_that.vehicleTypes,_that.ticketTypes,_that.rejectReasons,_that.supportedLanguages);case _:
+return $default(_that.postingChargeInr,_that.tripChargeInr,_that.topupChips,_that.otpTtlSeconds,_that.otpResendSeconds,_that.revisionLimit,_that.revisionResponseMinutes,_that.geofenceMeters,_that.wishlistMax,_that.wishlistFirstMinutes,_that.wishlistOnlyNotifyMinutes,_that.goodsTypes,_that.vehicleTypes,_that.ticketTypes,_that.rejectReasons,_that.supportedLanguages,_that.aadhaarEnabled);case _:
   return orElse();
 
 }
@@ -195,10 +196,10 @@ return $default(_that.postingChargeInr,_that.tripChargeInr,_that.topupChips,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int postingChargeInr,  int tripChargeInr,  List<int> topupChips,  int otpTtlSeconds,  int otpResendSeconds,  int revisionLimit,  int revisionResponseMinutes,  int geofenceMeters,  int wishlistMax,  int wishlistFirstMinutes,  int wishlistOnlyNotifyMinutes,  List<String> goodsTypes,  List<String> vehicleTypes,  List<String> ticketTypes,  List<String> rejectReasons,  List<String> supportedLanguages)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int postingChargeInr,  int tripChargeInr,  List<int> topupChips,  int otpTtlSeconds,  int otpResendSeconds,  int revisionLimit,  int revisionResponseMinutes,  int geofenceMeters,  int wishlistMax,  int wishlistFirstMinutes,  int wishlistOnlyNotifyMinutes,  List<String> goodsTypes,  List<String> vehicleTypes,  List<String> ticketTypes,  List<String> rejectReasons,  List<String> supportedLanguages,  bool aadhaarEnabled)  $default,) {final _that = this;
 switch (_that) {
 case _PublicSettings():
-return $default(_that.postingChargeInr,_that.tripChargeInr,_that.topupChips,_that.otpTtlSeconds,_that.otpResendSeconds,_that.revisionLimit,_that.revisionResponseMinutes,_that.geofenceMeters,_that.wishlistMax,_that.wishlistFirstMinutes,_that.wishlistOnlyNotifyMinutes,_that.goodsTypes,_that.vehicleTypes,_that.ticketTypes,_that.rejectReasons,_that.supportedLanguages);case _:
+return $default(_that.postingChargeInr,_that.tripChargeInr,_that.topupChips,_that.otpTtlSeconds,_that.otpResendSeconds,_that.revisionLimit,_that.revisionResponseMinutes,_that.geofenceMeters,_that.wishlistMax,_that.wishlistFirstMinutes,_that.wishlistOnlyNotifyMinutes,_that.goodsTypes,_that.vehicleTypes,_that.ticketTypes,_that.rejectReasons,_that.supportedLanguages,_that.aadhaarEnabled);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -215,10 +216,10 @@ return $default(_that.postingChargeInr,_that.tripChargeInr,_that.topupChips,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int postingChargeInr,  int tripChargeInr,  List<int> topupChips,  int otpTtlSeconds,  int otpResendSeconds,  int revisionLimit,  int revisionResponseMinutes,  int geofenceMeters,  int wishlistMax,  int wishlistFirstMinutes,  int wishlistOnlyNotifyMinutes,  List<String> goodsTypes,  List<String> vehicleTypes,  List<String> ticketTypes,  List<String> rejectReasons,  List<String> supportedLanguages)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int postingChargeInr,  int tripChargeInr,  List<int> topupChips,  int otpTtlSeconds,  int otpResendSeconds,  int revisionLimit,  int revisionResponseMinutes,  int geofenceMeters,  int wishlistMax,  int wishlistFirstMinutes,  int wishlistOnlyNotifyMinutes,  List<String> goodsTypes,  List<String> vehicleTypes,  List<String> ticketTypes,  List<String> rejectReasons,  List<String> supportedLanguages,  bool aadhaarEnabled)?  $default,) {final _that = this;
 switch (_that) {
 case _PublicSettings() when $default != null:
-return $default(_that.postingChargeInr,_that.tripChargeInr,_that.topupChips,_that.otpTtlSeconds,_that.otpResendSeconds,_that.revisionLimit,_that.revisionResponseMinutes,_that.geofenceMeters,_that.wishlistMax,_that.wishlistFirstMinutes,_that.wishlistOnlyNotifyMinutes,_that.goodsTypes,_that.vehicleTypes,_that.ticketTypes,_that.rejectReasons,_that.supportedLanguages);case _:
+return $default(_that.postingChargeInr,_that.tripChargeInr,_that.topupChips,_that.otpTtlSeconds,_that.otpResendSeconds,_that.revisionLimit,_that.revisionResponseMinutes,_that.geofenceMeters,_that.wishlistMax,_that.wishlistFirstMinutes,_that.wishlistOnlyNotifyMinutes,_that.goodsTypes,_that.vehicleTypes,_that.ticketTypes,_that.rejectReasons,_that.supportedLanguages,_that.aadhaarEnabled);case _:
   return null;
 
 }
@@ -230,7 +231,7 @@ return $default(_that.postingChargeInr,_that.tripChargeInr,_that.topupChips,_tha
 @JsonSerializable()
 
 class _PublicSettings implements PublicSettings {
-  const _PublicSettings({required this.postingChargeInr, required this.tripChargeInr,  List<int> topupChips = const <int>[], required this.otpTtlSeconds, required this.otpResendSeconds, required this.revisionLimit, required this.revisionResponseMinutes, required this.geofenceMeters, required this.wishlistMax, required this.wishlistFirstMinutes, required this.wishlistOnlyNotifyMinutes,  List<String> goodsTypes = const <String>[],  List<String> vehicleTypes = const <String>[],  List<String> ticketTypes = const <String>[],  List<String> rejectReasons = const <String>[],  List<String> supportedLanguages = const <String>[]}): _topupChips = topupChips,_goodsTypes = goodsTypes,_vehicleTypes = vehicleTypes,_ticketTypes = ticketTypes,_rejectReasons = rejectReasons,_supportedLanguages = supportedLanguages;
+  const _PublicSettings({required this.postingChargeInr, required this.tripChargeInr,  List<int> topupChips = const <int>[], required this.otpTtlSeconds, required this.otpResendSeconds, required this.revisionLimit, required this.revisionResponseMinutes, required this.geofenceMeters, required this.wishlistMax, required this.wishlistFirstMinutes, required this.wishlistOnlyNotifyMinutes,  List<String> goodsTypes = const <String>[],  List<String> vehicleTypes = const <String>[],  List<String> ticketTypes = const <String>[],  List<String> rejectReasons = const <String>[],  List<String> supportedLanguages = const <String>[], this.aadhaarEnabled = false}): _topupChips = topupChips,_goodsTypes = goodsTypes,_vehicleTypes = vehicleTypes,_ticketTypes = ticketTypes,_rejectReasons = rejectReasons,_supportedLanguages = supportedLanguages;
   factory _PublicSettings.fromJson(Map<String, dynamic> json) => _$PublicSettingsFromJson(json);
 
 @override final  int postingChargeInr;
@@ -285,6 +286,7 @@ class _PublicSettings implements PublicSettings {
   return EqualUnmodifiableListView(_supportedLanguages);
 }
 
+@override@JsonKey() final  bool aadhaarEnabled;
 
 /// Create a copy of PublicSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -299,18 +301,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _PublicSettings&&(identical(other.postingChargeInr, postingChargeInr) || other.postingChargeInr == postingChargeInr)&&(identical(other.tripChargeInr, tripChargeInr) || other.tripChargeInr == tripChargeInr)&&const DeepCollectionEquality().equals(other.topupChips, _topupChips)&&(identical(other.otpTtlSeconds, otpTtlSeconds) || other.otpTtlSeconds == otpTtlSeconds)&&(identical(other.otpResendSeconds, otpResendSeconds) || other.otpResendSeconds == otpResendSeconds)&&(identical(other.revisionLimit, revisionLimit) || other.revisionLimit == revisionLimit)&&(identical(other.revisionResponseMinutes, revisionResponseMinutes) || other.revisionResponseMinutes == revisionResponseMinutes)&&(identical(other.geofenceMeters, geofenceMeters) || other.geofenceMeters == geofenceMeters)&&(identical(other.wishlistMax, wishlistMax) || other.wishlistMax == wishlistMax)&&(identical(other.wishlistFirstMinutes, wishlistFirstMinutes) || other.wishlistFirstMinutes == wishlistFirstMinutes)&&(identical(other.wishlistOnlyNotifyMinutes, wishlistOnlyNotifyMinutes) || other.wishlistOnlyNotifyMinutes == wishlistOnlyNotifyMinutes)&&const DeepCollectionEquality().equals(other.goodsTypes, _goodsTypes)&&const DeepCollectionEquality().equals(other.vehicleTypes, _vehicleTypes)&&const DeepCollectionEquality().equals(other.ticketTypes, _ticketTypes)&&const DeepCollectionEquality().equals(other.rejectReasons, _rejectReasons)&&const DeepCollectionEquality().equals(other.supportedLanguages, _supportedLanguages));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _PublicSettings&&(identical(other.postingChargeInr, postingChargeInr) || other.postingChargeInr == postingChargeInr)&&(identical(other.tripChargeInr, tripChargeInr) || other.tripChargeInr == tripChargeInr)&&const DeepCollectionEquality().equals(other.topupChips, _topupChips)&&(identical(other.otpTtlSeconds, otpTtlSeconds) || other.otpTtlSeconds == otpTtlSeconds)&&(identical(other.otpResendSeconds, otpResendSeconds) || other.otpResendSeconds == otpResendSeconds)&&(identical(other.revisionLimit, revisionLimit) || other.revisionLimit == revisionLimit)&&(identical(other.revisionResponseMinutes, revisionResponseMinutes) || other.revisionResponseMinutes == revisionResponseMinutes)&&(identical(other.geofenceMeters, geofenceMeters) || other.geofenceMeters == geofenceMeters)&&(identical(other.wishlistMax, wishlistMax) || other.wishlistMax == wishlistMax)&&(identical(other.wishlistFirstMinutes, wishlistFirstMinutes) || other.wishlistFirstMinutes == wishlistFirstMinutes)&&(identical(other.wishlistOnlyNotifyMinutes, wishlistOnlyNotifyMinutes) || other.wishlistOnlyNotifyMinutes == wishlistOnlyNotifyMinutes)&&const DeepCollectionEquality().equals(other.goodsTypes, _goodsTypes)&&const DeepCollectionEquality().equals(other.vehicleTypes, _vehicleTypes)&&const DeepCollectionEquality().equals(other.ticketTypes, _ticketTypes)&&const DeepCollectionEquality().equals(other.rejectReasons, _rejectReasons)&&const DeepCollectionEquality().equals(other.supportedLanguages, _supportedLanguages)&&(identical(other.aadhaarEnabled, aadhaarEnabled) || other.aadhaarEnabled == aadhaarEnabled));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,postingChargeInr,tripChargeInr,const DeepCollectionEquality().hash(_topupChips),otpTtlSeconds,otpResendSeconds,revisionLimit,revisionResponseMinutes,geofenceMeters,wishlistMax,wishlistFirstMinutes,wishlistOnlyNotifyMinutes,const DeepCollectionEquality().hash(_goodsTypes),const DeepCollectionEquality().hash(_vehicleTypes),const DeepCollectionEquality().hash(_ticketTypes),const DeepCollectionEquality().hash(_rejectReasons),const DeepCollectionEquality().hash(_supportedLanguages));
+    return Object.hash(runtimeType,postingChargeInr,tripChargeInr,const DeepCollectionEquality().hash(_topupChips),otpTtlSeconds,otpResendSeconds,revisionLimit,revisionResponseMinutes,geofenceMeters,wishlistMax,wishlistFirstMinutes,wishlistOnlyNotifyMinutes,const DeepCollectionEquality().hash(_goodsTypes),const DeepCollectionEquality().hash(_vehicleTypes),const DeepCollectionEquality().hash(_ticketTypes),const DeepCollectionEquality().hash(_rejectReasons),const DeepCollectionEquality().hash(_supportedLanguages),aadhaarEnabled);
 }
 
 @override
 String toString() {
-    return 'PublicSettings(postingChargeInr: $postingChargeInr, tripChargeInr: $tripChargeInr, topupChips: $topupChips, otpTtlSeconds: $otpTtlSeconds, otpResendSeconds: $otpResendSeconds, revisionLimit: $revisionLimit, revisionResponseMinutes: $revisionResponseMinutes, geofenceMeters: $geofenceMeters, wishlistMax: $wishlistMax, wishlistFirstMinutes: $wishlistFirstMinutes, wishlistOnlyNotifyMinutes: $wishlistOnlyNotifyMinutes, goodsTypes: $goodsTypes, vehicleTypes: $vehicleTypes, ticketTypes: $ticketTypes, rejectReasons: $rejectReasons, supportedLanguages: $supportedLanguages)';
+    return 'PublicSettings(postingChargeInr: $postingChargeInr, tripChargeInr: $tripChargeInr, topupChips: $topupChips, otpTtlSeconds: $otpTtlSeconds, otpResendSeconds: $otpResendSeconds, revisionLimit: $revisionLimit, revisionResponseMinutes: $revisionResponseMinutes, geofenceMeters: $geofenceMeters, wishlistMax: $wishlistMax, wishlistFirstMinutes: $wishlistFirstMinutes, wishlistOnlyNotifyMinutes: $wishlistOnlyNotifyMinutes, goodsTypes: $goodsTypes, vehicleTypes: $vehicleTypes, ticketTypes: $ticketTypes, rejectReasons: $rejectReasons, supportedLanguages: $supportedLanguages, aadhaarEnabled: $aadhaarEnabled)';
 }
 
 
@@ -321,7 +323,7 @@ abstract mixin class _$PublicSettingsCopyWith<$Res> implements $PublicSettingsCo
   factory _$PublicSettingsCopyWith(_PublicSettings value, $Res Function(_PublicSettings) _then) = __$PublicSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- int postingChargeInr, int tripChargeInr, List<int> topupChips, int otpTtlSeconds, int otpResendSeconds, int revisionLimit, int revisionResponseMinutes, int geofenceMeters, int wishlistMax, int wishlistFirstMinutes, int wishlistOnlyNotifyMinutes, List<String> goodsTypes, List<String> vehicleTypes, List<String> ticketTypes, List<String> rejectReasons, List<String> supportedLanguages
+ int postingChargeInr, int tripChargeInr, List<int> topupChips, int otpTtlSeconds, int otpResendSeconds, int revisionLimit, int revisionResponseMinutes, int geofenceMeters, int wishlistMax, int wishlistFirstMinutes, int wishlistOnlyNotifyMinutes, List<String> goodsTypes, List<String> vehicleTypes, List<String> ticketTypes, List<String> rejectReasons, List<String> supportedLanguages, bool aadhaarEnabled
 });
 
 
@@ -338,7 +340,7 @@ class __$PublicSettingsCopyWithImpl<$Res>
 
 /// Create a copy of PublicSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? postingChargeInr = null,Object? tripChargeInr = null,Object? topupChips = null,Object? otpTtlSeconds = null,Object? otpResendSeconds = null,Object? revisionLimit = null,Object? revisionResponseMinutes = null,Object? geofenceMeters = null,Object? wishlistMax = null,Object? wishlistFirstMinutes = null,Object? wishlistOnlyNotifyMinutes = null,Object? goodsTypes = null,Object? vehicleTypes = null,Object? ticketTypes = null,Object? rejectReasons = null,Object? supportedLanguages = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? postingChargeInr = null,Object? tripChargeInr = null,Object? topupChips = null,Object? otpTtlSeconds = null,Object? otpResendSeconds = null,Object? revisionLimit = null,Object? revisionResponseMinutes = null,Object? geofenceMeters = null,Object? wishlistMax = null,Object? wishlistFirstMinutes = null,Object? wishlistOnlyNotifyMinutes = null,Object? goodsTypes = null,Object? vehicleTypes = null,Object? ticketTypes = null,Object? rejectReasons = null,Object? supportedLanguages = null,Object? aadhaarEnabled = null,}) {
   return _then(_PublicSettings(
 postingChargeInr: null == postingChargeInr ? _self.postingChargeInr : postingChargeInr // ignore: cast_nullable_to_non_nullable
 as int,tripChargeInr: null == tripChargeInr ? _self.tripChargeInr : tripChargeInr // ignore: cast_nullable_to_non_nullable
@@ -356,7 +358,8 @@ as List<String>,vehicleTypes: null == vehicleTypes ? _self._vehicleTypes : vehic
 as List<String>,ticketTypes: null == ticketTypes ? _self._ticketTypes : ticketTypes // ignore: cast_nullable_to_non_nullable
 as List<String>,rejectReasons: null == rejectReasons ? _self._rejectReasons : rejectReasons // ignore: cast_nullable_to_non_nullable
 as List<String>,supportedLanguages: null == supportedLanguages ? _self._supportedLanguages : supportedLanguages // ignore: cast_nullable_to_non_nullable
-as List<String>,
+as List<String>,aadhaarEnabled: null == aadhaarEnabled ? _self.aadhaarEnabled : aadhaarEnabled // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

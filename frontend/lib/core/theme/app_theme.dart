@@ -91,5 +91,7 @@ abstract final class AppTheme {
 }
 
 extension StatusColorsX on BuildContext {
+  Color get successColor => statusColors.success;
+
   StatusColors get statusColors => Theme.of(this).extension<StatusColors>() ?? StatusColors.light;
 }

@@ -24,6 +24,7 @@ abstract class PublicSettings with _$PublicSettings {
     @Default(<String>[]) List<String> ticketTypes,
     @Default(<String>[]) List<String> rejectReasons,
     @Default(<String>[]) List<String> supportedLanguages,
+    @Default(false) bool aadhaarEnabled,
   }) = _PublicSettings;
 
   factory PublicSettings.fromJson(Map<String, dynamic> json) => _$PublicSettingsFromJson(json);

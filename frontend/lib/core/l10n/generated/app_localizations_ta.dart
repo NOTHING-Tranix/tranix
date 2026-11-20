@@ -312,4 +312,266 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get otpSent => 'OTP அனுப்பப்பட்டது';
+
+  @override
+  String get photo => 'புகைப்படம்';
+
+  @override
+  String get addPhoto => 'புகைப்படம் சேர்';
+
+  @override
+  String get camera => 'கேமரா';
+
+  @override
+  String get gallery => 'கேலரி';
+
+  @override
+  String get pdfFile => 'PDF கோப்பு';
+
+  @override
+  String get basicDetails => 'பெயர், மின்னஞ்சல் மற்றும் முகவரி';
+
+  @override
+  String get emailLabel => 'மின்னஞ்சல் (விருப்பம்)';
+
+  @override
+  String get emailInvalid => 'சரியான மின்னஞ்சலை உள்ளிடவும்';
+
+  @override
+  String get address => 'முகவரி';
+
+  @override
+  String get addressLine => 'வீடு / தெரு';
+
+  @override
+  String get village => 'கிராமம் / நகரம்';
+
+  @override
+  String get district => 'மாவட்டம்';
+
+  @override
+  String get state => 'மாநிலம்';
+
+  @override
+  String get pinCode => 'பின் கோடு';
+
+  @override
+  String get pinInvalid => '6 இலக்க பின் கோடை உள்ளிடவும்';
+
+  @override
+  String get fieldRequired => 'தேவை';
+
+  @override
+  String get save => 'சேமி';
+
+  @override
+  String get saved => 'சேமிக்கப்பட்டது';
+
+  @override
+  String get language => 'மொழி';
+
+  @override
+  String get roleDetails => 'கணக்கு விவரங்கள்';
+
+  @override
+  String get idProof => 'அடையாளச் சான்று';
+
+  @override
+  String get documents => 'ஆவணங்கள்';
+
+  @override
+  String get changeMobile => 'மொபைல் எண்ணை மாற்று';
+
+  @override
+  String get newMobile => 'புதிய மொபைல் எண்';
+
+  @override
+  String get verificationTitle => 'சரிபார்ப்பு';
+
+  @override
+  String get submitForVerification => 'சரிபார்ப்புக்குச் சமர்ப்பி';
+
+  @override
+  String get statusNotSubmitted => 'சமர்ப்பிக்கப்படவில்லை';
+
+  @override
+  String get statusUnderReview => 'பரிசீலனையில்';
+
+  @override
+  String get statusVerified => 'சரிபார்க்கப்பட்டது';
+
+  @override
+  String get statusNotVerified => 'சரிபார்க்கப்படவில்லை';
+
+  @override
+  String underReviewInfo(int hours) {
+    return 'உங்கள் விவரங்களைச் சரிபார்க்கிறோம். இதற்கு சுமார் $hours மணி நேரம் ஆகும்.';
+  }
+
+  @override
+  String get notVerifiedInfo => 'சில ஆவணங்களை மீண்டும் பதிவேற்ற வேண்டும்.';
+
+  @override
+  String get verifiedInfo =>
+      'நீங்கள் சரிபார்க்கப்பட்டீர்கள். இப்போது அனைத்து வசதிகளையும் பயன்படுத்தலாம்.';
+
+  @override
+  String get notSubmittedInfo =>
+      'கீழே உள்ள அனைத்தையும் முடித்து, சரிபார்ப்புக்குச் சமர்ப்பிக்கவும்.';
+
+  @override
+  String get checkUpdates => 'புதுப்பிப்புகளைப் பார்';
+
+  @override
+  String get uploadAgain => 'மீண்டும் பதிவேற்று';
+
+  @override
+  String get docPan => 'பான் கார்டு';
+
+  @override
+  String get docVoterId => 'வாக்காளர் அடையாள அட்டை';
+
+  @override
+  String get docDrivingLicence => 'ஓட்டுநர் உரிமம்';
+
+  @override
+  String get docPhoto => 'புகைப்படம்';
+
+  @override
+  String get docFnRegistrationCert => 'பதிவுச் சான்றிதழ்';
+
+  @override
+  String get docOrgRegistrationCert => 'பதிவுச் சான்றிதழ்';
+
+  @override
+  String get docGstCert => 'GST சான்றிதழ்';
+
+  @override
+  String get docAadhaar => 'ஆதார் (ஆஃப்லைன் சரிபார்ப்பு)';
+
+  @override
+  String get docRc => 'RC புத்தகம்';
+
+  @override
+  String get docInsurance => 'காப்பீடு';
+
+  @override
+  String get docNationalPermit => 'தேசிய அனுமதி';
+
+  @override
+  String get documentType => 'ஆவணம்';
+
+  @override
+  String get docNumber => 'ஆவண எண்';
+
+  @override
+  String get expiresOn => 'செல்லுபடியாகும் தேதி';
+
+  @override
+  String get chooseFile => 'கோப்பைத் தேர்ந்தெடு';
+
+  @override
+  String uploading(int percent) {
+    return 'பதிவேற்றுகிறது… $percent%';
+  }
+
+  @override
+  String fileChosen(int count) {
+    return '$count கோப்பு(கள்) தேர்ந்தெடுக்கப்பட்டன';
+  }
+
+  @override
+  String get docPending => 'பரிசீலனைக்குக் காத்திருக்கிறது';
+
+  @override
+  String get docApproved => 'ஏற்கப்பட்டது';
+
+  @override
+  String get docRejected => 'நிராகரிக்கப்பட்டது';
+
+  @override
+  String rejectedReason(String reason) {
+    return 'காரணம்: $reason';
+  }
+
+  @override
+  String expiresOnDate(String date) {
+    return '$date வரை செல்லும்';
+  }
+
+  @override
+  String get addDocument => 'ஆவணம் சேர்';
+
+  @override
+  String get completeVerificationTitle => 'சரிபார்ப்பை முடிக்கவும்';
+
+  @override
+  String get completeVerificationBody =>
+      'இதைச் செய்ய சரிபார்க்கப்பட்ட கணக்கு தேவை. உங்கள் சுயவிவரத்தை முடித்து சரிபார்ப்புக்குச் சமர்ப்பிக்கவும்.';
+
+  @override
+  String get goToProfile => 'சுயவிவரத்திற்குச் செல்';
+
+  @override
+  String get accountType => 'கணக்கு வகை';
+
+  @override
+  String get individual => 'தனிநபர்';
+
+  @override
+  String get business => 'வணிகம்';
+
+  @override
+  String get businessName => 'வணிகப் பெயர்';
+
+  @override
+  String get businessNameOptional => 'வணிகப் பெயர் (விருப்பம்)';
+
+  @override
+  String get gstinOptional => 'GSTIN (விருப்பம்)';
+
+  @override
+  String get panOptional => 'PAN (விருப்பம்)';
+
+  @override
+  String get networkName => 'அமைப்பின் பெயர்';
+
+  @override
+  String get registrationNumber => 'பதிவு எண்';
+
+  @override
+  String get idType => 'அடையாள வகை';
+
+  @override
+  String get idNumber => 'அடையாள எண்';
+
+  @override
+  String get contactPerson => 'தொடர்பு நபர்';
+
+  @override
+  String get licenceNumber => 'உரிம எண்';
+
+  @override
+  String get licenceValidUntil => 'உரிமம் செல்லுபடியாகும் தேதி';
+
+  @override
+  String get vehicleClasses => 'வாகன வகைகள் (எ.கா. HGMV, LMV)';
+
+  @override
+  String get emergencyContact => 'அவசரத் தொடர்பு (விருப்பம்)';
+
+  @override
+  String get orgName => 'நிறுவனத்தின் பெயர்';
+
+  @override
+  String get pickDate => 'தேதியைத் தேர்ந்தெடு';
+
+  @override
+  String get wallet => 'வாலட்';
+
+  @override
+  String get support => 'உதவி';
+
+  @override
+  String get mobileChanged => 'மொபைல் எண் மாற்றப்பட்டது';
 }

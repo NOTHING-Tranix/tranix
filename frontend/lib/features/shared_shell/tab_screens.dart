@@ -5,15 +5,15 @@ import '../../core/l10n/generated/app_localizations.dart';
 import '../../core/network/interceptors.dart';
 import '../../core/providers.dart';
 import '../../core/router/routes.dart';
-import '../../core/session/session_controller.dart';
 import '../../core/utils/formatters.dart';
 import '../../core/widgets/widgets.dart';
 import '../../shared/models/models.dart';
+import '../profile/presentation/profile_screens.dart';
 import 'role_shell.dart';
 
 /// M0: every tab is a placeholder; real screens replace these per milestone (screens.md).
 Widget tabScreenFor(ShellTab tab) => switch (tab.label) {
-      TabLabel.profile => const ProfileTabPlaceholder(),
+      TabLabel.profile => const ProfileScreen(),
       TabLabel.home when tab.path == Routes.lp || tab.path == Routes.fn => HomeWithLoadsPlaceholder(tab: tab),
       _ => PlaceholderTab(tab: tab),
     };
@@ -27,7 +27,7 @@ class PlaceholderTab extends StatelessWidget {
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(title: Text(tabLabel(l, tab.label))),
+      appBar: AppBar(title: Text(tabLabel(l, tab.label)), actions: const [ProfileAvatarButton()]),
       body: EmptyState(icon: tabIcon(tab.label), message: l.comingSoon),
     );
   }
@@ -52,7 +52,7 @@ class HomeWithLoadsPlaceholder extends ConsumerWidget {
     final l = AppLocalizations.of(context);
     final loads = ref.watch(ongoingLoadsProvider);
     return Scaffold(
-      appBar: AppBar(title: Text(tabLabel(l, tab.label))),
+      appBar: AppBar(title: Text(tabLabel(l, tab.label)), actions: const [ProfileAvatarButton()]),
       body: RefreshIndicator(
         onRefresh: () => ref.refresh(ongoingLoadsProvider.future),
         child: AsyncView(
@@ -109,59 +109,6 @@ class _LoadCard extends StatelessWidget {
   }
 }
 
-class ProfileTabPlaceholder extends ConsumerWidget {
-  const ProfileTabPlaceholder({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l = AppLocalizations.of(context);
-    final session = ref.watch(sessionProvider);
-    final me = session is SignedIn ? session.me : null;
-    return Scaffold(
-      appBar: AppBar(title: Text(l.navProfile)),
-      body: ListView(
-        padding: const EdgeInsets.all(24),
-        children: [
-          if (me != null) ...[
-            Row(
-              children: [
-                CompletionRing(percent: me.profileCompletion),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(me.name, style: Theme.of(context).textTheme.titleLarge),
-                      Text(roleLabel(l, me.role)),
-                      const SizedBox(height: 4),
-                      TrustScoreBadge(score: me.trustScore),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            if (me.walletBalanceInr != null) ...[
-              const SizedBox(height: 24),
-              Text(l.walletBalance),
-              MoneyText(me.walletBalanceInr!, large: true),
-            ],
-            if (me.verificationStatus != VerificationStatus.verified) ...[
-              const SizedBox(height: 24),
-              Text(l.verificationBanner, style: TextStyle(color: Theme.of(context).colorScheme.error)),
-            ],
-          ],
-          const SizedBox(height: 32),
-          OutlinedButton.icon(
-            onPressed: () => ref.read(sessionProvider.notifier).signOut(),
-            icon: const Icon(Icons.logout),
-            label: Text(l.actionSignOut),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 String roleLabel(AppLocalizations l, Role role) => switch (role) {
       Role.loadProvider => l.roleLoadProvider,
       Role.farmerNetwork => l.roleFarmerNetwork,
@@ -171,3 +118,17 @@ String roleLabel(AppLocalizations l, Role role) => switch (role) {
       Role.admin => l.roleAdmin,
       Role.unknown => l.statusUnknown,
     };
+
+/// Avatar in home app bars → S-07 profile pop-up.
+class ProfileAvatarButton extends ConsumerWidget {
+  const ProfileAvatarButton({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return IconButton(
+      tooltip: AppLocalizations.of(context).navProfile,
+      icon: const Icon(Icons.account_circle_outlined),
+      onPressed: () => showProfileSheet(context, ref),
+    );
+  }
+}

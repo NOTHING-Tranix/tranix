@@ -7,7 +7,7 @@ Status: `[ ]` not started · `[~]` in progress · `[x]` done. Claude updates thi
 | --- | --- | --- | --- | --- | --- |
 | M0 | Foundations | B-001 – B-010 | A-001 – A-012 | Both projects build; CI green; app opens with mock data | [x] |
 | M1 | Sign up and sign in | B-101 – B-112 | A-101 – A-106 | Sign up with OTP on the phone, stay signed in, sign out | [x] |
-| M2 | Profile and verification | B-201 – B-208 | A-201 – A-207 | Fill profile to 100%, submit; approve in Swagger; app shows Verified | [~] |
+| M2 | Profile and verification | B-201 – B-208 | A-201 – A-207 | Fill profile to 100%, submit; approve in Swagger; app shows Verified | [x] |
 | M3 | Wallet and notifications basics | B-301 – B-308, B-1101, B-1102 | A-301 – A-304 | Top up via browser page (fake gateway), see balance and notification | [ ] |
 | M4 | Post a load | B-401 – B-409 | A-401 – A-403 | Load Provider posts a load with estimate; sees it in Tracking | [ ] |
 | M5 | Driver and fleet setup (backend) + driver profile | B-501 – B-509 | A-501, A-502 | Driver adds own truck, goes on duty; org invite accepted | [ ] |

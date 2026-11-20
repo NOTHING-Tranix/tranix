@@ -49,6 +49,7 @@ _PublicSettings _$PublicSettingsFromJson(Map<String, dynamic> json) =>
               ?.map((e) => e as String)
               .toList() ??
           const <String>[],
+      aadhaarEnabled: json['aadhaarEnabled'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$PublicSettingsToJson(_PublicSettings instance) =>
@@ -69,4 +70,5 @@ Map<String, dynamic> _$PublicSettingsToJson(_PublicSettings instance) =>
       'ticketTypes': instance.ticketTypes,
       'rejectReasons': instance.rejectReasons,
       'supportedLanguages': instance.supportedLanguages,
+      'aadhaarEnabled': instance.aadhaarEnabled,
     };

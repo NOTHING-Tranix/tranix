@@ -6,6 +6,8 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/presentation/auth_screens.dart';
 import '../../features/auth/presentation/placeholder_auth_screens.dart';
 import '../../features/onboarding/presentation/splash_screen.dart';
+import '../../features/profile/presentation/profile_screens.dart';
+import '../../features/shared_shell/placeholders.dart';
 import '../../features/onboarding/presentation/welcome_screen.dart';
 import '../../features/shared_shell/role_shell.dart';
 import '../../features/shared_shell/tab_screens.dart';
@@ -55,6 +57,19 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: Routes.signIn, builder: (_, _) => const SignInScreen()),
       GoRoute(path: Routes.signInOtp, builder: (_, _) => const OtpScreen()),
       GoRoute(path: Routes.unsupported, builder: (_, _) => const UnsupportedRoleScreen()),
+      GoRoute(path: Routes.profile, builder: (_, _) => const ProfileScreen()),
+      GoRoute(path: Routes.profileEdit, builder: (_, _) => const EditBasicsScreen()),
+      GoRoute(path: Routes.profileRole, builder: (_, _) => const RoleProfileScreen()),
+      GoRoute(
+        path: Routes.profileDocument,
+        builder: (_, s) => DocumentFormScreen(
+          type: documentTypeFromWire(s.uri.queryParameters['type']),
+          replaceId: s.uri.queryParameters['replace'],
+        ),
+      ),
+      GoRoute(path: Routes.profileMobile, builder: (_, _) => const ChangeMobileScreen()),
+      GoRoute(path: Routes.verification, builder: (_, _) => const VerificationScreen()),
+      GoRoute(path: Routes.wallet, builder: (_, _) => const ComingSoonScreen()),
       for (final entry in RoleTabs.byShell.entries) _shell(entry.value),
     ],
   );

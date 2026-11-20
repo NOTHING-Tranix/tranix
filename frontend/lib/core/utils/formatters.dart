@@ -20,4 +20,7 @@ abstract final class Fmt {
 
   /// `dd MMM yyyy, h:mm a` (architecture.md).
   static String fullDateTime(DateTime at) => DateFormat('dd MMM yyyy, h:mm a', 'en').format(at.toLocal());
+
+  /// `20 Nov 2026`.
+  static String dateOnly(DateTime d) => DateFormat('d MMM yyyy', 'en').format(d);
 }

@@ -7,7 +7,7 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 | --- | --- | --- |
 | 0 Foundation | 12 | 12 |
 | 1 Auth and onboarding | 6 | 6 |
-| 2 Profile and verification | 7 | 0 |
+| 2 Profile and verification | 7 | 7 |
 | 3 Wallet, notifications, support | 7 | 0 |
 | 4 Load Provider | 10 | 0 |
 | 5 Driver | 12 | 0 |
@@ -41,13 +41,13 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 - [x] **A-106** Widget tests for sign-up/sign-in validation. (2026-11-21)
 
 ## Phase 2 — Profile and verification (needs B-108…B-111, B-201…B-206)
-- [ ] **A-201** Profile screen (S-05) with completion ring and common fields.
-- [ ] **A-202** File/photo pick, compress, upload (`POST /files`) with progress.
-- [ ] **A-203** Documents (ID proof options; Aadhaar option hidden until enabled by settings) + role-profile sections.
-- [ ] **A-204** Submit for verification; verification status screen (S-06).
-- [ ] **A-205** Profile pop-up sheet (S-07).
-- [ ] **A-206** "Complete verification" blocking sheet reused across features.
-- [ ] **A-207** Change mobile with OTP.
+- [x] **A-201** Profile screen (S-05) with completion ring and common fields. (2026-11-21)
+- [x] **A-202** File/photo pick, compress, upload (`POST /files`) with progress. (2026-11-21)
+- [x] **A-203** Documents (ID proof options; Aadhaar option hidden until enabled by settings) + role-profile sections. (2026-11-21)
+- [x] **A-204** Submit for verification; verification status screen (S-06). (2026-11-21)
+- [x] **A-205** Profile pop-up sheet (S-07). (2026-11-21)
+- [x] **A-206** "Complete verification" blocking sheet reused across features. (2026-11-21)
+- [x] **A-207** Change mobile with OTP. (2026-11-21)
 
 ## Phase 3 — Wallet, notifications, support (needs B-301…B-304, B-1101…B-1104)
 - [ ] **A-301** Wallet screen (S-08) + transactions with filters.

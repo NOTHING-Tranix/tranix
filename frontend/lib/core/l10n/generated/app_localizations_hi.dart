@@ -307,4 +307,266 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get otpSent => 'OTP भेजा गया';
+
+  @override
+  String get photo => 'फ़ोटो';
+
+  @override
+  String get addPhoto => 'फ़ोटो जोड़ें';
+
+  @override
+  String get camera => 'कैमरा';
+
+  @override
+  String get gallery => 'गैलरी';
+
+  @override
+  String get pdfFile => 'PDF फ़ाइल';
+
+  @override
+  String get basicDetails => 'नाम, ईमेल और पता';
+
+  @override
+  String get emailLabel => 'ईमेल (वैकल्पिक)';
+
+  @override
+  String get emailInvalid => 'सही ईमेल डालें';
+
+  @override
+  String get address => 'पता';
+
+  @override
+  String get addressLine => 'मकान / गली';
+
+  @override
+  String get village => 'गाँव / शहर';
+
+  @override
+  String get district => 'ज़िला';
+
+  @override
+  String get state => 'राज्य';
+
+  @override
+  String get pinCode => 'पिन कोड';
+
+  @override
+  String get pinInvalid => '6 अंकों का पिन कोड डालें';
+
+  @override
+  String get fieldRequired => 'ज़रूरी';
+
+  @override
+  String get save => 'सेव करें';
+
+  @override
+  String get saved => 'सेव हो गया';
+
+  @override
+  String get language => 'भाषा';
+
+  @override
+  String get roleDetails => 'खाते का विवरण';
+
+  @override
+  String get idProof => 'पहचान पत्र';
+
+  @override
+  String get documents => 'दस्तावेज़';
+
+  @override
+  String get changeMobile => 'मोबाइल नंबर बदलें';
+
+  @override
+  String get newMobile => 'नया मोबाइल नंबर';
+
+  @override
+  String get verificationTitle => 'सत्यापन';
+
+  @override
+  String get submitForVerification => 'सत्यापन के लिए भेजें';
+
+  @override
+  String get statusNotSubmitted => 'नहीं भेजा गया';
+
+  @override
+  String get statusUnderReview => 'जाँच जारी है';
+
+  @override
+  String get statusVerified => 'सत्यापित';
+
+  @override
+  String get statusNotVerified => 'सत्यापित नहीं';
+
+  @override
+  String underReviewInfo(int hours) {
+    return 'हम आपका विवरण जाँच रहे हैं। इसमें आमतौर पर लगभग $hours घंटे लगते हैं।';
+  }
+
+  @override
+  String get notVerifiedInfo => 'कुछ दस्तावेज़ फिर से अपलोड करने होंगे।';
+
+  @override
+  String get verifiedInfo =>
+      'आप सत्यापित हैं। अब आप सभी सुविधाएँ इस्तेमाल कर सकते हैं।';
+
+  @override
+  String get notSubmittedInfo =>
+      'नीचे दी गई सभी चीज़ें पूरी करें, फिर सत्यापन के लिए भेजें।';
+
+  @override
+  String get checkUpdates => 'अपडेट देखें';
+
+  @override
+  String get uploadAgain => 'फिर से अपलोड करें';
+
+  @override
+  String get docPan => 'पैन कार्ड';
+
+  @override
+  String get docVoterId => 'वोटर आईडी';
+
+  @override
+  String get docDrivingLicence => 'ड्राइविंग लाइसेंस';
+
+  @override
+  String get docPhoto => 'फ़ोटो';
+
+  @override
+  String get docFnRegistrationCert => 'पंजीकरण प्रमाणपत्र';
+
+  @override
+  String get docOrgRegistrationCert => 'पंजीकरण प्रमाणपत्र';
+
+  @override
+  String get docGstCert => 'GST प्रमाणपत्र';
+
+  @override
+  String get docAadhaar => 'आधार (ऑफ़लाइन जाँच)';
+
+  @override
+  String get docRc => 'RC बुक';
+
+  @override
+  String get docInsurance => 'बीमा';
+
+  @override
+  String get docNationalPermit => 'नेशनल परमिट';
+
+  @override
+  String get documentType => 'दस्तावेज़';
+
+  @override
+  String get docNumber => 'दस्तावेज़ नंबर';
+
+  @override
+  String get expiresOn => 'मान्य तिथि तक';
+
+  @override
+  String get chooseFile => 'फ़ाइल चुनें';
+
+  @override
+  String uploading(int percent) {
+    return 'अपलोड हो रहा है… $percent%';
+  }
+
+  @override
+  String fileChosen(int count) {
+    return '$count फ़ाइल चुनी गई';
+  }
+
+  @override
+  String get docPending => 'जाँच बाकी';
+
+  @override
+  String get docApproved => 'स्वीकृत';
+
+  @override
+  String get docRejected => 'अस्वीकृत';
+
+  @override
+  String rejectedReason(String reason) {
+    return 'कारण: $reason';
+  }
+
+  @override
+  String expiresOnDate(String date) {
+    return '$date तक मान्य';
+  }
+
+  @override
+  String get addDocument => 'दस्तावेज़ जोड़ें';
+
+  @override
+  String get completeVerificationTitle => 'सत्यापन पूरा करें';
+
+  @override
+  String get completeVerificationBody =>
+      'यह करने के लिए सत्यापित खाता ज़रूरी है। अपनी प्रोफ़ाइल पूरी करें और सत्यापन के लिए भेजें।';
+
+  @override
+  String get goToProfile => 'प्रोफ़ाइल पर जाएँ';
+
+  @override
+  String get accountType => 'खाते का प्रकार';
+
+  @override
+  String get individual => 'व्यक्तिगत';
+
+  @override
+  String get business => 'व्यवसाय';
+
+  @override
+  String get businessName => 'व्यवसाय का नाम';
+
+  @override
+  String get businessNameOptional => 'व्यवसाय का नाम (वैकल्पिक)';
+
+  @override
+  String get gstinOptional => 'GSTIN (वैकल्पिक)';
+
+  @override
+  String get panOptional => 'PAN (वैकल्पिक)';
+
+  @override
+  String get networkName => 'नेटवर्क का नाम';
+
+  @override
+  String get registrationNumber => 'पंजीकरण नंबर';
+
+  @override
+  String get idType => 'आईडी का प्रकार';
+
+  @override
+  String get idNumber => 'आईडी नंबर';
+
+  @override
+  String get contactPerson => 'संपर्क व्यक्ति';
+
+  @override
+  String get licenceNumber => 'लाइसेंस नंबर';
+
+  @override
+  String get licenceValidUntil => 'लाइसेंस कब तक मान्य';
+
+  @override
+  String get vehicleClasses => 'वाहन श्रेणियाँ (जैसे HGMV, LMV)';
+
+  @override
+  String get emergencyContact => 'आपातकालीन संपर्क (वैकल्पिक)';
+
+  @override
+  String get orgName => 'संगठन का नाम';
+
+  @override
+  String get pickDate => 'तारीख चुनें';
+
+  @override
+  String get wallet => 'वॉलेट';
+
+  @override
+  String get support => 'सहायता';
+
+  @override
+  String get mobileChanged => 'मोबाइल नंबर बदल दिया गया';
 }

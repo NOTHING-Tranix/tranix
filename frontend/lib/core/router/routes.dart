@@ -9,6 +9,13 @@ abstract final class Routes {
   static const signUpOtp = '/sign-up/otp';
   static const signInOtp = '/sign-in/otp';
   static const unsupported = '/unsupported';
+  static const profile = '/profile';
+  static const profileEdit = '/profile/edit';
+  static const profileRole = '/profile/role';
+  static const profileDocument = '/profile/document';
+  static const profileMobile = '/profile/mobile';
+  static const verification = '/verification';
+  static const wallet = '/wallet';
 
   static const lp = '/lp';
   static const fn = '/fn';
