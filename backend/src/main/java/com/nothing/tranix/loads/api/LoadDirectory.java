@@ -35,6 +35,18 @@ public interface LoadDirectory {
     /** Loads in an active status for this driver (at most one by the matching rules). */
     List<LoadInfo> activeForDriver(UUID driverId);
 
+    List<LoadInfo> activeForTruck(UUID truckId);
+
+    /** Loads carried by an Organization (B-507), newest pickup first, as {@code LoadSummary} maps + driverId/truckId. */
+    List<Map<String, Object>> forOrg(UUID orgId, UUID driverId, UUID truckId, Instant from, Instant to, LoadStatus status,
+                                     int limit);
+
+    /** Delivered/cancelled counts and money for a driver (performance). */
+    DriverStats driverStats(UUID driverId);
+
+    record DriverStats(long tripsDelivered, long onTime, long cancelledByDriver, long agreedTotalInr) {
+    }
+
     /** The contract {@code LoadDetail} map for a viewer (shipper/receiver/driver/admin). */
     Map<String, Object> detail(UUID loadId, Viewer viewer);
 

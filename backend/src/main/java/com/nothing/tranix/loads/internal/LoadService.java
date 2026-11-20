@@ -441,6 +441,50 @@ public class LoadService implements LoadDirectory {
         return loads.findAllById(ids).stream().map(LoadService::info).toList();
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<LoadInfo> activeForTruck(UUID truckId) {
+        List<UUID> ids = jdbc.queryForList("select id from loads_load where truck_id = ? and status in ("
+                + ACTIVE_FOR_DRIVER.stream().map(s -> "'" + s + "'").collect(Collectors.joining(",")) + ")", UUID.class, truckId);
+        return loads.findAllById(ids).stream().map(LoadService::info).toList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Map<String, Object>> forOrg(UUID orgId, UUID driverId, UUID truckId, Instant from, Instant to,
+                                            LoadStatus status, int limit) {
+        StringBuilder sql = new StringBuilder("select id from loads_load where org_id = ?");
+        List<Object> args = new ArrayList<>(List.of(orgId));
+        if (driverId != null) { sql.append(" and driver_id = ?"); args.add(driverId); }
+        if (truckId != null) { sql.append(" and truck_id = ?"); args.add(truckId); }
+        if (from != null) { sql.append(" and pickup_window_start >= ?"); args.add(Timestamp.from(from)); }
+        if (to != null) { sql.append(" and pickup_window_start < ?"); args.add(Timestamp.from(to)); }
+        if (status != null) { sql.append(" and status = ?"); args.add(status.name()); }
+        sql.append(" order by pickup_window_start desc limit ?");
+        args.add(limit);
+        List<UUID> ids = jdbc.queryForList(sql.toString(), UUID.class, args.toArray());
+        return loads.findAllById(ids).stream().sorted((a, b) -> ids.indexOf(a.getId()) - ids.indexOf(b.getId()))
+                .map(l -> {
+                    Map<String, Object> m = new LinkedHashMap<>(summary(info(l)));
+                    m.put("driverId", l.getDriverId());
+                    m.put("truckId", l.getTruckId());
+                    return m;
+                }).toList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public DriverStats driverStats(UUID driverId) {
+        return jdbc.queryForObject("""
+                select count(*) filter (where status = 'DELIVERED') delivered,
+                       count(*) filter (where status = 'DELIVERED' and delivered_at <= delivery_eta) on_time,
+                       coalesce(sum(agreed_amount_inr) filter (where status = 'DELIVERED'), 0) agreed,
+                       (select count(*) from loads_cancellation c where c.by_user_id = ?) cancelled
+                from loads_load where driver_id = ?""",
+                (rs, i) -> new DriverStats(rs.getLong("delivered"), rs.getLong("on_time"), rs.getLong("cancelled"),
+                        rs.getLong("agreed")), driverId, driverId);
+    }
+
     void timeline(UUID loadId, LoadStatus status, UUID actorId) {
         jdbc.update("insert into loads_timeline (id, load_id, status, at, actor_id) values (?, ?, ?, ?, ?)",
                 UUID.randomUUID(), loadId, status.name(), Timestamp.from(Instant.now(clock)), actorId);

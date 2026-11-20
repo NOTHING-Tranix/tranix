@@ -13,6 +13,11 @@ Newest first. Claude adds an entry at the end of every session and at every mile
 
 ---
 
+## 2026-11-21 — M5 in progress (backend done, frontend next)
+- Done: B-501…B-509 (fleet module: trucks, invitations, allocations with DB uniqueness, duty/home, org dashboard/drivers/trips/CSV, truck location; dev seed trucks for 9000000003 and 9000000004).
+- Next: A-501 driver home (duty switch, invitation banner) and A-502 driver profile (licence, own truck form + documents, invitation accept/reject, locker); then M0-style checkpoint, then M6.
+- Notes: Spring proxies — never read fields through another @Service bean (inject dependencies directly).
+
 ## 2026-11-21 — M4 Post a load (done; B-408 moved to M7)
 - Done: B-401…B-407, B-409, A-401…A-403 (+ tracking/history lists and basic load detail with edit/cancel/post again). D-26 assumed.
 - Maps: pin picker uses Google Maps only with a key (F-5); otherwise device location + typed address.

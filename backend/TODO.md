@@ -10,7 +10,7 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 | 2 Verification and documents | 8 | 7 |
 | 3 Wallet | 8 | 8 |
 | 4 Loads (shipper) | 9 | 8 |
-| 5 Fleet and driver setup | 9 | 0 |
+| 5 Fleet and driver setup | 9 | 9 |
 | 6 Matching and acceptance | 7 | 0 |
 | 6A Wish list | 6 | 0 |
 | 7 Trip execution | 11 | 0 |
@@ -80,15 +80,15 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 - [x] **B-409** Tests for transitions and cancellation outcomes. (2026-11-21)
 
 ## Phase 5 — Fleet and driver setup
-- [ ] **B-501** `fleet_truck` + owner-driver `POST/PUT /driver/truck` (one truck only) + truck documents. Also add dev seed trucks in `db/dev` (from B-010).
-- [ ] **B-502** Org trucks CRUD, deactivate, documents, status.
-- [ ] **B-503** Org driver invitation by mobile (SMS) + `GET/POST /driver/invitations/{id}/accept|reject`.
-- [ ] **B-504** Allocation create/update/remove with DB unique constraints and `ALLOCATION_CONFLICT`; no change during active trip.
-- [ ] **B-505** `PUT /driver/duty`, `GET /driver/home`.
-- [ ] **B-506** Org dashboard, drivers list, driver performance.
-- [ ] **B-507** Org trips by driver/truck + CSV export.
-- [ ] **B-508** `GET /org/trucks/{id}/location`.
-- [ ] **B-509** Tests: allocation rules, one-truck rule for owner-drivers.
+- [x] **B-501** `fleet_truck` + owner-driver `POST/PUT /driver/truck` (one truck only) + truck documents. (2026-11-21)
+- [x] **B-502** Org trucks CRUD, deactivate, documents, status. (2026-11-21)
+- [x] **B-503** Org driver invitation by mobile (SMS) + `GET/POST /driver/invitations/{id}/accept|reject`. (2026-11-21)
+- [x] **B-504** Allocation create/update/remove with DB unique constraints and `ALLOCATION_CONFLICT`; no change during active trip. (2026-11-21)
+- [x] **B-505** `PUT /driver/duty`, `GET /driver/home`. (2026-11-21)
+- [x] **B-506** Org dashboard, drivers list, driver performance. (2026-11-21)
+- [x] **B-507** Org trips by driver/truck + CSV export. (2026-11-21)
+- [x] **B-508** `GET /org/trucks/{id}/location`. (2026-11-21)
+- [x] **B-509** Tests: allocation rules, one-truck rule for owner-drivers. (2026-11-21)
 
 ## Phase 6 — Matching and acceptance
 - [ ] **B-601** Eligibility query (see domain model) with Haversine + bounding box.

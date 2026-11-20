@@ -68,6 +68,21 @@ final class Templates {
                 "दस्तावेज़ समाप्त", "{document} समाप्त हो गया। नया सत्यापित होने तक यात्राएँ रुकी रहेंगी।");
     }
 
+    static {
+        add("ORG_INVITE", true, true,
+                "Organization invitation", "{org} invited you to drive for them. Open Tranix to accept or reject.",
+                "நிறுவன அழைப்பு", "{org} உங்களை ஓட்டுநராக அழைத்துள்ளது. ஏற்க அல்லது நிராகரிக்க டிரானிக்ஸைத் திறக்கவும்.",
+                "संगठन का निमंत्रण", "{org} ने आपको ड्राइवर के रूप में बुलाया है। स्वीकार या अस्वीकार करने के लिए ट्रानिक्स खोलें।");
+        add("INVITE_ACCEPTED", true, false,
+                "Invitation accepted", "{driver} joined your Organization.",
+                "அழைப்பு ஏற்கப்பட்டது", "{driver} உங்கள் நிறுவனத்தில் சேர்ந்தார்.",
+                "निमंत्रण स्वीकार", "{driver} आपके संगठन से जुड़ गए।");
+        add("INVITE_REJECTED", true, false,
+                "Invitation rejected", "{driver} rejected your invitation.",
+                "அழைப்பு நிராகரிக்கப்பட்டது", "{driver} உங்கள் அழைப்பை நிராகரித்தார்.",
+                "निमंत्रण अस्वीकार", "{driver} ने आपका निमंत्रण अस्वीकार किया।");
+    }
+
     private Templates() {
     }
 

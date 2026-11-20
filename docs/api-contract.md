@@ -168,7 +168,7 @@ LoadDetail = LoadSummary + { pickup, drop, senderName, senderMobile, receiverNam
 | --- | --- |
 | `PUT /driver/duty` | `{onDuty}` |
 | `GET /driver/home` | `{onDuty, truck?, walletBalanceInr?, orgName?, currentLoadId?, suggestionsCount, trustScore, expiringDocuments[]}` |
-| `POST /driver/truck` · `PUT /driver/truck` | Owner-driver only: `{number, vehicleType, capacityTonnes}` + documents via `/me/documents` |
+| `GET/POST/PUT /driver/truck` | Owner-driver only: `{number, vehicleType, capacityTonnes}`; truck documents via `POST /driver/truck/documents {type: RC|INSURANCE|NATIONAL_PERMIT, fileIds, number, expiresOn}`. Truck view `{id, number, vehicleType, capacityTonnes, status, documents[], allocatedDriver?, ownedByMe}` |
 | `GET /driver/suggestions?sort=NEAREST\|AMOUNT\|EARLIEST` | `[Suggestion{loadId, goodsType, description, quantity, unit, weightTonnes, pickupArea, dropArea, pickupWindowStart, distanceToPickupKm, minutesToPickup, deliveryEta, amountInr, shipperTrustScore, preferredByShipper}]` (poll 30 s while open) |
 | `POST /driver/suggestions/{loadId}/accept` | → `LoadDetail` or `LOAD_TAKEN` / `INSUFFICIENT_BALANCE` |
 | `POST /driver/suggestions/{loadId}/reject` | `{reason?: TOO_FAR\|LOW_AMOUNT\|WRONG_TRUCK\|OTHER}` |
