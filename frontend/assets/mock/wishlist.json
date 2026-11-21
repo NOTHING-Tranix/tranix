@@ -1,0 +1,8 @@
+[
+  { "id": "w1000000-0000-4000-8000-000000000001", "targetType": "TRUCK", "truckNumber": "TN57AB1234", "vehicleType": "OPEN_BODY",
+    "capacityTonnes": 9, "driverName": "Murugan K", "orgId": null, "orgName": null, "trustScore": 82, "tripsTogether": 3,
+    "note": "Good with vegetables", "available": true },
+  { "id": "w1000000-0000-4000-8000-000000000002", "targetType": "ORGANIZATION", "truckNumber": null, "vehicleType": null,
+    "capacityTonnes": null, "driverName": null, "orgId": "o1000000-0000-4000-8000-000000000001", "orgName": "Kaveri Logistics",
+    "trustScore": 77, "tripsTogether": 1, "note": null, "available": false }
+]

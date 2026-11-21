@@ -12,6 +12,7 @@ import '../driver/trip_feature.dart';
 import '../notifications/notifications_feature.dart';
 import '../payments/payments_feature.dart';
 import '../shipper/presentation/shipper_screens.dart';
+import '../shipper/wishlist_feature.dart';
 import 'role_shell.dart';
 
 /// M0: every tab is a placeholder; real screens replace these per milestone (screens.md).
@@ -21,6 +22,7 @@ Widget tabScreenFor(ShellTab tab) => switch (tab.label) {
       TabLabel.home when tab.path == Routes.lp || tab.path == Routes.fn => const ShipperHomeScreen(),
       TabLabel.home when tab.path == Routes.driver => const DriverHomeScreen(),
       TabLabel.suggestions => const SuggestionsScreen(),
+      TabLabel.wishlist => const WishlistScreen(actions: [NotificationBell(), ProfileAvatarButton()]),
       TabLabel.currentTrip => const CurrentTripScreen(),
       TabLabel.tracking => const _LoadsTab(ongoing: true),
       TabLabel.history when tab.path.startsWith(Routes.lp) || tab.path.startsWith(Routes.fn) => const _LoadsTab(ongoing: false),

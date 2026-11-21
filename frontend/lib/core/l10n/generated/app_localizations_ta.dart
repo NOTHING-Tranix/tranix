@@ -1316,4 +1316,73 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get evDriverCancelled => 'ஓட்டுநர் ரத்து செய்தார்';
+
+  @override
+  String get myList => 'என் பட்டியல்';
+
+  @override
+  String get fromMyTrips => 'என் பயணங்களிலிருந்து';
+
+  @override
+  String get findOrganization => 'நிறுவனத்தைத் தேடு';
+
+  @override
+  String get searchOrgHint => 'நிறுவனப் பெயர் அல்லது குறியீடு';
+
+  @override
+  String get addToWishlist => 'விருப்பப் பட்டியலில் சேர்';
+
+  @override
+  String get addedToWishlist => 'விருப்பப் பட்டியலில் சேர்க்கப்பட்டது';
+
+  @override
+  String wishlistCount(int count, int max) {
+    return '$count / $max';
+  }
+
+  @override
+  String tripsTogether(int count) {
+    return '$count பயணங்கள் ஒன்றாக';
+  }
+
+  @override
+  String get availableNow => 'இப்போது கிடைக்கும்';
+
+  @override
+  String get removeAction => 'நீக்கு';
+
+  @override
+  String get wishlistEmptyHint =>
+      'உங்கள் பழைய பயணங்களிலிருந்து லாரிகளைச் சேர்க்கவும் அல்லது சரிபார்க்கப்பட்ட நிறுவனங்களைத் தேடவும்.';
+
+  @override
+  String get noCandidates => 'உங்கள் பயணங்களிலிருந்து சேர்க்க எதுவும் இல்லை.';
+
+  @override
+  String get chooseEntries => 'முதலில் யாருக்கு';
+
+  @override
+  String get manageWishlist => 'விருப்பப் பட்டியலை நிர்வகி';
+
+  @override
+  String wishlistFirstBanner(String time) {
+    return '$time வரை உங்கள் விருப்பப் பட்டியலுக்கு மட்டும், பிறகு அனைவருக்கும்.';
+  }
+
+  @override
+  String get wishlistOnlyBanner => 'உங்கள் விருப்பப் பட்டியலுக்கு மட்டும்.';
+
+  @override
+  String get openToEveryone => 'அனைவருக்கும் திற';
+
+  @override
+  String trucksCount(int count) {
+    return '$count லாரிகள்';
+  }
+
+  @override
+  String get organizationLabel => 'நிறுவனம்';
+
+  @override
+  String get noResults => 'முடிவுகள் இல்லை';
 }

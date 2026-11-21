@@ -1302,4 +1302,74 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get evDriverCancelled => 'Driver cancelled';
+
+  @override
+  String get myList => 'My list';
+
+  @override
+  String get fromMyTrips => 'From my trips';
+
+  @override
+  String get findOrganization => 'Find organization';
+
+  @override
+  String get searchOrgHint => 'Organization name or code';
+
+  @override
+  String get addToWishlist => 'Add to wish list';
+
+  @override
+  String get addedToWishlist => 'Added to your wish list';
+
+  @override
+  String wishlistCount(int count, int max) {
+    return '$count of $max';
+  }
+
+  @override
+  String tripsTogether(int count) {
+    return '$count trips together';
+  }
+
+  @override
+  String get availableNow => 'Available now';
+
+  @override
+  String get removeAction => 'Remove';
+
+  @override
+  String get wishlistEmptyHint =>
+      'Add trucks from your past trips or search verified Organizations.';
+
+  @override
+  String get noCandidates =>
+      'No trucks or Organizations from your trips to add.';
+
+  @override
+  String get chooseEntries => 'Who gets it first';
+
+  @override
+  String get manageWishlist => 'Manage wish list';
+
+  @override
+  String wishlistFirstBanner(String time) {
+    return 'Offered to your wish list until $time, then to everyone.';
+  }
+
+  @override
+  String get wishlistOnlyBanner => 'Offered only to your wish list.';
+
+  @override
+  String get openToEveryone => 'Open to everyone';
+
+  @override
+  String trucksCount(int count) {
+    return '$count trucks';
+  }
+
+  @override
+  String get organizationLabel => 'Organization';
+
+  @override
+  String get noResults => 'No results';
 }

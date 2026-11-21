@@ -2529,6 +2529,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Driver cancelled'**
   String get evDriverCancelled;
+
+  /// No description provided for @myList.
+  ///
+  /// In en, this message translates to:
+  /// **'My list'**
+  String get myList;
+
+  /// No description provided for @fromMyTrips.
+  ///
+  /// In en, this message translates to:
+  /// **'From my trips'**
+  String get fromMyTrips;
+
+  /// No description provided for @findOrganization.
+  ///
+  /// In en, this message translates to:
+  /// **'Find organization'**
+  String get findOrganization;
+
+  /// No description provided for @searchOrgHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Organization name or code'**
+  String get searchOrgHint;
+
+  /// No description provided for @addToWishlist.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to wish list'**
+  String get addToWishlist;
+
+  /// No description provided for @addedToWishlist.
+  ///
+  /// In en, this message translates to:
+  /// **'Added to your wish list'**
+  String get addedToWishlist;
+
+  /// No description provided for @wishlistCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} of {max}'**
+  String wishlistCount(int count, int max);
+
+  /// No description provided for @tripsTogether.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} trips together'**
+  String tripsTogether(int count);
+
+  /// No description provided for @availableNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Available now'**
+  String get availableNow;
+
+  /// No description provided for @removeAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get removeAction;
+
+  /// No description provided for @wishlistEmptyHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add trucks from your past trips or search verified Organizations.'**
+  String get wishlistEmptyHint;
+
+  /// No description provided for @noCandidates.
+  ///
+  /// In en, this message translates to:
+  /// **'No trucks or Organizations from your trips to add.'**
+  String get noCandidates;
+
+  /// No description provided for @chooseEntries.
+  ///
+  /// In en, this message translates to:
+  /// **'Who gets it first'**
+  String get chooseEntries;
+
+  /// No description provided for @manageWishlist.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage wish list'**
+  String get manageWishlist;
+
+  /// No description provided for @wishlistFirstBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Offered to your wish list until {time}, then to everyone.'**
+  String wishlistFirstBanner(String time);
+
+  /// No description provided for @wishlistOnlyBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Offered only to your wish list.'**
+  String get wishlistOnlyBanner;
+
+  /// No description provided for @openToEveryone.
+  ///
+  /// In en, this message translates to:
+  /// **'Open to everyone'**
+  String get openToEveryone;
+
+  /// No description provided for @trucksCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} trucks'**
+  String trucksCount(int count);
+
+  /// No description provided for @organizationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Organization'**
+  String get organizationLabel;
+
+  /// No description provided for @noResults.
+  ///
+  /// In en, this message translates to:
+  /// **'No results'**
+  String get noResults;
 }
 
 class _AppLocalizationsDelegate

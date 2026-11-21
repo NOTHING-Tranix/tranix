@@ -1306,4 +1306,73 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get evDriverCancelled => 'ड्राइवर ने रद्द किया';
+
+  @override
+  String get myList => 'मेरी सूची';
+
+  @override
+  String get fromMyTrips => 'मेरी यात्राओं से';
+
+  @override
+  String get findOrganization => 'संगठन खोजें';
+
+  @override
+  String get searchOrgHint => 'संगठन का नाम या कोड';
+
+  @override
+  String get addToWishlist => 'पसंद सूची में जोड़ें';
+
+  @override
+  String get addedToWishlist => 'पसंद सूची में जोड़ा गया';
+
+  @override
+  String wishlistCount(int count, int max) {
+    return '$count / $max';
+  }
+
+  @override
+  String tripsTogether(int count) {
+    return '$count यात्राएँ साथ';
+  }
+
+  @override
+  String get availableNow => 'अभी उपलब्ध';
+
+  @override
+  String get removeAction => 'हटाएँ';
+
+  @override
+  String get wishlistEmptyHint =>
+      'अपनी पिछली यात्राओं से ट्रक जोड़ें या सत्यापित संगठन खोजें।';
+
+  @override
+  String get noCandidates => 'आपकी यात्राओं से जोड़ने के लिए कुछ नहीं।';
+
+  @override
+  String get chooseEntries => 'पहले किसे मिले';
+
+  @override
+  String get manageWishlist => 'पसंद सूची संभालें';
+
+  @override
+  String wishlistFirstBanner(String time) {
+    return '$time तक सिर्फ़ आपकी पसंद सूची को, फिर सभी को।';
+  }
+
+  @override
+  String get wishlistOnlyBanner => 'सिर्फ़ आपकी पसंद सूची को।';
+
+  @override
+  String get openToEveryone => 'सभी के लिए खोलें';
+
+  @override
+  String trucksCount(int count) {
+    return '$count ट्रक';
+  }
+
+  @override
+  String get organizationLabel => 'संगठन';
+
+  @override
+  String get noResults => 'कोई परिणाम नहीं';
 }

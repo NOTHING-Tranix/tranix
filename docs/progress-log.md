@@ -13,6 +13,14 @@ Newest first. Claude adds an entry at the end of every session and at every mile
 
 ---
 
+## 2026-11-21 — M9 Wish list (done)
+- Done: B-651…B-656, A-408…A-410, A-512.
+- Backend: `matching_wishlist_entry` (V12); `GET/POST/PUT/DELETE /wishlist` (trucks only from own finished trips, verified Orgs, limit → `WISHLIST_FULL`); `/wishlist/org-search` (name or `ORG-` code) and `/wishlist/candidates`; posting with `WISHLIST_FIRST`/`WISHLIST_ONLY` (`WISHLIST_EMPTY`); matching restricts to wish-list drivers (relaxed 100 km radius, eligibility unchanged), ranking bonus on EVERYONE loads, preferred push; server job opens WISHLIST_FIRST after 15 min and notifies once for WISHLIST_ONLY after 30 min; `POST /loads/{id}/open-to-everyone`; Org dashboard `preferredByShippersCount`. 57 integration tests green.
+- Frontend: Wish list tab (My list with notes/remove and "n of 20", From my trips, Find organization); "Offer to" with Everyone / Wish list first / Wish list only and entry chips on post-a-load (+ Manage wish list link, also for Farmer Networks); wish-list banner with Open to everyone on the load detail; "Add to wish list" on finished loads. analyze clean, 41 tests green, debug APK builds.
+- Demo (mock): Open as Load Provider → Wish list → From my trips → ♡ on TN38CD5678; Find organization → "pal" → Palani Roadways. Home → Post a load → Offer to → Wish list first → pick entries.
+- Demo (backend): deliver a trip (M7), `GET /wishlist/candidates`, `POST /wishlist {targetType: TRUCK, truckId}`, post a load with `audience: WISHLIST_ONLY` → only that driver gets the suggestion (tag "Preferred by this shipper"); `POST /loads/{id}/open-to-everyone` → others get it on the next batch.
+- New: D-30 (assumed: Org code format, bonus 10, window behaviour). Contract: org-search gains `orgCode`; candidates shape defined.
+
 ## 2026-11-21 — M8 Payments, ratings, Trust Score (done)
 - Done: B-801…B-808, A-407, A-510, A-601…A-603.
 - Backend: payment record at acceptance; mark paid (payer) → driver confirm/dispute; admin dispute decision; Trust Score ledger (events with unique (user, load, event), clamp 0–100, Org score from its drivers); ratings with Later once + reminder job; driver history with month summary. 52 integration tests green.

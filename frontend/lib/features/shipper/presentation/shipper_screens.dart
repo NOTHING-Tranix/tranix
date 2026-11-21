@@ -24,6 +24,7 @@ import '../../notifications/notifications_feature.dart';
 import '../../profile/presentation/profile_screens.dart';
 import '../../shared_shell/tab_screens.dart' show ProfileAvatarButton;
 import '../../payments/payments_feature.dart';
+import '../wishlist_feature.dart';
 import '../application/post_load_draft.dart';
 import '../data/loads_api.dart';
 
@@ -395,12 +396,42 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
               ),
             ],
             section(l.offerTo),
-            // Wish-list options appear once the shipper has a wish list (M9, LP-07).
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.radio_button_checked),
-              title: Text(l.offerEveryone),
-            ),
+            // A-409: wish-list options once the shipper has a wish list (LP-07).
+            Builder(builder: (context) {
+              final list = ref.watch(wishlistProvider).value ?? const <WishlistEntry>[];
+              final options = [
+                (LoadAudience.everyone, l.offerEveryone),
+                if (list.isNotEmpty) (LoadAudience.wishlistFirst, l.offerWishlistFirst),
+                if (list.isNotEmpty) (LoadAudience.wishlistOnly, l.offerWishlistOnly),
+              ];
+              final chosen = x.wishlistEntryIds?.toSet() ?? list.map((e) => e.id).toSet();
+              return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                for (final (a, label) in options)
+                  ListTile(
+                    key: Key('offer-${a.name}'),
+                    contentPadding: EdgeInsets.zero,
+                    leading: Icon(x.audience == a ? Icons.radio_button_checked : Icons.radio_button_unchecked),
+                    title: Text(label),
+                    onTap: () => _set((y) => y.copyWith(audience: a)),
+                  ),
+                if (x.audience != LoadAudience.everyone && list.isNotEmpty) ...[
+                  Text(l.chooseEntries, style: Theme.of(context).textTheme.labelLarge),
+                  Wrap(spacing: 6, runSpacing: 6, children: [
+                    for (final e in list)
+                      FilterChip(
+                        label: Text(entryTitle(e)),
+                        selected: chosen.contains(e.id),
+                        onSelected: (on) {
+                          final next = {...chosen};
+                          on ? next.add(e.id) : next.remove(e.id);
+                          _set((y) => next.length == list.length ? y.copyWith(clearEntries: true) : y.copyWith(wishlistEntryIds: next.toList()));
+                        },
+                      ),
+                  ]),
+                ],
+                TextButton.icon(onPressed: () => context.push(Routes.wishlist), icon: const Icon(Icons.favorite_border), label: Text(l.manageWishlist)),
+              ]);
+            }),
             if (_sectionError != null)
               Padding(
                 padding: const EdgeInsets.only(top: 8),
@@ -528,6 +559,8 @@ class LoadDetailScreen extends ConsumerWidget {
               for (final r in d.revisions.where((r) => r.status == RevisionStatus.pending)) AmountRequestCard(load: d, revision: r),
               if (d.status == LoadStatus.locationReached) OtpCodeCard(loadId: d.id, title: l.pickupOtpTitle, hint: l.shareAfterLoading),
               if (d.driver != null && d.status != LoadStatus.delivered && d.status != LoadStatus.cancelled) TrackingCard(loadId: d.id),
+              if (d.status == LoadStatus.notAccepted && d.audience != LoadAudience.everyone && d.audience != LoadAudience.unknown)
+                WishlistBanner(load: d, onChanged: () => ref.invalidate(loadDetailProvider(d.id))),
               if (d.payment != null) PaymentCard(load: d),
               ListTile(contentPadding: EdgeInsets.zero, leading: const Icon(Icons.trip_origin), title: Text(d.pickup.address),
                   subtitle: Text('${l.sender}: ${d.senderName} · +91 ${d.senderMobile}')),
@@ -575,6 +608,12 @@ class LoadDetailScreen extends ConsumerWidget {
                   },
                   icon: const Icon(Icons.replay),
                   label: Text(l.postAgain),
+                ),
+              if ((d.status == LoadStatus.cancelled || d.status == LoadStatus.delivered) && d.driver != null)
+                OutlinedButton.icon(
+                  onPressed: () => addTripTruckToWishlist(context, ref, d.driver!.truckNumber),
+                  icon: const Icon(Icons.favorite_border),
+                  label: Text(l.addToWishlist),
                 ),
             ],
           ),

@@ -66,9 +66,9 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 - [x] **A-405** Amount request card confirm/reject; pickup OTP card. (2026-11-21)
 - [x] **A-406** Edit (not accepted), cancel with rule preview, repost. (2026-11-21, built in M4)
 - [x] **A-407** History (LP-05) and payment mark-paid (LP-06). (2026-11-21)
-- [ ] **A-408** Wish list screen with "From my trips" and "Find organization" tabs, notes, remove, limit (LP-07) — needs B-651, B-652.
-- [ ] **A-409** "Offer to" section in post-a-load with entry selection; `WISHLIST_EMPTY` handling — needs B-653.
-- [ ] **A-410** Wish-list status banner and **Open to everyone** on load detail; "Add to wish list" from history — needs B-654.
+- [x] **A-408** Wish list screen with "From my trips" and "Find organization" tabs, notes, remove, limit (LP-07) — needs B-651, B-652. (2026-11-21)
+- [x] **A-409** "Offer to" section in post-a-load with entry selection; `WISHLIST_EMPTY` handling — needs B-653. (2026-11-21)
+- [x] **A-410** Wish-list status banner and **Open to everyone** on load detail; "Add to wish list" from history — needs B-654. (2026-11-21)
 
 ## Phase 5 — Driver (needs B-501…B-505, B-601…B-711, B-802)
 - [x] **A-501** Driver home with duty switch, invitation banner (DR-01). (2026-11-21)
@@ -82,7 +82,7 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 - [x] **A-509** Amount revision request (x of 5, pending state) and cancel before pickup. (2026-11-21)
 - [x] **A-510** History with earnings summary; payment confirm/dispute (DR-06). (2026-11-21)
 - [x] **A-511** Widget tests: accept race, OTP sheet, step button per status. (2026-11-21)
-- [ ] **A-512** "Preferred by this shipper" tag on suggestions and preferred-load push routing — needs B-655.
+- [x] **A-512** "Preferred by this shipper" tag on suggestions and preferred-load push routing — needs B-655. (2026-11-21)
 
 ## Phase 6 — Ratings and Trust Score (needs B-803…B-805)
 - [x] **A-601** Rating pop-up on app open with Later once (S-11). (2026-11-21)

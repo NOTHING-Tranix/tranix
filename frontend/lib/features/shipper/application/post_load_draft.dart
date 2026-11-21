@@ -25,6 +25,7 @@ class LoadDraft {
     this.payer = FreightPayer.shipper,
     this.amount = '',
     this.audience = LoadAudience.everyone,
+    this.wishlistEntryIds,
     this.postedForFarmerId,
     this.estimate,
   });
@@ -48,6 +49,9 @@ class LoadDraft {
   final FreightPayer payer;
   final String amount;
   final LoadAudience audience;
+
+  /// Chosen subset of the wish list (null = whole list).
+  final List<String>? wishlistEntryIds;
   final String? postedForFarmerId;
   final LoadEstimate? estimate;
 
@@ -74,6 +78,8 @@ class LoadDraft {
     FreightPayer? payer,
     String? amount,
     LoadAudience? audience,
+    List<String>? wishlistEntryIds,
+    bool clearEntries = false,
     LoadEstimate? estimate,
     bool clearEstimate = false,
   }) {
@@ -97,6 +103,7 @@ class LoadDraft {
       payer: payer ?? this.payer,
       amount: amount ?? this.amount,
       audience: audience ?? this.audience,
+      wishlistEntryIds: clearEntries ? null : (wishlistEntryIds ?? this.wishlistEntryIds),
       postedForFarmerId: postedForFarmerId,
       estimate: clearEstimate ? null : (estimate ?? this.estimate),
     );
@@ -122,6 +129,7 @@ class LoadDraft {
         amountInr: int.parse(amount),
         postedForFarmerId: postedForFarmerId,
         audience: audience,
+        wishlistEntryIds: audience == LoadAudience.everyone ? null : wishlistEntryIds,
       );
 
   static LoadDraft fromDetail(LoadDetail d) {

@@ -93,6 +93,13 @@ class MockInterceptor extends Interceptor {
     MockRoute('POST', RegExp(r'^/ratings/[^/]+/later$'), status: 204),
     MockRoute('GET', RegExp(r'^/trust-score$'), fixture: 'trust_score.json'),
     MockRoute('GET', RegExp(r'^/trust-score/events$'), fixture: 'trust_events.json'),
+    MockRoute('GET', RegExp(r'^/wishlist$'), fixture: 'wishlist.json'),
+    MockRoute('POST', RegExp(r'^/wishlist$'), fixture: 'wishlist_entry.json'),
+    MockRoute('PUT', RegExp(r'^/wishlist/[^/]+$'), fixture: 'wishlist_entry.json'),
+    MockRoute('DELETE', RegExp(r'^/wishlist/[^/]+$'), status: 204),
+    MockRoute('GET', RegExp(r'^/wishlist/org-search$'), fixture: 'org_search.json'),
+    MockRoute('GET', RegExp(r'^/wishlist/candidates$'), fixture: 'wishlist_candidates.json'),
+    MockRoute('POST', RegExp(r'^/loads/[^/]+/open-to-everyone$'), fixture: 'load_detail.json'),
   ];
 
   @override

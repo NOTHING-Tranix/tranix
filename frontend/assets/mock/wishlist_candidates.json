@@ -1,0 +1,5 @@
+[
+  { "targetType": "TRUCK", "truckId": "t1000000-0000-4000-8000-000000000009", "truckNumber": "TN38CD5678", "vehicleType": "CLOSED_BODY",
+    "driverName": "Selvam R", "orgId": "o1000000-0000-4000-8000-000000000001", "orgName": "Kaveri Logistics", "tripsTogether": 1,
+    "lastTripAt": "2026-11-12T08:00:00Z" }
+]
