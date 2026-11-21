@@ -206,9 +206,9 @@ LoadDetail = LoadSummary + { pickup, drop, senderName, senderMobile, receiverNam
 
 | Method & path | Notes |
 | --- | --- |
-| `GET /ratings/pending` | `[{loadId, rateeName, rateeRole}]` — app shows pop-up on open |
+| `GET /ratings/pending` | `[{loadId, loadCode, rateeUserId, rateeName, rateeRole, laterUsed}]` — app shows pop-up on open |
 | `POST /ratings` | `{loadId, rateeUserId, stars 1–5, tags[], comment?}` |
-| `POST /ratings/{loadId}/later` | One "Later" per pending rating |
+| `POST /ratings/{loadId}/later` | One "Later" per pending rating (second → `INVALID_STATE`) |
 | `GET /trust-score` | `{score, updatedAt, trend[]}` |
 | `GET /trust-score/events?page=` | `[{at, loadId?, event, points, reason}]` |
 | `GET /notifications?tab=&page=` · `POST /notifications/{id}/read` · `POST /notifications/read-all` · `GET /notifications/summary` | Item `{id, tab, type, title, body, route?, read, createdAt}` (paged). Summary `{unreadByTab, latestTranixMessage?, latestTripUpdate?}` (items or null). Push data: `{notificationId, tab, route?}` |
@@ -220,5 +220,5 @@ LoadDetail = LoadSummary + { pickup, drop, senderName, senderMobile, receiverNam
 
 ## 13. Admin (`/api/v1/admin/**`, role ADMIN)
 
-`/admin/dashboard` · `/admin/loads?status=&q=&page=` (10 per page) · `/admin/loads/{id}` (+ `/cancel`, `/otp-override`) · `/admin/fleet?q=&page=` · `/admin/verifications?tab=DRIVER|VEHICLE|FARMER_NETWORK|ORGANIZATION|IDENTITY` · `/admin/documents/{id}/approve|reject` · `/admin/users` (+ `/suspend`, `/reactivate`) · `/admin/wallet/{userId}/credit|refund` · `/admin/cancellations` (+ `/decide`) · `/admin/payment-disputes` (+ `/decide`) · `/admin/location-exceptions` (+ `/review`) · `/admin/tickets` (+ `/reply`, `/ignore`) · `/admin/trust-score/{userId}/adjust` · `/admin/broadcasts` · `/admin/settings` · `/admin/audit`.
+`/admin/payment-disputes/{loadId}/decide {decision: AGAINST_PAYER|AGAINST_DRIVER|NO_FAULT}` · `/admin/trust-score/{userId}/adjust {points, reason}` · `/admin/dashboard` · `/admin/loads?status=&q=&page=` (10 per page) · `/admin/loads/{id}` (+ `/cancel`, `/otp-override`) · `/admin/fleet?q=&page=` · `/admin/verifications?tab=DRIVER|VEHICLE|FARMER_NETWORK|ORGANIZATION|IDENTITY` · `/admin/documents/{id}/approve|reject` · `/admin/users` (+ `/suspend`, `/reactivate`) · `/admin/wallet/{userId}/credit|refund` · `/admin/cancellations` (+ `/decide`) · `/admin/payment-disputes` (+ `/decide`) · `/admin/location-exceptions` (+ `/review`) · `/admin/tickets` (+ `/reply`, `/ignore`) · `/admin/trust-score/{userId}/adjust` · `/admin/broadcasts` · `/admin/settings` · `/admin/audit`.
 Until the Flutter web admin exists, these are used through Swagger UI with an admin token.

@@ -53,6 +53,9 @@ public interface LoadDirectory {
     List<Map<String, Object>> forOrg(UUID orgId, UUID driverId, UUID truckId, Instant from, Instant to, LoadStatus status,
                                      int limit);
 
+    /** Driver's finished trips (delivered or cancelled) picked up in [from, to), newest first, as LoadSummary maps. */
+    List<Map<String, Object>> historyForDriver(UUID driverId, Instant from, Instant to, int limit);
+
     /** Delivered/cancelled counts and money for a driver (performance). */
     DriverStats driverStats(UUID driverId);
 

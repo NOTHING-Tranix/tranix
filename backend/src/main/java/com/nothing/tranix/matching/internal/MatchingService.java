@@ -185,7 +185,7 @@ public class MatchingService {
 
     // ------------------------------------------------------------------ batches (B-603)
 
-    @Transactional
+    @Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)
     public void start(UUID loadId) {
         Instant now = Instant.now(clock);
         jdbc.update("insert into matching_load_state (load_id, radius_km, batches, next_batch_at) values (?, ?, 0, ?) on conflict do nothing",
@@ -247,7 +247,7 @@ public class MatchingService {
                 Timestamp.from(now.plus(Duration.ofMinutes(settings.getInt(SettingKeys.MATCHING_BATCH_INTERVAL_MINUTES)))), notify, loadId);
     }
 
-    @Transactional
+    @Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)
     public void stop(UUID loadId, String suggestionStatus) {
         jdbc.update("update matching_load_state set done = true where load_id = ?", loadId);
         jdbc.update("update matching_suggestion set status = ?, responded_at = ? where load_id = ? and status = 'SHOWN'",
@@ -255,7 +255,7 @@ public class MatchingService {
     }
 
     /** Load details changed: suggestions stay, batches continue with the new details. */
-    @Transactional
+    @Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)
     public void restart(UUID loadId) {
         jdbc.update("update matching_load_state set next_batch_at = ?, done = false where load_id = ?", Timestamp.from(Instant.now(clock)), loadId);
     }

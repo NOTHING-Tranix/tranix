@@ -503,6 +503,17 @@ public class LoadService implements LoadDirectory {
 
     @Override
     @Transactional(readOnly = true)
+    public List<Map<String, Object>> historyForDriver(UUID driverId, Instant from, Instant to, int limit) {
+        List<UUID> ids = jdbc.queryForList("""
+                select id from loads_load where driver_id = ? and (status = 'DELIVERED' or status = 'CANCELLED')
+                and pickup_window_start >= ? and pickup_window_start < ? order by pickup_window_start desc limit ?""",
+                UUID.class, driverId, Timestamp.from(from), Timestamp.from(to), limit);
+        return loads.findAllById(ids).stream().sorted((a, b) -> ids.indexOf(a.getId()) - ids.indexOf(b.getId()))
+                .map(l -> new LinkedHashMap<>(summary(info(l)))).map(m -> (Map<String, Object>) m).toList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public DriverStats driverStats(UUID driverId) {
         return jdbc.queryForObject("""
                 select count(*) filter (where status = 'DELIVERED') delivered,

@@ -14,7 +14,7 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 | 6 Matching and acceptance | 7 | 7 |
 | 6A Wish list | 6 | 0 |
 | 7 Trip execution | 11 | 11 |
-| 8 Payments, ratings, Trust Score | 8 | 0 |
+| 8 Payments, ratings, Trust Score | 8 | 8 |
 | 9 Farmer Network | 4 | 0 |
 | 10 Receiver and public pages | 6 | 0 |
 | 11 Notifications and support | 7 | 2 |
@@ -121,14 +121,14 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 - [x] **B-711** Tests: full trip happy path; OTP failures; revision limits. (2026-11-21)
 
 ## Phase 8 — Payments, ratings, Trust Score
-- [ ] **B-801** Payment record created at acceptance (payer from load); mark paid (shipper or receiver).
-- [ ] **B-802** Driver confirm / dispute (dispute opens a ticket); trip `closed_at`.
-- [ ] **B-803** Pending ratings created at DELIVERED; `GET /ratings/pending`, `POST /ratings`, `/later`.
-- [ ] **B-804** Trust events ledger + listeners for all events in the points table; clamp 0–100.
-- [ ] **B-805** `GET /trust-score`, `/trust-score/events`.
-- [ ] **B-806** Org score from drivers' performance and own cancellations.
-- [ ] **B-807** Driver history summary (earnings: agreed, confirmed, pending).
-- [ ] **B-808** Tests for score calculations.
+- [x] **B-801** Payment record created at acceptance (payer from load); mark paid (shipper or receiver). (2026-11-21)
+- [x] **B-802** Driver confirm / dispute (dispute opens a ticket); trip `closed_at`. (2026-11-21)
+- [x] **B-803** Pending ratings created at DELIVERED; `GET /ratings/pending`, `POST /ratings`, `/later`. (2026-11-21)
+- [x] **B-804** Trust events ledger + listeners for all events in the points table; clamp 0–100. (2026-11-21)
+- [x] **B-805** `GET /trust-score`, `/trust-score/events`. (2026-11-21)
+- [x] **B-806** Org score from drivers' performance and own cancellations. (2026-11-21)
+- [x] **B-807** Driver history summary (earnings: agreed, confirmed, pending). (2026-11-21)
+- [x] **B-808** Tests for score calculations. (2026-11-21)
 
 ## Phase 9 — Farmer Network
 - [ ] **B-901** `farmers_farmer` CRUD with consent and Aadhaar last 4 only.

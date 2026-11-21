@@ -13,7 +13,7 @@ Status: `[ ]` not started · `[~]` in progress · `[x]` done. Claude updates thi
 | M5 | Driver and fleet setup (backend) + driver profile | B-501 – B-509 | A-501, A-502 | Driver adds own truck, goes on duty; org invite accepted | [x] |
 | M6 | Matching and acceptance | B-601 – B-607 | A-503, A-404 | Driver sees suggestion, accepts; shipper sees driver details | [x] |
 | M7 | Trip execution | B-701 – B-711 | A-504 – A-511, A-405, A-406 | Full trip: amount request, Reached, pickup OTP, live map, delivery OTP | [x] |
-| M8 | Payments, ratings, Trust Score | B-801 – B-808 | A-407, A-601 – A-603 | Mark paid → confirm; rating pop-up; Trust Score history | [ ] |
+| M8 | Payments, ratings, Trust Score | B-801 – B-808 | A-407, A-601 – A-603 | Mark paid → confirm; rating pop-up; Trust Score history | [~] |
 | M9 | Wish list | B-651 – B-656 | A-408 – A-410, A-512 | Add truck/org to wish list; post "Wish list first"; preferred driver accepts | [ ] |
 | M10 | Farmer Network | B-901 – B-904 | A-701 – A-704 | FN registers, adds farmer, posts for farmer; farmer gets SMS (fake) | [ ] |
 | M11 | Organization app | (B-502 – B-508 done in M5) | A-801 – A-805 | Org adds trucks/drivers, allocates, watches trips | [ ] |

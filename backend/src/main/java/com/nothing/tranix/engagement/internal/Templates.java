@@ -135,6 +135,19 @@ final class Templates {
                 "பயணம் ரத்து", "{code}: அனுப்புநர் இந்தப் பயணத்தை ரத்து செய்தார்.", "यात्रा रद्द", "{code}: शिपर ने यह यात्रा रद्द की।");
     }
 
+    static {
+        add("PAYMENT_MARKED", true, false, "Payment marked paid", "{code}: ₹{amount} by {mode}. Confirm when you receive it.",
+                "கட்டணம் செலுத்தப்பட்டது", "{code}: ₹{amount} ({mode}). பெற்றதும் உறுதிசெய்யவும்.",
+                "भुगतान दर्ज", "{code}: ₹{amount} ({mode})। मिलने पर पुष्टि करें।");
+        add("PAYMENT_CONFIRMED", true, false, "Payment confirmed", "{code}: the driver confirmed the payment.",
+                "கட்டணம் உறுதி", "{code}: ஓட்டுநர் கட்டணத்தை உறுதிசெய்தார்.", "भुगतान की पुष्टि", "{code}: ड्राइवर ने भुगतान की पुष्टि की।");
+        add("PAYMENT_DISPUTED", true, false, "Payment disputed", "{code}: the driver raised a payment dispute. Tranix support will contact you.",
+                "கட்டண சர்ச்சை", "{code}: ஓட்டுநர் கட்டண சர்ச்சை எழுப்பினார். உதவி மையம் தொடர்பு கொள்ளும்.",
+                "भुगतान विवाद", "{code}: ड्राइवर ने भुगतान विवाद उठाया। सहायता टीम संपर्क करेगी।");
+        add("RATING_REMINDER", true, false, "Rate your trip", "{code}: please rate your trip partner.",
+                "பயணத்தை மதிப்பிடவும்", "{code}: உங்கள் பயணக் கூட்டாளியை மதிப்பிடவும்.", "यात्रा रेट करें", "{code}: अपने यात्रा साथी को रेट करें।");
+    }
+
     private Templates() {
     }
 
