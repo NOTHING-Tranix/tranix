@@ -1372,4 +1372,56 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noResults => 'No results';
+
+  @override
+  String get idNumberInvalid => 'Does not match the chosen ID type';
+
+  @override
+  String get addFarmer => 'Add farmer';
+
+  @override
+  String get editFarmer => 'Edit farmer';
+
+  @override
+  String get aadhaarLast4Optional => 'Aadhaar last 4 digits (optional)';
+
+  @override
+  String get aadhaarLast4Invalid => 'Enter only the last 4 digits';
+
+  @override
+  String get landAcresOptional => 'Land holding in acres (optional)';
+
+  @override
+  String get farmerConsent =>
+      'The farmer agreed to share these details with Tranix';
+
+  @override
+  String get deactivate => 'Deactivate';
+
+  @override
+  String get inactive => 'Inactive';
+
+  @override
+  String get noFarmers => 'No farmers yet. Add your first farmer.';
+
+  @override
+  String get searchFarmers => 'Search by name, mobile or village';
+
+  @override
+  String get postForFarmer => 'Post for a farmer';
+
+  @override
+  String get chooseFarmer => 'Choose a farmer';
+
+  @override
+  String postedFor(String name) {
+    return 'Posted for $name';
+  }
+
+  @override
+  String get allFarmers => 'All farmers';
+
+  @override
+  String get senderLockedFarmer =>
+      'The farmer is the sender and gets the pickup OTP.';
 }

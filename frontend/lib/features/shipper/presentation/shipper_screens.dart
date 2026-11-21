@@ -25,6 +25,7 @@ import '../../profile/presentation/profile_screens.dart';
 import '../../shared_shell/tab_screens.dart' show ProfileAvatarButton;
 import '../../payments/payments_feature.dart';
 import '../wishlist_feature.dart';
+import '../../farmers/farmers_feature.dart';
 import '../application/post_load_draft.dart';
 import '../data/loads_api.dart';
 
@@ -80,6 +81,15 @@ class ShipperHomeScreen extends ConsumerWidget {
                 context.push(Routes.postLoad);
               },
             ),
+            if (me?.role == Role.farmerNetwork) ...[
+              const SizedBox(height: 8),
+              OutlinedButton.icon(
+                key: const Key('post-for-farmer'),
+                onPressed: () => pickFarmerAndPost(context, ref),
+                icon: const Icon(Icons.agriculture_outlined),
+                label: Text(l.postForFarmer),
+              ),
+            ],
             const SizedBox(height: 16),
             const HomeNotificationCards(),
             Text(l.ongoingLoads, style: Theme.of(context).textTheme.titleMedium),
@@ -98,28 +108,57 @@ class ShipperHomeScreen extends ConsumerWidget {
   }
 }
 
-/// LP-03 Tracking / LP-05 History list.
-class LoadListScreen extends ConsumerWidget {
+/// LP-03 Tracking / LP-05 History list (Farmer Networks can filter by farmer, FN-03).
+class LoadListScreen extends ConsumerStatefulWidget {
   const LoadListScreen({super.key, required this.ongoing, required this.title});
 
   final bool ongoing;
   final String title;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<LoadListScreen> createState() => _LoadListScreenState();
+}
+
+class _LoadListScreenState extends ConsumerState<LoadListScreen> {
+  String? _farmerId;
+
+  @override
+  Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
+    final session = ref.watch(sessionProvider);
+    final isNetwork = session is SignedIn && session.me.role == Role.farmerNetwork;
+    final provider = _farmerId == null ? loadListProvider(widget.ongoing) : farmerLoadListProvider((widget.ongoing, _farmerId!));
     return Scaffold(
-      appBar: AppBar(title: Text(title), actions: const [NotificationBell(), ProfileAvatarButton()]),
-      body: RefreshIndicator(
-        onRefresh: () async => ref.invalidate(loadListProvider(ongoing)),
-        child: AsyncView(
-          value: ref.watch(loadListProvider(ongoing)),
-          onRetry: () => ref.invalidate(loadListProvider(ongoing)),
-          data: (page) => page.items.isEmpty
-              ? EmptyState(message: l.noLoads)
-              : ListView(padding: const EdgeInsets.all(16), children: [for (final load in page.items) LoadCard(load: load)]),
+      appBar: AppBar(title: Text(widget.title), actions: const [NotificationBell(), ProfileAvatarButton()]),
+      body: Column(children: [
+        if (isNetwork)
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+            child: DropdownButtonFormField<String?>(
+              key: const Key('farmer-filter'),
+              initialValue: _farmerId,
+              decoration: InputDecoration(labelText: l.navFarmers),
+              items: [
+                DropdownMenuItem(value: null, child: Text(l.allFarmers)),
+                for (final f in ref.watch(farmersProvider('')).value?.items ?? const <Farmer>[])
+                  DropdownMenuItem(value: f.id, child: Text(f.name)),
+              ],
+              onChanged: (v) => setState(() => _farmerId = v),
+            ),
+          ),
+        Expanded(
+          child: RefreshIndicator(
+            onRefresh: () async => ref.invalidate(provider),
+            child: AsyncView(
+              value: ref.watch(provider),
+              onRetry: () => ref.invalidate(provider),
+              data: (page) => page.items.isEmpty
+                  ? EmptyState(message: l.noLoads)
+                  : ListView(padding: const EdgeInsets.all(16), children: [for (final load in page.items) LoadCard(load: load)]),
+            ),
+          ),
         ),
-      ),
+      ]),
     );
   }
 }
@@ -146,7 +185,7 @@ class LoadCard extends StatelessWidget {
               Text('${load.goodsType}${load.description == null ? '' : ' · ${load.description}'}', style: t.bodyLarge),
               Text('${load.quantity} ${unitLabel(l, load.quantityUnit)}'),
               Text('${load.pickupArea} → ${load.dropArea}'),
-              if (load.postedForFarmerName != null) Text(load.postedForFarmerName!),
+              if (load.postedForFarmerName != null) Text(l.postedFor(load.postedForFarmerName!)),
               const SizedBox(height: 8),
               Row(children: [Expanded(child: Text(Fmt.dateTime(load.pickupWindowStart))), MoneyText(load.agreedAmountInr)]),
             ],
@@ -255,12 +294,13 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
           child: Text(title, style: Theme.of(context).textTheme.titleMedium),
         );
     Widget text(String key, String label, String value, void Function(String) onChanged,
-            {String? Function(String?)? validator, TextInputType? type, int? maxLength}) =>
+            {String? Function(String?)? validator, TextInputType? type, int? maxLength, bool enabled = true}) =>
         Padding(
           padding: const EdgeInsets.only(bottom: 12),
           child: TextFormField(
             key: Key('pl-$key'),
             initialValue: value,
+            enabled: enabled,
             keyboardType: type,
             maxLength: maxLength,
             inputFormatters: type == TextInputType.phone ? [FilteringTextInputFormatter.digitsOnly] : null,
@@ -314,9 +354,12 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
             const SizedBox(height: 8),
             placeTile(true),
             const SizedBox(height: 8),
-            text('senderName', l.senderName, x.senderName, (v) => _set((y) => y.copyWith(senderName: v)), validator: req),
+            if (x.postedForFarmerId != null)
+              Padding(padding: const EdgeInsets.only(bottom: 8), child: Text(l.senderLockedFarmer)),
+            text('senderName', l.senderName, x.senderName, (v) => _set((y) => y.copyWith(senderName: v)),
+                validator: req, enabled: x.postedForFarmerId == null),
             text('senderMobile', l.senderMobile, x.senderMobile, (v) => _set((y) => y.copyWith(senderMobile: v)),
-                validator: mobile, type: TextInputType.phone, maxLength: 10),
+                validator: mobile, type: TextInputType.phone, maxLength: 10, enabled: x.postedForFarmerId == null),
             section(l.goodsSection),
             DropdownButtonFormField<String>(
               key: const Key('pl-goods'),
@@ -502,6 +545,7 @@ class _ReviewLoadScreenState extends ConsumerState<ReviewLoadScreen> {
         padding: const EdgeInsets.all(16),
         children: [
           row(l.pickupSection, '${x.pickup!.address}\n${Fmt.dateTime(x.windowStart!)} – ${Fmt.dateTime(x.windowEnd!)}'),
+          if (x.postedForFarmerId != null) row(l.navFarmers, l.postedFor(x.senderName)),
           row(l.sender, '${x.senderName} · +91 ${x.senderMobile}'),
           row(l.goodsSection, '${x.goodsType} · ${x.quantity} ${unitLabel(l, x.unit)} · ${x.weight} t · ${vehicleLabel(l, x.vehicleType)}'),
           row(l.dropSection, x.drop!.address),

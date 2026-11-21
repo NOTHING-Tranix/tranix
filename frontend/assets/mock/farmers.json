@@ -1,0 +1,9 @@
+{
+  "items": [
+    { "id": "f1000000-0000-4000-8000-000000000001", "name": "Raman K", "mobile": "9811100001", "aadhaarLast4": "1234", "landAcres": 2.5,
+      "village": "Kallupatti", "active": true, "createdAt": "2026-11-10T08:00:00Z" },
+    { "id": "f1000000-0000-4000-8000-000000000002", "name": "Selvi M", "mobile": "9811100002", "aadhaarLast4": null, "landAcres": null,
+      "village": "Ayakudi", "active": true, "createdAt": "2026-11-12T08:00:00Z" }
+  ],
+  "page": 0, "size": 100, "total": 2
+}

@@ -2649,6 +2649,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No results'**
   String get noResults;
+
+  /// No description provided for @idNumberInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Does not match the chosen ID type'**
+  String get idNumberInvalid;
+
+  /// No description provided for @addFarmer.
+  ///
+  /// In en, this message translates to:
+  /// **'Add farmer'**
+  String get addFarmer;
+
+  /// No description provided for @editFarmer.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit farmer'**
+  String get editFarmer;
+
+  /// No description provided for @aadhaarLast4Optional.
+  ///
+  /// In en, this message translates to:
+  /// **'Aadhaar last 4 digits (optional)'**
+  String get aadhaarLast4Optional;
+
+  /// No description provided for @aadhaarLast4Invalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter only the last 4 digits'**
+  String get aadhaarLast4Invalid;
+
+  /// No description provided for @landAcresOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Land holding in acres (optional)'**
+  String get landAcresOptional;
+
+  /// No description provided for @farmerConsent.
+  ///
+  /// In en, this message translates to:
+  /// **'The farmer agreed to share these details with Tranix'**
+  String get farmerConsent;
+
+  /// No description provided for @deactivate.
+  ///
+  /// In en, this message translates to:
+  /// **'Deactivate'**
+  String get deactivate;
+
+  /// No description provided for @inactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get inactive;
+
+  /// No description provided for @noFarmers.
+  ///
+  /// In en, this message translates to:
+  /// **'No farmers yet. Add your first farmer.'**
+  String get noFarmers;
+
+  /// No description provided for @searchFarmers.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by name, mobile or village'**
+  String get searchFarmers;
+
+  /// No description provided for @postForFarmer.
+  ///
+  /// In en, this message translates to:
+  /// **'Post for a farmer'**
+  String get postForFarmer;
+
+  /// No description provided for @chooseFarmer.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a farmer'**
+  String get chooseFarmer;
+
+  /// No description provided for @postedFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Posted for {name}'**
+  String postedFor(String name);
+
+  /// No description provided for @allFarmers.
+  ///
+  /// In en, this message translates to:
+  /// **'All farmers'**
+  String get allFarmers;
+
+  /// No description provided for @senderLockedFarmer.
+  ///
+  /// In en, this message translates to:
+  /// **'The farmer is the sender and gets the pickup OTP.'**
+  String get senderLockedFarmer;
 }
 
 class _AppLocalizationsDelegate

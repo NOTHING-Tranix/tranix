@@ -1385,4 +1385,57 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get noResults => 'முடிவுகள் இல்லை';
+
+  @override
+  String get idNumberInvalid => 'தேர்ந்த அடையாள வகைக்கு பொருந்தவில்லை';
+
+  @override
+  String get addFarmer => 'விவசாயியைச் சேர்';
+
+  @override
+  String get editFarmer => 'விவசாயியைத் திருத்து';
+
+  @override
+  String get aadhaarLast4Optional => 'ஆதார் கடைசி 4 இலக்கங்கள் (விருப்பம்)';
+
+  @override
+  String get aadhaarLast4Invalid => 'கடைசி 4 இலக்கங்களை மட்டும் உள்ளிடவும்';
+
+  @override
+  String get landAcresOptional => 'நிலம் (ஏக்கர், விருப்பம்)';
+
+  @override
+  String get farmerConsent =>
+      'இந்த விவரங்களை டிரானிக்ஸுடன் பகிர விவசாயி ஒப்புக்கொண்டார்';
+
+  @override
+  String get deactivate => 'செயலிழக்கச் செய்';
+
+  @override
+  String get inactive => 'செயலில் இல்லை';
+
+  @override
+  String get noFarmers =>
+      'இன்னும் விவசாயிகள் இல்லை. முதல் விவசாயியைச் சேர்க்கவும்.';
+
+  @override
+  String get searchFarmers => 'பெயர், மொபைல் அல்லது ஊர் மூலம் தேடு';
+
+  @override
+  String get postForFarmer => 'விவசாயிக்காகப் பதிவு செய்';
+
+  @override
+  String get chooseFarmer => 'விவசாயியைத் தேர்வு செய்';
+
+  @override
+  String postedFor(String name) {
+    return '$name-க்காக';
+  }
+
+  @override
+  String get allFarmers => 'அனைத்து விவசாயிகள்';
+
+  @override
+  String get senderLockedFarmer =>
+      'விவசாயியே அனுப்புநர்; ஏற்றும் OTP அவருக்குச் செல்லும்.';
 }

@@ -468,5 +468,22 @@
   "trucksCount": "{count} trucks",
   "@trucksCount": {"placeholders": {"count": {"type": "int"}}},
   "organizationLabel": "Organization",
-  "noResults": "No results"
+  "noResults": "No results",
+  "idNumberInvalid": "Does not match the chosen ID type",
+  "addFarmer": "Add farmer",
+  "editFarmer": "Edit farmer",
+  "aadhaarLast4Optional": "Aadhaar last 4 digits (optional)",
+  "aadhaarLast4Invalid": "Enter only the last 4 digits",
+  "landAcresOptional": "Land holding in acres (optional)",
+  "farmerConsent": "The farmer agreed to share these details with Tranix",
+  "deactivate": "Deactivate",
+  "inactive": "Inactive",
+  "noFarmers": "No farmers yet. Add your first farmer.",
+  "searchFarmers": "Search by name, mobile or village",
+  "postForFarmer": "Post for a farmer",
+  "chooseFarmer": "Choose a farmer",
+  "postedFor": "Posted for {name}",
+  "@postedFor": {"placeholders": {"name": {"type": "String"}}},
+  "allFarmers": "All farmers",
+  "senderLockedFarmer": "The farmer is the sender and gets the pickup OTP."
 }

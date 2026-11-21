@@ -13,6 +13,14 @@ Newest first. Claude adds an entry at the end of every session and at every mile
 
 ---
 
+## 2026-11-21 — M10 Farmer Network (done)
+- Done: B-901…B-904, A-701…A-704.
+- Backend: `farmers_farmer` (V13) with consent time and Aadhaar last 4 only; `GET/POST/PUT /farmers`, `/deactivate` (verified FN for add/edit, duplicate mobile per network rejected); posting with `postedForFarmerId` locks the farmer as sender (pickup OTP to the farmer), FN wallet pays, `postedForFarmerName` on summaries, farmer gets `SENDER_TRACKING` SMS at acceptance; `GET /loads?farmerId=`. 59 integration tests green.
+- Frontend: FN registration checks the ID number against CIN/PAN/GSTIN; Farmers tab (search, add with consent, edit, deactivate, post for this farmer); "Post for a farmer" on the FN home with a farmer picker; locked sender in the post form + "Posted for" on cards/review; farmer filter on tracking/history. analyze clean, 44 tests green, debug APK builds.
+- Demo (mock): Open as Farmer Network → Farmers → Add farmer (tick consent) → Save; Home → Post for a farmer → Raman K → sender is locked. Tracking → filter by farmer.
+- Demo (backend): sign up as FARMER_NETWORK (verify via admin), `POST /farmers {name, mobile, village, consent:true}`, post a load with `postedForFarmerId`; after a driver accepts, the fake SMS list has `SENDER_TRACKING` for the farmer mobile.
+- Notes: the SMS tracking link for the farmer arrives with public pages (M12).
+
 ## 2026-11-21 — M9 Wish list (done)
 - Done: B-651…B-656, A-408…A-410, A-512.
 - Backend: `matching_wishlist_entry` (V12); `GET/POST/PUT/DELETE /wishlist` (trucks only from own finished trips, verified Orgs, limit → `WISHLIST_FULL`); `/wishlist/org-search` (name or `ORG-` code) and `/wishlist/candidates`; posting with `WISHLIST_FIRST`/`WISHLIST_ONLY` (`WISHLIST_EMPTY`); matching restricts to wish-list drivers (relaxed 100 km radius, eligibility unchanged), ranking bonus on EVERYONE loads, preferred push; server job opens WISHLIST_FIRST after 15 min and notifies once for WISHLIST_ONLY after 30 min; `POST /loads/{id}/open-to-everyone`; Org dashboard `preferredByShippersCount`. 57 integration tests green.

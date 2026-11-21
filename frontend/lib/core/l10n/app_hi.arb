@@ -431,5 +431,21 @@
   "openToEveryone": "सभी के लिए खोलें",
   "trucksCount": "{count} ट्रक",
   "organizationLabel": "संगठन",
-  "noResults": "कोई परिणाम नहीं"
+  "noResults": "कोई परिणाम नहीं",
+  "idNumberInvalid": "चुने गए ID प्रकार से मेल नहीं खाता",
+  "addFarmer": "किसान जोड़ें",
+  "editFarmer": "किसान बदलें",
+  "aadhaarLast4Optional": "आधार के आखिरी 4 अंक (वैकल्पिक)",
+  "aadhaarLast4Invalid": "सिर्फ़ आखिरी 4 अंक डालें",
+  "landAcresOptional": "ज़मीन एकड़ में (वैकल्पिक)",
+  "farmerConsent": "किसान ने ये जानकारी ट्रानिक्स से साझा करने की सहमति दी",
+  "deactivate": "निष्क्रिय करें",
+  "inactive": "निष्क्रिय",
+  "noFarmers": "अभी कोई किसान नहीं। पहला किसान जोड़ें।",
+  "searchFarmers": "नाम, मोबाइल या गाँव से खोजें",
+  "postForFarmer": "किसान के लिए पोस्ट करें",
+  "chooseFarmer": "किसान चुनें",
+  "postedFor": "{name} के लिए",
+  "allFarmers": "सभी किसान",
+  "senderLockedFarmer": "किसान ही भेजने वाला है और पिकअप OTP उसे मिलेगा।"
 }

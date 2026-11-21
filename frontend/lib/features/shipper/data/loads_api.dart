@@ -63,6 +63,11 @@ final loadListProvider = FutureProvider.autoDispose.family<Paged<LoadSummary>, b
   (ref, ongoing) => ref.watch(loadsApiProvider).list(ongoing: ongoing),
 );
 
+/// FN-03: loads posted for one farmer (scope, farmerId).
+final farmerLoadListProvider = FutureProvider.autoDispose.family<Paged<LoadSummary>, (bool, String)>(
+  (ref, key) => ref.watch(loadsApiProvider).list(ongoing: key.$1, farmerId: key.$2),
+);
+
 final loadDetailProvider = FutureProvider.autoDispose.family<LoadDetail, String>(
   (ref, id) => ref.watch(loadsApiProvider).detail(id),
 );

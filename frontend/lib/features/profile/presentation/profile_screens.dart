@@ -409,7 +409,7 @@ class _RoleProfileScreenState extends ConsumerState<RoleProfileScreen> {
     final role = session is SignedIn ? session.me.role : Role.unknown;
     String? req(String? v) => v == null || v.trim().isEmpty ? l.fieldRequired : null;
 
-    Widget text(String key, String label, {bool required = false, bool caps = false, TextInputType? type}) => Padding(
+    Widget text(String key, String label, {bool required = false, bool caps = false, TextInputType? type, String? Function(String?)? validator}) => Padding(
           padding: const EdgeInsets.only(bottom: 12),
           child: TextFormField(
             key: Key('rp-$key'),
@@ -418,7 +418,7 @@ class _RoleProfileScreenState extends ConsumerState<RoleProfileScreen> {
             textCapitalization: caps ? TextCapitalization.characters : TextCapitalization.words,
             inputFormatters: type == TextInputType.phone ? [FilteringTextInputFormatter.digitsOnly] : null,
             decoration: InputDecoration(labelText: label, errorText: _error?.fieldError(key)),
-            validator: required ? req : null,
+            validator: validator ?? (required ? req : null),
           ),
         );
 
@@ -444,7 +444,8 @@ class _RoleProfileScreenState extends ConsumerState<RoleProfileScreen> {
           text('networkName', l.networkName, required: true),
           text('registrationNumber', l.registrationNumber, required: true, caps: true),
           choice('idType', l.idType, {'CIN': 'CIN', 'PAN': 'PAN', 'GSTIN': 'GSTIN'}),
-          text('idNumber', l.idNumber, required: true, caps: true),
+          text('idNumber', l.idNumber, required: true, caps: true,
+              validator: (v) => Validators.idNumber(_choice['idType'], v) ? null : l.idNumberInvalid),
           text('contactPerson', l.contactPerson, required: true),
           text('state', l.state, required: true),
           text('district', l.district, required: true),

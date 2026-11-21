@@ -90,10 +90,10 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 - [x] **A-603** Trust Score badges on cards (suggestions, driver block). (2026-11-21)
 
 ## Phase 7 — Farmer Network (needs B-110, B-901…B-904)
-- [ ] **A-701** FN registration form with per-type ID validation (FN-01).
-- [ ] **A-702** Farmers list/add/edit (FN-02).
-- [ ] **A-703** Post for a farmer (FN-03) + "Posted for" and farmer filter.
-- [ ] **A-704** FN bottom navigation and home.
+- [x] **A-701** FN registration form with per-type ID validation (FN-01). (2026-11-21)
+- [x] **A-702** Farmers list/add/edit (FN-02). (2026-11-21)
+- [x] **A-703** Post for a farmer (FN-03) + "Posted for" and farmer filter. (2026-11-21)
+- [x] **A-704** FN bottom navigation and home. (2026-11-21)
 
 ## Phase 8 — Organization (needs B-502…B-508)
 - [ ] **A-801** Org dashboard (OR-01) incl. "Shippers who prefer you".

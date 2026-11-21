@@ -15,7 +15,7 @@ Status: `[ ]` not started · `[~]` in progress · `[x]` done. Claude updates thi
 | M7 | Trip execution | B-701 – B-711 | A-504 – A-511, A-405, A-406 | Full trip: amount request, Reached, pickup OTP, live map, delivery OTP | [x] |
 | M8 | Payments, ratings, Trust Score | B-801 – B-808 | A-407, A-601 – A-603 | Mark paid → confirm; rating pop-up; Trust Score history | [x] |
 | M9 | Wish list | B-651 – B-656 | A-408 – A-410, A-512 | Add truck/org to wish list; post "Wish list first"; preferred driver accepts | [x] |
-| M10 | Farmer Network | B-901 – B-904 | A-701 – A-704 | FN registers, adds farmer, posts for farmer; farmer gets SMS (fake) | [ ] |
+| M10 | Farmer Network | B-901 – B-904 | A-701 – A-704 | FN registers, adds farmer, posts for farmer; farmer gets SMS (fake) | [x] |
 | M11 | Organization app | (B-502 – B-508 done in M5) | A-801 – A-805 | Org adds trucks/drivers, allocates, watches trips | [ ] |
 | M12 | Receiver and public pages | B-1001 – B-1006 | A-901 – A-903 | Receiver tracks by SMS link page and in app; uploads receipt | [ ] |
 | M13 | Support and broadcasts | B-1103 – B-1107 | A-305 – A-307 | Raise ticket, admin replies (Swagger), broadcast appears | [ ] |

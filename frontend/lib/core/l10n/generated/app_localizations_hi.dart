@@ -1375,4 +1375,56 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get noResults => 'कोई परिणाम नहीं';
+
+  @override
+  String get idNumberInvalid => 'चुने गए ID प्रकार से मेल नहीं खाता';
+
+  @override
+  String get addFarmer => 'किसान जोड़ें';
+
+  @override
+  String get editFarmer => 'किसान बदलें';
+
+  @override
+  String get aadhaarLast4Optional => 'आधार के आखिरी 4 अंक (वैकल्पिक)';
+
+  @override
+  String get aadhaarLast4Invalid => 'सिर्फ़ आखिरी 4 अंक डालें';
+
+  @override
+  String get landAcresOptional => 'ज़मीन एकड़ में (वैकल्पिक)';
+
+  @override
+  String get farmerConsent =>
+      'किसान ने ये जानकारी ट्रानिक्स से साझा करने की सहमति दी';
+
+  @override
+  String get deactivate => 'निष्क्रिय करें';
+
+  @override
+  String get inactive => 'निष्क्रिय';
+
+  @override
+  String get noFarmers => 'अभी कोई किसान नहीं। पहला किसान जोड़ें।';
+
+  @override
+  String get searchFarmers => 'नाम, मोबाइल या गाँव से खोजें';
+
+  @override
+  String get postForFarmer => 'किसान के लिए पोस्ट करें';
+
+  @override
+  String get chooseFarmer => 'किसान चुनें';
+
+  @override
+  String postedFor(String name) {
+    return '$name के लिए';
+  }
+
+  @override
+  String get allFarmers => 'सभी किसान';
+
+  @override
+  String get senderLockedFarmer =>
+      'किसान ही भेजने वाला है और पिकअप OTP उसे मिलेगा।';
 }
