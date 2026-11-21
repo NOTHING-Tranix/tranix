@@ -189,6 +189,8 @@ class RefreshToken {
 
     UUID getUserId() { return userId; }
     UUID getFamilyId() { return familyId; }
+
+    Instant getCreatedAt() { return createdAt; }
     String getDeviceId() { return deviceId; }
     Instant getExpiresAt() { return expiresAt; }
     boolean isRevoked() { return revokedAt != null; }

@@ -6,6 +6,8 @@ spring:
     show-sql: false
 
 tranix:
+  admin:
+    mobiles: 9000000006
   jwt:
     # Dev-only value; never used outside the dev profile.
     secret: ${JWT_SECRET:dev-only-jwt-secret-change-me-0123456789abcdef}

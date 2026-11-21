@@ -586,6 +586,24 @@ public class LoadService implements LoadDirectory {
         }).toList();
     }
 
+    @Override
+    @Transactional
+    public Map<String, Object> adminCancel(UUID loadId, UUID adminId, String reason) {
+        Load load = loads.findById(loadId).orElseThrow(() -> ApiException.notFound("Load"));
+        Instant now = Instant.now(clock);
+        LoadStatus stage = load.cancelByAdmin(now);
+        timeline(loadId, LoadStatus.CANCELLED, adminId);
+        boolean accepted = stage != LoadStatus.NOT_ACCEPTED;
+        jdbc.update("""
+                insert into loads_cancellation (id, load_id, by_user_id, by_role, stage, reason, note, charges_kept, penalty_points, created_at)
+                values (?, ?, ?, 'ADMIN', ?, 'ADMIN', ?, ?, 0, ?)""",
+                UUID.randomUUID(), loadId, adminId, stage.name(), reason, accepted, Timestamp.from(now));
+        events.publishEvent(new LoadEvents.StatusChanged(loadId, stage, LoadStatus.CANCELLED, adminId));
+        events.publishEvent(new LoadEvents.LoadCancelled(loadId, adminId, Role.ADMIN, stage, "ADMIN", accepted, BigDecimal.ZERO,
+                load.getShipperId(), load.getDriverId()));
+        return detail(load, Viewer.ADMIN);
+    }
+
     private Load owned(UUID shipperId, UUID loadId) {
         return loads.findById(loadId).filter(l -> l.getShipperId().equals(shipperId))
                 .orElseThrow(() -> ApiException.notFound("Load"));

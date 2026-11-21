@@ -236,6 +236,18 @@ public class Load extends BaseEntity {
     public String getWishlistEntryIds() { return wishlistEntryIds; }
     public Instant getWishlistUntil() { return wishlistUntil; }
     public Instant getOpenedToEveryoneAt() { return openedToEveryoneAt; }
+    /** Admin cancel (support case): allowed from any status before DELIVERED, also after pickup. */
+    LoadStatus cancelByAdmin(Instant now) {
+        if (status == DELIVERED || status == CANCELLED) {
+            throw new ApiException(ErrorCode.INVALID_STATE, "Load is " + status);
+        }
+        LoadStatus previous = status;
+        status = CANCELLED;
+        cancelledAt = now;
+        closedAt = now;
+        return previous;
+    }
+
     void openToEveryone(Instant now) { openedToEveryoneAt = now; audience = LoadAudience.EVERYONE; }
     public Instant getAcceptedAt() { return acceptedAt; }
     public Instant getPickedUpAt() { return pickedUpAt; }

@@ -50,4 +50,7 @@ public interface UserDirectory {
 
     /** M13 broadcasts: active (not suspended) users, optionally only one role and/or district (null = any). */
     List<UUID> audience(Role role, String district);
+
+    /** M14 admin: suspend (signs the user out everywhere) or reactivate. Callers audit the action. */
+    void setSuspended(UUID userId, boolean suspended);
 }

@@ -131,6 +131,18 @@ class UserDirectoryImpl implements UserDirectory {
     }
 
     @Override
+    @Transactional
+    public void setSuspended(UUID userId, boolean suspended) {
+        if (jdbc.update("update identity_user set suspended_at = " + (suspended ? "now()" : "null") + ", updated_at = now() where id = ? and role <> 'ADMIN'",
+                userId) == 0) {
+            throw ApiException.notFound("User");
+        }
+        if (suspended) {
+            jdbc.update("update identity_refresh_token set revoked_at = now() where user_id = ? and revoked_at is null", userId);
+        }
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<UUID> audience(com.nothing.tranix.shared.types.Role role, String district) {
         StringBuilder sql = new StringBuilder("select u.id from identity_user u left join identity_address a on a.user_id = u.id where u.suspended_at is null and u.role <> 'ADMIN'");
@@ -149,5 +161,34 @@ class UserDirectoryImpl implements UserDirectory {
     static UserView view(User u) {
         return new UserView(u.getId(), u.getName(), u.getMobile(), u.getRole(), u.getLanguage(),
                 u.getVerificationStatus(), u.getTrustScore(), u.isSuspended(), u.getPhotoFileId());
+    }
+}
+
+/** B-1201: makes sure every allow-listed admin mobile has a verified ADMIN account (admins never sign up). */
+@Component
+class AdminSeeder implements org.springframework.boot.ApplicationRunner {
+
+    private final org.springframework.jdbc.core.JdbcTemplate jdbc;
+    private final String mobiles;
+
+    AdminSeeder(org.springframework.jdbc.core.JdbcTemplate jdbc,
+                @org.springframework.beans.factory.annotation.Value("${tranix.admin.mobiles:}") String mobiles) {
+        this.jdbc = jdbc;
+        this.mobiles = mobiles;
+    }
+
+    @Override
+    public void run(org.springframework.boot.ApplicationArguments args) {
+        for (String m : mobiles.split(",")) {
+            String mobile = m.trim();
+            if (!mobile.matches("[6-9][0-9]{9}")) {
+                continue;
+            }
+            jdbc.update("""
+                    insert into identity_user (id, mobile, name, role, language, verification_status, profile_completion, trust_score,
+                                               consent_at, created_at, updated_at, version)
+                    values (gen_random_uuid(), ?, 'Admin', 'ADMIN', 'en', 'VERIFIED', 100, 70, now(), now(), now(), 0)
+                    on conflict (mobile) do nothing""", mobile);
+        }
     }
 }

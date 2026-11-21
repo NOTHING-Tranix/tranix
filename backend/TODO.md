@@ -154,18 +154,18 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 - [x] **B-1107** Document expiry and low-balance notifications wired. (2026-11-21)
 
 ## Phase 12 — Admin API (used via Swagger until Flutter web admin)
-- [ ] **B-1201** Admin seeding, allow-listed mobiles, 30-min idle timeout.
-- [ ] **B-1202** Dashboard metrics (active loads, fleet, pending verifications, open support, freight total, route status, reminders).
-- [ ] **B-1203** Active loads (10/page, search) + detail + cancel + OTP override.
-- [ ] **B-1204** Active fleet.
-- [ ] **B-1205** Verification tabs (driver, vehicle, FN, org, identity).
-- [ ] **B-1206** Tickets reply/ignore (reason).
-- [ ] **B-1207** Users: search, suspend, reactivate.
-- [ ] **B-1208** Wallet credit/refund; cancellations decide; payment disputes decide.
-- [ ] **B-1209** Location exceptions review; Trust Score adjust.
-- [ ] **B-1210** Settings CRUD with validation (weights sum to 100%).
-- [ ] **B-1211** Map restrictions CRUD.
-- [ ] **B-1212** Audit log for every admin action + query.
+- [x] **B-1201** Admin seeding, allow-listed mobiles, 30-min idle timeout. (2026-11-21)
+- [x] **B-1202** Dashboard metrics (active loads, fleet, pending verifications, open support, freight total, route status, reminders). (2026-11-21)
+- [x] **B-1203** Active loads (10/page, search) + detail + cancel + OTP override. (2026-11-21)
+- [x] **B-1204** Active fleet. (2026-11-21)
+- [x] **B-1205** Verification tabs (driver, vehicle, FN, org, identity). (2026-11-21)
+- [x] **B-1206** Tickets reply/ignore (reason). (2026-11-21)
+- [x] **B-1207** Users: search, suspend, reactivate. (2026-11-21)
+- [x] **B-1208** Wallet credit/refund; cancellations decide; payment disputes decide. (2026-11-21)
+- [x] **B-1209** Location exceptions review; Trust Score adjust. (2026-11-21)
+- [x] **B-1210** Settings CRUD with validation (weights sum to 100%). (2026-11-21)
+- [x] **B-1211** Map restrictions CRUD. (2026-11-21)
+- [x] **B-1212** Audit log for every admin action + query. (2026-11-21)
 
 ## Phase 13 — Real integrations
 - [ ] **B-1301** SMS provider (MSG91, DLT templates en/ta/hi) — Q-03.

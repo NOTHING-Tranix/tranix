@@ -15,6 +15,7 @@ Items Claude could not finish or decided on its own while working in autopilot. 
 | D-30 | Org code format, ranking bonus 10, wish-list window behaviour | docs/decisions.md |
 | D-31 | Link expiry on cancel, link rating, receipt rules, farmer link view-only | docs/decisions.md |
 | D-32 | Ticket rules, automatic tickets, broadcast audience | docs/decisions.md |
+| D-33 | Admin cancel/override/reverse rules, admin allow-list + 30-min idle | docs/decisions.md |
 | --- | --- | --- |
 
 ## Actions only the founder can do
@@ -26,6 +27,7 @@ Items Claude could not finish or decided on its own while working in autopilot. 
 | F-3 | Choose an Aadhaar offline/DigiLocker provider (Q-04) | Sign up with the provider, get sandbox + live keys; then Claude implements `AadhaarVerifier` for it and sets `tranix.integrations.aadhaar=<provider>`. Until then the option stays hidden (`aadhaarEnabled=false`). |
 | F-4 | Firebase project for push (FCM) | Create a Firebase project, add Android apps `in.tranix.app` and `in.tranix.app.dev`, download `google-services.json` into `frontend/android/app/` (do not commit prod), add the `com.google.gms.google-services` Gradle plugin, and create a service account key for the backend `PushSender` (set `tranix.integrations.push=fcm` once implemented in M15). |
 | F-5 | Google Maps API key (Q-05) | Create a Google Cloud project with Maps SDK for Android (+ Routes/Places when Q-05 is decided), restrict the key to `in.tranix.app`, then build with `-PMAPS_API_KEY=…` (Gradle) and `--dart-define=MAPS_API_KEY=…` (Dart). Without it the app uses the device location + typed address instead of the map pin. |
+| F-6 | Admin numbers for production | Set `ADMIN_MOBILES` (comma separated) on the server; those numbers get an ADMIN account at start-up and are the only ones that can sign in as admin. |
 
 ## Blocked tasks `[!]`
 

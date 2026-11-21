@@ -78,6 +78,9 @@ public interface LoadDirectory {
     /** M12 RC-01: loads addressed to a registered receiver (ongoing = not delivered/cancelled), as LoadSummary + deliveryEta. */
     List<Map<String, Object>> forReceiver(UUID receiverUserId, boolean ongoing);
 
+    /** M14 admin: cancel any load before delivery (also after pickup); charges stay, no Trust Score penalty. */
+    Map<String, Object> adminCancel(UUID loadId, UUID adminId, String reason);
+
     /** The contract {@code LoadDetail} map for a viewer (shipper/receiver/driver/admin). */
     Map<String, Object> detail(UUID loadId, Viewer viewer);
 

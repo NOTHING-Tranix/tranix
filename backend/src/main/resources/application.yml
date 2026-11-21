@@ -45,6 +45,9 @@ springdoc:
     path: /v3/api-docs
 
 tranix:
+  admin:
+    # B-1201: allow-listed admin mobiles (comma separated). Empty = no extra check (admins are never created by sign-up).
+    mobiles: ${ADMIN_MOBILES:}
   # Base URL used in links the server hands out (signed file URLs, top-up and tracking pages).
   public-base-url: ${PUBLIC_BASE_URL:http://localhost:8080}
   jwt:

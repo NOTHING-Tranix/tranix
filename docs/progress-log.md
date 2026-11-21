@@ -13,6 +13,12 @@ Newest first. Claude adds an entry at the end of every session and at every mile
 
 ---
 
+## 2026-11-21 — M14 Admin API complete (done)
+- Done: B-1201…B-1212 (B-1205 verification tabs from M2, B-1206 tickets from M13).
+- Backend: admin allow-list (`ADMIN_MOBILES`, seeded at start-up; dev = 9000000006) and 30-minute idle timeout on admin refresh; dashboard metrics (open/active loads, fleet on duty, pending verifications, open support, freight and payment split, route status, review reminders, top-ups and cancellations today); loads list (10/page, search by code/area/mobile) + detail with tracking, cancellations, location exceptions, OTP help; admin cancel (also after pickup) and OTP override; fleet list; users search/suspend (signs out)/reactivate; cancellations decide (REVERSE returns points); payment disputes list; location-exception review; typed settings with "weights = 100%" check; map restrictions CRUD; audit query. Every admin write is audited. 67 integration tests green.
+- Demo (Swagger, dev): sign in with 9000000006 / OTP 123456 → Authorize → `GET /api/v1/admin/dashboard`, `GET /api/v1/admin/loads?q=TRX`, `PUT /api/v1/admin/settings/support.reopen_days {value:"10", reason}`, `GET /api/v1/admin/audit`.
+- New: D-33 (assumed admin rules); founder action F-6 (production admin numbers).
+
 ## 2026-11-21 — M13 Support and broadcasts (done)
 - Done: B-1103…B-1107, B-1005, A-305…A-307.
 - Backend: new `support` module (V15): tickets with codes `TKT-000001`, conversation, unread flags for user/admin, reopen within 7 days (setting), admin `/admin/tickets` list/detail/reply (optionally close)/ignore with reason (audited, user notified); payment disputes and receipt shortage/damage open tickets automatically. Broadcasts in engagement: all/role/district/user, now or scheduled (job every minute) → "Tranix messages" inbox + push. Rating reminders and document-expiry/low-balance notifications confirmed wired. 64 integration tests green.

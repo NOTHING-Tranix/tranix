@@ -19,7 +19,7 @@ Status: `[ ]` not started · `[~]` in progress · `[x]` done. Claude updates thi
 | M11 | Organization app | (B-502 – B-508 done in M5) | A-801 – A-805 | Org adds trucks/drivers, allocates, watches trips | [x] |
 | M12 | Receiver and public pages | B-1001 – B-1006 | A-901 – A-903 | Receiver tracks by SMS link page and in app; uploads receipt | [x] |
 | M13 | Support and broadcasts | B-1103 – B-1107 | A-305 – A-307 | Raise ticket, admin replies (Swagger), broadcast appears | [x] |
-| M14 | Admin API complete | B-1201 – B-1212 | — | All admin actions possible in Swagger | [ ] |
+| M14 | Admin API complete | B-1201 – B-1212 | — | All admin actions possible in Swagger | [x] |
 | M15 | Real integrations | B-1301 – B-1307 | (config only) | Real SMS OTP, real test payment, real maps ETA | [ ] |
 | M16 | Hardening and release | B-1401 – B-1408 | A-1001 – A-1008 | Signed AAB on Play internal testing; backend on AWS | [ ] |
 | Later | Flutter web + Admin panel | — | A-1101 – A-1103 | Admin panel in browser | [ ] |

@@ -46,7 +46,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /** B-701…B-709 + B-408: current trip, revisions, reached/OTP, help, locations, ETA/route status, tracking. */
 @Service
-public class TripService implements com.nothing.tranix.trips.api.TripTracking {
+public class TripService implements com.nothing.tranix.trips.api.TripTracking, com.nothing.tranix.trips.api.TripAdmin {
 
     private static final SecureRandom RANDOM = new SecureRandom();
 
@@ -281,6 +281,49 @@ public class TripService implements com.nothing.tranix.trips.api.TripTracking {
             notifier.notify(l.shipperId(), NotificationTab.TRIPS, "DELIVERED", Map.of("code", l.code()), "/loads/" + loadId);
         }
         return loads.detail(loadId, LoadDirectory.Viewer.DRIVER);
+    }
+
+    @Override
+    @Transactional
+    public Map<String, Object> otpOverride(UUID loadId, String purposeName, UUID adminId) {
+        OtpPurpose purpose;
+        try {
+            purpose = OtpPurpose.valueOf(purposeName);
+        } catch (RuntimeException e) {
+            throw ApiException.invalidField("purpose", "PICKUP or DELIVERY");
+        }
+        LoadDirectory.LoadInfo l = loads.find(loadId).orElseThrow(() -> ApiException.notFound("Load"));
+        boolean pickup = purpose == OtpPurpose.PICKUP;
+        if (l.status() != (pickup ? LoadStatus.LOCATION_REACHED : LoadStatus.ARRIVED_DESTINATION)) {
+            throw new ApiException(ErrorCode.INVALID_STATE, "Not the right step for this trip");
+        }
+        jdbc.update("update trips_otp set invalidated_at = ? where load_id = ? and purpose = ? and consumed_at is null and invalidated_at is null",
+                Timestamp.from(now()), loadId, purpose.name());
+        event(loadId, purpose, "OVERRIDE", null, null);
+        if (pickup) {
+            loads.transition(loadId, LoadStatus.PICKED_UP, adminId);
+            loads.transition(loadId, LoadStatus.TRAVELING, adminId);
+            notifier.notify(l.shipperId(), NotificationTab.TRIPS, "PICKED_UP", Map.of("code", l.code()), "/loads/" + loadId);
+        } else {
+            loads.transition(loadId, LoadStatus.DELIVERED, adminId);
+            fleet.tripEnded(l.driverId(), now());
+            notifier.notify(l.shipperId(), NotificationTab.TRIPS, "DELIVERED", Map.of("code", l.code()), "/loads/" + loadId);
+        }
+        return loads.detail(loadId, LoadDirectory.Viewer.ADMIN);
+    }
+
+    @Override
+    @Transactional
+    public Map<String, Object> reviewLocationException(UUID exceptionId, String decision, String note) {
+        if (!"OK".equals(decision) && !"FLAGGED".equals(decision)) {
+            throw ApiException.invalidField("decision", "OK or FLAGGED");
+        }
+        if (jdbc.update("update trips_location_exception set review_status = ?, admin_note = ? where id = ? and review_status = 'PENDING'",
+                decision, note == null || note.isBlank() ? null : note.trim(), exceptionId) == 0) {
+            throw ApiException.notFound("Pending location exception");
+        }
+        return jdbc.queryForMap("select id, load_id as \"loadId\", purpose, distance_m as \"distanceM\", driver_reason as \"driverReason\", "
+                + "review_status as \"reviewStatus\", admin_note as \"adminNote\" from trips_location_exception where id = ?", exceptionId);
     }
 
     @Transactional

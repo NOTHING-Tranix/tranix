@@ -47,11 +47,16 @@ public class IdentityService {
     private final ApplicationEventPublisher events;
     private final ObjectProvider<MeContributor> contributors;
     private final Clock clock;
+    /** B-1201: when set, only these mobiles may sign in as ADMIN (tranix.admin.mobiles). */
+    private final java.util.Set<String> adminMobiles;
 
     IdentityService(UserRepository users, AddressRepository addresses, RoleProfileRepository roleProfiles,
                     DeviceRepository devices, OtpService otp, TokenService tokens, RoleProfiles roleProfileRules,
                     UserDocuments documents, FileService files, Settings settings, AuditLog audit,
-                    ApplicationEventPublisher events, ObjectProvider<MeContributor> contributors, Clock clock) {
+                    ApplicationEventPublisher events, ObjectProvider<MeContributor> contributors, Clock clock,
+                    @org.springframework.beans.factory.annotation.Value("${tranix.admin.mobiles:}") String adminMobiles) {
+        this.adminMobiles = java.util.Arrays.stream(adminMobiles.split(",")).map(String::trim).filter(s -> !s.isEmpty())
+                .collect(java.util.stream.Collectors.toUnmodifiableSet());
         this.users = users;
         this.addresses = addresses;
         this.roleProfiles = roleProfiles;
@@ -102,6 +107,9 @@ public class IdentityService {
     public AuthResult signIn(String mobile, String code, String deviceId) {
         otp.verify(mobile, OtpPurpose.SIGN_IN, code);
         User user = users.findByMobile(mobile).orElseThrow(() -> new ApiException(ErrorCode.OTP_INVALID));
+        if (user.getRole() == Role.ADMIN && !adminMobiles.isEmpty() && !adminMobiles.contains(mobile)) {
+            throw new ApiException(ErrorCode.FORBIDDEN, "This number is not allowed to sign in as admin");
+        }
         if (user.isSuspended()) {
             throw new ApiException(ErrorCode.FORBIDDEN, "Account suspended. Contact support.");
         }
@@ -112,6 +120,12 @@ public class IdentityService {
     public AuthResult refresh(String refreshToken) {
         RefreshToken previous = tokens.rotate(refreshToken);
         User user = users.findById(previous.getUserId()).orElseThrow(() -> new ApiException(ErrorCode.UNAUTHENTICATED));
+        // B-1201: admin sessions end after N idle minutes (no refresh within the window)
+        if (user.getRole() == Role.ADMIN && previous.getCreatedAt()
+                .plus(java.time.Duration.ofMinutes(settings.getInt("admin.idle_minutes"))).isBefore(Instant.now(clock))) {
+            tokens.revokeFamily(previous);
+            throw new ApiException(ErrorCode.TOKEN_EXPIRED, "Session ended after inactivity — sign in again");
+        }
         if (user.isSuspended()) {
             throw new ApiException(ErrorCode.FORBIDDEN, "Account suspended. Contact support.");
         }

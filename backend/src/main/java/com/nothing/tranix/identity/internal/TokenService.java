@@ -74,6 +74,11 @@ class TokenService {
     }
 
     @Transactional
+    void revokeFamily(RefreshToken token) {
+        refreshTokens.revokeFamily(token.getFamilyId(), Instant.now(clock));
+    }
+
+    @Transactional
     void revoke(String rawRefreshToken) {
         refreshTokens.findByTokenHash(sha256(rawRefreshToken))
                 .ifPresent(t -> refreshTokens.revokeFamily(t.getFamilyId(), Instant.now(clock)));
