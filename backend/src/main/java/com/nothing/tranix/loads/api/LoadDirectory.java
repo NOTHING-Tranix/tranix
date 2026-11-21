@@ -35,6 +35,15 @@ public interface LoadDirectory {
     /** Loads in an active status for this driver (at most one by the matching rules). */
     List<LoadInfo> activeForDriver(UUID driverId);
 
+    /**
+     * B-605: first accept wins — one atomic UPDATE (NOT_ACCEPTED → ACCEPTED) then WAITING_FOR_PICKUP, with timeline
+     * rows. Returns false when another driver was faster (caller answers LOAD_TAKEN). Joins the caller's transaction.
+     */
+    boolean acceptAtomically(UUID loadId, UUID driverId, UUID truckId, UUID orgId);
+
+    /** Open loads (NOT_ACCEPTED) — for the matching job. */
+    List<UUID> openLoadIds();
+
     List<LoadInfo> activeForTruck(UUID truckId);
 
     /** Loads carried by an Organization (B-507), newest pickup first, as {@code LoadSummary} maps + driverId/truckId. */

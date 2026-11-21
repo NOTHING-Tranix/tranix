@@ -64,6 +64,9 @@ public class LoadService implements LoadDirectory {
     private final ObjectProvider<LoadEvents.DetailContributor> contributors;
     private final Clock clock;
 
+    @jakarta.persistence.PersistenceContext
+    private jakarta.persistence.EntityManager entityManager;
+
     LoadService(LoadRepository loads, JdbcTemplate jdbc, MapsService maps, Settings settings, UserDirectory users,
                 WalletApi wallet, ApplicationEventPublisher events,
                 ObjectProvider<PostingHooks.AudienceValidator> audienceValidator,
@@ -439,6 +442,31 @@ public class LoadService implements LoadDirectory {
         List<UUID> ids = jdbc.queryForList("select id from loads_load where driver_id = ? and status in ("
                 + ACTIVE_FOR_DRIVER.stream().map(s -> "'" + s + "'").collect(Collectors.joining(",")) + ")", UUID.class, driverId);
         return loads.findAllById(ids).stream().map(LoadService::info).toList();
+    }
+
+    @Override
+    @Transactional
+    public boolean acceptAtomically(UUID loadId, UUID driverId, UUID truckId, UUID orgId) {
+        Timestamp now = Timestamp.from(Instant.now(clock));
+        int updated = jdbc.update("""
+                update loads_load set status = 'WAITING_FOR_PICKUP', driver_id = ?, truck_id = ?, org_id = ?, accepted_at = ?,
+                updated_at = ?, version = version + 1 where id = ? and status = 'NOT_ACCEPTED'""",
+                driverId, truckId, orgId, now, now, loadId);
+        if (updated == 0) {
+            return false;
+        }
+        // the row changed underneath the persistence context — reload it
+        loads.findById(loadId).ifPresent(entityManager::refresh);
+        timeline(loadId, LoadStatus.ACCEPTED, driverId);
+        timeline(loadId, LoadStatus.WAITING_FOR_PICKUP, driverId);
+        events.publishEvent(new LoadEvents.StatusChanged(loadId, LoadStatus.NOT_ACCEPTED, LoadStatus.WAITING_FOR_PICKUP, driverId));
+        return true;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<UUID> openLoadIds() {
+        return jdbc.queryForList("select id from loads_load where status = 'NOT_ACCEPTED'", UUID.class);
     }
 
     @Override

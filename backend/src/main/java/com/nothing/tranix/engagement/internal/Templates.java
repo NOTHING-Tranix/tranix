@@ -83,6 +83,25 @@ final class Templates {
                 "निमंत्रण अस्वीकार", "{driver} ने आपका निमंत्रण अस्वीकार किया।");
     }
 
+    static {
+        add("NEW_SUGGESTION", true, false,
+                "New trip suggestion", "{pickup} → {drop} · ₹{amount}",
+                "புதிய பயணப் பரிந்துரை", "{pickup} → {drop} · ₹{amount}",
+                "नया यात्रा सुझाव", "{pickup} → {drop} · ₹{amount}");
+        add("PREFERRED_SUGGESTION", true, false,
+                "A shipper who prefers you posted a load", "{pickup} → {drop} · ₹{amount}",
+                "உங்களை விரும்பும் அனுப்புநர் சரக்கைப் பதிவு செய்தார்", "{pickup} → {drop} · ₹{amount}",
+                "आपको पसंद करने वाले शिपर ने लोड पोस्ट किया", "{pickup} → {drop} · ₹{amount}");
+        add("LOAD_ACCEPTED", true, false,
+                "Load accepted", "{code}: {driver} ({truck}) accepted your load.",
+                "சரக்கு ஏற்கப்பட்டது", "{code}: {driver} ({truck}) உங்கள் சரக்கை ஏற்றுக்கொண்டார்.",
+                "लोड स्वीकार", "{code}: {driver} ({truck}) ने आपका लोड स्वीकार किया।");
+        add("NO_DRIVER_FOUND", true, false,
+                "No driver yet", "{code}: no driver has accepted yet. You can raise the amount, change the pickup time, wait or cancel free.",
+                "இன்னும் ஓட்டுநர் இல்லை", "{code}: இன்னும் யாரும் ஏற்கவில்லை. தொகையை உயர்த்தலாம், நேரத்தை மாற்றலாம், காத்திருக்கலாம் அல்லது இலவசமாக ரத்து செய்யலாம்.",
+                "अभी कोई ड्राइवर नहीं", "{code}: अभी किसी ने स्वीकार नहीं किया। राशि बढ़ाएँ, समय बदलें, इंतज़ार करें या मुफ़्त रद्द करें।");
+    }
+
     private Templates() {
     }
 

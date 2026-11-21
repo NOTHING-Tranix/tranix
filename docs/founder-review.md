@@ -9,6 +9,7 @@ Items Claude could not finish or decided on its own while working in autopilot. 
 | D-24 | User status derived from document decisions; verified users stay verified when replacing a document | docs/decisions.md |
 | D-25 | Top-up ₹100–₹50,000, wallets only for LP/FN/Driver/Org, low-balance rule, no SMS for wallet events | docs/decisions.md |
 | D-26 | ETA buffer 60 min, max 60 t, cancel reasons + fault list, ongoing definition, repost window | docs/decisions.md |
+| D-27 | Radius step 25 km → max 100 km, location needed to match, neutral return-load factor | docs/decisions.md |
 | --- | --- | --- |
 
 ## Actions only the founder can do

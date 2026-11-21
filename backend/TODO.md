@@ -11,7 +11,7 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 | 3 Wallet | 8 | 8 |
 | 4 Loads (shipper) | 9 | 8 |
 | 5 Fleet and driver setup | 9 | 9 |
-| 6 Matching and acceptance | 7 | 0 |
+| 6 Matching and acceptance | 7 | 7 |
 | 6A Wish list | 6 | 0 |
 | 7 Trip execution | 11 | 0 |
 | 8 Payments, ratings, Trust Score | 8 | 0 |
@@ -91,13 +91,13 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 - [x] **B-509** Tests: allocation rules, one-truck rule for owner-drivers. (2026-11-21)
 
 ## Phase 6 — Matching and acceptance
-- [ ] **B-601** Eligibility query (see domain model) with Haversine + bounding box.
-- [ ] **B-602** Ranking with weights from settings; deterministic tests with fixed clock.
-- [ ] **B-603** Batch job: top 5 at posting, +5 every 10 min, radius widening, "no driver" notification to shipper.
-- [ ] **B-604** `GET /driver/suggestions` (area-only data, sorting).
-- [ ] **B-605** `POST /driver/suggestions/{loadId}/accept`: atomic status update + both charges in one transaction; others → `TAKEN`; notifications; tracking SMS to receiver.
-- [ ] **B-606** Reject with reason.
-- [ ] **B-607** Concurrency test: 10 drivers accept at once → exactly one wins.
+- [x] **B-601** Eligibility query (see domain model) with Haversine + bounding box. (2026-11-21)
+- [x] **B-602** Ranking with weights from settings; deterministic tests with fixed clock. (2026-11-21)
+- [x] **B-603** Batch job: top 5 at posting, +5 every 10 min, radius widening, "no driver" notification to shipper. (2026-11-21)
+- [x] **B-604** `GET /driver/suggestions` (area-only data, sorting). (2026-11-21)
+- [x] **B-605** `POST /driver/suggestions/{loadId}/accept`: atomic status update + both charges in one transaction; others → `TAKEN`; notifications; tracking SMS to receiver. (2026-11-21)
+- [x] **B-606** Reject with reason. (2026-11-21)
+- [x] **B-607** Concurrency test: 10 drivers accept at once → exactly one wins. (2026-11-21)
 
 ## Phase 6A — Wish list (D-19)
 - [ ] **B-651** `matching_wishlist_entry` + `GET/POST/PUT/DELETE /wishlist` (limit, truck only from own past trips, `WISHLIST_FULL`).

@@ -1,5 +1,8 @@
 # Automated tests. The database comes from Testcontainers (@ServiceConnection).
 spring:
+  datasource:
+    hikari:
+      maximum-pool-size: 30
   flyway:
     locations: classpath:db/migration
 

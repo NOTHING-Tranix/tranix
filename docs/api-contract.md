@@ -45,7 +45,7 @@ VerificationStatus: NOT_SUBMITTED | UNDER_REVIEW | VERIFIED | NOT_VERIFIED
 DocumentType: AADHAAR_OFFLINE | PAN | VOTER_ID | DRIVING_LICENCE | PHOTO | RC | INSURANCE | NATIONAL_PERMIT |
               FN_REGISTRATION_CERT | ORG_REGISTRATION_CERT | GST_CERT
 DocumentStatus: PENDING | APPROVED | REJECTED
-LoadStatus: NOT_ACCEPTED | ACCEPTED | AMOUNT_NEGOTIATION | WAITING_FOR_PICKUP | LOCATION_REACHED | PICKED_UP |
+LoadStatus: NOT_ACCEPTED | ACCEPTED | | `GET /driver/suggestions?sort=NEAREST|AMOUNT|EARLIEST` (empty list when off duty, not verified or the payer wallet is below the trip charge) |_NEGOTIATION | WAITING_FOR_PICKUP | LOCATION_REACHED | PICKED_UP |
             TRAVELING | ARRIVED_DESTINATION | DELIVERED | CANCELLED
 QuantityUnit: BAGS | CRATES | BOXES | TONNES | LITRES
 VehicleType: OPEN_BODY | CLOSED_BODY | CONTAINER | REFRIGERATED | TANKER | ANY
@@ -169,9 +169,9 @@ LoadDetail = LoadSummary + { pickup, drop, senderName, senderMobile, receiverNam
 | `PUT /driver/duty` | `{onDuty}` |
 | `GET /driver/home` | `{onDuty, truck?, walletBalanceInr?, orgName?, currentLoadId?, suggestionsCount, trustScore, expiringDocuments[]}` |
 | `GET/POST/PUT /driver/truck` | Owner-driver only: `{number, vehicleType, capacityTonnes}`; truck documents via `POST /driver/truck/documents {type: RC|INSURANCE|NATIONAL_PERMIT, fileIds, number, expiresOn}`. Truck view `{id, number, vehicleType, capacityTonnes, status, documents[], allocatedDriver?, ownedByMe}` |
-| `GET /driver/suggestions?sort=NEAREST\|AMOUNT\|EARLIEST` | `[Suggestion{loadId, goodsType, description, quantity, unit, weightTonnes, pickupArea, dropArea, pickupWindowStart, distanceToPickupKm, minutesToPickup, deliveryEta, amountInr, shipperTrustScore, preferredByShipper}]` (poll 30 s while open) |
+| `GET /driver/suggestions?sort=NEAREST|AMOUNT|EARLIEST` (empty list when off duty, not verified or the payer wallet is below the trip charge) |\|AMOUNT\|EARLIEST` | `[Suggestion{loadId, goodsType, description, quantity, unit, weightTonnes, pickupArea, dropArea, pickupWindowStart, distanceToPickupKm, minutesToPickup, deliveryEta, amountInr, shipperTrustScore, preferredByShipper}]` (poll 30 s while open) |
 | `POST /driver/suggestions/{loadId}/accept` | → `LoadDetail` or `LOAD_TAKEN` / `INSUFFICIENT_BALANCE` |
-| `POST /driver/suggestions/{loadId}/reject` | `{reason?: TOO_FAR\|LOW_AMOUNT\|WRONG_TRUCK\|OTHER}` |
+| `POST /driver/suggestions/{loadId}/reject` | `{reason?: TOO_FAR\|LOW_| `GET /driver/suggestions?sort=NEAREST|AMOUNT|EARLIEST` (empty list when off duty, not verified or the payer wallet is below the trip charge) |\|WRONG_TRUCK\|OTHER}` |
 | `GET /driver/current-trip` | `LoadDetail` with exact locations, contacts |
 | `POST /driver/trips/{loadId}/revisions` | `{amountInr, reason}` → `REVISION_LIMIT_REACHED`, `REVISION_PENDING`, `INVALID_STATE` after pickup |
 | `POST /driver/trips/{loadId}/reached` | `{purpose: PICKUP\|DELIVERY, lat, lng, reason?}` → `{distanceM, outsideRadius, otpSentTo}` |
