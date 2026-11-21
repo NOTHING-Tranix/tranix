@@ -55,7 +55,7 @@ class ShipperHomeScreen extends ConsumerWidget {
                 child: ListTile(
                   title: Text(l.walletBalance),
                   subtitle: MoneyText(me!.walletBalanceInr!, large: true),
-                  trailing: FilledButton.tonal(onPressed: () => context.push(Routes.wallet), child: Text(l.topUp)),
+                  trailing: TileAction(child: FilledButton.tonal(onPressed: () => context.push(Routes.wallet), child: Text(l.topUp))),
                 ),
               ),
             if (me != null && me.verificationStatus != VerificationStatus.verified)
@@ -320,7 +320,7 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
           leading: Icon(pickup ? Icons.trip_origin : Icons.location_on),
           title: Text(p?.address ?? l.locationNotSet),
           subtitle: p?.landmark == null ? null : Text(p!.landmark!),
-          trailing: TextButton(onPressed: () => _pickPlace(pickup), child: Text(l.setLocation)),
+          trailing: TileAction(child: TextButton(onPressed: () => _pickPlace(pickup), child: Text(l.setLocation))),
         ),
       );
     }

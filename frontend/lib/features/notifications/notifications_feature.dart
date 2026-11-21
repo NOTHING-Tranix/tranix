@@ -67,12 +67,13 @@ class NotificationsScreen extends ConsumerWidget {
         appBar: AppBar(
           title: Text(l.navNotifications),
           actions: [
-            TextButton(
+            IconButton(
+              tooltip: l.markAllRead,
+              icon: const Icon(Icons.done_all),
               onPressed: () async {
                 await ref.read(notificationsApiProvider).readAll();
                 _refreshAll(ref);
               },
-              child: Text(l.markAllRead),
             ),
           ],
           bottom: TabBar(

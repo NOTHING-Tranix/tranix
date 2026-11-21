@@ -13,6 +13,12 @@ Newest first. Claude adds an entry at the end of every session and at every mile
 
 ---
 
+## 2026-11-21 — M16 Hardening and release (code ready; release steps need the founder)
+- Done: B-1401, B-1402, B-1403, B-1406, B-1408, A-1001, A-1002, A-1005, A-1008.
+- Backend: per-IP rate limits on auth and public link paths (`429 RATE_LIMITED`); `X-Request-Id` on every request and in logs, JSON (ECS) logs in prod; health liveness/readiness + metrics; Dockerfile (built in CI); `tools/db-backup.sh`, `tools/db-restore.sh`, `tools/loadtest/suggestions-tracking.js`; full-lifecycle E2E test; `GET /legal/privacy|terms` (draft) and `POST /me/deletion-request`. 19 unit + 69 integration tests green.
+- Frontend: localised app name (prod flavor), brand splash + placeholder adaptive icon, release signing from `android/key.properties` (prod AAB builds), Tamil/Hindi 1.3× layout test on every tab of every role (fixed: wide trailing buttons, long status chips, notifications app bar, suggestions sort, driver history buttons), no-IAP release check, Play disclosures in `docs/play-console.md`. analyze clean, 61 tests green, debug APK builds.
+- Blocked `[!]`: B-1404/B-1405/B-1407 (AWS, F-9), A-1003 (Firebase, F-4), A-1004 (real low-end phone), A-1006 (emulator + dev backend run), A-1007 (upload key + Play Console, F-10).
+
 ## 2026-11-21 — M15 Real integrations (adapters ready; blocked on founder keys)
 - Done: B-1307 (per-environment switches `tranix.integrations.*`, production config from environment variables).
 - Built and unit-tested behind switches (default fake): MSG91 Flow SMS with DLT template ids per key/language (B-1301), Razorpay payment links + HMAC webhook check, `X-Razorpay-Signature` accepted (B-1302), FCM HTTP v1 with a service-account JWT and token cache (B-1303), Google Routes with 24 h cache and monthly budget (setting `maps.monthly_route_calls`) falling back to the straight-line estimate (B-1304). Top-up return page `/p/wallet/topup/done`.

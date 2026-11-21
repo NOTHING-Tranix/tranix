@@ -21,7 +21,7 @@ Status: `[ ]` not started · `[~]` in progress · `[x]` done. Claude updates thi
 | M13 | Support and broadcasts | B-1103 – B-1107 | A-305 – A-307 | Raise ticket, admin replies (Swagger), broadcast appears | [x] |
 | M14 | Admin API complete | B-1201 – B-1212 | — | All admin actions possible in Swagger | [x] |
 | M15 | Real integrations | B-1301 – B-1307 | (config only) | Real SMS OTP, real test payment, real maps ETA | [!] adapters ready; keys from founder |
-| M16 | Hardening and release | B-1401 – B-1408 | A-1001 – A-1008 | Signed AAB on Play internal testing; backend on AWS | [ ] |
+| M16 | Hardening and release | B-1401 – B-1408 | A-1001 – A-1008 | Signed AAB on Play internal testing; backend on AWS | [!] code ready; release steps with founder |
 | Later | Flutter web + Admin panel | — | A-1101 – A-1103 | Admin panel in browser | [ ] |
 
 **Before M15:** the founder must settle Q-01 (charge amounts), Q-02 (payment gateway), Q-03 (SMS + DLT), Q-04 (Aadhaar provider), Q-05 (maps budget). **Before M16:** Q-07 and Q-08.

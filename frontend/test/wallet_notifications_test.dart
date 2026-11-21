@@ -19,7 +19,7 @@ void main() {
     await tester.tap(find.byTooltip('Notifications'));
     await tester.pumpAndSettle();
     expect(find.text('Trips'), findsWidgets);
-    expect(find.text('Mark all read'), findsOneWidget);
+    expect(find.byTooltip('Mark all read'), findsOneWidget);
     expect(find.text('TRX-000123 picked up'), findsOneWidget);
   });
 

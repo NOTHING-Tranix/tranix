@@ -108,14 +108,14 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 - [x] **A-903** Receiver navigation and notifications. (2026-11-21)
 
 ## Phase 10 — Release
-- [ ] **A-1001** App icon, splash, app name in 3 languages.
-- [ ] **A-1002** Permissions copy and privacy disclosures (location, camera, notifications) for Play Console.
-- [ ] **A-1003** Crash reporting (Firebase Crashlytics) and basic analytics events.
-- [ ] **A-1004** Performance pass on low-end device (startup, map screens, list scrolling).
-- [ ] **A-1005** Tamil/Hindi layout review; font scaling 1.3×.
-- [ ] **A-1006** Integration tests: shipper and driver happy paths against dev backend.
-- [ ] **A-1007** Signed release build (AAB), Play internal testing track.
-- [ ] **A-1008** Confirm no in-app purchase code paths (D-13).
+- [x] **A-1001** App icon, splash, app name in 3 languages. (2026-11-21; localised app name, brand splash, placeholder adaptive icon — final logo F-10)
+- [x] **A-1002** Permissions copy and privacy disclosures (location, camera, notifications) for Play Console. (2026-11-21; docs/play-console.md)
+- [!] **A-1003** Crash reporting (Firebase Crashlytics) and basic analytics events. — needs the Firebase project (F-4)
+- [!] **A-1004** Performance pass on low-end device (startup, map screens, list scrolling). — needs a run on a real low-end phone
+- [x] **A-1005** Tamil/Hindi layout review; font scaling 1.3×. (2026-11-21; test/layout_i18n_test.dart: every tab, ta/hi, 1.3×, 360 dp)
+- [!] **A-1006** Integration tests: shipper and driver happy paths against dev backend. — needs an emulator + a running dev backend (backend lifecycle is covered by LifecycleIT)
+- [!] **A-1007** Signed release build (AAB), Play internal testing track. — release signing reads android/key.properties; prod AAB builds; needs the upload key + Play Console (F-10)
+- [x] **A-1008** Confirm no in-app purchase code paths (D-13). (2026-11-21; test/release_checks_test.dart)
 
 ## Phase 11 — Later: Flutter web + Admin
 - [ ] **A-1101** Make shared code web-safe; web build for shipper and Organization.

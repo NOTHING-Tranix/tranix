@@ -289,11 +289,11 @@ class _HistoryTile extends ConsumerWidget {
               ],
             ),
             if (paid)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+              Wrap(
+                alignment: WrapAlignment.end,
+                spacing: 8,
                 children: [
                   TextButton(onPressed: () => _dispute(context, ref), child: Text(l.disputePayment)),
-                  const SizedBox(width: 8),
                   FilledButton(onPressed: () => _confirm(context, ref), child: Text(l.confirmReceived)),
                 ],
               ),

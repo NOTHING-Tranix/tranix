@@ -31,6 +31,7 @@ Items Claude could not finish or decided on its own while working in autopilot. 
 | F-7 | SMS provider MSG91 + DLT (Q-03) | Register the entity and the sender ID on a DLT portal, get every SMS template in `Templates`/SMS keys approved in en/ta/hi (OTP_SIGN_UP, OTP_SIGN_IN, OTP_MOBILE_CHANGE, TRIP_OTP_PICKUP, TRIP_OTP_DELIVERY, RECEIVER_TRACKING, SENDER_TRACKING, ORG_INVITE…), create matching MSG91 Flow templates, then set `SMS_PROVIDER=msg91`, `MSG91_AUTH_KEY` and one env var per template id `TRANIX_MSG91_TEMPLATES_<KEY>_<LANG>`. |
 | F-8 | Razorpay account (Q-02) | Create the account (KYC), get API key id/secret, add a webhook to `https://<api-host>/api/v1/webhooks/payments` for `payment_link.paid` with a secret; set `PAYMENT_PROVIDER=razorpay`, `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`, `RAZORPAY_WEBHOOK_SECRET`. Test with Razorpay test keys first. |
 | F-9 | AWS account (S3 + RDS + hosting) | Needed for B-1305 (S3 files) and B-1404 (deploy). Create the account, a region (ap-south-1), an IAM user/role for the app; then Claude adds the S3 adapter and the deploy scripts. |
+| F-10 | Play Console, upload key and logo | Create the Play Console app `in.tranix.app`; create an upload key: `keytool -genkey -v -keystore tranix-upload.jks -keyalg RSA -keysize 2048 -validity 10000 -alias upload`; put it outside git and write `frontend/android/key.properties` with `storeFile`, `storePassword`, `keyAlias`, `keyPassword`; then `flutter build appbundle --flavor prod --dart-define=ENV=prod` and upload to Internal testing. Send the final logo (SVG/PNG 1024 px) to replace the placeholder icon. |
 
 ## Blocked tasks `[!]`
 
@@ -47,3 +48,7 @@ Items Claude could not finish or decided on its own while working in autopilot. 
 | B-1404 | AWS deploy (image builds in CI) | F-9 |
 | B-1405 | Backup/restore scripts need a database host to run against | F-9 |
 | B-1407 | Load test needs a staging environment | F-9 |
+| A-1003 | Crashlytics needs Firebase | F-4 |
+| A-1004 | Performance pass needs a real low-end phone | founder device |
+| A-1006 | App integration tests need an emulator + dev backend run | local run |
+| A-1007 | Signed AAB + Play internal testing | F-10 |

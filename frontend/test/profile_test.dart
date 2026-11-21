@@ -30,6 +30,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Under review'), findsOneWidget);
     expect(find.textContaining('about 24 hours'), findsOneWidget);
+    await tester.scrollUntilVisible(find.text('PAN card'), 200);
     expect(find.text('PAN card'), findsOneWidget);
     await tester.scrollUntilVisible(find.text('Reason: Face not clear'), 200);
     expect(find.text('Reason: Face not clear'), findsOneWidget);

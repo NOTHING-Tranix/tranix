@@ -166,15 +166,15 @@ class _SuggestionsScreenState extends ConsumerState<SuggestionsScreen> {
                 actionLabel: l.topUp,
                 onAction: () => context.push(Routes.wallet),
               ),
-            SegmentedButton<String>(
-              segments: [
-                ButtonSegment(value: 'NEAREST', label: Text(l.sortNearest)),
-                ButtonSegment(value: 'AMOUNT', label: Text(l.sortAmount)),
-                ButtonSegment(value: 'EARLIEST', label: Text(l.sortEarliest)),
-              ],
-              selected: {sort},
-              onSelectionChanged: (s) => ref.read(suggestionSortProvider.notifier).set(s.first),
-            ),
+            // Chips wrap on small screens with long Tamil/Hindi labels (A-1005).
+            Wrap(spacing: 8, runSpacing: 4, children: [
+              for (final (value, label) in [('NEAREST', l.sortNearest), ('AMOUNT', l.sortAmount), ('EARLIEST', l.sortEarliest)])
+                ChoiceChip(
+                  label: Text(label),
+                  selected: sort == value,
+                  onSelected: (_) => ref.read(suggestionSortProvider.notifier).set(value),
+                ),
+            ]),
             const SizedBox(height: 12),
             AsyncView(
               value: ref.watch(suggestionsProvider),
@@ -222,7 +222,7 @@ class _SuggestionCard extends StatelessWidget {
             Text('${l.pickupDate}: ${Fmt.dateTime(s.pickupWindowStart)}'),
             Text(l.toPickup(Fmt.km(s.distanceToPickupKm), s.minutesToPickup)),
             if (s.deliveryEta != null) Text('${l.deliveryEstimate}: ${Fmt.dateTime(s.deliveryEta!)}'),
-            Row(children: [Text('${l.trustScore}: '), TrustScoreBadge(score: s.shipperTrustScore)]),
+            Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [Text('${l.trustScore}: '), TrustScoreBadge(score: s.shipperTrustScore)]),
             const SizedBox(height: 12),
             Row(children: [
               Expanded(child: OutlinedButton(onPressed: onReject, child: Text(l.rejectTrip))),

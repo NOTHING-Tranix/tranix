@@ -45,7 +45,9 @@ class StatusChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Capped width: long Tamil/Hindi labels at large text wrap instead of pushing tiles and rows out (A-1005).
     return Container(
+      constraints: const BoxConstraints(maxWidth: 132),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
         color: filled ? color : color.withValues(alpha: 0.12),
@@ -54,6 +56,9 @@ class StatusChip extends StatelessWidget {
       ),
       child: Text(
         label,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.labelLarge?.copyWith(color: filled ? Colors.white : color),
       ),
     );

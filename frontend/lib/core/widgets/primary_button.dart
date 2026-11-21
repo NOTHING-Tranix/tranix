@@ -22,3 +22,18 @@ class PrimaryButton extends StatelessWidget {
     );
   }
 }
+
+/// A button used as `ListTile.trailing`: capped width and scaled down so long Tamil/Hindi labels at large text
+/// never take the whole tile (A-1005).
+class TileAction extends StatelessWidget {
+  const TileAction({super.key, required this.child, this.maxWidth = 140});
+
+  final Widget child;
+  final double maxWidth;
+
+  @override
+  Widget build(BuildContext context) => ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: maxWidth),
+        child: FittedBox(fit: BoxFit.scaleDown, child: child),
+      );
+}
