@@ -1,0 +1,188 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${lang}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Tranix</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 0; background: #f4f6f9; color: #1b1b1f; }
+    main { max-width: 480px; margin: 0 auto; padding: 16px; }
+    .card { background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+    h1 { font-size: 20px; color: #1F4E79; margin: 0 0 4px; }
+    h2 { font-size: 16px; margin: 0 0 8px; }
+    .muted { color: #5f6368; font-size: 14px; }
+    .status { display: inline-block; padding: 2px 10px; border-radius: 12px; background: #e3ecf6; color: #1F4E79; font-weight: 600; }
+    .notice { background: #fff4e5; border-left: 4px solid #e8a33d; }
+    ul.timeline { list-style: none; padding: 0; margin: 0; }
+    ul.timeline li { padding: 4px 0; border-bottom: 1px solid #eee; font-size: 14px; }
+    button, .btn { display: block; width: 100%; padding: 12px; font-size: 16px; background: #1F4E79; color: #fff; border: 0;
+      border-radius: 8px; margin-top: 8px; text-align: center; text-decoration: none; }
+    input, select, textarea { width: 100%; box-sizing: border-box; padding: 10px; font-size: 16px; margin-top: 6px; border: 1px solid #ccc; border-radius: 8px; }
+    .stars button { display: inline-block; width: auto; background: none; color: #e8a33d; font-size: 32px; padding: 0 4px; margin: 0; }
+    .langs a { margin-right: 12px; color: #1F4E79; }
+    .err { color: #b3261e; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+<main>
+  <div class="langs muted">
+    <a th:href="@{/p/track/{t}(t=${token},lang='en')}">English</a>
+    <a th:href="@{/p/track/{t}(t=${token},lang='ta')}">தமிழ்</a>
+    <a th:href="@{/p/track/{t}(t=${token},lang='hi')}">हिन्दी</a>
+  </div>
+
+  <div class="card" th:if="${expired}">
+    <h1 id="expired-title">Tranix</h1>
+    <p id="expired-text">This link has expired.</p>
+  </div>
+
+  <div id="app" th:unless="${expired}">
+    <div class="card"><p class="muted" id="loading">…</p></div>
+  </div>
+</main>
+
+<script th:inline="javascript">
+  const TOKEN = /*[[${token}]]*/ '';
+  const LANG = /*[[${lang}]]*/ 'en';
+  const EXPIRED = /*[[${expired}]]*/ false;
+  const T = {
+    en: { expired: 'This link has expired.', load: 'Load', from: 'From', to: 'To', sender: 'Sender', goods: 'Goods', driver: 'Driver',
+      truck: 'Truck', call: 'Call driver', eta: 'Expected delivery', last: 'Truck last seen', timeline: 'Timeline',
+      otp: 'The driver has arrived. The delivery OTP was sent to your phone by SMS. Share it only after checking the goods.',
+      receipt: 'Delivery receipt', photos: 'Photos (1 to 5)', condition: 'Condition', full: 'Received in full', damage: 'Shortage or damage',
+      remarks: 'Remarks', submit: 'Submit', thanks: 'Thank you!', rate: 'Rate the driver', comment: 'Comment (optional)',
+      pay: 'Mark freight as paid', amount: 'Amount (₹)', mode: 'Mode', ref: 'Reference (optional)', paid: 'Payment', received: 'Receipt received',
+      statuses: { ACCEPTED: 'Accepted', WAITING_FOR_PICKUP: 'Waiting for pickup', LOCATION_REACHED: 'Driver at pickup', PICKED_UP: 'Picked up',
+        TRAVELING: 'On the way', ARRIVED_DESTINATION: 'Arrived', DELIVERED: 'Delivered', CANCELLED: 'Cancelled', AMOUNT_NEGOTIATION: 'Accepted' } },
+    ta: { expired: 'இந்த இணைப்பு காலாவதியானது.', load: 'சரக்கு', from: 'இருந்து', to: 'வரை', sender: 'அனுப்புநர்', goods: 'பொருள்', driver: 'ஓட்டுநர்',
+      truck: 'லாரி', call: 'ஓட்டுநரை அழை', eta: 'எதிர்பார்க்கும் ஒப்படைப்பு', last: 'லாரி கடைசியாக', timeline: 'நிலைகள்',
+      otp: 'ஓட்டுநர் வந்துவிட்டார். ஒப்படைப்பு OTP உங்கள் தொலைபேசிக்கு SMS ஆக அனுப்பப்பட்டது. பொருளைச் சரிபார்த்த பின் மட்டும் பகிரவும்.',
+      receipt: 'பெற்றதற்கான ரசீது', photos: 'படங்கள் (1 முதல் 5)', condition: 'நிலை', full: 'முழுமையாகப் பெற்றேன்', damage: 'குறைவு அல்லது சேதம்',
+      remarks: 'குறிப்பு', submit: 'சமர்ப்பி', thanks: 'நன்றி!', rate: 'ஓட்டுநரை மதிப்பிடுங்கள்', comment: 'கருத்து (விருப்பம்)',
+      pay: 'கட்டணம் செலுத்தியதாகக் குறி', amount: 'தொகை (₹)', mode: 'முறை', ref: 'குறிப்பு எண் (விருப்பம்)', paid: 'கட்டணம்', received: 'ரசீது பெறப்பட்டது',
+      statuses: { ACCEPTED: 'ஏற்கப்பட்டது', WAITING_FOR_PICKUP: 'ஏற்றத்துக்குக் காத்திருப்பு', LOCATION_REACHED: 'ஓட்டுநர் வந்தார்', PICKED_UP: 'ஏற்றப்பட்டது',
+        TRAVELING: 'வழியில்', ARRIVED_DESTINATION: 'வந்துவிட்டது', DELIVERED: 'ஒப்படைக்கப்பட்டது', CANCELLED: 'ரத்து', AMOUNT_NEGOTIATION: 'ஏற்கப்பட்டது' } },
+    hi: { expired: 'यह लिंक समाप्त हो गया है।', load: 'लोड', from: 'से', to: 'तक', sender: 'भेजने वाला', goods: 'सामान', driver: 'ड्राइवर',
+      truck: 'ट्रक', call: 'ड्राइवर को कॉल करें', eta: 'अनुमानित डिलीवरी', last: 'ट्रक आखिरी बार', timeline: 'स्थिति',
+      otp: 'ड्राइवर पहुँच गया है। डिलीवरी OTP आपके फ़ोन पर SMS से भेजा गया है। सामान जाँचने के बाद ही बताएँ।',
+      receipt: 'डिलीवरी रसीद', photos: 'फ़ोटो (1 से 5)', condition: 'हालत', full: 'पूरा मिला', damage: 'कमी या नुकसान',
+      remarks: 'टिप्पणी', submit: 'जमा करें', thanks: 'धन्यवाद!', rate: 'ड्राइवर को रेट करें', comment: 'टिप्पणी (वैकल्पिक)',
+      pay: 'भाड़ा भुगतान दर्ज करें', amount: 'राशि (₹)', mode: 'तरीका', ref: 'संदर्भ (वैकल्पिक)', paid: 'भुगतान', received: 'रसीद मिली',
+      statuses: { ACCEPTED: 'स्वीकृत', WAITING_FOR_PICKUP: 'पिकअप का इंतज़ार', LOCATION_REACHED: 'ड्राइवर पहुँचा', PICKED_UP: 'लोड हुआ',
+        TRAVELING: 'रास्ते में', ARRIVED_DESTINATION: 'पहुँच गया', DELIVERED: 'डिलीवर', CANCELLED: 'रद्द', AMOUNT_NEGOTIATION: 'स्वीकृत' } }
+  };
+  const t = T[LANG] || T.en;
+  const api = '/api/v1/public/track/' + encodeURIComponent(TOKEN);
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const when = (iso) => iso ? new Date(iso).toLocaleString(LANG === 'en' ? 'en-IN' : LANG + '-IN', { dateStyle: 'medium', timeStyle: 'short' }) : '';
+  let stars = 0;
+  let timer = null;
+
+  if (EXPIRED) {
+    document.getElementById('expired-text').textContent = t.expired;
+  } else {
+    load();
+    timer = setInterval(load, 30000);
+  }
+
+  async function load() {
+    // never wipe a form the receiver is filling in
+    const a = document.activeElement;
+    if (timer && a && a.closest && a.closest('#app form, #app .stars')) return;
+    const res = await fetch(api);
+    if (res.status === 410) { location.reload(); return; }
+    if (!res.ok) return;
+    render(await res.json());
+  }
+
+  function render(d) {
+    const st = t.statuses[d.status] || d.status;
+    let h = `<div class="card"><h1>${esc(d.code)}</h1><span class="status">${esc(st)}</span>
+      <p>${esc(t.from)}: ${esc(d.pickupArea)}<br>${esc(t.to)}: ${esc(d.dropArea)}</p>
+      <p class="muted">${esc(t.sender)}: ${esc(d.senderName)} · ${esc(t.goods)}: ${esc(d.goodsType)} ${esc(d.description || '')} · ${esc(d.quantity)} ${esc(d.quantityUnit)}</p></div>`;
+    if (d.deliveryOtpNotice) h += `<div class="card notice">${esc(t.otp)}</div>`;
+    if (d.driver) {
+      h += `<div class="card"><h2>${esc(t.driver)}: ${esc(d.driver.name)}</h2><p>${esc(t.truck)}: ${esc(d.driver.truckNumber)}</p>`;
+      if (d.driver.mobile) h += `<a class="btn" href="tel:+91${esc(d.driver.mobile)}">${esc(t.call)}</a>`;
+      h += `</div>`;
+    }
+    if (d.tracking) {
+      const loc = d.tracking.driverLocation;
+      h += `<div class="card"><p>${esc(t.eta)}: <b>${esc(when(d.tracking.etaAt))}</b></p>`;
+      if (loc) h += `<p class="muted">${esc(t.last)}: ${esc(when(loc.at))} — <a href="https://maps.google.com/?q=${loc.lat},${loc.lng}">${loc.lat.toFixed(4)}, ${loc.lng.toFixed(4)}</a></p>`;
+      h += `</div>`;
+    }
+    h += `<div class="card"><h2>${esc(t.timeline)}</h2><ul class="timeline">${(d.timeline || []).map((x) =>
+      `<li>${esc(t.statuses[x.status] || x.status)} — <span class="muted">${esc(when(x.at))}</span></li>`).join('')}</ul></div>`;
+    if (d.receipt) h += `<div class="card"><h2>${esc(t.received)}</h2><p>${esc(d.receipt.condition === 'FULL' ? t.full : t.damage)} ${esc(d.receipt.remarks || '')}</p></div>`;
+    if (d.canSubmitReceipt) {
+      h += `<div class="card"><h2>${esc(t.receipt)}</h2><form id="receipt">
+        <label>${esc(t.photos)}<input type="file" id="photos" accept="image/*" capture="environment" multiple required></label>
+        <label>${esc(t.condition)}<select id="condition"><option value="FULL">${esc(t.full)}</option><option value="SHORTAGE_DAMAGE">${esc(t.damage)}</option></select></label>
+        <label>${esc(t.remarks)}<textarea id="remarks" maxlength="500"></textarea></label>
+        <button type="submit">${esc(t.submit)}</button><p class="err" id="receipt-err"></p></form></div>`;
+    }
+    if (d.canRate) {
+      h += `<div class="card"><h2>${esc(t.rate)}</h2><div class="stars">${[1, 2, 3, 4, 5].map((i) =>
+        `<button type="button" data-s="${i}">${i <= stars ? '★' : '☆'}</button>`).join('')}</div>
+        <input id="comment" maxlength="500" placeholder="${esc(t.comment)}"><button id="rate">${esc(t.submit)}</button></div>`;
+    }
+    if (d.payment) {
+      h += `<div class="card"><h2>${esc(t.paid)}: ${esc(d.payment.status)}</h2>`;
+      if (d.canMarkPaid) {
+        h += `<form id="pay"><label>${esc(t.amount)}<input id="amount" type="number" min="1" required></label>
+          <label>${esc(t.mode)}<select id="mode"><option>UPI</option><option>CASH</option><option>BANK</option></select></label>
+          <label>${esc(t.ref)}<input id="ref" maxlength="60"></label><button type="submit">${esc(t.pay)}</button></form>`;
+      }
+      h += `</div>`;
+    }
+    document.getElementById('app').innerHTML = h;
+    wire();
+    if ((d.status === 'DELIVERED' || d.status === 'CANCELLED') && timer) { clearInterval(timer); timer = null; }
+  }
+
+  async function post(path, body) {
+    const res = await fetch(api + path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    if (!res.ok) { const p = await res.json().catch(() => ({})); throw new Error(p.detail || res.statusText); }
+  }
+
+  function wire() {
+    const receipt = document.getElementById('receipt');
+    if (receipt) receipt.onsubmit = async (e) => {
+      e.preventDefault();
+      try {
+        const ids = [];
+        for (const f of Array.from(document.getElementById('photos').files).slice(0, 5)) {
+          const fd = new FormData(); fd.append('file', f);
+          const r = await fetch(api + '/files', { method: 'POST', body: fd });
+          if (!r.ok) throw new Error((await r.json().catch(() => ({}))).detail || r.statusText);
+          ids.push((await r.json()).id);
+        }
+        await post('/receipt', { fileIds: ids, condition: document.getElementById('condition').value, remarks: document.getElementById('remarks').value });
+        load();
+      } catch (err) { document.getElementById('receipt-err').textContent = err.message; }
+    };
+    document.querySelectorAll('.stars button').forEach((b) => b.onclick = () => {
+      stars = Number(b.dataset.s);
+      document.querySelectorAll('.stars button').forEach((x) => x.textContent = Number(x.dataset.s) <= stars ? '★' : '☆');
+    });
+    const rate = document.getElementById('rate');
+    if (rate) rate.onclick = async () => {
+      if (!stars) return;
+      try { await post('/rating', { stars, tags: [], comment: document.getElementById('comment').value }); load(); } catch (err) { alert(err.message); }
+    };
+    const pay = document.getElementById('pay');
+    if (pay) pay.onsubmit = async (e) => {
+      e.preventDefault();
+      try {
+        await post('/payment/mark-paid', { amountInr: Number(document.getElementById('amount').value), mode: document.getElementById('mode').value,
+          reference: document.getElementById('ref').value || null });
+        load();
+      } catch (err) { alert(err.message); }
+    };
+  }
+</script>
+</body>
+</html>

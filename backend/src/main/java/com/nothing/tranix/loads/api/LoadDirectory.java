@@ -74,6 +74,10 @@ public interface LoadDirectory {
 
     /** M9: open wish-list loads (NOT_ACCEPTED, audience ≠ EVERYONE). */
     List<LoadInfo> openWishlistLoads();
+
+    /** M12 RC-01: loads addressed to a registered receiver (ongoing = not delivered/cancelled), as LoadSummary + deliveryEta. */
+    List<Map<String, Object>> forReceiver(UUID receiverUserId, boolean ongoing);
+
     /** The contract {@code LoadDetail} map for a viewer (shipper/receiver/driver/admin). */
     Map<String, Object> detail(UUID loadId, Viewer viewer);
 

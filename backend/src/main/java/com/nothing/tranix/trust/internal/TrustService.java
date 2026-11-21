@@ -218,6 +218,13 @@ public class TrustService implements TrustApi, MeContributor {
         }
     }
 
+    @Override
+    @Transactional
+    public void rateFromLink(UUID loadId, UUID raterId, UUID rateeId, int stars, List<String> tags, String comment) {
+        pending(loadId, raterId, rateeId, Role.DRIVER);
+        rate(raterId, loadId, rateeId, stars, tags, comment);
+    }
+
     @Transactional
     public void later(UUID raterId, UUID loadId) {
         int n = jdbc.update("update trust_pending_rating set later_used = true where load_id = ? and rater_id = ? and not done and not later_used",

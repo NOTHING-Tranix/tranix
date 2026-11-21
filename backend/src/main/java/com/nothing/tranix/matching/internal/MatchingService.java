@@ -339,14 +339,7 @@ public class MatchingService {
         UserDirectory.UserView driver = users.get(driverId);
         notifier.notify(load.shipperId(), NotificationTab.TRIPS, "LOAD_ACCEPTED",
                 Map.of("code", load.code(), "driver", driver.name(), "truck", d.truckNumber()), "/loads/" + loadId);
-        String shipperName = users.find(load.shipperId()).map(UserDirectory.UserView::name).orElse("");
-        sms.send(load.receiverMobile(), "RECEIVER_TRACKING", Map.of("code", load.code(), "shipper", shipperName,
-                "truck", d.truckNumber()), users.find(load.shipperId()).map(UserDirectory.UserView::language)
-                .orElse(com.nothing.tranix.shared.types.Language.en));
-        if (load.postedForFarmerId() != null) { // B-903: the farmer is the sender and gets the trip details (link page in M12)
-            sms.send(load.senderMobile(), "SENDER_TRACKING", Map.of("code", load.code(), "network", shipperName, "truck", d.truckNumber()),
-                    users.find(load.shipperId()).map(UserDirectory.UserView::language).orElse(com.nothing.tranix.shared.types.Language.en));
-        }
+        // Receiver (and farmer sender) SMS with the tracking link: receiver module, after commit (M12).
         return loads.detail(loadId, LoadDirectory.Viewer.DRIVER);
     }
 

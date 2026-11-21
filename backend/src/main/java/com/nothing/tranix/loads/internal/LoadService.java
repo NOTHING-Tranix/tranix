@@ -573,6 +573,19 @@ public class LoadService implements LoadDirectory {
                 .stream().map(LoadService::info).toList();
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<Map<String, Object>> forReceiver(UUID receiverUserId, boolean ongoing) {
+        List<UUID> ids = jdbc.queryForList("select id from loads_load where receiver_user_id = ? and status <> 'NOT_ACCEPTED' and "
+                + (ongoing ? "status not in ('DELIVERED','CANCELLED')" : "status in ('DELIVERED','CANCELLED')")
+                + " order by pickup_window_start desc limit 200", UUID.class, receiverUserId);
+        return loads.findAllById(ids).stream().sorted((a, b) -> ids.indexOf(a.getId()) - ids.indexOf(b.getId())).map(l -> {
+            Map<String, Object> m = new LinkedHashMap<>(summary(info(l)));
+            m.put("deliveryEta", l.getDeliveryEta());
+            return m;
+        }).toList();
+    }
+
     private Load owned(UUID shipperId, UUID loadId) {
         return loads.findById(loadId).filter(l -> l.getShipperId().equals(shipperId))
                 .orElseThrow(() -> ApiException.notFound("Load"));

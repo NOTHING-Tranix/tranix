@@ -32,7 +32,7 @@ import org.springframework.transaction.event.TransactionalEventListener;
 
 /** B-801, B-802, B-807: freight payment records (paid outside Tranix) and driver earnings history. */
 @Service
-public class PaymentService {
+public class PaymentService implements com.nothing.tranix.payments.api.PaymentApi {
 
     static final ZoneId IST = ZoneId.of("Asia/Kolkata");
 
@@ -162,6 +162,22 @@ public class PaymentService {
         loads.close(loadId);
         events.publishEvent(new PaymentEvents.DisputeDecided(loadId, against, decision));
         return view(loadId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public java.util.Optional<Map<String, Object>> payment(UUID loadId) {
+        return java.util.Optional.ofNullable(view(loadId));
+    }
+
+    @Override
+    @Transactional
+    public Map<String, Object> markPaidFromLink(UUID loadId, long amountInr, PaymentMode mode, String reference) {
+        LoadDirectory.LoadInfo l = loads.find(loadId).orElseThrow(() -> ApiException.notFound("Load"));
+        if (l.freightPaidBy() != FreightPayer.RECEIVER) {
+            throw new ApiException(ErrorCode.FORBIDDEN, "Only the payer marks this payment");
+        }
+        return markPaidBy(null, l, amountInr, mode, reference);
     }
 
     Map<String, Object> view(UUID loadId) {

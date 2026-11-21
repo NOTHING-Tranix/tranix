@@ -22,7 +22,8 @@ public enum ErrorCode {
     ALLOCATION_CONFLICT(HttpStatus.CONFLICT, "Driver or truck already allocated"),
     WISHLIST_FULL(HttpStatus.CONFLICT, "Wish list is full"),
     WISHLIST_EMPTY(HttpStatus.CONFLICT, "No usable wish-list entries"),
-    RATE_LIMITED(HttpStatus.TOO_MANY_REQUESTS, "Too many requests");
+    RATE_LIMITED(HttpStatus.TOO_MANY_REQUESTS, "Too many requests"),
+    LINK_EXPIRED(HttpStatus.GONE, "This link has expired");
 
     private final HttpStatus status;
     private final String title;

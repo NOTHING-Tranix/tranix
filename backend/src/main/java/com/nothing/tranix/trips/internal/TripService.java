@@ -46,7 +46,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /** B-701…B-709 + B-408: current trip, revisions, reached/OTP, help, locations, ETA/route status, tracking. */
 @Service
-public class TripService {
+public class TripService implements com.nothing.tranix.trips.api.TripTracking {
 
     private static final SecureRandom RANDOM = new SecureRandom();
 
@@ -397,6 +397,12 @@ public class TripService {
                 .filter(x -> admin || userId.equals(x.shipperId()) || userId.equals(x.receiverUserId()) || userId.equals(x.orgId()))
                 .orElseThrow(() -> ApiException.notFound("Load"));
         return trackingOf(l);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Map<String, Object> trackingOf(UUID loadId) {
+        return trackingOf(loads.get(loadId));
     }
 
     public Map<String, Object> trackingOf(LoadDirectory.LoadInfo l) {

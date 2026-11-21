@@ -36,6 +36,7 @@
 | `WISHLIST_FULL` | 409 | Wish list limit reached |
 | `WISHLIST_EMPTY` | 409 | Posting with WISHLIST_FIRST/ONLY but no usable entries |
 | `RATE_LIMITED` | 429 | |
+| `LINK_EXPIRED` | 410 | Public tracking link expired (no load data returned) |
 
 ## 2. Enums
 
@@ -203,6 +204,8 @@ LoadDetail = LoadSummary + { pickup, drop, senderName, senderMobile, receiverNam
 
 - App (registered): `GET /receiver/loads?scope=` · `GET /receiver/loads/{id}` · delivery OTP via `GET /loads/{id}/otp` · `POST /receiver/loads/{id}/receipt` · `POST /loads/{id}/payment/mark-paid` (if receiver pays).
 - **Public link (no JWT, token in path):** server page `GET /p/track/{token}`; JSON for the page: `GET /api/v1/public/track/{token}`, `POST /api/v1/public/track/{token}/receipt` `{fileIds[], condition: FULL|SHORTAGE_DAMAGE, remarks?}`, `POST .../rating`, `POST .../payment/mark-paid`. Expired → `410` with no load data.
+- Public JSON `GET /api/v1/public/track/{token}` → `{code, status, audience: RECEIVER|SENDER, senderName, receiverName, goodsType, description, quantity, quantityUnit, pickupArea, dropArea, timeline[], driver?{name, truckNumber, mobile}, tracking?{driverLocation, etaAt, routeStatus}, deliveryOtpNotice, receipt?{condition, remarks, fileIds, at}, freightPaidBy, payment?, canSubmitReceipt, canRate, canMarkPaid, expiresAt}`. Never contains an OTP. Photos: `POST /api/v1/public/track/{token}/files` (multipart `file`) → `{id}`; receipt `{fileIds[1..5], condition, remarks?}` (remarks required for SHORTAGE_DAMAGE; once per load); rating `{stars, tags?, comment?}` once; SENDER links (farmer) are read-only. Links are sent by SMS at acceptance (`RECEIVER_TRACKING`, `SENDER_TRACKING` with `link`) and expire 7 days (setting) after delivery/cancellation → `410 LINK_EXPIRED`.
+- App: `GET /receiver/loads?scope=ONGOING|HISTORY` → `[LoadSummary + deliveryEta]`; `GET /receiver/loads/{id}` → `LoadDetail + {receipt?, canSubmitReceipt}` (payment only when the receiver pays); `POST /receiver/loads/{id}/receipt` same body as the link (files from `POST /files`).
 
 ## 11. Ratings, Trust Score, notifications, support
 
