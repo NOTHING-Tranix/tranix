@@ -477,5 +477,16 @@
   "noTrucksYet": "अभी कोई ट्रक नहीं। पहला ट्रक जोड़ें।",
   "noDriversYet": "अभी कोई ड्राइवर नहीं। पहले ड्राइवर को बुलाएँ।",
   "noTrips": "अभी कोई यात्रा नहीं",
-  "allItems": "सभी"
+  "allItems": "सभी",
+  "incomingLoads": "आने वाले लोड",
+  "noIncomingLoads": "आपकी ओर कोई लोड नहीं आ रहा।",
+  "receiptTitle": "डिलीवरी रसीद",
+  "receiptPhotos": "रसीद फ़ोटो (1 से 5)",
+  "conditionFull": "पूरा मिला",
+  "conditionDamage": "कमी या नुकसान",
+  "remarksLabel": "टिप्पणी",
+  "remarksRequired": "कमी या नुकसान बताएँ",
+  "receiptSent": "रसीद भेज दी गई",
+  "addPhoto": "फ़ोटो जोड़ें",
+  "expectedDelivery": "अनुमानित {time}"
 }

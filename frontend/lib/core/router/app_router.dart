@@ -12,6 +12,8 @@ import '../../features/notifications/notifications_feature.dart';
 import '../../features/wallet/wallet_feature.dart';
 import '../../features/trust_score/trust_feature.dart';
 import '../../features/shipper/wishlist_feature.dart';
+import '../../features/receiver/receiver_feature.dart';
+import '../../shared/models/enums.dart';
 import '../../features/shipper/presentation/shipper_screens.dart';
 import '../../features/onboarding/presentation/welcome_screen.dart';
 import '../../features/shared_shell/role_shell.dart';
@@ -32,6 +34,8 @@ String? redirectFor(SessionState session, String location) {
       final home = Routes.homeFor(me.role);
       if (Routes.public.contains(location)) return home;
       if (home == Routes.unsupported) return location == Routes.unsupported ? null : Routes.unsupported;
+      // Notification deep links use the shipper path; receivers open their own load screen (A-903).
+      if (me.role == Role.receiver && RegExp(r'^/loads/[^/]+$').hasMatch(location)) return '/receiver$location';
       // Stay inside the own role's shell (e.g. a driver can't open /lp).
       for (final shell in RoleTabs.byShell.keys) {
         if (Routes.isInShell(location, shell) && shell != home) return home;
@@ -85,6 +89,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: Routes.postLoad, builder: (_, _) => const PostLoadScreen()),
       GoRoute(path: Routes.postLoadReview, builder: (_, _) => const ReviewLoadScreen()),
       GoRoute(path: '/loads/:id', builder: (_, s) => LoadDetailScreen(id: s.pathParameters['id']!)),
+      GoRoute(path: '/receiver/loads/:id', builder: (_, s) => ReceiverLoadScreen(id: s.pathParameters['id']!)),
       for (final entry in RoleTabs.byShell.entries) _shell(entry.value),
     ],
   );

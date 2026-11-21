@@ -517,5 +517,17 @@
   "noTrucksYet": "No trucks yet. Add your first truck.",
   "noDriversYet": "No drivers yet. Invite your first driver.",
   "noTrips": "No trips yet",
-  "allItems": "All"
+  "allItems": "All",
+  "incomingLoads": "Incoming loads",
+  "noIncomingLoads": "No loads on the way to you.",
+  "receiptTitle": "Delivery receipt",
+  "receiptPhotos": "Receipt photos (1 to 5)",
+  "conditionFull": "Received in full",
+  "conditionDamage": "Shortage or damage",
+  "remarksLabel": "Remarks",
+  "remarksRequired": "Describe the shortage or damage",
+  "receiptSent": "Receipt sent",
+  "addPhoto": "Add photo",
+  "expectedDelivery": "Expected {time}",
+  "@expectedDelivery": {"placeholders": {"time": {"type": "String"}}}
 }

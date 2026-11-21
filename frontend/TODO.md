@@ -103,9 +103,9 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 - [x] **A-805** Trips by driver/truck + CSV export link (OR-05). (2026-11-21)
 
 ## Phase 9 — Receiver (needs B-1004)
-- [ ] **A-901** Receiver incoming loads (RC-01).
-- [ ] **A-902** Load detail with delivery OTP card, receipt upload, mark paid, rating (RC-02).
-- [ ] **A-903** Receiver navigation and notifications.
+- [x] **A-901** Receiver incoming loads (RC-01). (2026-11-21)
+- [x] **A-902** Load detail with delivery OTP card, receipt upload, mark paid, rating (RC-02). (2026-11-21)
+- [x] **A-903** Receiver navigation and notifications. (2026-11-21)
 
 ## Phase 10 — Release
 - [ ] **A-1001** App icon, splash, app name in 3 languages.

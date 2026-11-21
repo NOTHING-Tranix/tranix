@@ -17,7 +17,7 @@ Status: `[ ]` not started · `[~]` in progress · `[x]` done. Claude updates thi
 | M9 | Wish list | B-651 – B-656 | A-408 – A-410, A-512 | Add truck/org to wish list; post "Wish list first"; preferred driver accepts | [x] |
 | M10 | Farmer Network | B-901 – B-904 | A-701 – A-704 | FN registers, adds farmer, posts for farmer; farmer gets SMS (fake) | [x] |
 | M11 | Organization app | (B-502 – B-508 done in M5) | A-801 – A-805 | Org adds trucks/drivers, allocates, watches trips | [x] |
-| M12 | Receiver and public pages | B-1001 – B-1006 | A-901 – A-903 | Receiver tracks by SMS link page and in app; uploads receipt | [ ] |
+| M12 | Receiver and public pages | B-1001 – B-1006 | A-901 – A-903 | Receiver tracks by SMS link page and in app; uploads receipt | [x] |
 | M13 | Support and broadcasts | B-1103 – B-1107 | A-305 – A-307 | Raise ticket, admin replies (Swagger), broadcast appears | [ ] |
 | M14 | Admin API complete | B-1201 – B-1212 | — | All admin actions possible in Swagger | [ ] |
 | M15 | Real integrations | B-1301 – B-1307 | (config only) | Real SMS OTP, real test payment, real maps ETA | [ ] |

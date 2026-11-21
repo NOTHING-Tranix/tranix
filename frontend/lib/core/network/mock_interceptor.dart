@@ -119,6 +119,9 @@ class MockInterceptor extends Interceptor {
     MockRoute('PUT', RegExp(r'^/org/allocations/[^/]+$'), status: 204),
     MockRoute('DELETE', RegExp(r'^/org/allocations/[^/]+$'), status: 204),
     MockRoute('GET', RegExp(r'^/org/trips$'), fixture: 'org_trips.json'),
+    MockRoute('GET', RegExp(r'^/receiver/loads$'), fixture: 'receiver_loads.json'),
+    MockRoute('GET', RegExp(r'^/receiver/loads/[^/]+$'), fixture: 'receiver_load.json'),
+    MockRoute('POST', RegExp(r'^/receiver/loads/[^/]+/receipt$'), status: 204),
   ];
 
   @override

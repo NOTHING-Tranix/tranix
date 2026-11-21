@@ -317,7 +317,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get photo => 'புகைப்படம்';
 
   @override
-  String get addPhoto => 'புகைப்படம் சேர்';
+  String get addPhoto => 'படம் சேர்';
 
   @override
   String get camera => 'கேமரா';
@@ -1534,4 +1534,36 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get allItems => 'அனைத்தும்';
+
+  @override
+  String get incomingLoads => 'வரும் சரக்குகள்';
+
+  @override
+  String get noIncomingLoads => 'உங்களுக்கு வரும் சரக்குகள் இல்லை.';
+
+  @override
+  String get receiptTitle => 'பெற்றதற்கான ரசீது';
+
+  @override
+  String get receiptPhotos => 'ரசீது படங்கள் (1 முதல் 5)';
+
+  @override
+  String get conditionFull => 'முழுமையாகப் பெற்றேன்';
+
+  @override
+  String get conditionDamage => 'குறைவு அல்லது சேதம்';
+
+  @override
+  String get remarksLabel => 'குறிப்பு';
+
+  @override
+  String get remarksRequired => 'குறைவு அல்லது சேதத்தை விவரிக்கவும்';
+
+  @override
+  String get receiptSent => 'ரசீது அனுப்பப்பட்டது';
+
+  @override
+  String expectedDelivery(String time) {
+    return 'எதிர்பார்ப்பு $time';
+  }
 }

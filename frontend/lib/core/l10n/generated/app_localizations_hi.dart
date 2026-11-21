@@ -1521,4 +1521,36 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get allItems => 'सभी';
+
+  @override
+  String get incomingLoads => 'आने वाले लोड';
+
+  @override
+  String get noIncomingLoads => 'आपकी ओर कोई लोड नहीं आ रहा।';
+
+  @override
+  String get receiptTitle => 'डिलीवरी रसीद';
+
+  @override
+  String get receiptPhotos => 'रसीद फ़ोटो (1 से 5)';
+
+  @override
+  String get conditionFull => 'पूरा मिला';
+
+  @override
+  String get conditionDamage => 'कमी या नुकसान';
+
+  @override
+  String get remarksLabel => 'टिप्पणी';
+
+  @override
+  String get remarksRequired => 'कमी या नुकसान बताएँ';
+
+  @override
+  String get receiptSent => 'रसीद भेज दी गई';
+
+  @override
+  String expectedDelivery(String time) {
+    return 'अनुमानित $time';
+  }
 }

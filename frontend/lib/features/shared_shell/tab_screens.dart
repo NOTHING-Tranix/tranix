@@ -12,6 +12,7 @@ import '../driver/trip_feature.dart';
 import '../notifications/notifications_feature.dart';
 import '../farmers/farmers_feature.dart';
 import '../organization/org_feature.dart';
+import '../receiver/receiver_feature.dart';
 import '../payments/payments_feature.dart';
 import '../shipper/presentation/shipper_screens.dart';
 import '../shipper/wishlist_feature.dart';
@@ -34,6 +35,8 @@ Widget tabScreenFor(ShellTab tab) => switch (tab.label) {
       TabLabel.tracking => const _LoadsTab(ongoing: true),
       TabLabel.history when tab.path.startsWith(Routes.lp) || tab.path.startsWith(Routes.fn) => const _LoadsTab(ongoing: false),
       TabLabel.history when tab.path.startsWith(Routes.driver) => const DriverHistoryScreen(),
+      TabLabel.history when tab.path.startsWith(Routes.receiver) => const ReceiverLoadsScreen(ongoing: false),
+      TabLabel.loads => const ReceiverLoadsScreen(ongoing: true),
       _ => PlaceholderTab(tab: tab),
     };
 

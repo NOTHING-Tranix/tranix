@@ -2925,6 +2925,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'All'**
   String get allItems;
+
+  /// No description provided for @incomingLoads.
+  ///
+  /// In en, this message translates to:
+  /// **'Incoming loads'**
+  String get incomingLoads;
+
+  /// No description provided for @noIncomingLoads.
+  ///
+  /// In en, this message translates to:
+  /// **'No loads on the way to you.'**
+  String get noIncomingLoads;
+
+  /// No description provided for @receiptTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery receipt'**
+  String get receiptTitle;
+
+  /// No description provided for @receiptPhotos.
+  ///
+  /// In en, this message translates to:
+  /// **'Receipt photos (1 to 5)'**
+  String get receiptPhotos;
+
+  /// No description provided for @conditionFull.
+  ///
+  /// In en, this message translates to:
+  /// **'Received in full'**
+  String get conditionFull;
+
+  /// No description provided for @conditionDamage.
+  ///
+  /// In en, this message translates to:
+  /// **'Shortage or damage'**
+  String get conditionDamage;
+
+  /// No description provided for @remarksLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Remarks'**
+  String get remarksLabel;
+
+  /// No description provided for @remarksRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Describe the shortage or damage'**
+  String get remarksRequired;
+
+  /// No description provided for @receiptSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Receipt sent'**
+  String get receiptSent;
+
+  /// No description provided for @expectedDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Expected {time}'**
+  String expectedDelivery(String time);
 }
 
 class _AppLocalizationsDelegate

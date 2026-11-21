@@ -22,6 +22,7 @@ abstract final class Routes {
   static const postLoad = '/post';
   static const postLoadReview = '/post/review';
   static String loadDetail(String id) => '/loads/$id';
+  static String receiverLoad(String id) => '/receiver/loads/$id';
   static const driverTruckForm = '/truck';
   static const driverLocker = '/locker';
 

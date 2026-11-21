@@ -13,6 +13,14 @@ Newest first. Claude adds an entry at the end of every session and at every mile
 
 ---
 
+## 2026-11-21 — M12 Receiver and public pages (done; B-1005 ticket in M13)
+- Done: B-1001…B-1004, B-1006, A-901…A-903.
+- Backend: new `receiver` module (V14). Tracking links (random token per load for the receiver, plus the farmer sender on FN loads) are created at acceptance and sent by SMS (`RECEIVER_TRACKING`/`SENDER_TRACKING` with `link`); they expire 7 days after delivery or cancellation (`410 LINK_EXPIRED`, no data). Link page `/p/track/{token}` (en/ta/hi, polls every 30 s) + public JSON; delivery OTP only announced, never returned (tested); after delivery: receipt photos + condition (+ remarks for shortage/damage), rating once, mark paid when the receiver pays. Registered receivers: `GET /receiver/loads`, `/receiver/loads/{id}`, `POST .../receipt`. `ReceiptRecorded` event for B-1005. 61 integration tests green.
+- Frontend: receiver Loads/History tabs, load detail with driver, live tracking, delivery OTP card ("share only after checking"), receipt form (camera/gallery, condition, remarks), payment card when the receiver pays; receiver deep links from notifications open the receiver screen. analyze clean, 50 tests green, debug APK builds.
+- Demo (backend): accept a load (M6) → fake SMS list shows `RECEIVER_TRACKING` with `link` → open it in a phone browser: status, driver, ETA; after delivery submit a receipt and a rating.
+- Demo (mock app): Open as Receiver → TRX-000123 → Delivery receipt form.
+- New: D-31 (assumed link/receipt details); error `LINK_EXPIRED` (410).
+
 ## 2026-11-21 — M11 Organization app (done)
 - Done: A-801…A-805 (backend B-502…B-508 were done in M5).
 - Frontend: Org dashboard (wallet + top up, active trips, Shippers who prefer you, truck/driver counts); Trucks (add/edit/deactivate, detail with documents via `POST /org/trucks/{id}/documents` and live location); Drivers (invite, invited list, performance, allocate a free truck, pause/resume/remove with `ALLOCATION_CONFLICT` message); Trips by driver/truck with CSV export (saved through the system file dialog). analyze clean, 48 tests green, debug APK builds.

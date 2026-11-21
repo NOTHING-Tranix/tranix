@@ -1518,4 +1518,36 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get allItems => 'All';
+
+  @override
+  String get incomingLoads => 'Incoming loads';
+
+  @override
+  String get noIncomingLoads => 'No loads on the way to you.';
+
+  @override
+  String get receiptTitle => 'Delivery receipt';
+
+  @override
+  String get receiptPhotos => 'Receipt photos (1 to 5)';
+
+  @override
+  String get conditionFull => 'Received in full';
+
+  @override
+  String get conditionDamage => 'Shortage or damage';
+
+  @override
+  String get remarksLabel => 'Remarks';
+
+  @override
+  String get remarksRequired => 'Describe the shortage or damage';
+
+  @override
+  String get receiptSent => 'Receipt sent';
+
+  @override
+  String expectedDelivery(String time) {
+    return 'Expected $time';
+  }
 }
