@@ -333,6 +333,7 @@ public class LoadService implements LoadDirectory {
 
     // ------------------------------------------------------------------ cancel / repost (B-406)
 
+    @Override
     @Transactional
     public Map<String, Object> cancel(UUID userId, UUID loadId, String reason, String note) {
         UserDirectory.UserView user = users.get(userId);

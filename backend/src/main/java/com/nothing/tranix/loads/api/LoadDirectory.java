@@ -41,6 +41,9 @@ public interface LoadDirectory {
      */
     boolean acceptAtomically(UUID loadId, UUID driverId, UUID truckId, UUID orgId);
 
+    /** Shipper or driver cancels (B-406 / B-708 rules). */
+    Map<String, Object> cancel(UUID userId, UUID loadId, String reason, String note);
+
     /** Open loads (NOT_ACCEPTED) — for the matching job. */
     List<UUID> openLoadIds();
 

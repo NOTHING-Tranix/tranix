@@ -102,6 +102,39 @@ final class Templates {
                 "अभी कोई ड्राइवर नहीं", "{code}: अभी किसी ने स्वीकार नहीं किया। राशि बढ़ाएँ, समय बदलें, इंतज़ार करें या मुफ़्त रद्द करें।");
     }
 
+    static {
+        add("AMOUNT_REQUEST", true, false,
+                "Amount request", "{code}: driver asks ₹{amount} — {reason}. Answer within {minutes} min; no answer keeps the current amount.",
+                "தொகை கோரிக்கை", "{code}: ஓட்டுநர் ₹{amount} கேட்கிறார் — {reason}. {minutes} நிமிடத்தில் பதிலளிக்கவும்.",
+                "राशि अनुरोध", "{code}: ड्राइवर ₹{amount} माँग रहा है — {reason}। {minutes} मिनट में जवाब दें।");
+        add("AMOUNT_CONFIRMED", true, false, "Amount confirmed", "{code}: new amount ₹{amount}.",
+                "தொகை உறுதி", "{code}: புதிய தொகை ₹{amount}.", "राशि पक्की", "{code}: नई राशि ₹{amount}।");
+        add("AMOUNT_REJECTED", true, false, "Amount not changed", "{code}: the amount stays ₹{amount}. The trip continues.",
+                "தொகை மாறவில்லை", "{code}: தொகை ₹{amount} ஆகவே இருக்கும். பயணம் தொடரும்.",
+                "राशि नहीं बदली", "{code}: राशि ₹{amount} ही रहेगी। यात्रा जारी है।");
+        add("AMOUNT_EXPIRED", true, false, "No answer", "{code}: no answer in time — the amount stays ₹{amount}.",
+                "பதில் இல்லை", "{code}: நேரத்தில் பதில் இல்லை — தொகை ₹{amount}.",
+                "जवाब नहीं मिला", "{code}: समय पर जवाब नहीं — राशि ₹{amount} ही रहेगी।");
+        add("DRIVER_REACHED_PICKUP", true, false, "Driver reached pickup", "{code}: open the trip to see the pickup OTP and share it after loading.",
+                "ஓட்டுநர் வந்துவிட்டார்", "{code}: ஏற்றும் OTP-ஐப் பார்க்க பயணத்தைத் திறக்கவும்.",
+                "ड्राइवर पिकअप पर पहुँचा", "{code}: पिकअप OTP देखने के लिए यात्रा खोलें।");
+        add("DRIVER_REACHED_DROP", true, false, "Driver arrived", "{code}: check the goods, then share the delivery OTP.",
+                "ஓட்டுநர் வந்துவிட்டார்", "{code}: சரக்கைச் சரிபார்த்து, பின் OTP-ஐப் பகிரவும்.",
+                "ड्राइवर पहुँच गया", "{code}: माल जाँचें, फिर डिलीवरी OTP बताएँ।");
+        add("PICKED_UP", true, false, "Picked up", "{code}: goods picked up and on the way.",
+                "ஏற்றப்பட்டது", "{code}: சரக்கு ஏற்றப்பட்டு வருகிறது.", "माल उठाया गया", "{code}: माल उठाया गया और रास्ते में है।");
+        add("DELIVERED", true, false, "Delivered", "{code}: delivered. Please confirm payment and rate the trip.",
+                "ஒப்படைக்கப்பட்டது", "{code}: ஒப்படைக்கப்பட்டது. கட்டணத்தை உறுதிசெய்து மதிப்பிடவும்.",
+                "डिलीवर हुआ", "{code}: डिलीवर हुआ। भुगतान और रेटिंग पूरी करें।");
+        add("RUNNING_LATE", true, false, "Running late", "{code}: the truck is running late.",
+                "தாமதம்", "{code}: லாரி தாமதமாக வருகிறது.", "देरी", "{code}: ट्रक देरी से चल रहा है।");
+        add("CANCELLED_BY_DRIVER", true, false, "Trip cancelled by driver", "{code}: the driver cancelled. You can post the load again.",
+                "ஓட்டுநர் ரத்து செய்தார்", "{code}: ஓட்டுநர் ரத்து செய்தார். மீண்டும் பதிவு செய்யலாம்.",
+                "ड्राइवर ने रद्द किया", "{code}: ड्राइवर ने रद्द किया। आप फिर से पोस्ट कर सकते हैं।");
+        add("CANCELLED_BY_SHIPPER", true, false, "Trip cancelled", "{code}: the shipper cancelled this trip.",
+                "பயணம் ரத்து", "{code}: அனுப்புநர் இந்தப் பயணத்தை ரத்து செய்தார்.", "यात्रा रद्द", "{code}: शिपर ने यह यात्रा रद्द की।");
+    }
+
     private Templates() {
     }
 

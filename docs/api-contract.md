@@ -172,9 +172,9 @@ LoadDetail = LoadSummary + { pickup, drop, senderName, senderMobile, receiverNam
 | `GET /driver/suggestions?sort=NEAREST|AMOUNT|EARLIEST` (empty list when off duty, not verified or the payer wallet is below the trip charge) |\|AMOUNT\|EARLIEST` | `[Suggestion{loadId, goodsType, description, quantity, unit, weightTonnes, pickupArea, dropArea, pickupWindowStart, distanceToPickupKm, minutesToPickup, deliveryEta, amountInr, shipperTrustScore, preferredByShipper}]` (poll 30 s while open) |
 | `POST /driver/suggestions/{loadId}/accept` | → `LoadDetail` or `LOAD_TAKEN` / `INSUFFICIENT_BALANCE` |
 | `POST /driver/suggestions/{loadId}/reject` | `{reason?: TOO_FAR\|LOW_| `GET /driver/suggestions?sort=NEAREST|AMOUNT|EARLIEST` (empty list when off duty, not verified or the payer wallet is below the trip charge) |\|WRONG_TRUCK\|OTHER}` |
-| `GET /driver/current-trip` | `LoadDetail` with exact locations, contacts |
+| `GET /driver/current-trip` | `LoadDetail` with exact locations, contacts; `204` when there is no active trip |
 | `POST /driver/trips/{loadId}/revisions` | `{amountInr, reason}` → `REVISION_LIMIT_REACHED`, `REVISION_PENDING`, `INVALID_STATE` after pickup |
-| `POST /driver/trips/{loadId}/reached` | `{purpose: PICKUP\|DELIVERY, lat, lng, reason?}` → `{distanceM, outsideRadius, otpSentTo}` |
+| `POST /driver/trips/{loadId}/reached` | `{purpose: PICKUP|DELIVERY, lat, lng, reason?}` → `{distanceM, outsideRadius, otpSentTo}`. Outside 500 m without `reason` → nothing changes and `otpSentTo` is null (send again with a reason). `otpSentTo` is a masked mobile |\|DELIVERY, lat, lng, reason?}` → `{distanceM, outsideRadius, otpSentTo}` |
 | `POST /driver/trips/{loadId}/otp/verify` | `{purpose, code, lat, lng, reason?}` → `LoadDetail` |
 | `POST /driver/trips/{loadId}/otp/resend` | `{purpose}` |
 | `POST /driver/trips/{loadId}/otp/help` | `{purpose, lat, lng, note}` |
@@ -184,7 +184,7 @@ LoadDetail = LoadSummary + { pickup, drop, senderName, senderMobile, receiverNam
 | `GET /driver/history?month=&page=` | `{summary{trips, agreedTotalInr, confirmedInr, pendingInr}, items[]}` |
 | `GET /driver/invitations` · `POST /driver/invitations/{id}/accept` · `/reject` | Organization invites |
 | `GET /map/route-services?bbox=&types=` | Petrol bunks, weighbridges, puncture shops, tolls |
-| `GET /map/restrictions?bbox=` | Entry restrictions / no-entry timings |
+| `GET /map/restrictions?bbox=` | Entry restrictions / no-entry timings `[{id, name, lat, lng, radiusKm, noEntryFrom, noEntryTo, vehicleTypes, note}]`. `bbox=minLng,minLat,maxLng,maxLat` (≤ 5°); route services `[{id, type, name, lat, lng}]` |
 
 ## 9. Organization
 
