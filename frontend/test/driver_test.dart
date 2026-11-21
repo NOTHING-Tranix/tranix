@@ -40,4 +40,20 @@ void main() {
     expect(find.text('Truck documents'), findsOneWidget);
     expect(find.text('RC book'), findsOneWidget);
   });
+
+  testWidgets('A-503: suggestions show area-only cards; accept asks to confirm then opens the trip', (tester) async {
+    await openAsDriver(tester);
+    await tester.tap(find.text('Suggestions').last);
+    await tester.pumpAndSettle();
+    expect(find.text('Theni → Coimbatore'), findsOneWidget);
+    expect(find.text('Preferred by this shipper'), findsOneWidget);
+    expect(find.textContaining('min to pickup'), findsOneWidget);
+    await tester.tap(find.text('Accept').last);
+    await tester.pumpAndSettle();
+    expect(find.text('Accept this trip?'), findsOneWidget);
+    expect(find.textContaining('Trip charge ₹50 is deducted now'), findsOneWidget);
+    await tester.tap(find.text('Accept').last);
+    await tester.pumpAndSettle();
+    expect(find.text('Trip accepted'), findsOneWidget);
+  });
 }

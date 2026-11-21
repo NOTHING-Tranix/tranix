@@ -980,4 +980,63 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get invitations => 'நிறுவன அழைப்புகள்';
+
+  @override
+  String get sortNearest => 'அருகில்';
+
+  @override
+  String get sortAmount => 'தொகை';
+
+  @override
+  String get sortEarliest => 'முதலில்';
+
+  @override
+  String get acceptTrip => 'ஏற்கவும்';
+
+  @override
+  String get acceptConfirmTitle => 'இந்தப் பயணத்தை ஏற்கவா?';
+
+  @override
+  String acceptConfirmBody(String amount, String charge) {
+    return 'தொகை $amount. பயணக் கட்டணம் $charge இப்போது கழிக்கப்படும்.';
+  }
+
+  @override
+  String get rejectTrip => 'வேண்டாம்';
+
+  @override
+  String get rejectWhy => 'ஏன் வேண்டாம்?';
+
+  @override
+  String get rrTooFar => 'மிகத் தொலைவு';
+
+  @override
+  String get rrLowAmount => 'தொகை குறைவு';
+
+  @override
+  String get rrWrongTruck => 'தவறான லாரி';
+
+  @override
+  String get preferredTag => 'இந்த அனுப்புநர் உங்களை விரும்புகிறார்';
+
+  @override
+  String toPickup(String km, int minutes) {
+    return '$km தொலைவு · ஏற்றும் இடத்திற்கு $minutes நிமிடம்';
+  }
+
+  @override
+  String get topUpToSeeTrips => 'பயணங்களைப் பார்க்க டாப் அப் செய்யவும்';
+
+  @override
+  String get noSuggestions =>
+      'இப்போது பயணங்கள் இல்லை. சில நிமிடங்களில் புதியவை வரும்.';
+
+  @override
+  String get driverSection => 'ஓட்டுநர்';
+
+  @override
+  String get callAction => 'அழை';
+
+  @override
+  String get tripAccepted => 'பயணம் ஏற்கப்பட்டது';
 }

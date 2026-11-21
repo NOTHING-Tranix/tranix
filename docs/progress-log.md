@@ -13,6 +13,12 @@ Newest first. Claude adds an entry at the end of every session and at every mile
 
 ---
 
+## 2026-11-21 — M5 + M6 done (Driver/fleet; Matching and acceptance)
+- Done: B-501…B-509, A-501, A-502 (M5); B-601…B-607, A-503, A-404 (M6). D-27 assumed (radius steps, location needed to match).
+- Login is role-based: role chosen at sign-up and fixed; JWT carries the role; server checks every endpoint; app opens that role's shell (founder asked 2026-11-21).
+- Demo (dev seed): driver 9000000003 is on duty near Oddanchatram with an approved truck. Sign in as 9000000001, top up, post a load from Oddanchatram (pickup within 25 km of 10.50, 77.76) → sign in as 9000000003 → Suggestions shows it (area only) → Accept → confirm → ₹50 + ₹50 charged; shipper's load detail shows the driver with Call. Organization 9000000004: `POST /api/v1/org/drivers` invite, driver accepts in the app (home banner), then `POST /api/v1/org/allocations`.
+- Next: M7 trip execution (B-701…B-711, B-408; A-504…A-511, A-405, live map for A-404).
+
 ## 2026-11-21 — M5 in progress (backend done, frontend next)
 - Done: B-501…B-509 (fleet module: trucks, invitations, allocations with DB uniqueness, duty/home, org dashboard/drivers/trips/CSV, truck location; dev seed trucks for 9000000003 and 9000000004).
 - Next: A-501 driver home (duty switch, invitation banner) and A-502 driver profile (licence, own truck form + documents, invitation accept/reject, locker); then M0-style checkpoint, then M6.

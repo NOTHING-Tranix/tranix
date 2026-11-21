@@ -969,4 +969,63 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get invitations => 'Organization invitations';
+
+  @override
+  String get sortNearest => 'Nearest';
+
+  @override
+  String get sortAmount => 'Amount';
+
+  @override
+  String get sortEarliest => 'Earliest';
+
+  @override
+  String get acceptTrip => 'Accept';
+
+  @override
+  String get acceptConfirmTitle => 'Accept this trip?';
+
+  @override
+  String acceptConfirmBody(String amount, String charge) {
+    return 'Amount $amount. Trip charge $charge is deducted now.';
+  }
+
+  @override
+  String get rejectTrip => 'Not interested';
+
+  @override
+  String get rejectWhy => 'Why not?';
+
+  @override
+  String get rrTooFar => 'Too far';
+
+  @override
+  String get rrLowAmount => 'Amount too low';
+
+  @override
+  String get rrWrongTruck => 'Wrong truck';
+
+  @override
+  String get preferredTag => 'Preferred by this shipper';
+
+  @override
+  String toPickup(String km, int minutes) {
+    return '$km away · $minutes min to pickup';
+  }
+
+  @override
+  String get topUpToSeeTrips => 'Top up to see trips';
+
+  @override
+  String get noSuggestions =>
+      'No trips right now. New ones arrive every few minutes.';
+
+  @override
+  String get driverSection => 'Driver';
+
+  @override
+  String get callAction => 'Call';
+
+  @override
+  String get tripAccepted => 'Trip accepted';
 }

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/errors/app_exception.dart';
 import '../../../core/errors/error_messages.dart';
@@ -519,6 +520,7 @@ class LoadDetailScreen extends ConsumerWidget {
               Row(children: [Expanded(child: Text(d.code, style: Theme.of(context).textTheme.titleLarge)), StatusChip.load(context, d.status)]),
               const SizedBox(height: 8),
               MoneyText(d.agreedAmountInr, large: true),
+              if (d.driver != null) DriverBlock(driver: d.driver!),
               ListTile(contentPadding: EdgeInsets.zero, leading: const Icon(Icons.trip_origin), title: Text(d.pickup.address),
                   subtitle: Text('${l.sender}: ${d.senderName} · +91 ${d.senderMobile}')),
               ListTile(contentPadding: EdgeInsets.zero, leading: const Icon(Icons.location_on), title: Text(d.drop.address),
@@ -642,3 +644,33 @@ class StatusChipText extends StatelessWidget {
   }
 }
 
+
+/// Driver shown to the shipper after acceptance (LP-04): photo, name, truck, Trust Score, call.
+class DriverBlock extends StatelessWidget {
+  const DriverBlock({super.key, required this.driver});
+
+  final LoadDriver driver;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    return Card(
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundImage: driver.photoUrl == null ? null : NetworkImage(driver.photoUrl!),
+          child: driver.photoUrl == null ? const Icon(Icons.person) : null,
+        ),
+        title: Text(driver.name),
+        subtitle: Text('${driver.truckNumber} · ${vehicleLabel(l, driver.vehicleType)}'),
+        trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+          TrustScoreBadge(score: driver.trustScore),
+          IconButton(
+            tooltip: l.callAction,
+            icon: const Icon(Icons.call),
+            onPressed: () => launchUrl(Uri(scheme: 'tel', path: driver.mobile)),
+          ),
+        ]),
+      ),
+    );
+  }
+}

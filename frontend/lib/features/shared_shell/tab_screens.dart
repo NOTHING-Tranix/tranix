@@ -7,6 +7,7 @@ import '../../core/widgets/widgets.dart';
 import '../../shared/models/models.dart';
 import '../profile/presentation/profile_screens.dart';
 import '../driver/driver_feature.dart';
+import '../driver/suggestions_screen.dart';
 import '../notifications/notifications_feature.dart';
 import '../shipper/presentation/shipper_screens.dart';
 import 'role_shell.dart';
@@ -17,6 +18,7 @@ Widget tabScreenFor(ShellTab tab) => switch (tab.label) {
       TabLabel.notifications => const NotificationsScreen(),
       TabLabel.home when tab.path == Routes.lp || tab.path == Routes.fn => const ShipperHomeScreen(),
       TabLabel.home when tab.path == Routes.driver => const DriverHomeScreen(),
+      TabLabel.suggestions => const SuggestionsScreen(),
       TabLabel.tracking => const _LoadsTab(ongoing: true),
       TabLabel.history when tab.path.startsWith(Routes.lp) || tab.path.startsWith(Routes.fn) => const _LoadsTab(ongoing: false),
       _ => PlaceholderTab(tab: tab),

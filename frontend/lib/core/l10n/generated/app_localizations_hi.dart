@@ -973,4 +973,62 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get invitations => 'संगठन के निमंत्रण';
+
+  @override
+  String get sortNearest => 'सबसे पास';
+
+  @override
+  String get sortAmount => 'राशि';
+
+  @override
+  String get sortEarliest => 'सबसे पहले';
+
+  @override
+  String get acceptTrip => 'स्वीकार करें';
+
+  @override
+  String get acceptConfirmTitle => 'यह यात्रा स्वीकार करें?';
+
+  @override
+  String acceptConfirmBody(String amount, String charge) {
+    return 'राशि $amount। यात्रा शुल्क $charge अभी कटेगा।';
+  }
+
+  @override
+  String get rejectTrip => 'रुचि नहीं';
+
+  @override
+  String get rejectWhy => 'क्यों नहीं?';
+
+  @override
+  String get rrTooFar => 'बहुत दूर';
+
+  @override
+  String get rrLowAmount => 'राशि कम है';
+
+  @override
+  String get rrWrongTruck => 'गलत ट्रक';
+
+  @override
+  String get preferredTag => 'यह शिपर आपको पसंद करता है';
+
+  @override
+  String toPickup(String km, int minutes) {
+    return '$km दूर · पिकअप तक $minutes मिनट';
+  }
+
+  @override
+  String get topUpToSeeTrips => 'यात्राएँ देखने के लिए टॉप अप करें';
+
+  @override
+  String get noSuggestions => 'अभी कोई यात्रा नहीं। कुछ मिनटों में नई आएँगी।';
+
+  @override
+  String get driverSection => 'ड्राइवर';
+
+  @override
+  String get callAction => 'कॉल करें';
+
+  @override
+  String get tripAccepted => 'यात्रा स्वीकार हुई';
 }

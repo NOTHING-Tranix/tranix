@@ -1929,6 +1929,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Organization invitations'**
   String get invitations;
+
+  /// No description provided for @sortNearest.
+  ///
+  /// In en, this message translates to:
+  /// **'Nearest'**
+  String get sortNearest;
+
+  /// No description provided for @sortAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get sortAmount;
+
+  /// No description provided for @sortEarliest.
+  ///
+  /// In en, this message translates to:
+  /// **'Earliest'**
+  String get sortEarliest;
+
+  /// No description provided for @acceptTrip.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept'**
+  String get acceptTrip;
+
+  /// No description provided for @acceptConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept this trip?'**
+  String get acceptConfirmTitle;
+
+  /// No description provided for @acceptConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount {amount}. Trip charge {charge} is deducted now.'**
+  String acceptConfirmBody(String amount, String charge);
+
+  /// No description provided for @rejectTrip.
+  ///
+  /// In en, this message translates to:
+  /// **'Not interested'**
+  String get rejectTrip;
+
+  /// No description provided for @rejectWhy.
+  ///
+  /// In en, this message translates to:
+  /// **'Why not?'**
+  String get rejectWhy;
+
+  /// No description provided for @rrTooFar.
+  ///
+  /// In en, this message translates to:
+  /// **'Too far'**
+  String get rrTooFar;
+
+  /// No description provided for @rrLowAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount too low'**
+  String get rrLowAmount;
+
+  /// No description provided for @rrWrongTruck.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong truck'**
+  String get rrWrongTruck;
+
+  /// No description provided for @preferredTag.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferred by this shipper'**
+  String get preferredTag;
+
+  /// No description provided for @toPickup.
+  ///
+  /// In en, this message translates to:
+  /// **'{km} away · {minutes} min to pickup'**
+  String toPickup(String km, int minutes);
+
+  /// No description provided for @topUpToSeeTrips.
+  ///
+  /// In en, this message translates to:
+  /// **'Top up to see trips'**
+  String get topUpToSeeTrips;
+
+  /// No description provided for @noSuggestions.
+  ///
+  /// In en, this message translates to:
+  /// **'No trips right now. New ones arrive every few minutes.'**
+  String get noSuggestions;
+
+  /// No description provided for @driverSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver'**
+  String get driverSection;
+
+  /// No description provided for @callAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Call'**
+  String get callAction;
+
+  /// No description provided for @tripAccepted.
+  ///
+  /// In en, this message translates to:
+  /// **'Trip accepted'**
+  String get tripAccepted;
 }
 
 class _AppLocalizationsDelegate

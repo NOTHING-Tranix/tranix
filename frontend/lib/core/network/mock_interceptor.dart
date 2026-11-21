@@ -60,6 +60,8 @@ class MockInterceptor extends Interceptor {
     MockRoute('POST', RegExp(r'^/loads/[^/]+/(cancel|repost)$'), fixture: 'load_detail.json'),
     MockRoute('GET', RegExp(r'^/driver/suggestions$'), fixture: 'driver_suggestions.json'),
     MockRoute('GET', RegExp(r'^/driver/home$'), fixture: 'driver_home.json'),
+    MockRoute('POST', RegExp(r'^/driver/suggestions/[^/]+/accept$'), fixture: 'load_detail.json'),
+    MockRoute('POST', RegExp(r'^/driver/suggestions/[^/]+/reject$'), status: 204),
     MockRoute('PUT', RegExp(r'^/driver/duty$'), status: 204),
     MockRoute('GET', RegExp(r'^/driver/truck$'), fixture: 'driver_truck.json'),
     MockRoute('POST', RegExp(r'^/driver/truck$'), fixture: 'driver_truck.json'),
