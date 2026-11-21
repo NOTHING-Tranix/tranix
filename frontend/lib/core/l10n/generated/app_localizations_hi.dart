@@ -1553,4 +1553,69 @@ class AppLocalizationsHi extends AppLocalizations {
   String expectedDelivery(String time) {
     return 'अनुमानित $time';
   }
+
+  @override
+  String get newTicket => 'नया अनुरोध';
+
+  @override
+  String get noTickets => 'अभी कोई सहायता अनुरोध नहीं।';
+
+  @override
+  String get ticketType => 'प्रकार';
+
+  @override
+  String get ticketComplaint => 'शिकायत';
+
+  @override
+  String get ticketFeedback => 'सुझाव';
+
+  @override
+  String get ticketWallet => 'वॉलेट';
+
+  @override
+  String get ticketPaymentDispute => 'भुगतान विवाद';
+
+  @override
+  String get ticketOthers => 'अन्य';
+
+  @override
+  String get otherTopic => 'किस बारे में?';
+
+  @override
+  String get tripOptional => 'यात्रा (वैकल्पिक)';
+
+  @override
+  String get tripRequired => 'यात्रा';
+
+  @override
+  String get descriptionLabel => 'विवरण';
+
+  @override
+  String get photosUpTo3 => 'फ़ोटो (3 तक)';
+
+  @override
+  String get writeMessage => 'संदेश लिखें';
+
+  @override
+  String get reopenAction => 'फिर खोलें';
+
+  @override
+  String get ticketOpen => 'खुला';
+
+  @override
+  String get ticketClosed => 'बंद';
+
+  @override
+  String closedReason(String reason) {
+    return 'बंद: $reason';
+  }
+
+  @override
+  String get youLabel => 'आप';
+
+  @override
+  String get tranixSupport => 'ट्रानिक्स सहायता';
+
+  @override
+  String get ticketCreated => 'अनुरोध भेजा गया। जवाब यहीं आएगा।';
 }

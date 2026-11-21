@@ -54,9 +54,9 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 - [x] **A-302** Top-up via external browser link; refresh on resume. (2026-11-21)
 - [!] **A-303** FCM setup, token registration, foreground notifications, tap routing. — code done (PushService); needs Firebase project + google-services.json (founder-review F-4)
 - [x] **A-304** Notifications screen with tabs (S-09) + home cards. (2026-11-21)
-- [ ] **A-305** Support new ticket, list, thread, reopen (S-10).
-- [ ] **A-306** Home cards: latest Tranix message and trip update.
-- [ ] **A-307** Low-balance and verification banners on homes.
+- [x] **A-305** Support new ticket, list, thread, reopen (S-10). (2026-11-21)
+- [x] **A-306** Home cards: latest Tranix message and trip update. (2026-11-21)
+- [x] **A-307** Low-balance and verification banners on homes. (2026-11-21)
 
 ## Phase 4 — Load Provider (needs B-401…B-409, B-702, B-801)
 - [x] **A-401** LP home (LP-01). (2026-11-21)

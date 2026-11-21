@@ -1566,4 +1566,69 @@ class AppLocalizationsTa extends AppLocalizations {
   String expectedDelivery(String time) {
     return 'எதிர்பார்ப்பு $time';
   }
+
+  @override
+  String get newTicket => 'புதிய கோரிக்கை';
+
+  @override
+  String get noTickets => 'இன்னும் உதவி கோரிக்கைகள் இல்லை.';
+
+  @override
+  String get ticketType => 'வகை';
+
+  @override
+  String get ticketComplaint => 'புகார்';
+
+  @override
+  String get ticketFeedback => 'கருத்து';
+
+  @override
+  String get ticketWallet => 'வாலெட்';
+
+  @override
+  String get ticketPaymentDispute => 'கட்டண சர்ச்சை';
+
+  @override
+  String get ticketOthers => 'மற்றவை';
+
+  @override
+  String get otherTopic => 'எதைப் பற்றி?';
+
+  @override
+  String get tripOptional => 'பயணம் (விருப்பம்)';
+
+  @override
+  String get tripRequired => 'பயணம்';
+
+  @override
+  String get descriptionLabel => 'விவரம்';
+
+  @override
+  String get photosUpTo3 => 'படங்கள் (3 வரை)';
+
+  @override
+  String get writeMessage => 'செய்தி எழுதுங்கள்';
+
+  @override
+  String get reopenAction => 'மீண்டும் திற';
+
+  @override
+  String get ticketOpen => 'திறந்துள்ளது';
+
+  @override
+  String get ticketClosed => 'மூடப்பட்டது';
+
+  @override
+  String closedReason(String reason) {
+    return 'மூடப்பட்டது: $reason';
+  }
+
+  @override
+  String get youLabel => 'நீங்கள்';
+
+  @override
+  String get tranixSupport => 'டிரானிக்ஸ் உதவி மையம்';
+
+  @override
+  String get ticketCreated => 'கோரிக்கை அனுப்பப்பட்டது. இங்கே பதில் வரும்.';
 }

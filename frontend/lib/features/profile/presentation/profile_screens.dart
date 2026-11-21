@@ -942,6 +942,16 @@ Future<void> showProfileSheet(BuildContext context, WidgetRef ref) {
                     },
                   ),
                 ListTile(
+                  key: const Key('menu-support'),
+                  contentPadding: EdgeInsets.zero,
+                  leading: const Icon(Icons.support_agent),
+                  title: Text(l.support),
+                  onTap: () {
+                    Navigator.pop(sheetContext);
+                    context.push(Routes.support);
+                  },
+                ),
+                ListTile(
                   contentPadding: EdgeInsets.zero,
                   title: Text(l.trustScore),
                   trailing: TrustScoreBadge(score: me.trustScore),

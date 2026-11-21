@@ -13,6 +13,13 @@ Newest first. Claude adds an entry at the end of every session and at every mile
 
 ---
 
+## 2026-11-21 — M13 Support and broadcasts (done)
+- Done: B-1103…B-1107, B-1005, A-305…A-307.
+- Backend: new `support` module (V15): tickets with codes `TKT-000001`, conversation, unread flags for user/admin, reopen within 7 days (setting), admin `/admin/tickets` list/detail/reply (optionally close)/ignore with reason (audited, user notified); payment disputes and receipt shortage/damage open tickets automatically. Broadcasts in engagement: all/role/district/user, now or scheduled (job every minute) → "Tranix messages" inbox + push. Rating reminders and document-expiry/low-balance notifications confirmed wired. 64 integration tests green.
+- Frontend: Support screen (menu → Support): history with unread dot, new request (type, other text, trip picker per role, description, up to 3 photos), conversation thread with reply and Reopen; driver home now shows the latest Tranix message/trip update cards; the trip help button opens Support. analyze clean, 51 tests green, debug APK builds.
+- Demo: app → profile menu → Support → New request. Admin (Swagger): `GET /api/v1/admin/tickets`, `POST /api/v1/admin/tickets/{id}/reply {body}`; `POST /api/v1/admin/broadcasts {title, body, audience: ALL}` → appears in every inbox.
+- New: D-32 (assumed support details).
+
 ## 2026-11-21 — M12 Receiver and public pages (done; B-1005 ticket in M13)
 - Done: B-1001…B-1004, B-1006, A-901…A-903.
 - Backend: new `receiver` module (V14). Tracking links (random token per load for the receiver, plus the farmer sender on FN loads) are created at acceptance and sent by SMS (`RECEIVER_TRACKING`/`SENDER_TRACKING` with `link`); they expire 7 days after delivery or cancellation (`410 LINK_EXPIRED`, no data). Link page `/p/track/{token}` (en/ta/hi, polls every 30 s) + public JSON; delivery OTP only announced, never returned (tested); after delivery: receipt photos + condition (+ remarks for shortage/damage), rating once, mark paid when the receiver pays. Registered receivers: `GET /receiver/loads`, `/receiver/loads/{id}`, `POST .../receipt`. `ReceiptRecorded` event for B-1005. 61 integration tests green.

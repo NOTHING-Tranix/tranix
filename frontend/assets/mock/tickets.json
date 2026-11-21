@@ -1,0 +1,5 @@
+[
+  { "id": "t1000000-0000-4000-8000-000000000001", "code": "TKT-000012", "type": "WALLET", "otherText": null, "status": "OPEN", "loadId": null,
+    "loadCode": null, "description": "Top-up of 500 not credited", "unread": true, "closeReason": null,
+    "createdAt": "2026-11-20T08:00:00Z", "updatedAt": "2026-11-21T09:00:00Z", "closedAt": null }
+]

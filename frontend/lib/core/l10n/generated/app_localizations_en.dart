@@ -1550,4 +1550,69 @@ class AppLocalizationsEn extends AppLocalizations {
   String expectedDelivery(String time) {
     return 'Expected $time';
   }
+
+  @override
+  String get newTicket => 'New request';
+
+  @override
+  String get noTickets => 'No support requests yet.';
+
+  @override
+  String get ticketType => 'Type';
+
+  @override
+  String get ticketComplaint => 'Complaint';
+
+  @override
+  String get ticketFeedback => 'Feedback';
+
+  @override
+  String get ticketWallet => 'Wallet';
+
+  @override
+  String get ticketPaymentDispute => 'Payment dispute';
+
+  @override
+  String get ticketOthers => 'Others';
+
+  @override
+  String get otherTopic => 'What is it about?';
+
+  @override
+  String get tripOptional => 'Trip (optional)';
+
+  @override
+  String get tripRequired => 'Trip';
+
+  @override
+  String get descriptionLabel => 'Description';
+
+  @override
+  String get photosUpTo3 => 'Photos (up to 3)';
+
+  @override
+  String get writeMessage => 'Write a message';
+
+  @override
+  String get reopenAction => 'Reopen';
+
+  @override
+  String get ticketOpen => 'Open';
+
+  @override
+  String get ticketClosed => 'Closed';
+
+  @override
+  String closedReason(String reason) {
+    return 'Closed: $reason';
+  }
+
+  @override
+  String get youLabel => 'You';
+
+  @override
+  String get tranixSupport => 'Tranix support';
+
+  @override
+  String get ticketCreated => 'Request sent. Tranix support will reply here.';
 }

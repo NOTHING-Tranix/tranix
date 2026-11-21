@@ -2985,6 +2985,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Expected {time}'**
   String expectedDelivery(String time);
+
+  /// No description provided for @newTicket.
+  ///
+  /// In en, this message translates to:
+  /// **'New request'**
+  String get newTicket;
+
+  /// No description provided for @noTickets.
+  ///
+  /// In en, this message translates to:
+  /// **'No support requests yet.'**
+  String get noTickets;
+
+  /// No description provided for @ticketType.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get ticketType;
+
+  /// No description provided for @ticketComplaint.
+  ///
+  /// In en, this message translates to:
+  /// **'Complaint'**
+  String get ticketComplaint;
+
+  /// No description provided for @ticketFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback'**
+  String get ticketFeedback;
+
+  /// No description provided for @ticketWallet.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet'**
+  String get ticketWallet;
+
+  /// No description provided for @ticketPaymentDispute.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment dispute'**
+  String get ticketPaymentDispute;
+
+  /// No description provided for @ticketOthers.
+  ///
+  /// In en, this message translates to:
+  /// **'Others'**
+  String get ticketOthers;
+
+  /// No description provided for @otherTopic.
+  ///
+  /// In en, this message translates to:
+  /// **'What is it about?'**
+  String get otherTopic;
+
+  /// No description provided for @tripOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Trip (optional)'**
+  String get tripOptional;
+
+  /// No description provided for @tripRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Trip'**
+  String get tripRequired;
+
+  /// No description provided for @descriptionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get descriptionLabel;
+
+  /// No description provided for @photosUpTo3.
+  ///
+  /// In en, this message translates to:
+  /// **'Photos (up to 3)'**
+  String get photosUpTo3;
+
+  /// No description provided for @writeMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Write a message'**
+  String get writeMessage;
+
+  /// No description provided for @reopenAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Reopen'**
+  String get reopenAction;
+
+  /// No description provided for @ticketOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get ticketOpen;
+
+  /// No description provided for @ticketClosed.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get ticketClosed;
+
+  /// No description provided for @closedReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed: {reason}'**
+  String closedReason(String reason);
+
+  /// No description provided for @youLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'You'**
+  String get youLabel;
+
+  /// No description provided for @tranixSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Tranix support'**
+  String get tranixSupport;
+
+  /// No description provided for @ticketCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'Request sent. Tranix support will reply here.'**
+  String get ticketCreated;
 }
 
 class _AppLocalizationsDelegate

@@ -370,7 +370,7 @@ class _CurrentTripScreenState extends ConsumerState<CurrentTripScreen> {
                   TextButton(onPressed: () => _cancel(t), child: Text(l.cancelTrip)),
                 ],
                 if (!beforePickup && t.status != LoadStatus.delivered)
-                  TextButton(onPressed: () => context.push(Routes.notifications), child: Text(l.support)),
+                  TextButton(onPressed: () => context.push(Routes.support), child: Text(l.support)),
               ],
             );
           },

@@ -105,6 +105,7 @@ class DriverHomeScreen extends ConsumerWidget {
             padding: const EdgeInsets.all(16),
             children: [
               for (final inv in invitations) InvitationCard(invitation: inv),
+              const HomeNotificationCards(),
               Card(
                 child: SwitchListTile(
                   key: const Key('duty'),

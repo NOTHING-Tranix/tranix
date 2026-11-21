@@ -13,6 +13,7 @@ import '../../features/wallet/wallet_feature.dart';
 import '../../features/trust_score/trust_feature.dart';
 import '../../features/shipper/wishlist_feature.dart';
 import '../../features/receiver/receiver_feature.dart';
+import '../../features/support/support_feature.dart';
 import '../../shared/models/enums.dart';
 import '../../features/shipper/presentation/shipper_screens.dart';
 import '../../features/onboarding/presentation/welcome_screen.dart';
@@ -83,6 +84,8 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: Routes.wallet, builder: (_, _) => const WalletScreen()),
       GoRoute(path: Routes.trustScore, builder: (_, _) => const TrustScoreScreen()),
       GoRoute(path: Routes.wishlist, builder: (_, _) => const WishlistScreen()),
+      GoRoute(path: Routes.support, builder: (_, _) => const SupportScreen()),
+      GoRoute(path: '/support/:id', builder: (_, s) => TicketScreen(id: s.pathParameters['id']!)),
       GoRoute(path: Routes.notifications, builder: (_, _) => const NotificationsScreen()),
       GoRoute(path: Routes.driverTruckForm, builder: (_, _) => const TruckFormScreen()),
       GoRoute(path: Routes.driverLocker, builder: (_, _) => const LockerScreen()),

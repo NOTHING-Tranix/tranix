@@ -18,6 +18,8 @@ abstract final class Routes {
   static const wallet = '/wallet';
   static const trustScore = '/trust-score';
   static const wishlist = '/wishlist';
+  static const support = '/support';
+  static String ticket(String id) => '/support/$id';
   static const notifications = '/notifications';
   static const postLoad = '/post';
   static const postLoadReview = '/post/review';
