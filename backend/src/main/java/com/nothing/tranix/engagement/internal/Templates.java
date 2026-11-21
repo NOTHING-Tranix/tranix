@@ -154,6 +154,14 @@ final class Templates {
                 "भुगतान विवाद", "{code}: ड्राइवर ने भुगतान विवाद उठाया। सहायता टीम संपर्क करेगी।");
         add("RATING_REMINDER", true, false, "Rate your trip", "{code}: please rate your trip partner.",
                 "பயணத்தை மதிப்பிடவும்", "{code}: உங்கள் பயணக் கூட்டாளியை மதிப்பிடவும்.", "यात्रा रेट करें", "{code}: अपने यात्रा साथी को रेट करें।");
+        add("BROADCAST", true, false, "{title}", "{body}", "{title}", "{body}", "{title}", "{body}");
+        add("SUPPORT_REPLY", true, false, "Reply from Tranix support", "Ticket {ticket}: {body}",
+                "டிரானிக்ஸ் உதவி மையத்தின் பதில்", "டிக்கெட் {ticket}: {body}", "ट्रानिक्स सहायता का जवाब", "टिकट {ticket}: {body}");
+        add("TICKET_CLOSED", true, false, "Ticket closed", "Ticket {ticket} was closed: {reason}",
+                "டிக்கெட் மூடப்பட்டது", "டிக்கெட் {ticket} மூடப்பட்டது: {reason}", "टिकट बंद", "टिकट {ticket} बंद किया गया: {reason}");
+        add("TICKET_OPENED", false, false, "Support ticket opened", "Ticket {ticket} was opened for {code}. Tranix support will contact you.",
+                "உதவி டிக்கெட் திறக்கப்பட்டது", "{code}-க்கு டிக்கெட் {ticket} திறக்கப்பட்டது. உதவி மையம் தொடர்பு கொள்ளும்.",
+                "सहायता टिकट खुला", "{code} के लिए टिकट {ticket} खोला गया। सहायता टीम संपर्क करेगी।");
     }
 
     private Templates() {

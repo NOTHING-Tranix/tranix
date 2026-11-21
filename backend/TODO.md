@@ -141,17 +141,17 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 - [x] **B-1002** Thymeleaf `/p/track/{token}` (mobile-first, en/ta/hi, polling JSON every 30 s) + `GET /api/v1/public/track/{token}`; expired → 410, no data. (2026-11-21)
 - [x] **B-1003** Public receipt upload, condition, rating, mark paid. (2026-11-21)
 - [x] **B-1004** Registered receiver endpoints (`/receiver/loads`) and delivery OTP in app. (2026-11-21)
-- [~] **B-1005** Shortage/damage auto-opens a ticket. (event `ReceiptRecorded` published; ticket created by support in M13)
+- [x] **B-1005** Shortage/damage auto-opens a ticket. (2026-11-21)
 - [x] **B-1006** Link page never shows the delivery OTP (test). (2026-11-21)
 
 ## Phase 11 — Notifications and support
 - [x] **B-1101** Notification inbox with tabs + `summary` (latest Tranix message, latest trip update). (2026-11-21)
 - [x] **B-1102** Event → template (en/ta/hi) → FCM push and/or SMS router. (2026-11-21)
-- [ ] **B-1103** Broadcasts (all/role/district/user; scheduled) → inbox + push.
-- [ ] **B-1104** Tickets: create, list, detail, messages, reopen within 7 days.
-- [ ] **B-1105** Unread reply indicators.
-- [ ] **B-1106** Pending-rating reminder notifications.
-- [ ] **B-1107** Document expiry and low-balance notifications wired.
+- [x] **B-1103** Broadcasts (all/role/district/user; scheduled) → inbox + push. (2026-11-21)
+- [x] **B-1104** Tickets: create, list, detail, messages, reopen within 7 days. (2026-11-21)
+- [x] **B-1105** Unread reply indicators. (2026-11-21)
+- [x] **B-1106** Pending-rating reminder notifications. (2026-11-21)
+- [x] **B-1107** Document expiry and low-balance notifications wired. (2026-11-21)
 
 ## Phase 12 — Admin API (used via Swagger until Flutter web admin)
 - [ ] **B-1201** Admin seeding, allow-listed mobiles, 30-min idle timeout.

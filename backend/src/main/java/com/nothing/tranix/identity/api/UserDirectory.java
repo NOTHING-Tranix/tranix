@@ -47,4 +47,7 @@ public interface UserDirectory {
     static String orgCode(UUID orgId) {
         return "ORG-" + orgId.toString().substring(0, 6).toUpperCase(java.util.Locale.ROOT);
     }
+
+    /** M13 broadcasts: active (not suspended) users, optionally only one role and/or district (null = any). */
+    List<UUID> audience(Role role, String district);
 }

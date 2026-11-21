@@ -130,6 +130,22 @@ class UserDirectoryImpl implements UserDirectory {
                 }, "%" + term.replace("%", "") + "%", code, code.replace("%", "") + "%", limit);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<UUID> audience(com.nothing.tranix.shared.types.Role role, String district) {
+        StringBuilder sql = new StringBuilder("select u.id from identity_user u left join identity_address a on a.user_id = u.id where u.suspended_at is null and u.role <> 'ADMIN'");
+        List<Object> args = new java.util.ArrayList<>();
+        if (role != null) {
+            sql.append(" and u.role = ?");
+            args.add(role.name());
+        }
+        if (district != null && !district.isBlank()) {
+            sql.append(" and lower(a.district) = ?");
+            args.add(district.trim().toLowerCase(java.util.Locale.ROOT));
+        }
+        return jdbc.queryForList(sql.toString(), UUID.class, args.toArray());
+    }
+
     static UserView view(User u) {
         return new UserView(u.getId(), u.getName(), u.getMobile(), u.getRole(), u.getLanguage(),
                 u.getVerificationStatus(), u.getTrustScore(), u.isSuspended(), u.getPhotoFileId());

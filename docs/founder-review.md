@@ -14,6 +14,7 @@ Items Claude could not finish or decided on its own while working in autopilot. 
 | D-29 | Payment on time = 7 days; dispute outcomes; Org score = avg drivers + own events | docs/decisions.md |
 | D-30 | Org code format, ranking bonus 10, wish-list window behaviour | docs/decisions.md |
 | D-31 | Link expiry on cancel, link rating, receipt rules, farmer link view-only | docs/decisions.md |
+| D-32 | Ticket rules, automatic tickets, broadcast audience | docs/decisions.md |
 | --- | --- | --- |
 
 ## Actions only the founder can do
