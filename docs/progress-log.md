@@ -13,6 +13,12 @@ Newest first. Claude adds an entry at the end of every session and at every mile
 
 ---
 
+## 2026-11-21 — M15 Real integrations (adapters ready; blocked on founder keys)
+- Done: B-1307 (per-environment switches `tranix.integrations.*`, production config from environment variables).
+- Built and unit-tested behind switches (default fake): MSG91 Flow SMS with DLT template ids per key/language (B-1301), Razorpay payment links + HMAC webhook check, `X-Razorpay-Signature` accepted (B-1302), FCM HTTP v1 with a service-account JWT and token cache (B-1303), Google Routes with 24 h cache and monthly budget (setting `maps.monthly_route_calls`) falling back to the straight-line estimate (B-1304). Top-up return page `/p/wallet/topup/done`.
+- Blocked `[!]`: B-1301…B-1304 need keys (F-4, F-5, F-7, F-8); B-1305 S3 needs AWS (F-9); B-1306 Aadhaar provider (F-3).
+- Tests: 18 unit + 67 integration green.
+
 ## 2026-11-21 — M14 Admin API complete (done)
 - Done: B-1201…B-1212 (B-1205 verification tabs from M2, B-1206 tickets from M13).
 - Backend: admin allow-list (`ADMIN_MOBILES`, seeded at start-up; dev = 9000000006) and 30-minute idle timeout on admin refresh; dashboard metrics (open/active loads, fleet on duty, pending verifications, open support, freight and payment split, route status, review reminders, top-ups and cancellations today); loads list (10/page, search by code/area/mobile) + detail with tracking, cancellations, location exceptions, OTP help; admin cancel (also after pickup) and OTP override; fleet list; users search/suspend (signs out)/reactivate; cancellations decide (REVERSE returns points); payment disputes list; location-exception review; typed settings with "weights = 100%" check; map restrictions CRUD; audit query. Every admin write is audited. 67 integration tests green.

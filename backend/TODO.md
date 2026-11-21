@@ -168,13 +168,13 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 - [x] **B-1212** Audit log for every admin action + query. (2026-11-21)
 
 ## Phase 13 — Real integrations
-- [ ] **B-1301** SMS provider (MSG91, DLT templates en/ta/hi) — Q-03.
-- [ ] **B-1302** Payment gateway (Razorpay) checkout + webhook — Q-02.
-- [ ] **B-1303** FCM push with service account.
-- [ ] **B-1304** Maps (routes, ETA, places) with caching and budget guard — Q-05.
-- [ ] **B-1305** S3 storage with signed URLs.
-- [ ] **B-1306** Aadhaar offline verification / DigiLocker — Q-04.
-- [ ] **B-1307** Per-environment switches fake ↔ real.
+- [!] **B-1301** SMS provider (MSG91, DLT templates en/ta/hi) — Q-03. — adapter built + unit-tested behind the switch; needs founder keys (docs/founder-review.md)
+- [!] **B-1302** Payment gateway (Razorpay) checkout + webhook — Q-02. — adapter built + unit-tested behind the switch; needs founder keys (docs/founder-review.md)
+- [!] **B-1303** FCM push with service account. — adapter built + unit-tested behind the switch; needs founder keys (docs/founder-review.md)
+- [!] **B-1304** Maps (routes, ETA, places) with caching and budget guard — Q-05. — adapter built + unit-tested behind the switch; needs founder keys (docs/founder-review.md)
+- [!] **B-1305** S3 storage with signed URLs. — blocked: founder account needed (docs/founder-review.md)
+- [!] **B-1306** Aadhaar offline verification / DigiLocker — Q-04. — blocked: founder account needed (docs/founder-review.md)
+- [x] **B-1307** Per-environment switches fake ↔ real. (2026-11-21)
 
 ## Phase 14 — Hardening and release
 - [ ] **B-1401** Rate limits (OTP, sign-in, public tokens).

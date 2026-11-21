@@ -48,6 +48,13 @@ class TopupPageController {
         model.addAttribute("t", TEXT.getOrDefault(p.language(), TEXT.get("en")));
         return "wallet/topup";
     }
+
+    /** Gateway callback after checkout (Razorpay `callback_url`): the wallet is credited only by the signed webhook. */
+    @GetMapping("/p/wallet/topup/done")
+    String done(@RequestParam(name = "lang", defaultValue = "en") String lang, Model model) {
+        model.addAttribute("t", TEXT.getOrDefault(lang, TEXT.get("en")));
+        return "wallet/done";
+    }
 }
 
 /** Dev only: the fake gateway's "checkout" — pressing Pay posts a correctly signed webhook. */

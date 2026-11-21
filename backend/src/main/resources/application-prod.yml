@@ -4,6 +4,27 @@ tranix:
     secret: ${JWT_SECRET}
   files:
     signing-secret: ${FILES_SIGNING_SECRET}
+  admin:
+    mobiles: ${ADMIN_MOBILES}
+  # B-1307: fake ↔ real switches. Each real adapter needs its keys below (docs/founder-review.md F-4, F-5, F-7, F-8).
+  integrations:
+    sms: ${SMS_PROVIDER:fake}            # msg91
+    payments: ${PAYMENT_PROVIDER:fake}   # razorpay
+    push: ${PUSH_PROVIDER:fake}          # fcm
+    maps: ${MAPS_PROVIDER:fake}          # google
+    files: local                         # s3 after F-9 (AWS)
+    aadhaar: disabled                    # provider after F-3
+  msg91:
+    auth-key: ${MSG91_AUTH_KEY:}
+    # DLT template ids per key and language, e.g. MSG91_TEMPLATES_OTP_SIGN_IN_EN → tranix.msg91.templates.OTP_SIGN_IN.en
+  razorpay:
+    key-id: ${RAZORPAY_KEY_ID:}
+    key-secret: ${RAZORPAY_KEY_SECRET:}
+    webhook-secret: ${RAZORPAY_WEBHOOK_SECRET:}
+  fcm:
+    service-account-file: ${FCM_SERVICE_ACCOUNT_FILE:}
+  google:
+    maps-api-key: ${GOOGLE_MAPS_SERVER_KEY:}
 
 springdoc:
   swagger-ui:

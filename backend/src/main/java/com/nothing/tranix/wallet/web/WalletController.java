@@ -80,8 +80,9 @@ class WalletController {
     @Operation(summary = "Gateway webhook (signature-verified, idempotent). Not called by the app")
     @SecurityRequirements
     ResponseEntity<Map<String, String>> webhook(@RequestBody String rawBody,
-                                                @RequestHeader(value = "X-Signature", required = false) String signature) {
-        TopupService.WebhookResult r = topups.handleWebhook(rawBody, signature);
+                                                @RequestHeader(value = "X-Signature", required = false) String signature,
+                                                @RequestHeader(value = "X-Razorpay-Signature", required = false) String razorpaySignature) {
+        TopupService.WebhookResult r = topups.handleWebhook(rawBody, razorpaySignature != null ? razorpaySignature : signature);
         return r == TopupService.WebhookResult.BAD_SIGNATURE
                 ? ResponseEntity.badRequest().body(Map.of("result", r.name()))
                 : ResponseEntity.ok(Map.of("result", r.name()));
