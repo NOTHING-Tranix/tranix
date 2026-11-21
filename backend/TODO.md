@@ -131,10 +131,10 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 - [x] **B-808** Tests for score calculations. (2026-11-21)
 
 ## Phase 9 — Farmer Network
-- [ ] **B-901** `farmers_farmer` CRUD with consent and Aadhaar last 4 only.
-- [ ] **B-902** Post for a farmer (`postedForFarmerId`): farmer is sender, FN wallet pays.
-- [ ] **B-903** Farmer receives SMS link (SENDER token) and pickup OTP.
-- [ ] **B-904** Filters by farmer in `GET /loads`.
+- [x] **B-901** `farmers_farmer` CRUD with consent and Aadhaar last 4 only. (2026-11-21)
+- [x] **B-902** Post for a farmer (`postedForFarmerId`): farmer is sender, FN wallet pays. (2026-11-21)
+- [x] **B-903** Farmer receives SMS link (SENDER token) and pickup OTP. (2026-11-21)
+- [x] **B-904** Filters by farmer in `GET /loads`. (2026-11-21)
 
 ## Phase 10 — Receiver and public pages
 - [ ] **B-1001** Tracking tokens (random, audience RECEIVER/SENDER, expire 7 days after delivery).

@@ -259,7 +259,7 @@ public class LoadService implements LoadDirectory {
         m.put("pickupWindowStart", l.pickupWindowStart());
         m.put("agreedAmountInr", l.agreedAmountInr());
         m.put("paymentStatus", null);
-        m.put("postedForFarmerName", null);
+        m.put("postedForFarmerName", l.postedForFarmerId() == null ? null : l.senderName()); // farmer = locked sender (FN-03)
         for (LoadEvents.DetailContributor c : contributors.orderedStream().toList()) {
             c.contribute(l, Viewer.SHIPPER, m);
         }

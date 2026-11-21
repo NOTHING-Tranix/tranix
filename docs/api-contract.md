@@ -162,6 +162,8 @@ LoadDetail = LoadSummary + { pickup, drop, senderName, senderMobile, receiverNam
 
 `GET /farmers?q=&page=` · `POST /farmers` `{name, mobile, aadhaarLast4?, landAcres?, village, consent:true}` · `PUT /farmers/{id}` · `POST /farmers/{id}/deactivate`
 
+`Farmer = {id, name, mobile, aadhaarLast4?, landAcres?, village, active, createdAt}`; list is paged `{items, page, size, total}` (`includeInactive=true` shows deactivated). POST/PUT need a VERIFIED Farmer Network; duplicate mobile → `VALIDATION_FAILED` on `mobile`; `consent` must be true. Posting with `postedForFarmerId` makes the farmer the locked sender (pickup OTP + `SENDER_TRACKING` SMS at acceptance); charges from the FN wallet; `LoadSummary.postedForFarmerName` is set.
+
 ## 8. Driver
 
 | Method & path | Notes |
