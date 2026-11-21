@@ -100,12 +100,12 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 - [x] **B-607** Concurrency test: 10 drivers accept at once → exactly one wins. (2026-11-21)
 
 ## Phase 6A — Wish list (D-19)
-- [ ] **B-651** `matching_wishlist_entry` + `GET/POST/PUT/DELETE /wishlist` (limit, truck only from own past trips, `WISHLIST_FULL`).
-- [ ] **B-652** `GET /wishlist/org-search` (verified orgs by name/code) and `GET /wishlist/candidates`.
-- [ ] **B-653** Load `audience` + `wishlistEntryIds` on `POST /loads`; `WISHLIST_EMPTY`; `audience` fields in `LoadDetail`.
-- [ ] **B-654** Matching: resolve entries → drivers, relaxed radius, ranking bonus (EVERYONE), wish-list-only batches, `WISHLIST_FIRST` switch job, `WISHLIST_ONLY` notify job, `POST /loads/{id}/open-to-everyone`.
-- [ ] **B-655** `preferredByShipper` on suggestions, preferred-shipper push to drivers, `preferredByShippersCount` on org dashboard.
-- [ ] **B-656** Tests: eligibility still enforced, window switch timing, notify once, open-to-everyone.
+- [x] **B-651** `matching_wishlist_entry` + `GET/POST/PUT/DELETE /wishlist` (limit, truck only from own past trips, `WISHLIST_FULL`). (2026-11-21)
+- [x] **B-652** `GET /wishlist/org-search` (verified orgs by name/code) and `GET /wishlist/candidates`. (2026-11-21)
+- [x] **B-653** Load `audience` + `wishlistEntryIds` on `POST /loads`; `WISHLIST_EMPTY`; `audience` fields in `LoadDetail`. (2026-11-21)
+- [x] **B-654** Matching: resolve entries → drivers, relaxed radius, ranking bonus (EVERYONE), wish-list-only batches, `WISHLIST_FIRST` switch job, `WISHLIST_ONLY` notify job, `POST /loads/{id}/open-to-everyone`. (2026-11-21)
+- [x] **B-655** `preferredByShipper` on suggestions, preferred-shipper push to drivers, `preferredByShippersCount` on org dashboard. (2026-11-21)
+- [x] **B-656** Tests: eligibility still enforced, window switch timing, notify once, open-to-everyone. (2026-11-21)
 
 ## Phase 7 — Trip execution
 - [x] **B-701** `GET /driver/current-trip` with exact details and contacts. (2026-11-21)

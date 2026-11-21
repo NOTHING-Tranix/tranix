@@ -220,7 +220,10 @@ public class MatchingService {
         int batchSize = settings.getInt(SettingKeys.MATCHING_BATCH_SIZE);
         int batchNo = ((Number) state.get("batches")).intValue() + 1;
         List<Candidate> ranked = rank(load, radius);
-        while (ranked.isEmpty() && radius < maxRadius) {
+        // Wish-list window (M9): only wish-list drivers (relaxed radius already applied) — no widening, no "no driver" notice.
+        Instant at = Instant.now(clock);
+        boolean restricted = bonuses.stream().anyMatch(b -> b.restrictTo(load, at) != null);
+        while (!restricted && ranked.isEmpty() && radius < maxRadius) {
             radius = Math.min(maxRadius, radius + step);
             ranked = rank(load, radius);
         }
@@ -237,7 +240,7 @@ public class MatchingService {
                     Map.of("pickup", load.pickupArea(), "drop", load.dropArea(), "amount", String.valueOf(load.agreedAmountInr())),
                     "/driver/suggestions");
         }
-        boolean notify = batch.isEmpty() && radius >= maxRadius && !Boolean.TRUE.equals(state.get("no_driver_notified"));
+        boolean notify = !restricted && batch.isEmpty() && radius >= maxRadius && !Boolean.TRUE.equals(state.get("no_driver_notified"));
         if (notify) {
             notifier.notify(load.shipperId(), NotificationTab.TRIPS, "NO_DRIVER_FOUND", Map.of("code", load.code()), "/loads/" + loadId);
         }

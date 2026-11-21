@@ -68,8 +68,11 @@ class UserDirectoryImpl implements UserDirectory {
     private final UserRepository users;
     private final DeviceRepository devices;
     private final IdentityService identity;
+    private final org.springframework.jdbc.core.JdbcTemplate jdbc;
 
-    UserDirectoryImpl(UserRepository users, DeviceRepository devices, @org.springframework.context.annotation.Lazy IdentityService identity) {
+    UserDirectoryImpl(UserRepository users, DeviceRepository devices, @org.springframework.context.annotation.Lazy IdentityService identity,
+                      org.springframework.jdbc.core.JdbcTemplate jdbc) {
+        this.jdbc = jdbc;
         this.users = users;
         this.devices = devices;
         this.identity = identity;
@@ -107,6 +110,24 @@ class UserDirectoryImpl implements UserDirectory {
     @Transactional
     public void updateTrustScore(UUID userId, BigDecimal score) {
         users.findById(userId).ifPresent(u -> u.setTrustScore(score));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<OrgView> searchOrganizations(String q, int limit) {
+        String term = q == null ? "" : q.trim().toLowerCase(java.util.Locale.ROOT);
+        String code = term.startsWith("org-") ? term.substring(4) : term;
+        return jdbc.query("""
+                select u.id, cast(p.data as jsonb) ->> 'orgName' org_name, a.district, u.trust_score
+                from identity_user u join identity_role_profile p on p.user_id = u.id
+                left join identity_address a on a.user_id = u.id
+                where u.role = 'ORGANIZATION' and u.verification_status = 'VERIFIED' and u.suspended_at is null
+                  and (lower(cast(p.data as jsonb) ->> 'orgName') like ? or (length(?) >= 3 and cast(u.id as text) like ?))
+                order by u.trust_score desc limit ?""",
+                (rs, i) -> {
+                    UUID id = rs.getObject(1, UUID.class);
+                    return new OrgView(id, rs.getString(2), UserDirectory.orgCode(id), rs.getString(3), rs.getBigDecimal(4));
+                }, "%" + term.replace("%", "") + "%", code, code.replace("%", "") + "%", limit);
     }
 
     static UserView view(User u) {

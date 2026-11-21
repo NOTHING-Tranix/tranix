@@ -34,6 +34,9 @@ public interface FleetApi {
     /** Active (non-removed) drivers of an Organization. */
     List<UUID> driversOfOrg(UUID orgId);
 
+    /** Active trucks owned by an Organization. */
+    int activeTruckCount(UUID orgId);
+
     Optional<TruckView> truck(UUID truckId);
 
     void updateLocation(UUID driverId, GeoPoint point, Instant at);

@@ -155,8 +155,8 @@ LoadDetail = LoadSummary + { pickup, drop, senderName, senderMobile, receiverNam
 | `POST /wishlist` | `{targetType, truckId? \| orgId?, note?}` → `WishlistEntry`. Truck must come from my past trips (`FORBIDDEN` otherwise); `WISHLIST_FULL` |
 | `PUT /wishlist/{id}` | `{note}` |
 | `DELETE /wishlist/{id}` | Remove |
-| `GET /wishlist/org-search?q=` | Verified Organizations by name or code: `[{orgId, orgName, district, trustScore, trucksCount}]` |
-| `GET /wishlist/candidates` | Trucks and Organizations from my past trips not yet in the list |
+| `GET /wishlist/org-search?q=` | Verified Organizations by name or code (≥ 2 chars): `[{orgId, orgName, orgCode ("ORG-1A2B3C"), district, trustScore, trucksCount}]` |
+| `GET /wishlist/candidates` | Trucks and Organizations from my past trips not yet in the list: `[{targetType, truckId?, truckNumber?, vehicleType?, driverName?, orgId?, orgName?, tripsTogether, lastTripAt}]` |
 
 ## 7. Farmers (FARMER_NETWORK)
 

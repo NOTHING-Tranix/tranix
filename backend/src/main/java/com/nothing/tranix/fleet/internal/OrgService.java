@@ -385,7 +385,11 @@ public class OrgService {
         m.put("drivers", Map.of("total", driverIds.size(), "onDuty", onDuty, "onTrip", onTrip, "unallocated", unallocated));
         m.put("activeTrips", onTrip);
         m.put("walletBalanceInr", wallet.balance(orgId));
-        m.put("preferredByShippersCount", 0);
+        // B-655: read-only count from the matching wish-list table (fleet must not depend on matching).
+        Long preferred = jdbc.queryForObject("""
+                select count(distinct shipper_id) from matching_wishlist_entry where org_id = ?
+                   or truck_id in (select id from fleet_truck where owner_type = 'ORG' and owner_id = ?)""", Long.class, orgId, orgId);
+        m.put("preferredByShippersCount", preferred == null ? 0 : preferred);
         return m;
     }
 

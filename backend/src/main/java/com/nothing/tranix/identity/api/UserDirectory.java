@@ -36,4 +36,15 @@ public interface UserDirectory {
             return verificationStatus == VerificationStatus.VERIFIED && !suspended;
         }
     }
+
+    /** M9 wish list: verified, not suspended Organizations whose name or code matches {@code q}. */
+    List<OrgView> searchOrganizations(String q, int limit);
+
+    record OrgView(UUID orgId, String orgName, String orgCode, String district, BigDecimal trustScore) {
+    }
+
+    /** Organization code shown to shippers (D-30, assumed): {@code ORG-} + first 6 hex digits of the org id. */
+    static String orgCode(UUID orgId) {
+        return "ORG-" + orgId.toString().substring(0, 6).toUpperCase(java.util.Locale.ROOT);
+    }
 }

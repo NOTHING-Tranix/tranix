@@ -309,6 +309,13 @@ public class FleetService implements FleetApi {
 
     @Override
     @Transactional(readOnly = true)
+    public int activeTruckCount(UUID orgId) {
+        Integer n = jdbc.queryForObject("select count(*) from fleet_truck where owner_type = 'ORG' and owner_id = ? and active", Integer.class, orgId);
+        return n == null ? 0 : n;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public List<UUID> driversOfOrg(UUID orgId) {
         return jdbc.queryForList("select driver_id from fleet_org_driver where org_id = ? and removed_at is null", UUID.class, orgId);
     }

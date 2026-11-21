@@ -62,6 +62,18 @@ public interface LoadDirectory {
     record DriverStats(long tripsDelivered, long onTime, long cancelledByDriver, long agreedTotalInr) {
     }
 
+
+    /** M9: the shipper's finished trips (delivered or cancelled after acceptance) that had a truck — wish-list sources. */
+    List<PastTrip> pastTripsOfShipper(UUID shipperId);
+
+    record PastTrip(UUID loadId, UUID truckId, UUID orgId, UUID driverId, Instant at) {
+    }
+
+    /** M9: wish-list load → normal matching now (shipper button or the WISHLIST_FIRST window job). */
+    void openToEveryone(UUID loadId);
+
+    /** M9: open wish-list loads (NOT_ACCEPTED, audience ≠ EVERYONE). */
+    List<LoadInfo> openWishlistLoads();
     /** The contract {@code LoadDetail} map for a viewer (shipper/receiver/driver/admin). */
     Map<String, Object> detail(UUID loadId, Viewer viewer);
 

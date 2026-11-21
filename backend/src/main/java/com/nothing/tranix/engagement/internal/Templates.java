@@ -96,6 +96,14 @@ final class Templates {
                 "Load accepted", "{code}: {driver} ({truck}) accepted your load.",
                 "சரக்கு ஏற்கப்பட்டது", "{code}: {driver} ({truck}) உங்கள் சரக்கை ஏற்றுக்கொண்டார்.",
                 "लोड स्वीकार", "{code}: {driver} ({truck}) ने आपका लोड स्वीकार किया।");
+        add("WISHLIST_OPENED", true, false,
+                "Load opened to everyone", "{code}: no one from your wish list accepted in time, so the load is now offered to all drivers.",
+                "சரக்கு அனைவருக்கும் திறக்கப்பட்டது", "{code}: உங்கள் விருப்பப் பட்டியலில் யாரும் நேரத்தில் ஏற்கவில்லை; இப்போது அனைத்து ஓட்டுநர்களுக்கும் காட்டப்படுகிறது.",
+                "लोड सभी के लिए खुला", "{code}: आपकी पसंद सूची में से किसी ने समय पर स्वीकार नहीं किया, अब लोड सभी ड्राइवरों को दिखाया जा रहा है।");
+        add("WISHLIST_NO_RESPONSE", true, false,
+                "No response from your wish list", "{code}: no one from your wish list has accepted yet. You can open it to everyone, wait, edit or cancel free.",
+                "விருப்பப் பட்டியலிலிருந்து பதில் இல்லை", "{code}: உங்கள் விருப்பப் பட்டியலில் இன்னும் யாரும் ஏற்கவில்லை. அனைவருக்கும் திறக்கலாம், காத்திருக்கலாம், மாற்றலாம் அல்லது இலவசமாக ரத்து செய்யலாம்.",
+                "पसंद सूची से कोई जवाब नहीं", "{code}: आपकी पसंद सूची में से अभी किसी ने स्वीकार नहीं किया। सभी के लिए खोलें, इंतज़ार करें, बदलें या मुफ़्त रद्द करें।");
         add("NO_DRIVER_FOUND", true, false,
                 "No driver yet", "{code}: no driver has accepted yet. You can raise the amount, change the pickup time, wait or cancel free.",
                 "இன்னும் ஓட்டுநர் இல்லை", "{code}: இன்னும் யாரும் ஏற்கவில்லை. தொகையை உயர்த்தலாம், நேரத்தை மாற்றலாம், காத்திருக்கலாம் அல்லது இலவசமாக ரத்து செய்யலாம்.",

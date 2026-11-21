@@ -530,6 +530,49 @@ public class LoadService implements LoadDirectory {
                 UUID.randomUUID(), loadId, status.name(), Timestamp.from(Instant.now(clock)), actorId);
     }
 
+    // ------------------------------------------------------------------ wish list support (M9)
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<PastTrip> pastTripsOfShipper(UUID shipperId) {
+        return jdbc.query("""
+                select id, truck_id, org_id, driver_id, coalesce(delivered_at, cancelled_at, accepted_at) at from loads_load
+                where shipper_id = ? and truck_id is not null and (status = 'DELIVERED' or status = 'CANCELLED')
+                order by at desc""",
+                (rs, i) -> new PastTrip(rs.getObject(1, UUID.class), rs.getObject(2, UUID.class), rs.getObject(3, UUID.class),
+                        rs.getObject(4, UUID.class), rs.getTimestamp(5).toInstant()), shipperId);
+    }
+
+    /** Shipper button: {@code POST /loads/{id}/open-to-everyone}. */
+    @Transactional
+    public Map<String, Object> openToEveryone(UUID shipperId, UUID loadId) {
+        Load load = owned(shipperId, loadId);
+        if (load.getStatus() != LoadStatus.NOT_ACCEPTED || load.getAudience() == LoadAudience.EVERYONE) {
+            throw new ApiException(ErrorCode.INVALID_STATE, "This load is already open to everyone");
+        }
+        load.openToEveryone(Instant.now(clock));
+        events.publishEvent(new LoadEvents.LoadUpdated(loadId));
+        return detail(load, Viewer.SHIPPER);
+    }
+
+    @Override
+    @Transactional
+    public void openToEveryone(UUID loadId) {
+        loads.findById(loadId).filter(l -> l.getStatus() == LoadStatus.NOT_ACCEPTED && l.getAudience() != LoadAudience.EVERYONE)
+                .ifPresent(l -> {
+                    l.openToEveryone(Instant.now(clock));
+                    events.publishEvent(new LoadEvents.LoadUpdated(loadId));
+                });
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<LoadInfo> openWishlistLoads() {
+        return loads.findAllById(jdbc.queryForList(
+                "select id from loads_load where status = 'NOT_ACCEPTED' and audience <> 'EVERYONE'", UUID.class))
+                .stream().map(LoadService::info).toList();
+    }
+
     private Load owned(UUID shipperId, UUID loadId) {
         return loads.findById(loadId).filter(l -> l.getShipperId().equals(shipperId))
                 .orElseThrow(() -> ApiException.notFound("Load"));

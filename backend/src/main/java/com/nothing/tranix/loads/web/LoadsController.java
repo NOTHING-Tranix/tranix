@@ -126,4 +126,9 @@ class LoadsController {
     Map<String, Object> repost(@PathVariable UUID id) {
         return loads.repost(CurrentUser.id(), id);
     }
+
+    @PostMapping("/{id}/open-to-everyone")
+    Map<String, Object> openToEveryone(@PathVariable UUID id) {
+        return loads.openToEveryone(CurrentUser.id(), id);
+    }
 }

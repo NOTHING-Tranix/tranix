@@ -109,3 +109,20 @@ class DriverBlockContributor implements LoadEvents.DetailContributor {
         });
     }
 }
+
+/** B-654: wish-list windows run on the server every minute (hard rule 13). */
+@Component
+@ConditionalOnProperty(name = "tranix.jobs.enabled", havingValue = "true", matchIfMissing = true)
+class WishlistJob {
+
+    private final WishlistService wishlist;
+
+    WishlistJob(WishlistService wishlist) {
+        this.wishlist = wishlist;
+    }
+
+    @Scheduled(fixedDelayString = "${tranix.jobs.matching-delay:60000}", initialDelay = 45_000)
+    void run() {
+        wishlist.runWindows();
+    }
+}
