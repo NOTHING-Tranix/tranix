@@ -905,4 +905,79 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get receiver => 'பெறுநர்';
+
+  @override
+  String get onDuty => 'பணியில்';
+
+  @override
+  String get offDuty => 'பணியில் இல்லை';
+
+  @override
+  String get goOnDutyHint => 'பயணப் பரிந்துரைகள் பெற பணியில் இருங்கள்';
+
+  @override
+  String get myTruck => 'என் லாரி';
+
+  @override
+  String get addTruck => 'என் லாரியைச் சேர்';
+
+  @override
+  String get truckNumber => 'லாரி எண்';
+
+  @override
+  String get capacityTonnes => 'கொள்ளளவு (டன்)';
+
+  @override
+  String get truckAvailable => 'கிடைக்கிறது';
+
+  @override
+  String get truckAllocated => 'ஒதுக்கப்பட்டது';
+
+  @override
+  String get truckOnTrip => 'பயணத்தில்';
+
+  @override
+  String get truckDocumentsPending => 'ஆவணங்கள் நிலுவையில்';
+
+  @override
+  String get truckInactive => 'செயலில் இல்லை';
+
+  @override
+  String get truckDocuments => 'லாரி ஆவணங்கள்';
+
+  @override
+  String invitationFrom(String org) {
+    return '$org உங்களை ஓட்டுநராக அழைத்துள்ளது';
+  }
+
+  @override
+  String get accept => 'ஏற்கவும்';
+
+  @override
+  String get reject => 'நிராகரி';
+
+  @override
+  String suggestionsAvailable(int count) {
+    return '$count பயணப் பரிந்துரைகள்';
+  }
+
+  @override
+  String get expiringDocs => 'விரைவில் காலாவதியாகும் ஆவணங்கள்';
+
+  @override
+  String get locker => 'ஆவணப் பெட்டகம்';
+
+  @override
+  String truckAssignedBy(String org) {
+    return '$org ஒதுக்கிய லாரி';
+  }
+
+  @override
+  String get openTrip => 'தற்போதைய பயணத்தைத் திற';
+
+  @override
+  String get noTruckYet => 'இன்னும் லாரி இல்லை';
+
+  @override
+  String get invitations => 'நிறுவன அழைப்புகள்';
 }

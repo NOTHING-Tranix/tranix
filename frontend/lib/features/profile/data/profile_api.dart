@@ -62,6 +62,23 @@ class ProfileApi {
     return Document.fromJson(res.data!);
   }
 
+  /// Owner-driver truck document (contract §8).
+  Future<Document> saveTruckDocument({
+    String? replaceId,
+    required DocumentType type,
+    required List<String> fileIds,
+    String? number,
+    DateTime? expiresOn,
+  }) async {
+    final res = await guardApi(() => _dio.post<Map<String, dynamic>>('/driver/truck/documents', data: {
+          'type': _docType(type),
+          'fileIds': fileIds,
+          if (number != null && number.isNotEmpty) 'number': number,
+          if (expiresOn != null) 'expiresOn': expiresOn.toIso8601String().substring(0, 10),
+        }));
+    return Document.fromJson(res.data!);
+  }
+
   Future<void> changeMobile(String mobile) =>
       guardApi(() => _dio.post<void>('/me/mobile/change', data: {'mobile': mobile}));
 

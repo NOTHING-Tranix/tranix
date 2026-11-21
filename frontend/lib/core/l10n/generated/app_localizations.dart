@@ -1791,6 +1791,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Receiver'**
   String get receiver;
+
+  /// No description provided for @onDuty.
+  ///
+  /// In en, this message translates to:
+  /// **'On duty'**
+  String get onDuty;
+
+  /// No description provided for @offDuty.
+  ///
+  /// In en, this message translates to:
+  /// **'Off duty'**
+  String get offDuty;
+
+  /// No description provided for @goOnDutyHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Go on duty to get trip suggestions'**
+  String get goOnDutyHint;
+
+  /// No description provided for @myTruck.
+  ///
+  /// In en, this message translates to:
+  /// **'My truck'**
+  String get myTruck;
+
+  /// No description provided for @addTruck.
+  ///
+  /// In en, this message translates to:
+  /// **'Add my truck'**
+  String get addTruck;
+
+  /// No description provided for @truckNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck number'**
+  String get truckNumber;
+
+  /// No description provided for @capacityTonnes.
+  ///
+  /// In en, this message translates to:
+  /// **'Capacity (tonnes)'**
+  String get capacityTonnes;
+
+  /// No description provided for @truckAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Available'**
+  String get truckAvailable;
+
+  /// No description provided for @truckAllocated.
+  ///
+  /// In en, this message translates to:
+  /// **'Allocated'**
+  String get truckAllocated;
+
+  /// No description provided for @truckOnTrip.
+  ///
+  /// In en, this message translates to:
+  /// **'On trip'**
+  String get truckOnTrip;
+
+  /// No description provided for @truckDocumentsPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Documents pending'**
+  String get truckDocumentsPending;
+
+  /// No description provided for @truckInactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get truckInactive;
+
+  /// No description provided for @truckDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck documents'**
+  String get truckDocuments;
+
+  /// No description provided for @invitationFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'{org} invited you to drive for them'**
+  String invitationFrom(String org);
+
+  /// No description provided for @accept.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept'**
+  String get accept;
+
+  /// No description provided for @reject.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get reject;
+
+  /// No description provided for @suggestionsAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} trip suggestions'**
+  String suggestionsAvailable(int count);
+
+  /// No description provided for @expiringDocs.
+  ///
+  /// In en, this message translates to:
+  /// **'Documents expiring soon'**
+  String get expiringDocs;
+
+  /// No description provided for @locker.
+  ///
+  /// In en, this message translates to:
+  /// **'Document locker'**
+  String get locker;
+
+  /// No description provided for @truckAssignedBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck assigned by {org}'**
+  String truckAssignedBy(String org);
+
+  /// No description provided for @openTrip.
+  ///
+  /// In en, this message translates to:
+  /// **'Open current trip'**
+  String get openTrip;
+
+  /// No description provided for @noTruckYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No truck yet'**
+  String get noTruckYet;
+
+  /// No description provided for @invitations.
+  ///
+  /// In en, this message translates to:
+  /// **'Organization invitations'**
+  String get invitations;
 }
 
 class _AppLocalizationsDelegate

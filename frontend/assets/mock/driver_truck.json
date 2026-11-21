@@ -1,0 +1,5 @@
+{ "id": "00000000-0000-4000-8000-0000000000a1", "number": "TN57AB1234", "vehicleType": "OPEN_BODY", "capacityTonnes": 9, "status": "AVAILABLE",
+  "documents": [
+    { "id": "00000000-0000-4000-8000-0000000000d1", "type": "RC", "numberMasked": "XXXXXX1234", "expiresOn": "2028-11-20", "status": "APPROVED", "rejectReason": null, "viewUrl": null },
+    { "id": "00000000-0000-4000-8000-0000000000d2", "type": "INSURANCE", "numberMasked": "XXXXXX5678", "expiresOn": "2026-12-10", "status": "APPROVED", "rejectReason": null, "viewUrl": null }
+  ], "allocatedDriver": null, "ownedByMe": true }

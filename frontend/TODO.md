@@ -10,7 +10,7 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 | 2 Profile and verification | 7 | 7 |
 | 3 Wallet, notifications, support | 7 | 3 |
 | 4 Load Provider | 10 | 3 |
-| 5 Driver | 12 | 0 |
+| 5 Driver | 12 | 2 |
 | 6 Ratings and Trust Score | 3 | 0 |
 | 7 Farmer Network | 4 | 0 |
 | 8 Organization | 5 | 0 |
@@ -71,8 +71,8 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 - [ ] **A-410** Wish-list status banner and **Open to everyone** on load detail; "Add to wish list" from history — needs B-654.
 
 ## Phase 5 — Driver (needs B-501…B-505, B-601…B-711, B-802)
-- [ ] **A-501** Driver home with duty switch, invitation banner (DR-01).
-- [ ] **A-502** Driver profile: licence, selfie, own truck form, Org invitation accept/reject, Locker (DR-02).
+- [x] **A-501** Driver home with duty switch, invitation banner (DR-01). (2026-11-21)
+- [x] **A-502** Driver profile: licence, selfie, own truck form, Org invitation accept/reject, Locker (DR-02). (2026-11-21)
 - [ ] **A-503** Suggestions list with sort, polling, accept (LOAD_TAKEN handling), reject reasons (DR-03).
 - [ ] **A-504** Location permission explainer + Android foreground service + background location.
 - [ ] **A-505** Offline location queue + batch upload.

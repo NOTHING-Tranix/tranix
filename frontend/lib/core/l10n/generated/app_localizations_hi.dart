@@ -898,4 +898,79 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get receiver => 'प्राप्तकर्ता';
+
+  @override
+  String get onDuty => 'ड्यूटी पर';
+
+  @override
+  String get offDuty => 'ड्यूटी से बाहर';
+
+  @override
+  String get goOnDutyHint => 'यात्रा सुझाव पाने के लिए ड्यूटी पर आएँ';
+
+  @override
+  String get myTruck => 'मेरा ट्रक';
+
+  @override
+  String get addTruck => 'मेरा ट्रक जोड़ें';
+
+  @override
+  String get truckNumber => 'ट्रक नंबर';
+
+  @override
+  String get capacityTonnes => 'क्षमता (टन)';
+
+  @override
+  String get truckAvailable => 'उपलब्ध';
+
+  @override
+  String get truckAllocated => 'आवंटित';
+
+  @override
+  String get truckOnTrip => 'यात्रा पर';
+
+  @override
+  String get truckDocumentsPending => 'दस्तावेज़ बाकी';
+
+  @override
+  String get truckInactive => 'निष्क्रिय';
+
+  @override
+  String get truckDocuments => 'ट्रक के दस्तावेज़';
+
+  @override
+  String invitationFrom(String org) {
+    return '$org ने आपको ड्राइवर के रूप में बुलाया है';
+  }
+
+  @override
+  String get accept => 'स्वीकार करें';
+
+  @override
+  String get reject => 'अस्वीकार करें';
+
+  @override
+  String suggestionsAvailable(int count) {
+    return '$count यात्रा सुझाव';
+  }
+
+  @override
+  String get expiringDocs => 'जल्द समाप्त होने वाले दस्तावेज़';
+
+  @override
+  String get locker => 'दस्तावेज़ लॉकर';
+
+  @override
+  String truckAssignedBy(String org) {
+    return '$org द्वारा दिया गया ट्रक';
+  }
+
+  @override
+  String get openTrip => 'मौजूदा यात्रा खोलें';
+
+  @override
+  String get noTruckYet => 'अभी कोई ट्रक नहीं';
+
+  @override
+  String get invitations => 'संगठन के निमंत्रण';
 }

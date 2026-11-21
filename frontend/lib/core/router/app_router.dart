@@ -7,6 +7,7 @@ import '../../features/auth/presentation/auth_screens.dart';
 import '../../features/auth/presentation/placeholder_auth_screens.dart';
 import '../../features/onboarding/presentation/splash_screen.dart';
 import '../../features/profile/presentation/profile_screens.dart';
+import '../../features/driver/driver_feature.dart';
 import '../../features/notifications/notifications_feature.dart';
 import '../../features/wallet/wallet_feature.dart';
 import '../../features/shipper/presentation/shipper_screens.dart';
@@ -67,12 +68,15 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (_, s) => DocumentFormScreen(
           type: documentTypeFromWire(s.uri.queryParameters['type']),
           replaceId: s.uri.queryParameters['replace'],
+          truck: s.uri.queryParameters['truck'] == '1',
         ),
       ),
       GoRoute(path: Routes.profileMobile, builder: (_, _) => const ChangeMobileScreen()),
       GoRoute(path: Routes.verification, builder: (_, _) => const VerificationScreen()),
       GoRoute(path: Routes.wallet, builder: (_, _) => const WalletScreen()),
       GoRoute(path: Routes.notifications, builder: (_, _) => const NotificationsScreen()),
+      GoRoute(path: Routes.driverTruckForm, builder: (_, _) => const TruckFormScreen()),
+      GoRoute(path: Routes.driverLocker, builder: (_, _) => const LockerScreen()),
       GoRoute(path: Routes.postLoad, builder: (_, _) => const PostLoadScreen()),
       GoRoute(path: Routes.postLoadReview, builder: (_, _) => const ReviewLoadScreen()),
       GoRoute(path: '/loads/:id', builder: (_, s) => LoadDetailScreen(id: s.pathParameters['id']!)),

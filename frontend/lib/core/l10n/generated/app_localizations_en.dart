@@ -894,4 +894,79 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get receiver => 'Receiver';
+
+  @override
+  String get onDuty => 'On duty';
+
+  @override
+  String get offDuty => 'Off duty';
+
+  @override
+  String get goOnDutyHint => 'Go on duty to get trip suggestions';
+
+  @override
+  String get myTruck => 'My truck';
+
+  @override
+  String get addTruck => 'Add my truck';
+
+  @override
+  String get truckNumber => 'Truck number';
+
+  @override
+  String get capacityTonnes => 'Capacity (tonnes)';
+
+  @override
+  String get truckAvailable => 'Available';
+
+  @override
+  String get truckAllocated => 'Allocated';
+
+  @override
+  String get truckOnTrip => 'On trip';
+
+  @override
+  String get truckDocumentsPending => 'Documents pending';
+
+  @override
+  String get truckInactive => 'Inactive';
+
+  @override
+  String get truckDocuments => 'Truck documents';
+
+  @override
+  String invitationFrom(String org) {
+    return '$org invited you to drive for them';
+  }
+
+  @override
+  String get accept => 'Accept';
+
+  @override
+  String get reject => 'Reject';
+
+  @override
+  String suggestionsAvailable(int count) {
+    return '$count trip suggestions';
+  }
+
+  @override
+  String get expiringDocs => 'Documents expiring soon';
+
+  @override
+  String get locker => 'Document locker';
+
+  @override
+  String truckAssignedBy(String org) {
+    return 'Truck assigned by $org';
+  }
+
+  @override
+  String get openTrip => 'Open current trip';
+
+  @override
+  String get noTruckYet => 'No truck yet';
+
+  @override
+  String get invitations => 'Organization invitations';
 }

@@ -1,0 +1,3 @@
+{ "onDuty": false, "truck": { "id": "00000000-0000-4000-8000-0000000000a1", "number": "TN57AB1234", "vehicleType": "OPEN_BODY", "capacityTonnes": 9, "status": "AVAILABLE", "documents": [], "allocatedDriver": null, "ownedByMe": true },
+  "walletBalanceInr": 400, "orgName": null, "currentLoadId": null, "suggestionsCount": 1, "trustScore": 81,
+  "expiringDocuments": [ { "id": "00000000-0000-4000-8000-0000000000d2", "type": "INSURANCE", "numberMasked": "XXXXXX5678", "expiresOn": "2026-12-10", "status": "APPROVED", "rejectReason": null, "viewUrl": null } ] }

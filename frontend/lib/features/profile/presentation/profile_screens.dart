@@ -72,6 +72,10 @@ class ProfileScreen extends ConsumerWidget {
               _tile(context, Icons.description_outlined, l.documents, () => context.push(Routes.verification)),
               _tile(context, Icons.verified_outlined, l.verificationTitle, () => context.push(Routes.verification),
                   trailing: verificationChip(context, m.verificationStatus)),
+              if (m.role == Role.driver) ...[
+                _tile(context, Icons.local_shipping_outlined, l.myTruck, () => context.push(Routes.driverTruckForm)),
+                _tile(context, Icons.folder_shared_outlined, l.locker, () => context.push(Routes.driverLocker)),
+              ],
               _tile(context, Icons.account_balance_wallet_outlined, l.wallet, () => context.push(Routes.wallet)),
               _tile(context, Icons.notifications_none, l.navNotifications, () => context.push(Routes.notifications)),
               _tile(context, Icons.phone_android, l.changeMobile, () => context.push(Routes.profileMobile)),
@@ -521,10 +525,13 @@ class _DateField extends StatelessWidget {
 
 /// A-202/A-203: add or replace a document (type, number, expiry, files with upload progress).
 class DocumentFormScreen extends ConsumerStatefulWidget {
-  const DocumentFormScreen({super.key, this.type, this.replaceId});
+  const DocumentFormScreen({super.key, this.type, this.replaceId, this.truck = false});
 
   final DocumentType? type;
   final String? replaceId;
+
+  /// Owner-driver truck documents (RC, insurance, permit) via `POST /driver/truck/documents`.
+  final bool truck;
 
   @override
   ConsumerState<DocumentFormScreen> createState() => _DocumentFormScreenState();
@@ -538,8 +545,9 @@ class _DocumentFormScreenState extends ConsumerState<DocumentFormScreen> {
   double? _progress;
   AppException? _error;
 
-  static const _needsNumber = {DocumentType.pan, DocumentType.voterId, DocumentType.drivingLicence, DocumentType.gstCert};
-  static const _needsExpiry = {DocumentType.drivingLicence};
+  static const _needsNumber = {DocumentType.pan, DocumentType.voterId, DocumentType.drivingLicence, DocumentType.gstCert,
+      DocumentType.rc, DocumentType.insurance, DocumentType.nationalPermit};
+  static const _needsExpiry = {DocumentType.drivingLicence, DocumentType.rc, DocumentType.insurance, DocumentType.nationalPermit};
 
   @override
   void initState() {
@@ -553,7 +561,9 @@ class _DocumentFormScreenState extends ConsumerState<DocumentFormScreen> {
     super.dispose();
   }
 
-  List<DocumentType> _allowed(Role role) => [
+  List<DocumentType> _allowed(Role role) => widget.truck
+      ? const [DocumentType.rc, DocumentType.insurance, DocumentType.nationalPermit]
+      : [
         DocumentType.pan,
         DocumentType.voterId,
         DocumentType.drivingLicence,
@@ -593,7 +603,7 @@ class _DocumentFormScreenState extends ConsumerState<DocumentFormScreen> {
         ids.add(await uploadFile(api.dio, _files[i],
             onProgress: (p) => setState(() => _progress = (i + p) / _files.length)));
       }
-      await api.saveDocument(
+      await (widget.truck ? api.saveTruckDocument : api.saveDocument)(
         replaceId: widget.replaceId,
         type: _type!,
         fileIds: ids,
