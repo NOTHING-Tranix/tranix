@@ -46,6 +46,7 @@ public class SecurityConfig {
             "/api/v1/auth/**",
             "/api/v1/settings/public",
             "/api/v1/public/**",
+            "/api/v1/legal/**",
             "/api/v1/files/*/content",
             "/api/v1/webhooks/**",
             "/p/**",

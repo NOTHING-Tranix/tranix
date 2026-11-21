@@ -177,11 +177,11 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 - [x] **B-1307** Per-environment switches fake ↔ real. (2026-11-21)
 
 ## Phase 14 — Hardening and release
-- [ ] **B-1401** Rate limits (OTP, sign-in, public tokens).
-- [ ] **B-1402** Structured logs with request IDs; PII masking.
-- [ ] **B-1403** Actuator health/metrics; alerts.
-- [ ] **B-1404** Dockerfile; AWS deploy (RDS PostgreSQL, S3, secrets).
-- [ ] **B-1405** Backups and restore test.
-- [ ] **B-1406** End-to-end test of the full lifecycle (post → accept → revision → OTPs → delivered → paid → rated).
-- [ ] **B-1407** Load test of suggestions and tracking polling.
-- [ ] **B-1408** Privacy policy/terms endpoints and data deletion request flow — Q-08.
+- [x] **B-1401** Rate limits (OTP, sign-in, public tokens). (2026-11-21)
+- [x] **B-1402** Structured logs with request IDs; PII masking. (2026-11-21)
+- [x] **B-1403** Actuator health/metrics; alerts. (2026-11-21; health probes + metrics; alerts set up with the AWS deploy, F-9)
+- [!] **B-1404** Dockerfile; AWS deploy (RDS PostgreSQL, S3, secrets). — Dockerfile done and built in CI; AWS deploy needs F-9
+- [!] **B-1405** Backups and restore test. — `tools/db-backup.sh` + `tools/db-restore.sh` written, not yet run (no database host yet, F-9)
+- [x] **B-1406** End-to-end test of the full lifecycle (post → accept → revision → OTPs → delivered → paid → rated). (2026-11-21)
+- [!] **B-1407** Load test of suggestions and tracking polling. — k6 script `tools/loadtest/suggestions-tracking.js` ready; run against staging (F-9)
+- [x] **B-1408** Privacy policy/terms endpoints and data deletion request flow — Q-08. (2026-11-21)

@@ -44,3 +44,6 @@ Items Claude could not finish or decided on its own while working in autopilot. 
 | B-1304 | Google Routes adapter built + tested (cache + budget); needs a server key | F-5 |
 | B-1305 | S3 storage needs an AWS account | F-9 |
 | B-1306 | Aadhaar provider not chosen | F-3 |
+| B-1404 | AWS deploy (image builds in CI) | F-9 |
+| B-1405 | Backup/restore scripts need a database host to run against | F-9 |
+| B-1407 | Load test needs a staging environment | F-9 |

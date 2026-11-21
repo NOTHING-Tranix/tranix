@@ -31,3 +31,8 @@ springdoc:
     enabled: ${SWAGGER_ENABLED:false}
   api-docs:
     enabled: ${SWAGGER_ENABLED:false}
+
+logging:
+  structured:
+    format:
+      console: ecs   # B-1402: JSON logs (with requestId from MDC) for the log collector

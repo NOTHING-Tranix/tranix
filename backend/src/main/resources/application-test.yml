@@ -14,3 +14,6 @@ tranix:
     signing-secret: test-only-files-secret-0123456789abcdef
   jobs:
     enabled: false
+  rate-limit:
+    auth-per-minute: 100000
+    public-per-minute: 100000

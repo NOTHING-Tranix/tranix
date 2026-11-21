@@ -109,3 +109,45 @@ class AdminTicketsController {
         return support.ignore(CurrentUser.id(), id, req.reason());
     }
 }
+
+/**
+ * B-1408 (Q-08): privacy policy and terms (public; text is a draft until legal review) and the in-app account
+ * deletion request, which opens a support ticket for Tranix to process within the legal retention rules.
+ */
+@RestController
+class LegalController {
+
+    private final SupportService support;
+
+    LegalController(SupportService support) {
+        this.support = support;
+    }
+
+    record DeletionRequest(@Size(max = 500) String reason) {
+    }
+
+    @GetMapping("/api/v1/legal/{doc}")
+    Map<String, Object> legal(@PathVariable @Pattern(regexp = "privacy|terms") String doc) {
+        return Map.of("doc", doc, "version", "draft-2026-11-21", "status", "DRAFT_PENDING_LEGAL_REVIEW",
+                "text", "privacy".equals(doc) ? PRIVACY : TERMS);
+    }
+
+    @PostMapping("/api/v1/me/deletion-request")
+    Map<String, Object> deletion(@Valid @RequestBody(required = false) DeletionRequest req) {
+        String reason = req == null || req.reason() == null || req.reason().isBlank() ? "No reason given" : req.reason().trim();
+        return support.create(CurrentUser.id(), com.nothing.tranix.shared.types.TicketType.OTHERS, "Account deletion", null,
+                "Please delete my Tranix account and personal data. Reason: " + reason, List.of());
+    }
+
+    static final String PRIVACY = """
+            Tranix collects your name, mobile number, role details and documents to verify you; trip details and, during an \
+            active trip only, the driver's location. Aadhaar: only the last 4 digits and the verification result are kept. \
+            Phone numbers and exact addresses are shared with the other party only after a load is accepted. Location detail \
+            is kept for 90 days. You can ask for your account to be deleted from the app (Profile → Support or Delete account). \
+            This is a draft pending legal review.""";
+
+    static final String TERMS = """
+            Tranix connects verified load providers, Farmer Networks, drivers, Organizations and receivers. The posting and \
+            trip charges are deducted from the wallet when a load is accepted. Freight is paid directly between the parties; \
+            Tranix records the payment status. First accept wins. This is a draft pending legal review.""";
+}

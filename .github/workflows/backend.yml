@@ -26,3 +26,11 @@ jobs:
           cache: maven
       # Unit tests + Testcontainers integration tests (Docker is available on ubuntu runners)
       - run: ./mvnw -B verify
+
+  image:
+    # B-1404: the production image must keep building
+    runs-on: ubuntu-latest
+    needs: verify
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t tranix-backend:ci backend

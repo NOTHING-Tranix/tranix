@@ -36,7 +36,11 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info
+        include: health,info,metrics
+  endpoint:
+    health:
+      probes:
+        enabled: true
 
 springdoc:
   swagger-ui:
@@ -69,5 +73,8 @@ tranix:
     aadhaar: disabled
 
 logging:
+  pattern:
+    # B-1402: request id in every line (no bodies, tokens, OTPs or full mobiles are ever logged)
+    level: "%5p [%X{requestId:-}]"
   level:
     org.flywaydb: INFO
