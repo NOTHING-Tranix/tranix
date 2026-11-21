@@ -1213,4 +1213,107 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get callShipper => 'சரக்கு உரிமையாளரை அழை';
+
+  @override
+  String get markPaid => 'செலுத்தியதாகக் குறி';
+
+  @override
+  String get paymentMode => 'முறை';
+
+  @override
+  String get modeCash => 'பணம்';
+
+  @override
+  String get modeUpi => 'UPI';
+
+  @override
+  String get modeBank => 'வங்கி';
+
+  @override
+  String get referenceOptional => 'குறிப்பு எண் (விருப்பம்)';
+
+  @override
+  String get confirmReceived => 'பெற்றேன் என உறுதிசெய்';
+
+  @override
+  String get disputePayment => 'சர்ச்சை';
+
+  @override
+  String get disputeReason => 'என்ன பிரச்சனை?';
+
+  @override
+  String paidVia(String amount, String mode) {
+    return '$amount - $mode';
+  }
+
+  @override
+  String get thisMonth => 'இந்த மாதம்';
+
+  @override
+  String tripsCount(int count) {
+    return '$count பயணங்கள்';
+  }
+
+  @override
+  String get agreedTotal => 'ஒப்புக்கொண்டது';
+
+  @override
+  String get receivedTotal => 'பெற்றது';
+
+  @override
+  String get pendingTotal => 'நிலுவை';
+
+  @override
+  String rateTitle(String name) {
+    return '$name-ஐ மதிப்பிடுங்கள்';
+  }
+
+  @override
+  String get rateLater => 'பின்னர்';
+
+  @override
+  String get submitAction => 'சமர்ப்பி';
+
+  @override
+  String get commentOptional => 'கருத்து (விருப்பம்)';
+
+  @override
+  String get howItWorks => 'இது எப்படி வேலை செய்கிறது';
+
+  @override
+  String get trustHowBody =>
+      'உங்கள் மதிப்பெண் 70-ல் (100-க்கு) தொடங்கும். நேரத்தில் பயணம், நல்ல மதிப்பீடு, நேரத்தில் கட்டணம் உயர்த்தும்; தாமதம், ஏற்ற பின் ரத்து, சர்ச்சையில் தோல்வி குறைக்கும்.';
+
+  @override
+  String get noEvents => 'இன்னும் மாற்றங்கள் இல்லை';
+
+  @override
+  String get evOnTime => 'நேரத்தில் பயணம்';
+
+  @override
+  String get evLateDelivery => 'தாமதமான ஒப்படைப்பு';
+
+  @override
+  String get evLatePickup => 'தாமதமான ஏற்றம்';
+
+  @override
+  String get evCancelled => 'ஏற்ற பின் ரத்து';
+
+  @override
+  String get evRating => 'மதிப்பீடு பெற்றது';
+
+  @override
+  String get evPaymentOnTime => 'நேரத்தில் கட்டணம்';
+
+  @override
+  String get evDisputeLost => 'சர்ச்சையில் தோல்வி';
+
+  @override
+  String get evAdmin => 'டிரானிக்ஸ் மாற்றம்';
+
+  @override
+  String get evComplaint => 'உறுதிசெய்யப்பட்ட புகார்';
+
+  @override
+  String get evDriverCancelled => 'ஓட்டுநர் ரத்து செய்தார்';
 }

@@ -64,7 +64,9 @@ const _$VehicleTypeEnumMap = {
 
 _TrustScore _$TrustScoreFromJson(Map<String, dynamic> json) => _TrustScore(
   score: (json['score'] as num).toDouble(),
-  updatedAt: DateTime.parse(json['updatedAt'] as String),
+  updatedAt: json['updatedAt'] == null
+      ? null
+      : DateTime.parse(json['updatedAt'] as String),
   trend:
       (json['trend'] as List<dynamic>?)
           ?.map((e) => (e as num).toDouble())
@@ -75,7 +77,7 @@ _TrustScore _$TrustScoreFromJson(Map<String, dynamic> json) => _TrustScore(
 Map<String, dynamic> _$TrustScoreToJson(_TrustScore instance) =>
     <String, dynamic>{
       'score': instance.score,
-      'updatedAt': instance.updatedAt.toIso8601String(),
+      'updatedAt': ?instance.updatedAt?.toIso8601String(),
       'trend': instance.trend,
     };
 
@@ -99,7 +101,10 @@ Map<String, dynamic> _$TrustEventToJson(_TrustEvent instance) =>
 _PendingRating _$PendingRatingFromJson(Map<String, dynamic> json) =>
     _PendingRating(
       loadId: json['loadId'] as String,
+      loadCode: json['loadCode'] as String?,
+      rateeUserId: json['rateeUserId'] as String,
       rateeName: json['rateeName'] as String,
+      laterUsed: json['laterUsed'] as bool? ?? false,
       rateeRole: $enumDecode(
         _$RoleEnumMap,
         json['rateeRole'],
@@ -110,7 +115,10 @@ _PendingRating _$PendingRatingFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$PendingRatingToJson(_PendingRating instance) =>
     <String, dynamic>{
       'loadId': instance.loadId,
+      'loadCode': ?instance.loadCode,
+      'rateeUserId': instance.rateeUserId,
       'rateeName': instance.rateeName,
+      'laterUsed': instance.laterUsed,
       'rateeRole': _$RoleEnumMap[instance.rateeRole]!,
     };
 

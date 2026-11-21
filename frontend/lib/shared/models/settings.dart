@@ -20,6 +20,7 @@ abstract class PublicSettings with _$PublicSettings {
     required int wishlistFirstMinutes,
     required int wishlistOnlyNotifyMinutes,
     @Default(<String>[]) List<String> goodsTypes,
+    @Default(<String>[]) List<String> ratingTags,
     @Default(<String>[]) List<String> vehicleTypes,
     @Default(<String>[]) List<String> ticketTypes,
     @Default(<String>[]) List<String> rejectReasons,

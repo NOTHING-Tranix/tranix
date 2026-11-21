@@ -65,7 +65,7 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 - [x] **A-404** Tracking list + load detail with timeline, live map polling, driver block, call (LP-03/04). (2026-11-21) — list, detail, timeline, driver block, call; live map polling lands with B-70x tracking in M7 (A-405 extension)
 - [x] **A-405** Amount request card confirm/reject; pickup OTP card. (2026-11-21)
 - [x] **A-406** Edit (not accepted), cancel with rule preview, repost. (2026-11-21, built in M4)
-- [ ] **A-407** History (LP-05) and payment mark-paid (LP-06).
+- [x] **A-407** History (LP-05) and payment mark-paid (LP-06). (2026-11-21)
 - [ ] **A-408** Wish list screen with "From my trips" and "Find organization" tabs, notes, remove, limit (LP-07) — needs B-651, B-652.
 - [ ] **A-409** "Offer to" section in post-a-load with entry selection; `WISHLIST_EMPTY` handling — needs B-653.
 - [ ] **A-410** Wish-list status banner and **Open to everyone** on load detail; "Add to wish list" from history — needs B-654.
@@ -80,14 +80,14 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 - [x] **A-507** Map with markers, Navigate intent, layer chips (route services, restrictions). (2026-11-21) — Navigate intent + layer chips with nearby list; on-map markers need the Maps key (F-5)
 - [x] **A-508** Reached flow with outside-radius reason; OTP sheet with resend and help (DR-05). (2026-11-21)
 - [x] **A-509** Amount revision request (x of 5, pending state) and cancel before pickup. (2026-11-21)
-- [ ] **A-510** History with earnings summary; payment confirm/dispute (DR-06).
+- [x] **A-510** History with earnings summary; payment confirm/dispute (DR-06). (2026-11-21)
 - [x] **A-511** Widget tests: accept race, OTP sheet, step button per status. (2026-11-21)
 - [ ] **A-512** "Preferred by this shipper" tag on suggestions and preferred-load push routing — needs B-655.
 
 ## Phase 6 — Ratings and Trust Score (needs B-803…B-805)
-- [ ] **A-601** Rating pop-up on app open with Later once (S-11).
-- [ ] **A-602** Trust Score screen with events (S-12).
-- [ ] **A-603** Trust Score badges on cards (suggestions, driver block).
+- [x] **A-601** Rating pop-up on app open with Later once (S-11). (2026-11-21)
+- [x] **A-602** Trust Score screen with events (S-12). (2026-11-21)
+- [x] **A-603** Trust Score badges on cards (suggestions, driver block). (2026-11-21)
 
 ## Phase 7 — Farmer Network (needs B-110, B-901…B-904)
 - [ ] **A-701** FN registration form with per-type ID validation (FN-01).

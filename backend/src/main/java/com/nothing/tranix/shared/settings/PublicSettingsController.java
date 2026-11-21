@@ -49,6 +49,7 @@ class PublicSettingsController {
                 names(TicketType.values()),
                 names(SuggestionRejectReason.values()),
                 settings.getStringList(SettingKeys.SUPPORTED_LANGUAGES),
+                settings.getStringList(SettingKeys.RATING_TAGS),
                 aadhaar.enabled());
     }
 

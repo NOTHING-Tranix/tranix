@@ -2337,6 +2337,198 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Call shipper'**
   String get callShipper;
+
+  /// No description provided for @markPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as paid'**
+  String get markPaid;
+
+  /// No description provided for @paymentMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Mode'**
+  String get paymentMode;
+
+  /// No description provided for @modeCash.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash'**
+  String get modeCash;
+
+  /// No description provided for @modeUpi.
+  ///
+  /// In en, this message translates to:
+  /// **'UPI'**
+  String get modeUpi;
+
+  /// No description provided for @modeBank.
+  ///
+  /// In en, this message translates to:
+  /// **'Bank'**
+  String get modeBank;
+
+  /// No description provided for @referenceOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Reference (optional)'**
+  String get referenceOptional;
+
+  /// No description provided for @confirmReceived.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm received'**
+  String get confirmReceived;
+
+  /// No description provided for @disputePayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Dispute'**
+  String get disputePayment;
+
+  /// No description provided for @disputeReason.
+  ///
+  /// In en, this message translates to:
+  /// **'What is wrong?'**
+  String get disputeReason;
+
+  /// No description provided for @paidVia.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} by {mode}'**
+  String paidVia(String amount, String mode);
+
+  /// No description provided for @thisMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'This month'**
+  String get thisMonth;
+
+  /// No description provided for @tripsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} trips'**
+  String tripsCount(int count);
+
+  /// No description provided for @agreedTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Agreed'**
+  String get agreedTotal;
+
+  /// No description provided for @receivedTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Received'**
+  String get receivedTotal;
+
+  /// No description provided for @pendingTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get pendingTotal;
+
+  /// No description provided for @rateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate {name}'**
+  String rateTitle(String name);
+
+  /// No description provided for @rateLater.
+  ///
+  /// In en, this message translates to:
+  /// **'Later'**
+  String get rateLater;
+
+  /// No description provided for @submitAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get submitAction;
+
+  /// No description provided for @commentOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Comment (optional)'**
+  String get commentOptional;
+
+  /// No description provided for @howItWorks.
+  ///
+  /// In en, this message translates to:
+  /// **'How it works'**
+  String get howItWorks;
+
+  /// No description provided for @trustHowBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your score starts at 70 (out of 100). On-time trips, good ratings and on-time payments raise it; late trips, cancellations after acceptance and lost disputes lower it.'**
+  String get trustHowBody;
+
+  /// No description provided for @noEvents.
+  ///
+  /// In en, this message translates to:
+  /// **'No changes yet'**
+  String get noEvents;
+
+  /// No description provided for @evOnTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Trip on time'**
+  String get evOnTime;
+
+  /// No description provided for @evLateDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Late delivery'**
+  String get evLateDelivery;
+
+  /// No description provided for @evLatePickup.
+  ///
+  /// In en, this message translates to:
+  /// **'Late pickup'**
+  String get evLatePickup;
+
+  /// No description provided for @evCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled after acceptance'**
+  String get evCancelled;
+
+  /// No description provided for @evRating.
+  ///
+  /// In en, this message translates to:
+  /// **'Rating received'**
+  String get evRating;
+
+  /// No description provided for @evPaymentOnTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment on time'**
+  String get evPaymentOnTime;
+
+  /// No description provided for @evDisputeLost.
+  ///
+  /// In en, this message translates to:
+  /// **'Dispute lost'**
+  String get evDisputeLost;
+
+  /// No description provided for @evAdmin.
+  ///
+  /// In en, this message translates to:
+  /// **'Adjusted by Tranix'**
+  String get evAdmin;
+
+  /// No description provided for @evComplaint.
+  ///
+  /// In en, this message translates to:
+  /// **'Verified complaint'**
+  String get evComplaint;
+
+  /// No description provided for @evDriverCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver cancelled'**
+  String get evDriverCancelled;
 }
 
 class _AppLocalizationsDelegate

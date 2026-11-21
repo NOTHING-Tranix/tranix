@@ -319,7 +319,7 @@ as bool,
 /// @nodoc
 mixin _$TrustScore {
 
- double get score; DateTime get updatedAt; List<double> get trend;
+ double get score; DateTime? get updatedAt; List<double> get trend;
 /// Create a copy of TrustScore
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -357,7 +357,7 @@ abstract mixin class $TrustScoreCopyWith<$Res>  {
   factory $TrustScoreCopyWith(TrustScore value, $Res Function(TrustScore) _then) = _$TrustScoreCopyWithImpl;
 @useResult
 $Res call({
- double score, DateTime updatedAt, List<double> trend
+ double score, DateTime? updatedAt, List<double> trend
 });
 
 
@@ -374,11 +374,11 @@ class _$TrustScoreCopyWithImpl<$Res>
 
 /// Create a copy of TrustScore
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? score = null,Object? updatedAt = null,Object? trend = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? score = null,Object? updatedAt = freezed,Object? trend = null,}) {
   return _then(TrustScore(
 score: null == score ? _self.score : score // ignore: cast_nullable_to_non_nullable
-as double,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as DateTime,trend: null == trend ? _self.trend : trend // ignore: cast_nullable_to_non_nullable
+as double,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,trend: null == trend ? _self.trend : trend // ignore: cast_nullable_to_non_nullable
 as List<double>,
   ));
 }
@@ -464,7 +464,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( double score,  DateTime updatedAt,  List<double> trend)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( double score,  DateTime? updatedAt,  List<double> trend)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TrustScore() when $default != null:
 return $default(_that.score,_that.updatedAt,_that.trend);case _:
@@ -485,7 +485,7 @@ return $default(_that.score,_that.updatedAt,_that.trend);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( double score,  DateTime updatedAt,  List<double> trend)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( double score,  DateTime? updatedAt,  List<double> trend)  $default,) {final _that = this;
 switch (_that) {
 case _TrustScore():
 return $default(_that.score,_that.updatedAt,_that.trend);case _:
@@ -505,7 +505,7 @@ return $default(_that.score,_that.updatedAt,_that.trend);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( double score,  DateTime updatedAt,  List<double> trend)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( double score,  DateTime? updatedAt,  List<double> trend)?  $default,) {final _that = this;
 switch (_that) {
 case _TrustScore() when $default != null:
 return $default(_that.score,_that.updatedAt,_that.trend);case _:
@@ -520,11 +520,11 @@ return $default(_that.score,_that.updatedAt,_that.trend);case _:
 @JsonSerializable()
 
 class _TrustScore implements TrustScore {
-  const _TrustScore({required this.score, required this.updatedAt,  List<double> trend = const <double>[]}): _trend = trend;
+  const _TrustScore({required this.score, this.updatedAt,  List<double> trend = const <double>[]}): _trend = trend;
   factory _TrustScore.fromJson(Map<String, dynamic> json) => _$TrustScoreFromJson(json);
 
 @override final  double score;
-@override final  DateTime updatedAt;
+@override final  DateTime? updatedAt;
  final  List<double> _trend;
 @override@JsonKey() List<double> get trend {
   if (_trend is EqualUnmodifiableListView) return _trend;
@@ -568,7 +568,7 @@ abstract mixin class _$TrustScoreCopyWith<$Res> implements $TrustScoreCopyWith<$
   factory _$TrustScoreCopyWith(_TrustScore value, $Res Function(_TrustScore) _then) = __$TrustScoreCopyWithImpl;
 @override @useResult
 $Res call({
- double score, DateTime updatedAt, List<double> trend
+ double score, DateTime? updatedAt, List<double> trend
 });
 
 
@@ -585,11 +585,11 @@ class __$TrustScoreCopyWithImpl<$Res>
 
 /// Create a copy of TrustScore
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? score = null,Object? updatedAt = null,Object? trend = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? score = null,Object? updatedAt = freezed,Object? trend = null,}) {
   return _then(_TrustScore(
 score: null == score ? _self.score : score // ignore: cast_nullable_to_non_nullable
-as double,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as DateTime,trend: null == trend ? _self._trend : trend // ignore: cast_nullable_to_non_nullable
+as double,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,trend: null == trend ? _self._trend : trend // ignore: cast_nullable_to_non_nullable
 as List<double>,
   ));
 }
@@ -883,7 +883,7 @@ as String,
 /// @nodoc
 mixin _$PendingRating {
 
- String get loadId; String get rateeName;@JsonKey(unknownEnumValue: Role.unknown) Role get rateeRole;
+ String get loadId; String? get loadCode; String get rateeUserId; String get rateeName; bool get laterUsed;@JsonKey(unknownEnumValue: Role.unknown) Role get rateeRole;
 /// Create a copy of PendingRating
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -897,20 +897,20 @@ $PendingRatingCopyWith<PendingRating> get copyWith => _$PendingRatingCopyWithImp
 @override
 bool operator ==(Object other) {
   final _this = this as PendingRating;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PendingRating&&(identical(other.loadId, _this.loadId) || other.loadId == _this.loadId)&&(identical(other.rateeName, _this.rateeName) || other.rateeName == _this.rateeName)&&(identical(other.rateeRole, _this.rateeRole) || other.rateeRole == _this.rateeRole));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PendingRating&&(identical(other.loadId, _this.loadId) || other.loadId == _this.loadId)&&(identical(other.loadCode, _this.loadCode) || other.loadCode == _this.loadCode)&&(identical(other.rateeUserId, _this.rateeUserId) || other.rateeUserId == _this.rateeUserId)&&(identical(other.rateeName, _this.rateeName) || other.rateeName == _this.rateeName)&&(identical(other.laterUsed, _this.laterUsed) || other.laterUsed == _this.laterUsed)&&(identical(other.rateeRole, _this.rateeRole) || other.rateeRole == _this.rateeRole));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as PendingRating;
-  return Object.hash(runtimeType,_this.loadId,_this.rateeName,_this.rateeRole);
+  return Object.hash(runtimeType,_this.loadId,_this.loadCode,_this.rateeUserId,_this.rateeName,_this.laterUsed,_this.rateeRole);
 }
 
 @override
 String toString() {
   final _this = this as PendingRating;
-  return 'PendingRating(loadId: ${_this.loadId}, rateeName: ${_this.rateeName}, rateeRole: ${_this.rateeRole})';
+  return 'PendingRating(loadId: ${_this.loadId}, loadCode: ${_this.loadCode}, rateeUserId: ${_this.rateeUserId}, rateeName: ${_this.rateeName}, laterUsed: ${_this.laterUsed}, rateeRole: ${_this.rateeRole})';
 }
 
 
@@ -921,7 +921,7 @@ abstract mixin class $PendingRatingCopyWith<$Res>  {
   factory $PendingRatingCopyWith(PendingRating value, $Res Function(PendingRating) _then) = _$PendingRatingCopyWithImpl;
 @useResult
 $Res call({
- String loadId, String rateeName,@JsonKey(unknownEnumValue: Role.unknown) Role rateeRole
+ String loadId, String? loadCode, String rateeUserId, String rateeName, bool laterUsed,@JsonKey(unknownEnumValue: Role.unknown) Role rateeRole
 });
 
 
@@ -938,11 +938,14 @@ class _$PendingRatingCopyWithImpl<$Res>
 
 /// Create a copy of PendingRating
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? loadId = null,Object? rateeName = null,Object? rateeRole = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? loadId = null,Object? loadCode = freezed,Object? rateeUserId = null,Object? rateeName = null,Object? laterUsed = null,Object? rateeRole = null,}) {
   return _then(PendingRating(
 loadId: null == loadId ? _self.loadId : loadId // ignore: cast_nullable_to_non_nullable
+as String,loadCode: freezed == loadCode ? _self.loadCode : loadCode // ignore: cast_nullable_to_non_nullable
+as String?,rateeUserId: null == rateeUserId ? _self.rateeUserId : rateeUserId // ignore: cast_nullable_to_non_nullable
 as String,rateeName: null == rateeName ? _self.rateeName : rateeName // ignore: cast_nullable_to_non_nullable
-as String,rateeRole: null == rateeRole ? _self.rateeRole : rateeRole // ignore: cast_nullable_to_non_nullable
+as String,laterUsed: null == laterUsed ? _self.laterUsed : laterUsed // ignore: cast_nullable_to_non_nullable
+as bool,rateeRole: null == rateeRole ? _self.rateeRole : rateeRole // ignore: cast_nullable_to_non_nullable
 as Role,
   ));
 }
@@ -1028,10 +1031,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String loadId,  String rateeName, @JsonKey(unknownEnumValue: Role.unknown)  Role rateeRole)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String loadId,  String? loadCode,  String rateeUserId,  String rateeName,  bool laterUsed, @JsonKey(unknownEnumValue: Role.unknown)  Role rateeRole)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PendingRating() when $default != null:
-return $default(_that.loadId,_that.rateeName,_that.rateeRole);case _:
+return $default(_that.loadId,_that.loadCode,_that.rateeUserId,_that.rateeName,_that.laterUsed,_that.rateeRole);case _:
   return orElse();
 
 }
@@ -1049,10 +1052,10 @@ return $default(_that.loadId,_that.rateeName,_that.rateeRole);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String loadId,  String rateeName, @JsonKey(unknownEnumValue: Role.unknown)  Role rateeRole)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String loadId,  String? loadCode,  String rateeUserId,  String rateeName,  bool laterUsed, @JsonKey(unknownEnumValue: Role.unknown)  Role rateeRole)  $default,) {final _that = this;
 switch (_that) {
 case _PendingRating():
-return $default(_that.loadId,_that.rateeName,_that.rateeRole);case _:
+return $default(_that.loadId,_that.loadCode,_that.rateeUserId,_that.rateeName,_that.laterUsed,_that.rateeRole);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1069,10 +1072,10 @@ return $default(_that.loadId,_that.rateeName,_that.rateeRole);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String loadId,  String rateeName, @JsonKey(unknownEnumValue: Role.unknown)  Role rateeRole)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String loadId,  String? loadCode,  String rateeUserId,  String rateeName,  bool laterUsed, @JsonKey(unknownEnumValue: Role.unknown)  Role rateeRole)?  $default,) {final _that = this;
 switch (_that) {
 case _PendingRating() when $default != null:
-return $default(_that.loadId,_that.rateeName,_that.rateeRole);case _:
+return $default(_that.loadId,_that.loadCode,_that.rateeUserId,_that.rateeName,_that.laterUsed,_that.rateeRole);case _:
   return null;
 
 }
@@ -1084,11 +1087,14 @@ return $default(_that.loadId,_that.rateeName,_that.rateeRole);case _:
 @JsonSerializable()
 
 class _PendingRating implements PendingRating {
-  const _PendingRating({required this.loadId, required this.rateeName, @JsonKey(unknownEnumValue: Role.unknown) required this.rateeRole});
+  const _PendingRating({required this.loadId, this.loadCode, required this.rateeUserId, required this.rateeName, this.laterUsed = false, @JsonKey(unknownEnumValue: Role.unknown) required this.rateeRole});
   factory _PendingRating.fromJson(Map<String, dynamic> json) => _$PendingRatingFromJson(json);
 
 @override final  String loadId;
+@override final  String? loadCode;
+@override final  String rateeUserId;
 @override final  String rateeName;
+@override@JsonKey() final  bool laterUsed;
 @override@JsonKey(unknownEnumValue: Role.unknown) final  Role rateeRole;
 
 /// Create a copy of PendingRating
@@ -1104,18 +1110,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _PendingRating&&(identical(other.loadId, loadId) || other.loadId == loadId)&&(identical(other.rateeName, rateeName) || other.rateeName == rateeName)&&(identical(other.rateeRole, rateeRole) || other.rateeRole == rateeRole));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _PendingRating&&(identical(other.loadId, loadId) || other.loadId == loadId)&&(identical(other.loadCode, loadCode) || other.loadCode == loadCode)&&(identical(other.rateeUserId, rateeUserId) || other.rateeUserId == rateeUserId)&&(identical(other.rateeName, rateeName) || other.rateeName == rateeName)&&(identical(other.laterUsed, laterUsed) || other.laterUsed == laterUsed)&&(identical(other.rateeRole, rateeRole) || other.rateeRole == rateeRole));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,loadId,rateeName,rateeRole);
+    return Object.hash(runtimeType,loadId,loadCode,rateeUserId,rateeName,laterUsed,rateeRole);
 }
 
 @override
 String toString() {
-    return 'PendingRating(loadId: $loadId, rateeName: $rateeName, rateeRole: $rateeRole)';
+    return 'PendingRating(loadId: $loadId, loadCode: $loadCode, rateeUserId: $rateeUserId, rateeName: $rateeName, laterUsed: $laterUsed, rateeRole: $rateeRole)';
 }
 
 
@@ -1126,7 +1132,7 @@ abstract mixin class _$PendingRatingCopyWith<$Res> implements $PendingRatingCopy
   factory _$PendingRatingCopyWith(_PendingRating value, $Res Function(_PendingRating) _then) = __$PendingRatingCopyWithImpl;
 @override @useResult
 $Res call({
- String loadId, String rateeName,@JsonKey(unknownEnumValue: Role.unknown) Role rateeRole
+ String loadId, String? loadCode, String rateeUserId, String rateeName, bool laterUsed,@JsonKey(unknownEnumValue: Role.unknown) Role rateeRole
 });
 
 
@@ -1143,11 +1149,14 @@ class __$PendingRatingCopyWithImpl<$Res>
 
 /// Create a copy of PendingRating
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? loadId = null,Object? rateeName = null,Object? rateeRole = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? loadId = null,Object? loadCode = freezed,Object? rateeUserId = null,Object? rateeName = null,Object? laterUsed = null,Object? rateeRole = null,}) {
   return _then(_PendingRating(
 loadId: null == loadId ? _self.loadId : loadId // ignore: cast_nullable_to_non_nullable
+as String,loadCode: freezed == loadCode ? _self.loadCode : loadCode // ignore: cast_nullable_to_non_nullable
+as String?,rateeUserId: null == rateeUserId ? _self.rateeUserId : rateeUserId // ignore: cast_nullable_to_non_nullable
 as String,rateeName: null == rateeName ? _self.rateeName : rateeName // ignore: cast_nullable_to_non_nullable
-as String,rateeRole: null == rateeRole ? _self.rateeRole : rateeRole // ignore: cast_nullable_to_non_nullable
+as String,laterUsed: null == laterUsed ? _self.laterUsed : laterUsed // ignore: cast_nullable_to_non_nullable
+as bool,rateeRole: null == rateeRole ? _self.rateeRole : rateeRole // ignore: cast_nullable_to_non_nullable
 as Role,
   ));
 }

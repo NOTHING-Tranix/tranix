@@ -10,6 +10,7 @@ import '../../features/profile/presentation/profile_screens.dart';
 import '../../features/driver/driver_feature.dart';
 import '../../features/notifications/notifications_feature.dart';
 import '../../features/wallet/wallet_feature.dart';
+import '../../features/trust_score/trust_feature.dart';
 import '../../features/shipper/presentation/shipper_screens.dart';
 import '../../features/onboarding/presentation/welcome_screen.dart';
 import '../../features/shared_shell/role_shell.dart';
@@ -74,6 +75,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: Routes.profileMobile, builder: (_, _) => const ChangeMobileScreen()),
       GoRoute(path: Routes.verification, builder: (_, _) => const VerificationScreen()),
       GoRoute(path: Routes.wallet, builder: (_, _) => const WalletScreen()),
+      GoRoute(path: Routes.trustScore, builder: (_, _) => const TrustScoreScreen()),
       GoRoute(path: Routes.notifications, builder: (_, _) => const NotificationsScreen()),
       GoRoute(path: Routes.driverTruckForm, builder: (_, _) => const TruckFormScreen()),
       GoRoute(path: Routes.driverLocker, builder: (_, _) => const LockerScreen()),

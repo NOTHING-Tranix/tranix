@@ -15,5 +15,6 @@
   "ticketTypes": ["COMPLAINT", "FEEDBACK", "WALLET", "PAYMENT_DISPUTE", "OTHERS"],
   "rejectReasons": ["TOO_FAR", "LOW_AMOUNT", "WRONG_TRUCK", "OTHER"],
   "supportedLanguages": ["en", "ta", "hi"],
+  "ratingTags": ["On time", "Polite", "Careful with goods", "Good communication", "Late", "Rude", "Damaged goods", "Asked for more money"],
   "aadhaarEnabled": false
 }

@@ -1,0 +1,17 @@
+{
+  "summary": { "trips": 2, "agreedTotalInr": 30500, "confirmedInr": 12000, "pendingInr": 18500 },
+  "items": [
+    {
+      "id": "a1b2c3d4-0000-4000-8000-000000000123", "code": "TRX-000123", "status": "DELIVERED",
+      "goodsType": "Vegetables", "description": "Tomatoes, fresh", "quantity": 120, "quantityUnit": "CRATES",
+      "pickupArea": "Oddanchatram, Dindigul", "dropArea": "Koyambedu, Chennai",
+      "pickupWindowStart": "2026-11-21T03:30:00Z", "agreedAmountInr": 18500, "paymentStatus": "PAID", "postedForFarmerName": null
+    },
+    {
+      "id": "a1b2c3d4-0000-4000-8000-000000000101", "code": "TRX-000101", "status": "DELIVERED",
+      "goodsType": "Grains", "description": null, "quantity": 80, "quantityUnit": "BAGS",
+      "pickupArea": "Palani, Dindigul", "dropArea": "Madurai", "pickupWindowStart": "2026-11-05T04:00:00Z",
+      "agreedAmountInr": 12000, "paymentStatus": "CONFIRMED", "postedForFarmerName": null
+    }
+  ]
+}

@@ -7,6 +7,7 @@ import '../../core/router/routes.dart';
 import '../../core/session/session_controller.dart';
 import '../../shared/models/enums.dart';
 import '../../core/widgets/widgets.dart';
+import '../trust_score/trust_feature.dart';
 
 /// Bottom-navigation scaffold of a role (`StatefulShellRoute`), with the offline banner on top.
 class RoleShell extends StatelessWidget {
@@ -23,6 +24,7 @@ class RoleShell extends StatelessWidget {
         children: [
           const OfflineBanner(),
           const _ProfileBanner(),
+          const _RatingPrompt(),
           Expanded(child: navigationShell),
         ],
       ),
@@ -97,5 +99,29 @@ class _ProfileBanner extends ConsumerWidget {
         ),
       ),
     );
+  }
+}
+
+/// A-601: on app open, shows the pending-rating pop-ups once per shell launch.
+class _RatingPrompt extends ConsumerStatefulWidget {
+  const _RatingPrompt();
+
+  @override
+  ConsumerState<_RatingPrompt> createState() => _RatingPromptState();
+}
+
+class _RatingPromptState extends ConsumerState<_RatingPrompt> {
+  bool _shown = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final session = ref.watch(sessionProvider);
+    if (!_shown && session is SignedIn && session.me.pendingRatingsCount > 0) {
+      _shown = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) showPendingRatings(context, ref);
+      });
+    }
+    return const SizedBox.shrink();
   }
 }

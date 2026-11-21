@@ -1203,4 +1203,107 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get callShipper => 'शिपर को कॉल करें';
+
+  @override
+  String get markPaid => 'भुगतान हुआ दर्ज करें';
+
+  @override
+  String get paymentMode => 'तरीका';
+
+  @override
+  String get modeCash => 'नकद';
+
+  @override
+  String get modeUpi => 'UPI';
+
+  @override
+  String get modeBank => 'बैंक';
+
+  @override
+  String get referenceOptional => 'संदर्भ (वैकल्पिक)';
+
+  @override
+  String get confirmReceived => 'मिला — पुष्टि करें';
+
+  @override
+  String get disputePayment => 'विवाद';
+
+  @override
+  String get disputeReason => 'क्या गलत है?';
+
+  @override
+  String paidVia(String amount, String mode) {
+    return '$amount - $mode';
+  }
+
+  @override
+  String get thisMonth => 'इस महीने';
+
+  @override
+  String tripsCount(int count) {
+    return '$count यात्राएँ';
+  }
+
+  @override
+  String get agreedTotal => 'तय राशि';
+
+  @override
+  String get receivedTotal => 'मिला';
+
+  @override
+  String get pendingTotal => 'बाकी';
+
+  @override
+  String rateTitle(String name) {
+    return '$name को रेट करें';
+  }
+
+  @override
+  String get rateLater => 'बाद में';
+
+  @override
+  String get submitAction => 'जमा करें';
+
+  @override
+  String get commentOptional => 'टिप्पणी (वैकल्पिक)';
+
+  @override
+  String get howItWorks => 'यह कैसे काम करता है';
+
+  @override
+  String get trustHowBody =>
+      'आपका स्कोर 70 (100 में से) से शुरू होता है। समय पर यात्रा, अच्छी रेटिंग और समय पर भुगतान इसे बढ़ाते हैं; देरी, स्वीकार के बाद रद्द करना और विवाद हारना इसे घटाते हैं।';
+
+  @override
+  String get noEvents => 'अभी कोई बदलाव नहीं';
+
+  @override
+  String get evOnTime => 'समय पर यात्रा';
+
+  @override
+  String get evLateDelivery => 'देर से डिलीवरी';
+
+  @override
+  String get evLatePickup => 'देर से पिकअप';
+
+  @override
+  String get evCancelled => 'स्वीकार के बाद रद्द';
+
+  @override
+  String get evRating => 'रेटिंग मिली';
+
+  @override
+  String get evPaymentOnTime => 'समय पर भुगतान';
+
+  @override
+  String get evDisputeLost => 'विवाद हारा';
+
+  @override
+  String get evAdmin => 'ट्रानिक्स द्वारा बदलाव';
+
+  @override
+  String get evComplaint => 'पुष्ट शिकायत';
+
+  @override
+  String get evDriverCancelled => 'ड्राइवर ने रद्द किया';
 }

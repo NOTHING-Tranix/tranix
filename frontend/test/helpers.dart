@@ -14,12 +14,13 @@ Future<dynamic> fixtureJson(String name) async => jsonDecode(await diskFixture(n
 
 /// Overrides for a mock-mode app in widget tests: no latency, fixtures preloaded (real file I/O does not
 /// complete inside testWidgets' fake async zone), always online.
-Future<List<Override>> mockAppOverrides() async {
+Future<List<Override>> mockAppOverrides({Map<String, String> patch = const {}}) async {
   SharedPreferences.setMockInitialValues({});
   final prefs = await SharedPreferences.getInstance();
   final fixtures = {
     for (final f in Directory('assets/mock').listSync().whereType<File>())
       f.uri.pathSegments.last: f.readAsStringSync(),
+    ...patch,
   };
   return [
     sharedPreferencesProvider.overrideWithValue(prefs),

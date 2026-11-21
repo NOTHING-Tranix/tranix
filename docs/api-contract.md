@@ -216,7 +216,7 @@ LoadDetail = LoadSummary + { pickup, drop, senderName, senderMobile, receiverNam
 
 ## 12. Settings for clients
 
-`GET /settings/public` → `{postingChargeInr, tripChargeInr, topupChips:[500,1000,2000], otpTtlSeconds:300, otpResendSeconds:30, revisionLimit:5, revisionResponseMinutes:15, geofenceMeters:500, wishlistMax:20, wishlistFirstMinutes:15, wishlistOnlyNotifyMinutes:30, goodsTypes[], vehicleTypes[], ticketTypes[], rejectReasons[], supportedLanguages[], aadhaarEnabled}` — `aadhaarEnabled` hides the Aadhaar option until a provider is set up (Q-04)
+`GET /settings/public` → `{postingChargeInr, tripChargeInr, topupChips:[500,1000,2000], otpTtlSeconds:300, otpResendSeconds:30, revisionLimit:5, revisionResponseMinutes:15, geofenceMeters:500, wishlistMax:20, wishlistFirstMinutes:15, wishlistOnlyNotifyMinutes:30, goodsTypes[], vehicleTypes[], ticketTypes[], rejectReasons[], supportedLanguages[], ratingTags[], aadhaarEnabled}` — `aadhaarEnabled` hides the Aadhaar option until a provider is set up (Q-04)
 
 ## 13. Admin (`/api/v1/admin/**`, role ADMIN)
 

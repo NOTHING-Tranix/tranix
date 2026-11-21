@@ -10,6 +10,7 @@ import '../driver/driver_feature.dart';
 import '../driver/suggestions_screen.dart';
 import '../driver/trip_feature.dart';
 import '../notifications/notifications_feature.dart';
+import '../payments/payments_feature.dart';
 import '../shipper/presentation/shipper_screens.dart';
 import 'role_shell.dart';
 
@@ -23,6 +24,7 @@ Widget tabScreenFor(ShellTab tab) => switch (tab.label) {
       TabLabel.currentTrip => const CurrentTripScreen(),
       TabLabel.tracking => const _LoadsTab(ongoing: true),
       TabLabel.history when tab.path.startsWith(Routes.lp) || tab.path.startsWith(Routes.fn) => const _LoadsTab(ongoing: false),
+      TabLabel.history when tab.path.startsWith(Routes.driver) => const DriverHistoryScreen(),
       _ => PlaceholderTab(tab: tab),
     };
 

@@ -13,6 +13,14 @@ Newest first. Claude adds an entry at the end of every session and at every mile
 
 ---
 
+## 2026-11-21 — M8 Payments, ratings, Trust Score (done)
+- Done: B-801…B-808, A-407, A-510, A-601…A-603.
+- Backend: payment record at acceptance; mark paid (payer) → driver confirm/dispute; admin dispute decision; Trust Score ledger (events with unique (user, load, event), clamp 0–100, Org score from its drivers); ratings with Later once + reminder job; driver history with month summary. 52 integration tests green.
+- Frontend: payment card + "Mark as paid" sheet on the shipper load detail; driver History tab (month switcher, agreed/received/pending, confirm/dispute); rating pop-up on app open (Later once); Trust Score screen (score, trend line, events, How it works) from the profile badge or menu. analyze clean, 39 tests green, debug APK builds.
+- Demo (mock: `flutter run --dart-define=USE_MOCK=true`): Open as Load Provider → TRX-000123 → Payment → Mark as paid → pick UPI → Mark as paid. Profile → tap the Trust Score badge → events + How it works. Open as Driver → History → Confirm received / Dispute on TRX-000123.
+- Demo (backend): accept + deliver a load as in M7, then `POST /loads/{id}/payment/mark-paid` as the shipper, `POST /driver/trips/{id}/payment/confirm` as the driver; `GET /ratings/pending` shows the rating for both; `GET /trust-score/events` shows ON_TIME.
+- Contract: `GET /settings/public` gains `ratingTags[]` (setting `lists.rating_tags`).
+
 ## 2026-11-21 — M7 Trip execution (done; A-510 history moves to M8 with payments)
 - Done: B-701…B-711, B-408; A-405, A-504…A-509, A-511. D-28 assumed (trip OTP storage, late rule).
 - Demo (after the M6 demo accept): driver → Current trip shows exact pickup/drop with Call + Navigate → "Request new amount" (1 of 5) → shipper load detail shows the Amount request card → Confirm. Driver taps "Reached pickup" (outside 500 m asks a reason) → shipper detail shows the Pickup OTP (dev OTP 123456) → driver enters it → Traveling; app uploads location every 30 s (foreground notification) → shipper sees Live tracking + route status → "Reached destination" → delivery OTP (SMS to receiver; dev 123456) → Delivered.

@@ -1,0 +1,8 @@
+{
+  "items": [
+    { "at": "2026-11-21T10:00:00Z", "loadId": "a1b2c3d4-0000-4000-8000-000000000123", "event": "ON_TIME", "points": 2, "reason": "TRX-000123" },
+    { "at": "2026-11-18T08:00:00Z", "loadId": "a1b2c3d4-0000-4000-8000-000000000101", "event": "LATE_PICKUP", "points": -1, "reason": "TRX-000101" },
+    { "at": "2026-11-10T08:00:00Z", "loadId": null, "event": "RATING", "points": 2.5, "reason": "5 stars" }
+  ],
+  "page": 0, "size": 20, "total": 3
+}

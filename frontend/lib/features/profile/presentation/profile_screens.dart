@@ -59,7 +59,7 @@ class ProfileScreen extends ConsumerWidget {
                         Text(m.name, style: Theme.of(context).textTheme.titleLarge),
                         Text('${roleLabel(l, m.role)} · +91 ${m.mobile}'),
                         const SizedBox(height: 6),
-                        Wrap(spacing: 8, children: [verificationChip(context, m.verificationStatus), TrustScoreBadge(score: m.trustScore)]),
+                        Wrap(spacing: 8, children: [verificationChip(context, m.verificationStatus), InkWell(key: const Key('trust-badge'), onTap: () => context.push(Routes.trustScore), child: TrustScoreBadge(score: m.trustScore))]),
                       ],
                     ),
                   ),
@@ -942,6 +942,10 @@ Future<void> showProfileSheet(BuildContext context, WidgetRef ref) {
                   contentPadding: EdgeInsets.zero,
                   title: Text(l.trustScore),
                   trailing: TrustScoreBadge(score: me.trustScore),
+                  onTap: () {
+                    Navigator.pop(sheetContext);
+                    context.push(Routes.trustScore);
+                  },
                 ),
                 ListTile(
                   contentPadding: EdgeInsets.zero,

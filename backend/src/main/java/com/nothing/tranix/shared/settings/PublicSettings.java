@@ -20,5 +20,6 @@ public record PublicSettings(
         List<String> ticketTypes,
         List<String> rejectReasons,
         List<String> supportedLanguages,
+        List<String> ratingTags,
         boolean aadhaarEnabled) {
 }

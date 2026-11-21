@@ -31,7 +31,7 @@ abstract class WishlistEntry with _$WishlistEntry {
 abstract class TrustScore with _$TrustScore {
   const factory TrustScore({
     required double score,
-    required DateTime updatedAt,
+    DateTime? updatedAt,
     @Default(<double>[]) List<double> trend,
   }) = _TrustScore;
 
@@ -57,7 +57,10 @@ abstract class TrustEvent with _$TrustEvent {
 abstract class PendingRating with _$PendingRating {
   const factory PendingRating({
     required String loadId,
+    String? loadCode,
+    required String rateeUserId,
     required String rateeName,
+    @Default(false) bool laterUsed,
     @JsonKey(unknownEnumValue: Role.unknown) required Role rateeRole,
   }) = _PendingRating;
 

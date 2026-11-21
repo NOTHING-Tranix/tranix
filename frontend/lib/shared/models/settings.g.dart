@@ -29,6 +29,11 @@ _PublicSettings _$PublicSettingsFromJson(Map<String, dynamic> json) =>
               ?.map((e) => e as String)
               .toList() ??
           const <String>[],
+      ratingTags:
+          (json['ratingTags'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const <String>[],
       vehicleTypes:
           (json['vehicleTypes'] as List<dynamic>?)
               ?.map((e) => e as String)
@@ -66,6 +71,7 @@ Map<String, dynamic> _$PublicSettingsToJson(_PublicSettings instance) =>
       'wishlistFirstMinutes': instance.wishlistFirstMinutes,
       'wishlistOnlyNotifyMinutes': instance.wishlistOnlyNotifyMinutes,
       'goodsTypes': instance.goodsTypes,
+      'ratingTags': instance.ratingTags,
       'vehicleTypes': instance.vehicleTypes,
       'ticketTypes': instance.ticketTypes,
       'rejectReasons': instance.rejectReasons,

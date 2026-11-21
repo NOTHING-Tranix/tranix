@@ -85,6 +85,14 @@ class MockInterceptor extends Interceptor {
     MockRoute('POST', RegExp(r'^/notifications/[^/]+/read$'), status: 204),
     MockRoute('POST', RegExp(r'^/notifications/read-all$'), status: 204),
     MockRoute('POST', RegExp(r'^/wallet/topup-link$'), fixture: 'topup_link.json'),
+    MockRoute('POST', RegExp(r'^/loads/[^/]+/payment/mark-paid$'), fixture: 'payment.json'),
+    MockRoute('POST', RegExp(r'^/driver/trips/[^/]+/payment/(confirm|dispute)$'), fixture: 'payment.json'),
+    MockRoute('GET', RegExp(r'^/driver/history$'), fixture: 'driver_history.json'),
+    MockRoute('GET', RegExp(r'^/ratings/pending$'), fixture: 'pending_ratings.json'),
+    MockRoute('POST', RegExp(r'^/ratings$'), status: 204),
+    MockRoute('POST', RegExp(r'^/ratings/[^/]+/later$'), status: 204),
+    MockRoute('GET', RegExp(r'^/trust-score$'), fixture: 'trust_score.json'),
+    MockRoute('GET', RegExp(r'^/trust-score/events$'), fixture: 'trust_events.json'),
   ];
 
   @override

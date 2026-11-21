@@ -1199,4 +1199,107 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get callShipper => 'Call shipper';
+
+  @override
+  String get markPaid => 'Mark as paid';
+
+  @override
+  String get paymentMode => 'Mode';
+
+  @override
+  String get modeCash => 'Cash';
+
+  @override
+  String get modeUpi => 'UPI';
+
+  @override
+  String get modeBank => 'Bank';
+
+  @override
+  String get referenceOptional => 'Reference (optional)';
+
+  @override
+  String get confirmReceived => 'Confirm received';
+
+  @override
+  String get disputePayment => 'Dispute';
+
+  @override
+  String get disputeReason => 'What is wrong?';
+
+  @override
+  String paidVia(String amount, String mode) {
+    return '$amount by $mode';
+  }
+
+  @override
+  String get thisMonth => 'This month';
+
+  @override
+  String tripsCount(int count) {
+    return '$count trips';
+  }
+
+  @override
+  String get agreedTotal => 'Agreed';
+
+  @override
+  String get receivedTotal => 'Received';
+
+  @override
+  String get pendingTotal => 'Pending';
+
+  @override
+  String rateTitle(String name) {
+    return 'Rate $name';
+  }
+
+  @override
+  String get rateLater => 'Later';
+
+  @override
+  String get submitAction => 'Submit';
+
+  @override
+  String get commentOptional => 'Comment (optional)';
+
+  @override
+  String get howItWorks => 'How it works';
+
+  @override
+  String get trustHowBody =>
+      'Your score starts at 70 (out of 100). On-time trips, good ratings and on-time payments raise it; late trips, cancellations after acceptance and lost disputes lower it.';
+
+  @override
+  String get noEvents => 'No changes yet';
+
+  @override
+  String get evOnTime => 'Trip on time';
+
+  @override
+  String get evLateDelivery => 'Late delivery';
+
+  @override
+  String get evLatePickup => 'Late pickup';
+
+  @override
+  String get evCancelled => 'Cancelled after acceptance';
+
+  @override
+  String get evRating => 'Rating received';
+
+  @override
+  String get evPaymentOnTime => 'Payment on time';
+
+  @override
+  String get evDisputeLost => 'Dispute lost';
+
+  @override
+  String get evAdmin => 'Adjusted by Tranix';
+
+  @override
+  String get evComplaint => 'Verified complaint';
+
+  @override
+  String get evDriverCancelled => 'Driver cancelled';
 }

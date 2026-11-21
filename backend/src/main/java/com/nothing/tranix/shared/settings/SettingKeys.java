@@ -37,6 +37,7 @@ public final class SettingKeys {
 
     public static final String GOODS_TYPES = "lists.goods_types";
     public static final String SUPPORTED_LANGUAGES = "lists.supported_languages";
+    public static final String RATING_TAGS = "lists.rating_tags";
 
     private SettingKeys() {
     }

@@ -23,6 +23,7 @@ import '../../../shared/models/models.dart';
 import '../../notifications/notifications_feature.dart';
 import '../../profile/presentation/profile_screens.dart';
 import '../../shared_shell/tab_screens.dart' show ProfileAvatarButton;
+import '../../payments/payments_feature.dart';
 import '../application/post_load_draft.dart';
 import '../data/loads_api.dart';
 
@@ -527,6 +528,7 @@ class LoadDetailScreen extends ConsumerWidget {
               for (final r in d.revisions.where((r) => r.status == RevisionStatus.pending)) AmountRequestCard(load: d, revision: r),
               if (d.status == LoadStatus.locationReached) OtpCodeCard(loadId: d.id, title: l.pickupOtpTitle, hint: l.shareAfterLoading),
               if (d.driver != null && d.status != LoadStatus.delivered && d.status != LoadStatus.cancelled) TrackingCard(loadId: d.id),
+              if (d.payment != null) PaymentCard(load: d),
               ListTile(contentPadding: EdgeInsets.zero, leading: const Icon(Icons.trip_origin), title: Text(d.pickup.address),
                   subtitle: Text('${l.sender}: ${d.senderName} · +91 ${d.senderMobile}')),
               ListTile(contentPadding: EdgeInsets.zero, leading: const Icon(Icons.location_on), title: Text(d.drop.address),
