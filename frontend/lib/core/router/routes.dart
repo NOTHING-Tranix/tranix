@@ -20,6 +20,7 @@ abstract final class Routes {
   static const wishlist = '/wishlist';
   static const support = '/support';
   static String ticket(String id) => '/support/$id';
+  static String legal(String doc) => '/legal/$doc';
   static const notifications = '/notifications';
   static const postLoad = '/post';
   static const postLoadReview = '/post/review';

@@ -3111,6 +3111,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Request sent. Tranix support will reply here.'**
   String get ticketCreated;
+
+  /// No description provided for @privacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy policy'**
+  String get privacyPolicy;
+
+  /// No description provided for @termsOfUse.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of use'**
+  String get termsOfUse;
+
+  /// No description provided for @draftNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Draft — pending legal review'**
+  String get draftNotice;
+
+  /// No description provided for @deleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account'**
+  String get deleteAccount;
+
+  /// No description provided for @deleteAccountBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Tranix will delete your account and personal data after any active trips and payments are closed. Records the law requires are kept.'**
+  String get deleteAccountBody;
+
+  /// No description provided for @deleteReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason (optional)'**
+  String get deleteReason;
+
+  /// No description provided for @deleteRequested.
+  ///
+  /// In en, this message translates to:
+  /// **'Request sent. Tranix support will confirm here.'**
+  String get deleteRequested;
 }
 
 class _AppLocalizationsDelegate

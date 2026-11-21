@@ -15,6 +15,7 @@ import '../../../core/session/session_controller.dart';
 import '../../../core/settings_provider.dart';
 import '../../../core/utils/formatters.dart';
 import '../../../core/utils/validators.dart';
+import '../../support/support_feature.dart' show requestAccountDeletion;
 import '../../../core/widgets/widgets.dart';
 import '../../../shared/models/models.dart';
 import '../../auth/presentation/auth_screens.dart' show MobileField;
@@ -896,9 +897,12 @@ class _ChangeMobileScreenState extends ConsumerState<ChangeMobileScreen> {
 
 /// S-07 profile pop-up (from the avatar on home screens).
 Future<void> showProfileSheet(BuildContext context, WidgetRef ref) {
+  final outer = context; // the sheet's own context and ref are gone once it closes
+  final outerRef = ref;
   return showModalBottomSheet<void>(
     context: context,
     showDragHandle: true,
+    isScrollControlled: true,
     builder: (sheetContext) => Consumer(
       builder: (context, ref, _) {
         final l = AppLocalizations.of(context);
@@ -907,7 +911,7 @@ Future<void> showProfileSheet(BuildContext context, WidgetRef ref) {
         final me = session.me;
         final settings = ref.watch(publicSettingsProvider).value;
         return SafeArea(
-          child: Padding(
+          child: SingleChildScrollView(
             padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -949,6 +953,34 @@ Future<void> showProfileSheet(BuildContext context, WidgetRef ref) {
                   onTap: () {
                     Navigator.pop(sheetContext);
                     context.push(Routes.support);
+                  },
+                ),
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  leading: const Icon(Icons.privacy_tip_outlined),
+                  title: Text(l.privacyPolicy),
+                  onTap: () {
+                    Navigator.pop(sheetContext);
+                    context.push(Routes.legal('privacy'));
+                  },
+                ),
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  leading: const Icon(Icons.gavel_outlined),
+                  title: Text(l.termsOfUse),
+                  onTap: () {
+                    Navigator.pop(sheetContext);
+                    context.push(Routes.legal('terms'));
+                  },
+                ),
+                ListTile(
+                  key: const Key('menu-delete'),
+                  contentPadding: EdgeInsets.zero,
+                  leading: Icon(Icons.person_remove_outlined, color: Theme.of(context).colorScheme.error),
+                  title: Text(l.deleteAccount),
+                  onTap: () {
+                    Navigator.pop(sheetContext);
+                    requestAccountDeletion(outer, outerRef);
                   },
                 ),
                 ListTile(

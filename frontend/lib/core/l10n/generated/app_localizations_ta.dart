@@ -1631,4 +1631,27 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get ticketCreated => 'கோரிக்கை அனுப்பப்பட்டது. இங்கே பதில் வரும்.';
+
+  @override
+  String get privacyPolicy => 'தனியுரிமைக் கொள்கை';
+
+  @override
+  String get termsOfUse => 'பயன்பாட்டு விதிமுறைகள்';
+
+  @override
+  String get draftNotice => 'வரைவு — சட்ட ஆய்வு நிலுவையில்';
+
+  @override
+  String get deleteAccount => 'கணக்கை நீக்கு';
+
+  @override
+  String get deleteAccountBody =>
+      'நடப்பு பயணங்களும் கட்டணங்களும் முடிந்த பின் டிரானிக்ஸ் உங்கள் கணக்கையும் தனிப்பட்ட தரவையும் நீக்கும். சட்டப்படி தேவையான பதிவுகள் வைக்கப்படும்.';
+
+  @override
+  String get deleteReason => 'காரணம் (விருப்பம்)';
+
+  @override
+  String get deleteRequested =>
+      'கோரிக்கை அனுப்பப்பட்டது. உதவி மையம் இங்கே உறுதிசெய்யும்.';
 }

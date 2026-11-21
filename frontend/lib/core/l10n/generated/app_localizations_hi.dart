@@ -1618,4 +1618,27 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get ticketCreated => 'अनुरोध भेजा गया। जवाब यहीं आएगा।';
+
+  @override
+  String get privacyPolicy => 'गोपनीयता नीति';
+
+  @override
+  String get termsOfUse => 'उपयोग की शर्तें';
+
+  @override
+  String get draftNotice => 'मसौदा — कानूनी समीक्षा बाकी';
+
+  @override
+  String get deleteAccount => 'खाता हटाएँ';
+
+  @override
+  String get deleteAccountBody =>
+      'चालू यात्राएँ और भुगतान पूरे होने के बाद ट्रानिक्स आपका खाता और निजी डेटा हटा देगा। कानून के अनुसार ज़रूरी रिकॉर्ड रखे जाएँगे।';
+
+  @override
+  String get deleteReason => 'कारण (वैकल्पिक)';
+
+  @override
+  String get deleteRequested =>
+      'अनुरोध भेजा गया। सहायता टीम यहीं पुष्टि करेगी।';
 }

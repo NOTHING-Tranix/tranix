@@ -1615,4 +1615,27 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ticketCreated => 'Request sent. Tranix support will reply here.';
+
+  @override
+  String get privacyPolicy => 'Privacy policy';
+
+  @override
+  String get termsOfUse => 'Terms of use';
+
+  @override
+  String get draftNotice => 'Draft — pending legal review';
+
+  @override
+  String get deleteAccount => 'Delete account';
+
+  @override
+  String get deleteAccountBody =>
+      'Tranix will delete your account and personal data after any active trips and payments are closed. Records the law requires are kept.';
+
+  @override
+  String get deleteReason => 'Reason (optional)';
+
+  @override
+  String get deleteRequested =>
+      'Request sent. Tranix support will confirm here.';
 }

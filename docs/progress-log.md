@@ -13,6 +13,13 @@ Newest first. Claude adds an entry at the end of every session and at every mile
 
 ---
 
+## 2026-11-21 — Contract sync fixes (after /sync-check)
+- Done: B-1501…B-1503, A-1101.
+- Contract: repaired four garbled lines from an M6 text replacement (LoadStatus enum, driver suggestions row, reject reasons, wallet transactions); added TxnDirection and SuggestionRejectReason; new §14 legal + account deletion; documented `X-Request-Id`, rate limits, `X-Razorpay-Signature` and the top-up return page.
+- App: Privacy policy / Terms screens (`/legal/:doc`, readable signed out, draft notice), "Delete account" in the profile menu → confirmation → deletion request ticket. Fixed: the profile menu overflowed on small phones (now scrolls) and actions launched from it used the closed sheet's context. analyze clean, 63 tests green, debug APK builds. Backend unchanged.
+- Demo (mock): Open as Load Provider → avatar → Privacy policy; avatar → Delete account → reason → the request opens as a support ticket.
+- Sync status: contract, backend and app in sync (LINK_EXPIRED is only used by the server-rendered link page).
+
 ## 2026-11-21 — M16 Hardening and release (code ready; release steps need the founder)
 - Done: B-1401, B-1402, B-1403, B-1406, B-1408, A-1001, A-1002, A-1005, A-1008.
 - Backend: per-IP rate limits on auth and public link paths (`429 RATE_LIMITED`); `X-Request-Id` on every request and in logs, JSON (ECS) logs in prod; health liveness/readiness + metrics; Dockerfile (built in CI); `tools/db-backup.sh`, `tools/db-restore.sh`, `tools/loadtest/suggestions-tracking.js`; full-lifecycle E2E test; `GET /legal/privacy|terms` (draft) and `POST /me/deletion-request`. 19 unit + 69 integration tests green.

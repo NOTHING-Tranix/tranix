@@ -185,3 +185,8 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 - [x] **B-1406** End-to-end test of the full lifecycle (post → accept → revision → OTPs → delivered → paid → rated). (2026-11-21)
 - [!] **B-1407** Load test of suggestions and tracking polling. — k6 script `tools/loadtest/suggestions-tracking.js` ready; run against staging (F-9)
 - [x] **B-1408** Privacy policy/terms endpoints and data deletion request flow — Q-08. (2026-11-21)
+
+## Phase 15 — Contract sync fixes
+- [x] **B-1501** Repair garbled contract lines (LoadStatus, suggestions, reject reasons, wallet transactions); add TxnDirection, SuggestionRejectReason. (2026-11-21)
+- [x] **B-1502** Contract §14: `/legal/{privacy|terms}`, `POST /me/deletion-request`. (2026-11-21)
+- [x] **B-1503** Contract: `X-Request-Id`, rate limits, `X-Razorpay-Signature`, `/p/wallet/topup/done`. (2026-11-21)

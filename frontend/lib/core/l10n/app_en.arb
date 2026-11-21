@@ -552,5 +552,12 @@
   "@closedReason": {"placeholders": {"reason": {"type": "String"}}},
   "youLabel": "You",
   "tranixSupport": "Tranix support",
-  "ticketCreated": "Request sent. Tranix support will reply here."
+  "ticketCreated": "Request sent. Tranix support will reply here.",
+  "privacyPolicy": "Privacy policy",
+  "termsOfUse": "Terms of use",
+  "draftNotice": "Draft — pending legal review",
+  "deleteAccount": "Delete account",
+  "deleteAccountBody": "Tranix will delete your account and personal data after any active trips and payments are closed. Records the law requires are kept.",
+  "deleteReason": "Reason (optional)",
+  "deleteRequested": "Request sent. Tranix support will confirm here."
 }

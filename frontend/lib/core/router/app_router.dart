@@ -24,6 +24,8 @@ import 'routes.dart';
 
 /// Decides where a location should go for the current session (pure, unit-tested).
 String? redirectFor(SessionState session, String location) {
+  // Privacy policy and terms are readable signed in or out (A-1101), e.g. from the sign-up consent.
+  if (location.startsWith('/legal/') && session is! SessionUnknown) return null;
   switch (session) {
     case SessionUnknown():
     case SessionError():
@@ -86,6 +88,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: Routes.wishlist, builder: (_, _) => const WishlistScreen()),
       GoRoute(path: Routes.support, builder: (_, _) => const SupportScreen()),
       GoRoute(path: '/support/:id', builder: (_, s) => TicketScreen(id: s.pathParameters['id']!)),
+      GoRoute(path: '/legal/:doc', builder: (_, s) => LegalScreen(doc: s.pathParameters['doc']!)),
       GoRoute(path: Routes.notifications, builder: (_, _) => const NotificationsScreen()),
       GoRoute(path: Routes.driverTruckForm, builder: (_, _) => const TruckFormScreen()),
       GoRoute(path: Routes.driverLocker, builder: (_, _) => const LockerScreen()),

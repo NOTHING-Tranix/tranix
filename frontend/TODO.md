@@ -121,3 +121,6 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 - [ ] **A-1101** Make shared code web-safe; web build for shipper and Organization.
 - [ ] **A-1102** Admin panel routes (`/admin/**`) using admin API.
 - [ ] **A-1103** Web deployment.
+
+## Phase 11 — Contract sync fixes
+- [x] **A-1101** Privacy policy / Terms screens and "Delete account" in the profile menu (opens a deletion request ticket); legal pages readable signed out; profile menu scrolls on small screens. (2026-11-21)

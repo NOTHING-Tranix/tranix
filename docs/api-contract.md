@@ -11,6 +11,8 @@
 - IDs: UUID strings. Money: integer rupees (`amountInr`). Times: ISO-8601 UTC (`2026-11-20T10:15:00Z`). Coordinates: `{ "lat": 10.95, "lng": 78.08 }`.
 - Pagination: `?page=0&size=20` → `{ "items": [...], "page": 0, "size": 20, "total": 134 }`. Newest first unless stated.
 - Language: `Accept-Language: en | ta | hi` (server-generated messages and SMS).
+- Request ID: every response has `X-Request-Id` (a client-sent `X-Request-Id`, 8-64 chars `[A-Za-z0-9-]`, is reused); quote it to support.
+- Rate limits: `/auth/**` and the public link paths (`/public/**`, `/p/track/**`) are limited per client IP per minute (settings in config) → `429 RATE_LIMITED` with `Retry-After: 60`.
 - Errors: RFC 7807 Problem JSON with a stable `code`:
 
 ```json
@@ -46,7 +48,7 @@ VerificationStatus: NOT_SUBMITTED | UNDER_REVIEW | VERIFIED | NOT_VERIFIED
 DocumentType: AADHAAR_OFFLINE | PAN | VOTER_ID | DRIVING_LICENCE | PHOTO | RC | INSURANCE | NATIONAL_PERMIT |
               FN_REGISTRATION_CERT | ORG_REGISTRATION_CERT | GST_CERT
 DocumentStatus: PENDING | APPROVED | REJECTED
-LoadStatus: NOT_ACCEPTED | ACCEPTED | | `GET /driver/suggestions?sort=NEAREST|AMOUNT|EARLIEST` (empty list when off duty, not verified or the payer wallet is below the trip charge) |_NEGOTIATION | WAITING_FOR_PICKUP | LOCATION_REACHED | PICKED_UP |
+LoadStatus: NOT_ACCEPTED | ACCEPTED | AMOUNT_NEGOTIATION | WAITING_FOR_PICKUP | LOCATION_REACHED | PICKED_UP |
             TRAVELING | ARRIVED_DESTINATION | DELIVERED | CANCELLED
 QuantityUnit: BAGS | CRATES | BOXES | TONNES | LITRES
 VehicleType: OPEN_BODY | CLOSED_BODY | CONTAINER | REFRIGERATED | TANKER | ANY
@@ -56,6 +58,8 @@ OtpPurpose: SIGN_UP | SIGN_IN | CHANGE_MOBILE | PICKUP | DELIVERY
 PaymentStatus: PENDING | PAID | CONFIRMED | DISPUTED
 PaymentMode: CASH | UPI | BANK
 TxnType: TOPUP | POSTING_CHARGE | TRIP_CHARGE | REFUND | ADMIN_CREDIT
+TxnDirection: CREDIT | DEBIT
+SuggestionRejectReason: TOO_FAR | LOW_AMOUNT | WRONG_TRUCK | OTHER
 TruckStatus: AVAILABLE | ALLOCATED | ON_TRIP | DOCUMENTS_PENDING | INACTIVE
 TicketType: COMPLAINT | FEEDBACK | WALLET | PAYMENT_DISPUTE | OTHERS
 TicketStatus: OPEN | CLOSED
@@ -109,9 +113,10 @@ Language: en | ta | hi
 | Method & path | Notes |
 | --- | --- |
 | `GET /wallet` | `{balanceInr, postingChargeInr, tripChargeInr, lowBalance}` |
-| `GET /wallet/transactions?type=&month=YYYY-MM&page=&size=` | Paged `[{txnId, at, amountInr, direction: CREDIT|DEBIT, type, loadId?, note?}]` |\|DEBIT, type, loadId?, note?}]` |
+| `GET /wallet/transactions?type=&month=YYYY-MM&page=&size=` | Paged `[{txnId, at, amountInr, direction: CREDIT\|DEBIT, type, loadId?, note?}]` |
 | `POST /wallet/topup-link` | `{amountInr}` (₹100–₹50,000, settings) → `{url, expiresAt}` — app opens `url` in the browser (server page `/p/wallet/topup?t=...`, 15 min). `RECEIVER`/`ADMIN` have no wallet → `403 FORBIDDEN` |
-| `POST /webhooks/payments` | Gateway webhook, header `X-Signature` (signature-verified, idempotent by event and order). Not called by the app |
+| `POST /webhooks/payments` | Gateway webhook, header `X-Razorpay-Signature` (Razorpay, HMAC-SHA256 of the raw body) or `X-Signature` (fake gateway); signature-verified, idempotent by event and order. Not called by the app |
+| `GET /p/wallet/topup/done?lang=` | Server page the gateway returns to after checkout ("payment received, return to the app"); the wallet is credited only by the webhook |
 | `GET /wallet/statement?month=YYYY-MM` | PDF download (JWT) |
 
 ## 6. Loads (shipper side: LOAD_PROVIDER, FARMER_NETWORK)
@@ -172,9 +177,9 @@ LoadDetail = LoadSummary + { pickup, drop, senderName, senderMobile, receiverNam
 | `PUT /driver/duty` | `{onDuty}` |
 | `GET /driver/home` | `{onDuty, truck?, walletBalanceInr?, orgName?, currentLoadId?, suggestionsCount, trustScore, expiringDocuments[]}` |
 | `GET/POST/PUT /driver/truck` | Owner-driver only: `{number, vehicleType, capacityTonnes}`; truck documents via `POST /driver/truck/documents {type: RC|INSURANCE|NATIONAL_PERMIT, fileIds, number, expiresOn}`. Truck view `{id, number, vehicleType, capacityTonnes, status, documents[], allocatedDriver?, ownedByMe}` |
-| `GET /driver/suggestions?sort=NEAREST|AMOUNT|EARLIEST` (empty list when off duty, not verified or the payer wallet is below the trip charge) |\|AMOUNT\|EARLIEST` | `[Suggestion{loadId, goodsType, description, quantity, unit, weightTonnes, pickupArea, dropArea, pickupWindowStart, distanceToPickupKm, minutesToPickup, deliveryEta, amountInr, shipperTrustScore, preferredByShipper}]` (poll 30 s while open) |
+| `GET /driver/suggestions?sort=NEAREST\|AMOUNT\|EARLIEST` | `[Suggestion{loadId, goodsType, description, quantity, unit, weightTonnes, pickupArea, dropArea, pickupWindowStart, distanceToPickupKm, minutesToPickup, deliveryEta, amountInr, shipperTrustScore, preferredByShipper}]` (poll 30 s while open). Empty list when off duty, not verified or the payer wallet is below the trip charge |
 | `POST /driver/suggestions/{loadId}/accept` | → `LoadDetail` or `LOAD_TAKEN` / `INSUFFICIENT_BALANCE` |
-| `POST /driver/suggestions/{loadId}/reject` | `{reason?: TOO_FAR\|LOW_| `GET /driver/suggestions?sort=NEAREST|AMOUNT|EARLIEST` (empty list when off duty, not verified or the payer wallet is below the trip charge) |\|WRONG_TRUCK\|OTHER}` |
+| `POST /driver/suggestions/{loadId}/reject` | `{reason?: TOO_FAR\|LOW_AMOUNT\|WRONG_TRUCK\|OTHER}` |
 | `GET /driver/current-trip` | `LoadDetail` with exact locations, contacts; `204` when there is no active trip |
 | `POST /driver/trips/{loadId}/revisions` | `{amountInr, reason}` → `REVISION_LIMIT_REACHED`, `REVISION_PENDING`, `INVALID_STATE` after pickup |
 | `POST /driver/trips/{loadId}/reached` | `{purpose: PICKUP|DELIVERY, lat, lng, reason?}` → `{distanceM, outsideRadius, otpSentTo}`. Outside 500 m without `reason` → nothing changes and `otpSentTo` is null (send again with a reason). `otpSentTo` is a masked mobile |\|DELIVERY, lat, lng, reason?}` → `{distanceM, outsideRadius, otpSentTo}` |
@@ -226,5 +231,13 @@ LoadDetail = LoadSummary + { pickup, drop, senderName, senderMobile, receiverNam
 ## 13. Admin (`/api/v1/admin/**`, role ADMIN)
 
 `/admin/payment-disputes/{loadId}/decide {decision: AGAINST_PAYER|AGAINST_DRIVER|NO_FAULT}` · `/admin/trust-score/{userId}/adjust {points, reason}` · `/admin/dashboard` · `/admin/loads?status=&q=&page=` (10 per page) · `/admin/loads/{id}` (+ `/cancel`, `/otp-override`) · `/admin/fleet?q=&page=` · `/admin/verifications?tab=DRIVER|VEHICLE|FARMER_NETWORK|ORGANIZATION|IDENTITY` · `/admin/documents/{id}/approve|reject` · `/admin/users` (+ `/suspend`, `/reactivate`) · `/admin/wallet/{userId}/credit|refund` · `/admin/cancellations` (+ `/decide`) · `/admin/payment-disputes` (+ `/decide`) · `/admin/location-exceptions` (+ `/review`) · `/admin/tickets?status=` (+ `/{id}`, `/{id}/reply {body, close?}`, `/{id}/ignore {reason}`) · `/admin/trust-score/{userId}/adjust` · `/admin/broadcasts` (`POST {title, body, audience: ALL|ROLE|DISTRICT|USER, role?, district?, userId?, sendAt?}` → inbox "Tranix messages" + push; `GET` list) · `/admin/settings` · `/admin/audit`.
+
 Admin details (M14): lists are paged `{items, page, size, total}` (loads/fleet/users 10 per page, audit 50). `GET /admin/dashboard` → `{openLoads, activeLoads, activeFleet{driversOnDuty, trucks}, pendingVerifications, openSupport, freight{totalInr, pending, paid, confirmed, disputed}, routeStatus{NORMAL, SLOW, FAST}, reminders{cancellationsToReview, locationExceptionsToReview, paymentDisputes, otpHelpRequests}, topupsTodayInr, cancellationsToday}`. `GET /admin/loads?status=&q=` (q = code, area or mobile; default = not finished); `GET /admin/loads/{id}` = LoadDetail + `{tracking, cancellations, locationExceptionsReview, otpHelp}`; `POST /admin/loads/{id}/cancel {reason}` (any status before DELIVERED, charges stay, no penalty); `POST /admin/loads/{id}/otp-override {purpose: PICKUP|DELIVERY, reason}` (only at that step). `POST /admin/users/{id}/suspend|reactivate {reason}` (suspend signs the user out). `GET /admin/cancellations?pending=`, `POST /admin/cancellations/{id}/decide {decision: UPHOLD|REVERSE, reason}` (REVERSE returns the Trust Score points). `GET /admin/location-exceptions?status=`, `POST .../{id}/review {decision: OK|FLAGGED, note?}`. `GET /admin/settings`, `PUT /admin/settings/{key} {value, reason}` (typed; ranking weights must total 100). `GET/POST /admin/map-restrictions`, `PUT /admin/map-restrictions/{id}`, `DELETE` = deactivate. `GET /admin/audit?entity=&actorId=&action=`. Admin sessions end after 30 idle minutes (`TOKEN_EXPIRED` on refresh); only allow-listed mobiles (`ADMIN_MOBILES`) can sign in as admin.
 Until the Flutter web admin exists, these are used through Swagger UI with an admin token.
+
+## 14. Legal and account deletion
+
+| Method & path | Notes |
+| --- | --- |
+| `GET /legal/privacy` · `GET /legal/terms` | No JWT. `{doc, version, status, text}`; `status = DRAFT_PENDING_LEGAL_REVIEW` until Q-08 is closed |
+| `POST /me/deletion-request` | `{reason?}` → `Ticket` (type OTHERS, `otherText = "Account deletion"`); Tranix processes it within the legal retention rules |

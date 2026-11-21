@@ -360,3 +360,63 @@ class _TicketScreenState extends ConsumerState<TicketScreen> {
     );
   }
 }
+
+// ---------------------------------------------------------------- A-1101 legal + account deletion (contract §14)
+
+final legalProvider = FutureProvider.autoDispose.family<Map<String, dynamic>, String>((ref, doc) async =>
+    (await guardApi(() => ref.watch(dioProvider).get<Map<String, dynamic>>('/legal/$doc'))).data!);
+
+/// Privacy policy / terms (server text; marked as draft until the legal review, Q-08).
+class LegalScreen extends ConsumerWidget {
+  const LegalScreen({super.key, required this.doc});
+
+  final String doc;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
+    return Scaffold(
+      appBar: AppBar(title: Text(doc == 'privacy' ? l.privacyPolicy : l.termsOfUse)),
+      body: AsyncView(
+        value: ref.watch(legalProvider(doc)),
+        onRetry: () => ref.invalidate(legalProvider(doc)),
+        data: (d) => ListView(padding: const EdgeInsets.all(16), children: [
+          if ('${d['status']}'.startsWith('DRAFT'))
+            Padding(padding: const EdgeInsets.only(bottom: 12), child: Text(l.draftNotice, style: TextStyle(color: context.statusColors.warning))),
+          Text('${d['text']}'),
+        ]),
+      ),
+    );
+  }
+}
+
+/// "Delete account": confirmation with an optional reason → `POST /me/deletion-request` (opens a support ticket).
+Future<void> requestAccountDeletion(BuildContext context, WidgetRef ref) async {
+  final l = AppLocalizations.of(context);
+  var reason = '';
+  final ok = await showDialog<bool>(
+    context: context,
+    builder: (c) => AlertDialog(
+      title: Text(l.deleteAccount),
+      content: Column(mainAxisSize: MainAxisSize.min, children: [
+        Text(l.deleteAccountBody),
+        TextField(key: const Key('delete-reason'), maxLength: 500, decoration: InputDecoration(labelText: l.deleteReason), onChanged: (v) => reason = v),
+      ]),
+      actions: [
+        TextButton(onPressed: () => Navigator.pop(c, false), child: Text(MaterialLocalizations.of(c).cancelButtonLabel)),
+        FilledButton(onPressed: () => Navigator.pop(c, true), child: Text(l.deleteAccount)),
+      ],
+    ),
+  );
+  if (ok != true || !context.mounted) return;
+  final messenger = ScaffoldMessenger.of(context);
+  try {
+    final res = await guardApi(() => ref.read(dioProvider).post<Map<String, dynamic>>('/me/deletion-request',
+        data: {if (reason.trim().isNotEmpty) 'reason': reason.trim()}));
+    ref.invalidate(ticketsProvider);
+    messenger.showSnackBar(SnackBar(content: Text(l.deleteRequested)));
+    if (context.mounted) await context.push(Routes.ticket(res.data!['id'] as String));
+  } catch (e) {
+    messenger.showSnackBar(SnackBar(content: Text(errorMessage(l, e))));
+  }
+}
