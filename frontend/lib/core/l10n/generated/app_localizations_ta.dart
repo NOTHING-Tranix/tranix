@@ -1039,4 +1039,178 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get tripAccepted => 'பயணம் ஏற்கப்பட்டது';
+
+  @override
+  String get stepReachedPickup => 'ஏற்றும் இடத்தை அடைந்தேன்';
+
+  @override
+  String get stepEnterPickupOtp => 'ஏற்றும் OTP-ஐ உள்ளிடு';
+
+  @override
+  String get stepReachedDrop => 'சேருமிடத்தை அடைந்தேன்';
+
+  @override
+  String get stepEnterDeliveryOtp => 'ஒப்படைப்பு OTP-ஐ உள்ளிடு';
+
+  @override
+  String get navigate => 'வழிகாட்டு';
+
+  @override
+  String get requestAmount => 'புதிய தொகை கேள்';
+
+  @override
+  String amountUsed(int used, int limit) {
+    return '$limit-ல் $used பயன்படுத்தப்பட்டது';
+  }
+
+  @override
+  String get amountPendingWait => 'அனுப்புநரின் பதிலுக்குக் காத்திருக்கிறது';
+
+  @override
+  String get newAmount => 'புதிய தொகை (₹)';
+
+  @override
+  String get reasonLabel => 'காரணம்';
+
+  @override
+  String get sendAction => 'அனுப்பு';
+
+  @override
+  String get cancelTrip => 'பயணத்தை ரத்து செய்';
+
+  @override
+  String outsideRadiusTitle(int meters) {
+    return 'நீங்கள் குறியிலிருந்து $meters மீ தொலைவில் உள்ளீர்கள்';
+  }
+
+  @override
+  String get outsideRadiusBody =>
+      'குறியிடப்பட்ட இடத்தில் ஏன் இல்லை என்று சொல்லுங்கள்.';
+
+  @override
+  String get otpAskSender => 'அனுப்புநரிடம் 6 இலக்கக் குறியீட்டைக் கேளுங்கள்';
+
+  @override
+  String get otpAskReceiver => 'பெறுநரிடம் 6 இலக்கக் குறியீட்டைக் கேளுங்கள்';
+
+  @override
+  String otpSentToMobile(String mobile) {
+    return '$mobile-க்கு அனுப்பப்பட்டது';
+  }
+
+  @override
+  String get cantGetOtp => 'OTP கிடைக்கவில்லையா?';
+
+  @override
+  String get helpNote => 'என்ன நடந்தது?';
+
+  @override
+  String get helpSent =>
+      'உதவி கோரிக்கை அனுப்பப்பட்டது. டிரானிக்ஸ் உங்களை அழைக்கும்.';
+
+  @override
+  String get noActiveTrip =>
+      'தற்போது பயணம் இல்லை. பரிந்துரையை ஏற்றுத் தொடங்குங்கள்.';
+
+  @override
+  String get locationExplainTitle => 'பயணத்தின்போது உங்கள் இடத்தைப் பகிரவும்';
+
+  @override
+  String get locationExplainBody =>
+      'பயணம் நடக்கும்போது மட்டுமே டிரானிக்ஸ் உங்கள் இடத்தைப் பயன்படுத்துகிறது, அதனால் அனுப்புநரும் பெறுநரும் லாரியைப் பார்க்கலாம். அப்போது ஒரு அறிவிப்பு தெரியும்.';
+
+  @override
+  String get allow => 'அனுமதி';
+
+  @override
+  String tripInProgress(String code) {
+    return 'டிரானிக்ஸ் பயணம் $code நடக்கிறது';
+  }
+
+  @override
+  String get layerPetrol => 'பெட்ரோல்';
+
+  @override
+  String get layerWeighbridge => 'எடை மேடை';
+
+  @override
+  String get layerPuncture => 'பஞ்சர்';
+
+  @override
+  String get layerToll => 'சுங்கச்சாவடி';
+
+  @override
+  String get layerRestrictions => 'கட்டுப்பாடுகள்';
+
+  @override
+  String noEntryHours(String from, String to) {
+    return 'நுழைவு இல்லை $from–$to';
+  }
+
+  @override
+  String get amountRequestTitle => 'தொகை கோரிக்கை';
+
+  @override
+  String amountRequestBody(String amount, String reason) {
+    return 'ஓட்டுநர் $amount கேட்கிறார்: $reason';
+  }
+
+  @override
+  String answerBy(String time) {
+    return '$time-க்குள் பதிலளிக்கவும்';
+  }
+
+  @override
+  String get rejectKeepsAmount =>
+      'நிராகரித்தால் தற்போதைய தொகையே இருக்கும்; பயணம் தொடரும்.';
+
+  @override
+  String get pickupOtpTitle => 'ஏற்றும் OTP';
+
+  @override
+  String get deliveryOtpTitle => 'ஒப்படைப்பு OTP';
+
+  @override
+  String get shareAfterLoading =>
+      'ஏற்றிய பின் இந்தக் குறியீட்டை ஓட்டுநரிடம் கூறவும்.';
+
+  @override
+  String get shareAfterChecking => 'சரக்கைச் சரிபார்த்த பின் மட்டுமே பகிரவும்.';
+
+  @override
+  String get liveTracking => 'நேரடி கண்காணிப்பு';
+
+  @override
+  String lastSeen(String time) {
+    return 'லாரி $time-க்குப் பார்க்கப்பட்டது';
+  }
+
+  @override
+  String get routeNormal => 'நேரத்தில்';
+
+  @override
+  String get routeSlow => 'தாமதம்';
+
+  @override
+  String get routeFast => 'வேகமாக';
+
+  @override
+  String etaAt(String time) {
+    return 'வரும் நேரம் $time';
+  }
+
+  @override
+  String get pickupAt => 'ஏற்றும் இடம்';
+
+  @override
+  String get dropAt => 'இறக்கும் இடம்';
+
+  @override
+  String get callSender => 'அனுப்புநரை அழை';
+
+  @override
+  String get callReceiver => 'பெறுநரை அழை';
+
+  @override
+  String get callShipper => 'சரக்கு உரிமையாளரை அழை';
 }

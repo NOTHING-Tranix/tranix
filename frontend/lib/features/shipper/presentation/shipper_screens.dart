@@ -1,4 +1,6 @@
 
+import 'dart:async';
+
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -12,6 +14,7 @@ import '../../../core/location/location_picker.dart';
 import '../../../core/router/routes.dart';
 import '../../../core/session/session_controller.dart';
 import '../../../core/settings_provider.dart';
+import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/formatters.dart';
 import '../../../core/utils/validators.dart';
 import '../../../core/widgets/widgets.dart';
@@ -521,6 +524,9 @@ class LoadDetailScreen extends ConsumerWidget {
               const SizedBox(height: 8),
               MoneyText(d.agreedAmountInr, large: true),
               if (d.driver != null) DriverBlock(driver: d.driver!),
+              for (final r in d.revisions.where((r) => r.status == RevisionStatus.pending)) AmountRequestCard(load: d, revision: r),
+              if (d.status == LoadStatus.locationReached) OtpCodeCard(loadId: d.id, title: l.pickupOtpTitle, hint: l.shareAfterLoading),
+              if (d.driver != null && d.status != LoadStatus.delivered && d.status != LoadStatus.cancelled) TrackingCard(loadId: d.id),
               ListTile(contentPadding: EdgeInsets.zero, leading: const Icon(Icons.trip_origin), title: Text(d.pickup.address),
                   subtitle: Text('${l.sender}: ${d.senderName} · +91 ${d.senderMobile}')),
               ListTile(contentPadding: EdgeInsets.zero, leading: const Icon(Icons.location_on), title: Text(d.drop.address),
@@ -670,6 +676,140 @@ class DriverBlock extends StatelessWidget {
             onPressed: () => launchUrl(Uri(scheme: 'tel', path: driver.mobile)),
           ),
         ]),
+      ),
+    );
+  }
+}
+
+/// LP-04 amount request: amount, reason, "x of 5", answer-by time → Confirm / Reject.
+class AmountRequestCard extends ConsumerWidget {
+  const AmountRequestCard({super.key, required this.load, required this.revision});
+
+  final LoadDetail load;
+  final AmountRevision revision;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
+    final limit = ref.watch(publicSettingsProvider).value?.revisionLimit ?? 5;
+    Future<void> answer(bool confirm) async {
+      try {
+        await ref.read(loadsApiProvider).answerRevision(load.id, revision.id, confirm);
+        ref.invalidate(loadDetailProvider(load.id));
+      } catch (e) {
+        if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(errorMessage(l, e))));
+      }
+    }
+
+    return Card(
+      color: Theme.of(context).colorScheme.tertiaryContainer,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          Row(children: [
+            Expanded(child: Text(l.amountRequestTitle, style: Theme.of(context).textTheme.titleMedium)),
+            Text(l.amountUsed(load.revisionsUsed, limit)),
+          ]),
+          const SizedBox(height: 8),
+          Text(l.amountRequestBody(Fmt.money(revision.requestedAmountInr), revision.reason), style: Theme.of(context).textTheme.bodyLarge),
+          Text(l.answerBy(Fmt.dateTime(revision.respondBy))),
+          Text(l.rejectKeepsAmount, style: Theme.of(context).textTheme.bodySmall),
+          const SizedBox(height: 12),
+          Row(children: [
+            Expanded(child: OutlinedButton(onPressed: () => answer(false), child: Text(l.reject))),
+            const SizedBox(width: 12),
+            Expanded(child: FilledButton(onPressed: () => answer(true), child: Text(l.actionConfirm))),
+          ]),
+        ]),
+      ),
+    );
+  }
+}
+
+/// Pickup OTP for the sender / delivery OTP for the receiver (`GET /loads/{id}/otp`).
+class OtpCodeCard extends ConsumerWidget {
+  const OtpCodeCard({super.key, required this.loadId, required this.title, required this.hint});
+
+  final String loadId;
+  final String title;
+  final String hint;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final otp = ref.watch(loadOtpProvider(loadId));
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: AsyncView(
+          value: otp,
+          onRetry: () => ref.invalidate(loadOtpProvider(loadId)),
+          data: (o) => Column(children: [
+            Text(title, style: Theme.of(context).textTheme.titleMedium),
+            const SizedBox(height: 8),
+            SelectableText(o.code, key: const Key('otp-code'),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontWeight: FontWeight.bold, letterSpacing: 8)),
+            Text(hint, textAlign: TextAlign.center),
+          ]),
+        ),
+      ),
+    );
+  }
+}
+
+/// Live tracking (poll 30 s while visible, D-18): last truck position, ETA, route status.
+class TrackingCard extends ConsumerStatefulWidget {
+  const TrackingCard({super.key, required this.loadId});
+
+  final String loadId;
+
+  @override
+  ConsumerState<TrackingCard> createState() => _TrackingCardState();
+}
+
+class _TrackingCardState extends ConsumerState<TrackingCard> {
+  Timer? _poll;
+
+  @override
+  void initState() {
+    super.initState();
+    _poll = Timer.periodic(const Duration(seconds: 30), (_) {
+      if (!mounted) return;
+      ref.invalidate(trackingProvider(widget.loadId));
+      ref.invalidate(loadDetailProvider(widget.loadId));
+    });
+  }
+
+  @override
+  void dispose() {
+    _poll?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    final t = ref.watch(trackingProvider(widget.loadId)).value;
+    if (t == null) return const SizedBox.shrink();
+    final c = context.statusColors;
+    final (label, color) = switch (t.routeStatus) {
+      RouteStatus.slow => (l.routeSlow, c.warning),
+      RouteStatus.fast => (l.routeFast, c.info),
+      RouteStatus.normal => (l.routeNormal, c.success),
+      _ => (null, c.neutral),
+    };
+    return Card(
+      child: ListTile(
+        leading: const Icon(Icons.local_shipping),
+        title: Text(l.liveTracking),
+        subtitle: Text([
+          if (t.driverLocation != null) l.lastSeen(Fmt.dateTime(t.driverLocation!.at)),
+          if (t.etaAt != null) l.etaAt(Fmt.dateTime(t.etaAt!)),
+        ].join('\n')),
+        trailing: label == null ? null : StatusChip(label: label, color: color),
+        onTap: t.driverLocation == null
+            ? null
+            : () => launchUrl(Uri.parse('https://www.google.com/maps/search/?api=1&query=${t.driverLocation!.lat},${t.driverLocation!.lng}'),
+                mode: LaunchMode.externalApplication),
       ),
     );
   }

@@ -1028,4 +1028,175 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tripAccepted => 'Trip accepted';
+
+  @override
+  String get stepReachedPickup => 'Reached pickup';
+
+  @override
+  String get stepEnterPickupOtp => 'Enter pickup OTP';
+
+  @override
+  String get stepReachedDrop => 'Reached destination';
+
+  @override
+  String get stepEnterDeliveryOtp => 'Enter delivery OTP';
+
+  @override
+  String get navigate => 'Navigate';
+
+  @override
+  String get requestAmount => 'Request new amount';
+
+  @override
+  String amountUsed(int used, int limit) {
+    return '$used of $limit used';
+  }
+
+  @override
+  String get amountPendingWait => 'Waiting for the shipper\'s answer';
+
+  @override
+  String get newAmount => 'New amount (₹)';
+
+  @override
+  String get reasonLabel => 'Reason';
+
+  @override
+  String get sendAction => 'Send';
+
+  @override
+  String get cancelTrip => 'Cancel trip';
+
+  @override
+  String outsideRadiusTitle(int meters) {
+    return 'You are $meters m from the pin';
+  }
+
+  @override
+  String get outsideRadiusBody => 'Tell us why you are not at the pin.';
+
+  @override
+  String get otpAskSender => 'Ask the sender for the 6-digit code';
+
+  @override
+  String get otpAskReceiver => 'Ask the receiver for the 6-digit code';
+
+  @override
+  String otpSentToMobile(String mobile) {
+    return 'Sent to $mobile';
+  }
+
+  @override
+  String get cantGetOtp => 'Can\'t get OTP?';
+
+  @override
+  String get helpNote => 'What happened?';
+
+  @override
+  String get helpSent => 'Help request sent. Tranix will call you.';
+
+  @override
+  String get noActiveTrip => 'No active trip. Accept a suggestion to start.';
+
+  @override
+  String get locationExplainTitle => 'Share your location during trips';
+
+  @override
+  String get locationExplainBody =>
+      'Tranix uses your location only during an active trip, so the shipper and receiver can see the truck. A notification shows while it is on.';
+
+  @override
+  String get allow => 'Allow';
+
+  @override
+  String tripInProgress(String code) {
+    return 'Tranix trip $code in progress';
+  }
+
+  @override
+  String get layerPetrol => 'Petrol';
+
+  @override
+  String get layerWeighbridge => 'Weighbridge';
+
+  @override
+  String get layerPuncture => 'Puncture';
+
+  @override
+  String get layerToll => 'Toll';
+
+  @override
+  String get layerRestrictions => 'Restrictions';
+
+  @override
+  String noEntryHours(String from, String to) {
+    return 'No entry $from–$to';
+  }
+
+  @override
+  String get amountRequestTitle => 'Amount request';
+
+  @override
+  String amountRequestBody(String amount, String reason) {
+    return 'Driver asks $amount: $reason';
+  }
+
+  @override
+  String answerBy(String time) {
+    return 'Answer by $time';
+  }
+
+  @override
+  String get rejectKeepsAmount =>
+      'Rejecting keeps the current amount; the trip continues.';
+
+  @override
+  String get pickupOtpTitle => 'Pickup OTP';
+
+  @override
+  String get deliveryOtpTitle => 'Delivery OTP';
+
+  @override
+  String get shareAfterLoading =>
+      'Share this code with the driver after loading.';
+
+  @override
+  String get shareAfterChecking => 'Share only after checking the goods.';
+
+  @override
+  String get liveTracking => 'Live tracking';
+
+  @override
+  String lastSeen(String time) {
+    return 'Truck seen $time';
+  }
+
+  @override
+  String get routeNormal => 'On time';
+
+  @override
+  String get routeSlow => 'Running slow';
+
+  @override
+  String get routeFast => 'Running fast';
+
+  @override
+  String etaAt(String time) {
+    return 'ETA $time';
+  }
+
+  @override
+  String get pickupAt => 'Pickup';
+
+  @override
+  String get dropAt => 'Drop';
+
+  @override
+  String get callSender => 'Call sender';
+
+  @override
+  String get callReceiver => 'Call receiver';
+
+  @override
+  String get callShipper => 'Call shipper';
 }

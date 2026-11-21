@@ -1031,4 +1031,176 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get tripAccepted => 'यात्रा स्वीकार हुई';
+
+  @override
+  String get stepReachedPickup => 'पिकअप पर पहुँचा';
+
+  @override
+  String get stepEnterPickupOtp => 'पिकअप OTP डालें';
+
+  @override
+  String get stepReachedDrop => 'गंतव्य पर पहुँचा';
+
+  @override
+  String get stepEnterDeliveryOtp => 'डिलीवरी OTP डालें';
+
+  @override
+  String get navigate => 'रास्ता दिखाएँ';
+
+  @override
+  String get requestAmount => 'नई राशि माँगें';
+
+  @override
+  String amountUsed(int used, int limit) {
+    return '$limit में से $used इस्तेमाल';
+  }
+
+  @override
+  String get amountPendingWait => 'शिपर के जवाब का इंतज़ार';
+
+  @override
+  String get newAmount => 'नई राशि (₹)';
+
+  @override
+  String get reasonLabel => 'कारण';
+
+  @override
+  String get sendAction => 'भेजें';
+
+  @override
+  String get cancelTrip => 'यात्रा रद्द करें';
+
+  @override
+  String outsideRadiusTitle(int meters) {
+    return 'आप पिन से $meters मी दूर हैं';
+  }
+
+  @override
+  String get outsideRadiusBody => 'बताएँ कि आप पिन पर क्यों नहीं हैं।';
+
+  @override
+  String get otpAskSender => 'भेजने वाले से 6 अंकों का कोड माँगें';
+
+  @override
+  String get otpAskReceiver => 'प्राप्तकर्ता से 6 अंकों का कोड माँगें';
+
+  @override
+  String otpSentToMobile(String mobile) {
+    return '$mobile पर भेजा गया';
+  }
+
+  @override
+  String get cantGetOtp => 'OTP नहीं मिल रहा?';
+
+  @override
+  String get helpNote => 'क्या हुआ?';
+
+  @override
+  String get helpSent => 'सहायता अनुरोध भेजा गया। ट्रानिक्स आपको कॉल करेगा।';
+
+  @override
+  String get noActiveTrip =>
+      'कोई चालू यात्रा नहीं। शुरू करने के लिए सुझाव स्वीकार करें।';
+
+  @override
+  String get locationExplainTitle => 'यात्रा के दौरान अपना स्थान साझा करें';
+
+  @override
+  String get locationExplainBody =>
+      'ट्रानिक्स सिर्फ़ चालू यात्रा के दौरान आपका स्थान इस्तेमाल करता है, ताकि शिपर और प्राप्तकर्ता ट्रक देख सकें। तब एक सूचना दिखती रहती है।';
+
+  @override
+  String get allow => 'अनुमति दें';
+
+  @override
+  String tripInProgress(String code) {
+    return 'ट्रानिक्स यात्रा $code जारी है';
+  }
+
+  @override
+  String get layerPetrol => 'पेट्रोल';
+
+  @override
+  String get layerWeighbridge => 'धर्मकांटा';
+
+  @override
+  String get layerPuncture => 'पंक्चर';
+
+  @override
+  String get layerToll => 'टोल';
+
+  @override
+  String get layerRestrictions => 'प्रतिबंध';
+
+  @override
+  String noEntryHours(String from, String to) {
+    return 'प्रवेश बंद $from–$to';
+  }
+
+  @override
+  String get amountRequestTitle => 'राशि अनुरोध';
+
+  @override
+  String amountRequestBody(String amount, String reason) {
+    return 'ड्राइवर $amount माँग रहा है: $reason';
+  }
+
+  @override
+  String answerBy(String time) {
+    return '$time तक जवाब दें';
+  }
+
+  @override
+  String get rejectKeepsAmount =>
+      'अस्वीकार करने पर मौजूदा राशि रहेगी; यात्रा जारी रहेगी।';
+
+  @override
+  String get pickupOtpTitle => 'पिकअप OTP';
+
+  @override
+  String get deliveryOtpTitle => 'डिलीवरी OTP';
+
+  @override
+  String get shareAfterLoading =>
+      'माल लोड होने के बाद यह कोड ड्राइवर को बताएँ।';
+
+  @override
+  String get shareAfterChecking => 'माल जाँचने के बाद ही बताएँ।';
+
+  @override
+  String get liveTracking => 'लाइव ट्रैकिंग';
+
+  @override
+  String lastSeen(String time) {
+    return 'ट्रक $time पर दिखा';
+  }
+
+  @override
+  String get routeNormal => 'समय पर';
+
+  @override
+  String get routeSlow => 'धीमा';
+
+  @override
+  String get routeFast => 'तेज़';
+
+  @override
+  String etaAt(String time) {
+    return 'पहुँचने का समय $time';
+  }
+
+  @override
+  String get pickupAt => 'पिकअप';
+
+  @override
+  String get dropAt => 'ड्रॉप';
+
+  @override
+  String get callSender => 'भेजने वाले को कॉल करें';
+
+  @override
+  String get callReceiver => 'प्राप्तकर्ता को कॉल करें';
+
+  @override
+  String get callShipper => 'शिपर को कॉल करें';
 }

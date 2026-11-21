@@ -2037,6 +2037,306 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Trip accepted'**
   String get tripAccepted;
+
+  /// No description provided for @stepReachedPickup.
+  ///
+  /// In en, this message translates to:
+  /// **'Reached pickup'**
+  String get stepReachedPickup;
+
+  /// No description provided for @stepEnterPickupOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter pickup OTP'**
+  String get stepEnterPickupOtp;
+
+  /// No description provided for @stepReachedDrop.
+  ///
+  /// In en, this message translates to:
+  /// **'Reached destination'**
+  String get stepReachedDrop;
+
+  /// No description provided for @stepEnterDeliveryOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter delivery OTP'**
+  String get stepEnterDeliveryOtp;
+
+  /// No description provided for @navigate.
+  ///
+  /// In en, this message translates to:
+  /// **'Navigate'**
+  String get navigate;
+
+  /// No description provided for @requestAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Request new amount'**
+  String get requestAmount;
+
+  /// No description provided for @amountUsed.
+  ///
+  /// In en, this message translates to:
+  /// **'{used} of {limit} used'**
+  String amountUsed(int used, int limit);
+
+  /// No description provided for @amountPendingWait.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for the shipper\'s answer'**
+  String get amountPendingWait;
+
+  /// No description provided for @newAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'New amount (₹)'**
+  String get newAmount;
+
+  /// No description provided for @reasonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get reasonLabel;
+
+  /// No description provided for @sendAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get sendAction;
+
+  /// No description provided for @cancelTrip.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel trip'**
+  String get cancelTrip;
+
+  /// No description provided for @outsideRadiusTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You are {meters} m from the pin'**
+  String outsideRadiusTitle(int meters);
+
+  /// No description provided for @outsideRadiusBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us why you are not at the pin.'**
+  String get outsideRadiusBody;
+
+  /// No description provided for @otpAskSender.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask the sender for the 6-digit code'**
+  String get otpAskSender;
+
+  /// No description provided for @otpAskReceiver.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask the receiver for the 6-digit code'**
+  String get otpAskReceiver;
+
+  /// No description provided for @otpSentToMobile.
+  ///
+  /// In en, this message translates to:
+  /// **'Sent to {mobile}'**
+  String otpSentToMobile(String mobile);
+
+  /// No description provided for @cantGetOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Can\'t get OTP?'**
+  String get cantGetOtp;
+
+  /// No description provided for @helpNote.
+  ///
+  /// In en, this message translates to:
+  /// **'What happened?'**
+  String get helpNote;
+
+  /// No description provided for @helpSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Help request sent. Tranix will call you.'**
+  String get helpSent;
+
+  /// No description provided for @noActiveTrip.
+  ///
+  /// In en, this message translates to:
+  /// **'No active trip. Accept a suggestion to start.'**
+  String get noActiveTrip;
+
+  /// No description provided for @locationExplainTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your location during trips'**
+  String get locationExplainTitle;
+
+  /// No description provided for @locationExplainBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Tranix uses your location only during an active trip, so the shipper and receiver can see the truck. A notification shows while it is on.'**
+  String get locationExplainBody;
+
+  /// No description provided for @allow.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow'**
+  String get allow;
+
+  /// No description provided for @tripInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Tranix trip {code} in progress'**
+  String tripInProgress(String code);
+
+  /// No description provided for @layerPetrol.
+  ///
+  /// In en, this message translates to:
+  /// **'Petrol'**
+  String get layerPetrol;
+
+  /// No description provided for @layerWeighbridge.
+  ///
+  /// In en, this message translates to:
+  /// **'Weighbridge'**
+  String get layerWeighbridge;
+
+  /// No description provided for @layerPuncture.
+  ///
+  /// In en, this message translates to:
+  /// **'Puncture'**
+  String get layerPuncture;
+
+  /// No description provided for @layerToll.
+  ///
+  /// In en, this message translates to:
+  /// **'Toll'**
+  String get layerToll;
+
+  /// No description provided for @layerRestrictions.
+  ///
+  /// In en, this message translates to:
+  /// **'Restrictions'**
+  String get layerRestrictions;
+
+  /// No description provided for @noEntryHours.
+  ///
+  /// In en, this message translates to:
+  /// **'No entry {from}–{to}'**
+  String noEntryHours(String from, String to);
+
+  /// No description provided for @amountRequestTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount request'**
+  String get amountRequestTitle;
+
+  /// No description provided for @amountRequestBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver asks {amount}: {reason}'**
+  String amountRequestBody(String amount, String reason);
+
+  /// No description provided for @answerBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Answer by {time}'**
+  String answerBy(String time);
+
+  /// No description provided for @rejectKeepsAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejecting keeps the current amount; the trip continues.'**
+  String get rejectKeepsAmount;
+
+  /// No description provided for @pickupOtpTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup OTP'**
+  String get pickupOtpTitle;
+
+  /// No description provided for @deliveryOtpTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery OTP'**
+  String get deliveryOtpTitle;
+
+  /// No description provided for @shareAfterLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Share this code with the driver after loading.'**
+  String get shareAfterLoading;
+
+  /// No description provided for @shareAfterChecking.
+  ///
+  /// In en, this message translates to:
+  /// **'Share only after checking the goods.'**
+  String get shareAfterChecking;
+
+  /// No description provided for @liveTracking.
+  ///
+  /// In en, this message translates to:
+  /// **'Live tracking'**
+  String get liveTracking;
+
+  /// No description provided for @lastSeen.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck seen {time}'**
+  String lastSeen(String time);
+
+  /// No description provided for @routeNormal.
+  ///
+  /// In en, this message translates to:
+  /// **'On time'**
+  String get routeNormal;
+
+  /// No description provided for @routeSlow.
+  ///
+  /// In en, this message translates to:
+  /// **'Running slow'**
+  String get routeSlow;
+
+  /// No description provided for @routeFast.
+  ///
+  /// In en, this message translates to:
+  /// **'Running fast'**
+  String get routeFast;
+
+  /// No description provided for @etaAt.
+  ///
+  /// In en, this message translates to:
+  /// **'ETA {time}'**
+  String etaAt(String time);
+
+  /// No description provided for @pickupAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup'**
+  String get pickupAt;
+
+  /// No description provided for @dropAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Drop'**
+  String get dropAt;
+
+  /// No description provided for @callSender.
+  ///
+  /// In en, this message translates to:
+  /// **'Call sender'**
+  String get callSender;
+
+  /// No description provided for @callReceiver.
+  ///
+  /// In en, this message translates to:
+  /// **'Call receiver'**
+  String get callReceiver;
+
+  /// No description provided for @callShipper.
+  ///
+  /// In en, this message translates to:
+  /// **'Call shipper'**
+  String get callShipper;
 }
 
 class _AppLocalizationsDelegate

@@ -43,6 +43,16 @@ class LoadsApi {
             .data!,
       );
 
+  Future<LoadTracking> tracking(String id) async =>
+      LoadTracking.fromJson((await guardApi(() => _dio.get<Map<String, dynamic>>('/loads/$id/tracking'))).data!);
+
+  Future<OtpView> otp(String id) async =>
+      OtpView.fromJson((await guardApi(() => _dio.get<Map<String, dynamic>>('/loads/$id/otp'))).data!);
+
+  Future<LoadDetail> answerRevision(String id, String revisionId, bool confirm) async => LoadDetail.fromJson((await guardApi(
+          () => _dio.post<Map<String, dynamic>>('/loads/$id/revisions/$revisionId/${confirm ? 'confirm' : 'reject'}')))
+      .data!);
+
   Future<LoadDetail> repost(String id) async =>
       LoadDetail.fromJson((await guardApi(() => _dio.post<Map<String, dynamic>>('/loads/$id/repost'))).data!);
 }
@@ -55,4 +65,12 @@ final loadListProvider = FutureProvider.autoDispose.family<Paged<LoadSummary>, b
 
 final loadDetailProvider = FutureProvider.autoDispose.family<LoadDetail, String>(
   (ref, id) => ref.watch(loadsApiProvider).detail(id),
+);
+
+final trackingProvider = FutureProvider.autoDispose.family<LoadTracking, String>(
+  (ref, id) => ref.watch(loadsApiProvider).tracking(id),
+);
+
+final loadOtpProvider = FutureProvider.autoDispose.family<OtpView, String>(
+  (ref, id) => ref.watch(loadsApiProvider).otp(id),
 );

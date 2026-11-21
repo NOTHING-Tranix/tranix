@@ -9,8 +9,8 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 | 1 Auth and onboarding | 6 | 6 |
 | 2 Profile and verification | 7 | 7 |
 | 3 Wallet, notifications, support | 7 | 3 |
-| 4 Load Provider | 10 | 5 |
-| 5 Driver | 12 | 3 |
+| 4 Load Provider | 10 | 6 |
+| 5 Driver | 12 | 10 |
 | 6 Ratings and Trust Score | 3 | 0 |
 | 7 Farmer Network | 4 | 0 |
 | 8 Organization | 5 | 0 |
@@ -63,7 +63,7 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 - [x] **A-402** Post a load form with map pin picker and estimate (LP-02). (2026-11-21)
 - [x] **A-403** Review + post; insufficient balance / not verified sheets keeping form data. (2026-11-21)
 - [x] **A-404** Tracking list + load detail with timeline, live map polling, driver block, call (LP-03/04). (2026-11-21) — list, detail, timeline, driver block, call; live map polling lands with B-70x tracking in M7 (A-405 extension)
-- [ ] **A-405** Amount request card confirm/reject; pickup OTP card.
+- [x] **A-405** Amount request card confirm/reject; pickup OTP card. (2026-11-21)
 - [x] **A-406** Edit (not accepted), cancel with rule preview, repost. (2026-11-21, built in M4)
 - [ ] **A-407** History (LP-05) and payment mark-paid (LP-06).
 - [ ] **A-408** Wish list screen with "From my trips" and "Find organization" tabs, notes, remove, limit (LP-07) — needs B-651, B-652.
@@ -74,14 +74,14 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 - [x] **A-501** Driver home with duty switch, invitation banner (DR-01). (2026-11-21)
 - [x] **A-502** Driver profile: licence, selfie, own truck form, Org invitation accept/reject, Locker (DR-02). (2026-11-21)
 - [x] **A-503** Suggestions list with sort, polling, accept (LOAD_TAKEN handling), reject reasons (DR-03). (2026-11-21)
-- [ ] **A-504** Location permission explainer + Android foreground service + background location.
-- [ ] **A-505** Offline location queue + batch upload.
-- [ ] **A-506** Current trip screen with status-driven step button (DR-04).
-- [ ] **A-507** Map with markers, Navigate intent, layer chips (route services, restrictions).
-- [ ] **A-508** Reached flow with outside-radius reason; OTP sheet with resend and help (DR-05).
-- [ ] **A-509** Amount revision request (x of 5, pending state) and cancel before pickup.
+- [x] **A-504** Location permission explainer + Android foreground service + background location. (2026-11-21)
+- [x] **A-505** Offline location queue + batch upload. (2026-11-21)
+- [x] **A-506** Current trip screen with status-driven step button (DR-04). (2026-11-21)
+- [x] **A-507** Map with markers, Navigate intent, layer chips (route services, restrictions). (2026-11-21) — Navigate intent + layer chips with nearby list; on-map markers need the Maps key (F-5)
+- [x] **A-508** Reached flow with outside-radius reason; OTP sheet with resend and help (DR-05). (2026-11-21)
+- [x] **A-509** Amount revision request (x of 5, pending state) and cancel before pickup. (2026-11-21)
 - [ ] **A-510** History with earnings summary; payment confirm/dispute (DR-06).
-- [ ] **A-511** Widget tests: accept race, OTP sheet, step button per status.
+- [x] **A-511** Widget tests: accept race, OTP sheet, step button per status. (2026-11-21)
 - [ ] **A-512** "Preferred by this shipper" tag on suggestions and preferred-load push routing — needs B-655.
 
 ## Phase 6 — Ratings and Trust Score (needs B-803…B-805)

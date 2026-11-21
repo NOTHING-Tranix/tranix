@@ -13,6 +13,10 @@ Newest first. Claude adds an entry at the end of every session and at every mile
 
 ---
 
+## 2026-11-21 — M7 Trip execution (done; A-510 history moves to M8 with payments)
+- Done: B-701…B-711, B-408; A-405, A-504…A-509, A-511. D-28 assumed (trip OTP storage, late rule).
+- Demo (after the M6 demo accept): driver → Current trip shows exact pickup/drop with Call + Navigate → "Request new amount" (1 of 5) → shipper load detail shows the Amount request card → Confirm. Driver taps "Reached pickup" (outside 500 m asks a reason) → shipper detail shows the Pickup OTP (dev OTP 123456) → driver enters it → Traveling; app uploads location every 30 s (foreground notification) → shipper sees Live tracking + route status → "Reached destination" → delivery OTP (SMS to receiver; dev 123456) → Delivered.
+
 ## 2026-11-21 — M5 + M6 done (Driver/fleet; Matching and acceptance)
 - Done: B-501…B-509, A-501, A-502 (M5); B-601…B-607, A-503, A-404 (M6). D-27 assumed (radius steps, location needed to match).
 - Login is role-based: role chosen at sign-up and fixed; JWT carries the role; server checks every endpoint; app opens that role's shell (founder asked 2026-11-21).

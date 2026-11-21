@@ -63,9 +63,9 @@ void main() {
     await tester.tap(find.text('Post load'));
     await tester.pumpAndSettle();
     expect(find.text('TRX-000123'), findsWidgets);
-    expect(find.text('Timeline'), findsOneWidget);
     expect(find.text('Ravi Kumar'), findsOneWidget); // A-404 driver block
     expect(find.byTooltip('Call'), findsOneWidget);
+    await tester.scrollUntilVisible(find.text('Timeline'), 200);
     expect(container.read(loadDraftProvider).pickup, isNull); // draft cleared after posting
   });
 
