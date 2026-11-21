@@ -96,11 +96,11 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 - [x] **A-704** FN bottom navigation and home. (2026-11-21)
 
 ## Phase 8 — Organization (needs B-502…B-508)
-- [ ] **A-801** Org dashboard (OR-01) incl. "Shippers who prefer you".
-- [ ] **A-802** Trucks list/detail/add/documents/track (OR-02).
-- [ ] **A-803** Drivers add/list/performance (OR-03).
-- [ ] **A-804** Allocation flows with conflict handling (OR-04).
-- [ ] **A-805** Trips by driver/truck + CSV export link (OR-05).
+- [x] **A-801** Org dashboard (OR-01) incl. "Shippers who prefer you". (2026-11-21)
+- [x] **A-802** Trucks list/detail/add/documents/track (OR-02). (2026-11-21)
+- [x] **A-803** Drivers add/list/performance (OR-03). (2026-11-21)
+- [x] **A-804** Allocation flows with conflict handling (OR-04). (2026-11-21)
+- [x] **A-805** Trips by driver/truck + CSV export link (OR-05). (2026-11-21)
 
 ## Phase 9 — Receiver (needs B-1004)
 - [ ] **A-901** Receiver incoming loads (RC-01).

@@ -164,9 +164,12 @@ class _LoadListScreenState extends ConsumerState<LoadListScreen> {
 }
 
 class LoadCard extends StatelessWidget {
-  const LoadCard({super.key, required this.load});
+  const LoadCard({super.key, required this.load, this.openDetail = true});
 
   final LoadSummary load;
+
+  /// Org trip lists show the card only (the shipper detail is not theirs).
+  final bool openDetail;
 
   @override
   Widget build(BuildContext context) {
@@ -174,7 +177,7 @@ class LoadCard extends StatelessWidget {
     final t = Theme.of(context).textTheme;
     return Card(
       child: InkWell(
-        onTap: () => context.push(Routes.loadDetail(load.id)),
+        onTap: openDetail ? () => context.push(Routes.loadDetail(load.id)) : null,
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(

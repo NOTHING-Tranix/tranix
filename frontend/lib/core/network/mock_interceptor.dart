@@ -104,6 +104,21 @@ class MockInterceptor extends Interceptor {
     MockRoute('POST', RegExp(r'^/farmers$'), fixture: 'farmer.json'),
     MockRoute('PUT', RegExp(r'^/farmers/[^/]+$'), fixture: 'farmer.json'),
     MockRoute('POST', RegExp(r'^/farmers/[^/]+/deactivate$'), fixture: 'farmer.json'),
+    MockRoute('GET', RegExp(r'^/org/dashboard$'), fixture: 'org_dashboard.json'),
+    MockRoute('GET', RegExp(r'^/org/trucks$'), fixture: 'org_trucks.json'),
+    MockRoute('POST', RegExp(r'^/org/trucks$'), fixture: 'driver_truck.json'),
+    MockRoute('PUT', RegExp(r'^/org/trucks/[^/]+$'), fixture: 'driver_truck.json'),
+    MockRoute('POST', RegExp(r'^/org/trucks/[^/]+/deactivate$'), fixture: 'driver_truck.json'),
+    MockRoute('POST', RegExp(r'^/org/trucks/[^/]+/documents$'), fixture: 'document.json'),
+    MockRoute('GET', RegExp(r'^/org/trucks/[^/]+/location$'), fixture: 'org_location.json'),
+    MockRoute('GET', RegExp(r'^/org/drivers$'), fixture: 'org_drivers.json'),
+    MockRoute('POST', RegExp(r'^/org/drivers$'), status: 204),
+    MockRoute('GET', RegExp(r'^/org/drivers/[^/]+/performance$'), fixture: 'org_performance.json'),
+    MockRoute('GET', RegExp(r'^/org/allocations$'), fixture: 'org_allocations.json'),
+    MockRoute('POST', RegExp(r'^/org/allocations$'), status: 204),
+    MockRoute('PUT', RegExp(r'^/org/allocations/[^/]+$'), status: 204),
+    MockRoute('DELETE', RegExp(r'^/org/allocations/[^/]+$'), status: 204),
+    MockRoute('GET', RegExp(r'^/org/trips$'), fixture: 'org_trips.json'),
   ];
 
   @override

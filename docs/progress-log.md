@@ -13,6 +13,12 @@ Newest first. Claude adds an entry at the end of every session and at every mile
 
 ---
 
+## 2026-11-21 — M11 Organization app (done)
+- Done: A-801…A-805 (backend B-502…B-508 were done in M5).
+- Frontend: Org dashboard (wallet + top up, active trips, Shippers who prefer you, truck/driver counts); Trucks (add/edit/deactivate, detail with documents via `POST /org/trucks/{id}/documents` and live location); Drivers (invite, invited list, performance, allocate a free truck, pause/resume/remove with `ALLOCATION_CONFLICT` message); Trips by driver/truck with CSV export (saved through the system file dialog). analyze clean, 48 tests green, debug APK builds.
+- Demo (mock): Open as Organization → Dashboard; Trucks → TN38CD5678 → documents + last location; Drivers → Kumar V → Allocate truck → TN38EF9012; Trips → By truck → Export CSV.
+- Demo (backend): sign up as ORGANIZATION (verify), `POST /org/trucks`, `POST /org/drivers {name, mobile}` → driver accepts `POST /driver/invitations/{id}/accept` → `POST /org/allocations`; `GET /org/trips/export` downloads CSV.
+
 ## 2026-11-21 — M10 Farmer Network (done)
 - Done: B-901…B-904, A-701…A-704.
 - Backend: `farmers_farmer` (V13) with consent time and Aadhaar last 4 only; `GET/POST/PUT /farmers`, `/deactivate` (verified FN for add/edit, duplicate mobile per network rejected); posting with `postedForFarmerId` locks the farmer as sender (pickup OTP to the farmer), FN wallet pays, `postedForFarmerName` on summaries, farmer gets `SENDER_TRACKING` SMS at acceptance; `GET /loads?farmerId=`. 59 integration tests green.

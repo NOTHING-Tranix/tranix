@@ -69,8 +69,9 @@ class ProfileApi {
     required List<String> fileIds,
     String? number,
     DateTime? expiresOn,
+    String? orgTruckId,
   }) async {
-    final res = await guardApi(() => _dio.post<Map<String, dynamic>>('/driver/truck/documents', data: {
+    final res = await guardApi(() => _dio.post<Map<String, dynamic>>(orgTruckId == null ? '/driver/truck/documents' : '/org/trucks/$orgTruckId/documents', data: {
           'type': _docType(type),
           'fileIds': fileIds,
           if (number != null && number.isNotEmpty) 'number': number,

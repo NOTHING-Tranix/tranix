@@ -1424,4 +1424,98 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get senderLockedFarmer =>
       'The farmer is the sender and gets the pickup OTP.';
+
+  @override
+  String get activeTrips => 'Active trips';
+
+  @override
+  String get shippersPreferYou => 'Shippers who prefer you';
+
+  @override
+  String get idleLabel => 'Idle';
+
+  @override
+  String get docsExpiringSoon => 'Documents expiring in 30 days';
+
+  @override
+  String get notAllocated => 'Not allocated';
+
+  @override
+  String get addOrgTruck => 'Add truck';
+
+  @override
+  String get inviteDriver => 'Invite driver';
+
+  @override
+  String get invitedLabel => 'Invited — waiting to join';
+
+  @override
+  String get allocateAction => 'Allocate truck';
+
+  @override
+  String get pauseAction => 'Pause';
+
+  @override
+  String get resumeAction => 'Resume';
+
+  @override
+  String get pausedLabel => 'Paused';
+
+  @override
+  String get removeAllocation => 'Remove allocation';
+
+  @override
+  String get performanceTitle => 'Performance';
+
+  @override
+  String onTimePct(int pct) {
+    return '$pct% on time';
+  }
+
+  @override
+  String get earnedLabel => 'Earned';
+
+  @override
+  String get cancellationsLabel => 'Cancellations';
+
+  @override
+  String get byDriver => 'By driver';
+
+  @override
+  String get byTruck => 'By truck';
+
+  @override
+  String get exportCsv => 'Export CSV';
+
+  @override
+  String get csvSaved => 'Trips saved as CSV';
+
+  @override
+  String lastSeenAt(String time) {
+    return 'Last seen $time';
+  }
+
+  @override
+  String get noLiveLocation => 'No live location (not on a trip)';
+
+  @override
+  String get chooseTruck => 'Choose a truck';
+
+  @override
+  String get chooseDriver => 'Choose a driver';
+
+  @override
+  String get deactivateTruck => 'Deactivate truck';
+
+  @override
+  String get noTrucksYet => 'No trucks yet. Add your first truck.';
+
+  @override
+  String get noDriversYet => 'No drivers yet. Invite your first driver.';
+
+  @override
+  String get noTrips => 'No trips yet';
+
+  @override
+  String get allItems => 'All';
 }

@@ -1427,4 +1427,98 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get senderLockedFarmer =>
       'किसान ही भेजने वाला है और पिकअप OTP उसे मिलेगा।';
+
+  @override
+  String get activeTrips => 'चालू यात्राएँ';
+
+  @override
+  String get shippersPreferYou => 'आपको पसंद करने वाले शिपर';
+
+  @override
+  String get idleLabel => 'खाली';
+
+  @override
+  String get docsExpiringSoon => '30 दिन में समाप्त होने वाले दस्तावेज़';
+
+  @override
+  String get notAllocated => 'आवंटित नहीं';
+
+  @override
+  String get addOrgTruck => 'ट्रक जोड़ें';
+
+  @override
+  String get inviteDriver => 'ड्राइवर को बुलाएँ';
+
+  @override
+  String get invitedLabel => 'बुलाया गया — जुड़ने का इंतज़ार';
+
+  @override
+  String get allocateAction => 'ट्रक आवंटित करें';
+
+  @override
+  String get pauseAction => 'रोकें';
+
+  @override
+  String get resumeAction => 'फिर शुरू करें';
+
+  @override
+  String get pausedLabel => 'रुका हुआ';
+
+  @override
+  String get removeAllocation => 'आवंटन हटाएँ';
+
+  @override
+  String get performanceTitle => 'प्रदर्शन';
+
+  @override
+  String onTimePct(int pct) {
+    return '$pct% समय पर';
+  }
+
+  @override
+  String get earnedLabel => 'कमाई';
+
+  @override
+  String get cancellationsLabel => 'रद्द';
+
+  @override
+  String get byDriver => 'ड्राइवर के अनुसार';
+
+  @override
+  String get byTruck => 'ट्रक के अनुसार';
+
+  @override
+  String get exportCsv => 'CSV निर्यात';
+
+  @override
+  String get csvSaved => 'यात्राएँ CSV में सहेजी गईं';
+
+  @override
+  String lastSeenAt(String time) {
+    return 'आखिरी बार $time';
+  }
+
+  @override
+  String get noLiveLocation => 'लाइव लोकेशन नहीं (यात्रा पर नहीं)';
+
+  @override
+  String get chooseTruck => 'ट्रक चुनें';
+
+  @override
+  String get chooseDriver => 'ड्राइवर चुनें';
+
+  @override
+  String get deactivateTruck => 'ट्रक निष्क्रिय करें';
+
+  @override
+  String get noTrucksYet => 'अभी कोई ट्रक नहीं। पहला ट्रक जोड़ें।';
+
+  @override
+  String get noDriversYet => 'अभी कोई ड्राइवर नहीं। पहले ड्राइवर को बुलाएँ।';
+
+  @override
+  String get noTrips => 'अभी कोई यात्रा नहीं';
+
+  @override
+  String get allItems => 'सभी';
 }

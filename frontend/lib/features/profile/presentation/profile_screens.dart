@@ -526,13 +526,16 @@ class _DateField extends StatelessWidget {
 
 /// A-202/A-203: add or replace a document (type, number, expiry, files with upload progress).
 class DocumentFormScreen extends ConsumerStatefulWidget {
-  const DocumentFormScreen({super.key, this.type, this.replaceId, this.truck = false});
+  const DocumentFormScreen({super.key, this.type, this.replaceId, this.truck = false, this.orgTruckId});
 
   final DocumentType? type;
   final String? replaceId;
 
   /// Owner-driver truck documents (RC, insurance, permit) via `POST /driver/truck/documents`.
   final bool truck;
+
+  /// Organization truck documents via `POST /org/trucks/{id}/documents` (OR-02).
+  final String? orgTruckId;
 
   @override
   ConsumerState<DocumentFormScreen> createState() => _DocumentFormScreenState();
@@ -562,7 +565,7 @@ class _DocumentFormScreenState extends ConsumerState<DocumentFormScreen> {
     super.dispose();
   }
 
-  List<DocumentType> _allowed(Role role) => widget.truck
+  List<DocumentType> _allowed(Role role) => widget.truck || widget.orgTruckId != null
       ? const [DocumentType.rc, DocumentType.insurance, DocumentType.nationalPermit]
       : [
         DocumentType.pan,
@@ -604,13 +607,12 @@ class _DocumentFormScreenState extends ConsumerState<DocumentFormScreen> {
         ids.add(await uploadFile(api.dio, _files[i],
             onProgress: (p) => setState(() => _progress = (i + p) / _files.length)));
       }
-      await (widget.truck ? api.saveTruckDocument : api.saveDocument)(
-        replaceId: widget.replaceId,
-        type: _type!,
-        fileIds: ids,
-        number: _number.text.trim(),
-        expiresOn: _expires,
-      );
+      if (widget.truck || widget.orgTruckId != null) {
+        await api.saveTruckDocument(replaceId: widget.replaceId, type: _type!, fileIds: ids, number: _number.text.trim(),
+            expiresOn: _expires, orgTruckId: widget.orgTruckId);
+      } else {
+        await api.saveDocument(replaceId: widget.replaceId, type: _type!, fileIds: ids, number: _number.text.trim(), expiresOn: _expires);
+      }
       refreshProfile(ref);
       if (mounted) {
         _toast(context, l.saved);

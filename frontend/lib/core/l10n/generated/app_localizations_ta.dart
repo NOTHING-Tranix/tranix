@@ -1438,4 +1438,100 @@ class AppLocalizationsTa extends AppLocalizations {
   @override
   String get senderLockedFarmer =>
       'விவசாயியே அனுப்புநர்; ஏற்றும் OTP அவருக்குச் செல்லும்.';
+
+  @override
+  String get activeTrips => 'நடப்பு பயணங்கள்';
+
+  @override
+  String get shippersPreferYou => 'உங்களை விரும்பும் அனுப்புநர்கள்';
+
+  @override
+  String get idleLabel => 'காலியாக';
+
+  @override
+  String get docsExpiringSoon => '30 நாளில் காலாவதியாகும் ஆவணங்கள்';
+
+  @override
+  String get notAllocated => 'ஒதுக்கப்படவில்லை';
+
+  @override
+  String get addOrgTruck => 'லாரியைச் சேர்';
+
+  @override
+  String get inviteDriver => 'ஓட்டுநரை அழை';
+
+  @override
+  String get invitedLabel => 'அழைக்கப்பட்டார் — சேர காத்திருப்பு';
+
+  @override
+  String get allocateAction => 'லாரியை ஒதுக்கு';
+
+  @override
+  String get pauseAction => 'நிறுத்து';
+
+  @override
+  String get resumeAction => 'தொடர்';
+
+  @override
+  String get pausedLabel => 'நிறுத்தப்பட்டது';
+
+  @override
+  String get removeAllocation => 'ஒதுக்கீட்டை நீக்கு';
+
+  @override
+  String get performanceTitle => 'செயல்திறன்';
+
+  @override
+  String onTimePct(int pct) {
+    return '$pct% நேரத்தில்';
+  }
+
+  @override
+  String get earnedLabel => 'சம்பாதித்தது';
+
+  @override
+  String get cancellationsLabel => 'ரத்துகள்';
+
+  @override
+  String get byDriver => 'ஓட்டுநர் வாரியாக';
+
+  @override
+  String get byTruck => 'லாரி வாரியாக';
+
+  @override
+  String get exportCsv => 'CSV ஏற்றுமதி';
+
+  @override
+  String get csvSaved => 'பயணங்கள் CSV ஆக சேமிக்கப்பட்டன';
+
+  @override
+  String lastSeenAt(String time) {
+    return 'கடைசியாக $time';
+  }
+
+  @override
+  String get noLiveLocation => 'நேரடி இருப்பிடம் இல்லை (பயணத்தில் இல்லை)';
+
+  @override
+  String get chooseTruck => 'லாரியைத் தேர்வு செய்';
+
+  @override
+  String get chooseDriver => 'ஓட்டுநரைத் தேர்வு செய்';
+
+  @override
+  String get deactivateTruck => 'லாரியைச் செயலிழக்கச் செய்';
+
+  @override
+  String get noTrucksYet =>
+      'இன்னும் லாரிகள் இல்லை. முதல் லாரியைச் சேர்க்கவும்.';
+
+  @override
+  String get noDriversYet =>
+      'இன்னும் ஓட்டுநர்கள் இல்லை. முதல் ஓட்டுநரை அழைக்கவும்.';
+
+  @override
+  String get noTrips => 'இன்னும் பயணங்கள் இல்லை';
+
+  @override
+  String get allItems => 'அனைத்தும்';
 }

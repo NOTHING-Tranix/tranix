@@ -1,0 +1,7 @@
+[
+  { "id": "00000000-0000-4000-8000-0000000000b1", "number": "TN38CD5678", "vehicleType": "CLOSED_BODY", "capacityTonnes": 12, "status": "ON_TRIP",
+    "documents": [ { "id": "00000000-0000-4000-8000-0000000000d3", "type": "RC", "numberMasked": "XXXXXX5678", "expiresOn": "2029-01-10", "status": "APPROVED", "rejectReason": null, "viewUrl": null } ],
+    "allocatedDriver": { "id": "00000000-0000-4000-8000-0000000000c1", "name": "Selvam R" } },
+  { "id": "00000000-0000-4000-8000-0000000000b2", "number": "TN38EF9012", "vehicleType": "OPEN_BODY", "capacityTonnes": 9, "status": "AVAILABLE",
+    "documents": [], "allocatedDriver": null }
+]

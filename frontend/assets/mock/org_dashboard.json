@@ -1,0 +1,3 @@
+{ "trucks": { "total": 2, "onTrip": 1, "idle": 1, "documentsPending": 0, "documentsExpiring": 1 },
+  "drivers": { "total": 2, "onDuty": 1, "onTrip": 1, "unallocated": 1 },
+  "activeTrips": 1, "walletBalanceInr": 4200, "preferredByShippersCount": 3 }

@@ -71,6 +71,7 @@ final routerProvider = Provider<GoRouter>((ref) {
           type: documentTypeFromWire(s.uri.queryParameters['type']),
           replaceId: s.uri.queryParameters['replace'],
           truck: s.uri.queryParameters['truck'] == '1',
+          orgTruckId: s.uri.queryParameters['orgTruck'],
         ),
       ),
       GoRoute(path: Routes.profileMobile, builder: (_, _) => const ChangeMobileScreen()),

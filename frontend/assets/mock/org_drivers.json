@@ -1,0 +1,7 @@
+[
+  { "id": "00000000-0000-4000-8000-0000000000c1", "name": "Selvam R", "mobile": "9876500001", "verificationStatus": "VERIFIED", "trustScore": 81,
+    "onDuty": true, "onTrip": true, "allocationStatus": "ALLOCATED", "truckNumber": "TN38CD5678" },
+  { "id": "00000000-0000-4000-8000-0000000000c2", "name": "Kumar V", "mobile": "9876500002", "verificationStatus": "VERIFIED", "trustScore": 74,
+    "onDuty": false, "onTrip": false, "allocationStatus": "UNALLOCATED", "truckNumber": null },
+  { "invitationId": "00000000-0000-4000-8000-0000000000e1", "name": "Ravi S", "mobile": "9876500003", "allocationStatus": "INVITED" }
+]

@@ -2745,6 +2745,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The farmer is the sender and gets the pickup OTP.'**
   String get senderLockedFarmer;
+
+  /// No description provided for @activeTrips.
+  ///
+  /// In en, this message translates to:
+  /// **'Active trips'**
+  String get activeTrips;
+
+  /// No description provided for @shippersPreferYou.
+  ///
+  /// In en, this message translates to:
+  /// **'Shippers who prefer you'**
+  String get shippersPreferYou;
+
+  /// No description provided for @idleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Idle'**
+  String get idleLabel;
+
+  /// No description provided for @docsExpiringSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Documents expiring in 30 days'**
+  String get docsExpiringSoon;
+
+  /// No description provided for @notAllocated.
+  ///
+  /// In en, this message translates to:
+  /// **'Not allocated'**
+  String get notAllocated;
+
+  /// No description provided for @addOrgTruck.
+  ///
+  /// In en, this message translates to:
+  /// **'Add truck'**
+  String get addOrgTruck;
+
+  /// No description provided for @inviteDriver.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite driver'**
+  String get inviteDriver;
+
+  /// No description provided for @invitedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Invited — waiting to join'**
+  String get invitedLabel;
+
+  /// No description provided for @allocateAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Allocate truck'**
+  String get allocateAction;
+
+  /// No description provided for @pauseAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Pause'**
+  String get pauseAction;
+
+  /// No description provided for @resumeAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume'**
+  String get resumeAction;
+
+  /// No description provided for @pausedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Paused'**
+  String get pausedLabel;
+
+  /// No description provided for @removeAllocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove allocation'**
+  String get removeAllocation;
+
+  /// No description provided for @performanceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Performance'**
+  String get performanceTitle;
+
+  /// No description provided for @onTimePct.
+  ///
+  /// In en, this message translates to:
+  /// **'{pct}% on time'**
+  String onTimePct(int pct);
+
+  /// No description provided for @earnedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Earned'**
+  String get earnedLabel;
+
+  /// No description provided for @cancellationsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancellations'**
+  String get cancellationsLabel;
+
+  /// No description provided for @byDriver.
+  ///
+  /// In en, this message translates to:
+  /// **'By driver'**
+  String get byDriver;
+
+  /// No description provided for @byTruck.
+  ///
+  /// In en, this message translates to:
+  /// **'By truck'**
+  String get byTruck;
+
+  /// No description provided for @exportCsv.
+  ///
+  /// In en, this message translates to:
+  /// **'Export CSV'**
+  String get exportCsv;
+
+  /// No description provided for @csvSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Trips saved as CSV'**
+  String get csvSaved;
+
+  /// No description provided for @lastSeenAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Last seen {time}'**
+  String lastSeenAt(String time);
+
+  /// No description provided for @noLiveLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'No live location (not on a trip)'**
+  String get noLiveLocation;
+
+  /// No description provided for @chooseTruck.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a truck'**
+  String get chooseTruck;
+
+  /// No description provided for @chooseDriver.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a driver'**
+  String get chooseDriver;
+
+  /// No description provided for @deactivateTruck.
+  ///
+  /// In en, this message translates to:
+  /// **'Deactivate truck'**
+  String get deactivateTruck;
+
+  /// No description provided for @noTrucksYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No trucks yet. Add your first truck.'**
+  String get noTrucksYet;
+
+  /// No description provided for @noDriversYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No drivers yet. Invite your first driver.'**
+  String get noDriversYet;
+
+  /// No description provided for @noTrips.
+  ///
+  /// In en, this message translates to:
+  /// **'No trips yet'**
+  String get noTrips;
+
+  /// No description provided for @allItems.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get allItems;
 }
 
 class _AppLocalizationsDelegate

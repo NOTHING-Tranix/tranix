@@ -11,6 +11,7 @@ import '../driver/suggestions_screen.dart';
 import '../driver/trip_feature.dart';
 import '../notifications/notifications_feature.dart';
 import '../farmers/farmers_feature.dart';
+import '../organization/org_feature.dart';
 import '../payments/payments_feature.dart';
 import '../shipper/presentation/shipper_screens.dart';
 import '../shipper/wishlist_feature.dart';
@@ -24,6 +25,10 @@ Widget tabScreenFor(ShellTab tab) => switch (tab.label) {
       TabLabel.home when tab.path == Routes.driver => const DriverHomeScreen(),
       TabLabel.suggestions => const SuggestionsScreen(),
       TabLabel.farmers => const FarmersScreen(),
+      TabLabel.dashboard => const OrgDashboardScreen(),
+      TabLabel.trucks => const OrgTrucksScreen(),
+      TabLabel.drivers => const OrgDriversScreen(),
+      TabLabel.trips => const OrgTripsScreen(),
       TabLabel.wishlist => const WishlistScreen(actions: [NotificationBell(), ProfileAvatarButton()]),
       TabLabel.currentTrip => const CurrentTripScreen(),
       TabLabel.tracking => const _LoadsTab(ongoing: true),
