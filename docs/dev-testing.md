@@ -15,7 +15,12 @@ For testing with real phones before launch. Production setup (DLT, AWS, Play Sto
 The free map services are for testing only. Before launch, use a hosted tile/routing/geocoding service or your own
 OSRM/Nominatim server (`MAP_TILE_URL` app define, `tranix.osrm.base-url`, `tranix.nominatim.base-url`).
 
-## One-time: secrets as Windows user environment variables
+## One-time: put your settings in `backend.env`
+
+Open `backend.env` in Notepad (create it if missing), copy the lines you need from `backend.env.example`, fill in
+your values and save. The file is not in git. `toolsbackend-dev.ps1` reads it every time it starts.
+
+Alternative: Windows user environment variables (the `.env` file wins if both are set):
 
 Run in PowerShell, with your own values. **Never put these in git or in chat.**
 

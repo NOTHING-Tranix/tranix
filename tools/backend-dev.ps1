@@ -14,6 +14,20 @@ foreach ($n in 'TWILIO_ACCOUNT_SID', 'TWILIO_AUTH_TOKEN', 'TWILIO_FROM', 'SMS_RE
     if ($v) { Set-Item -Path "env:$n" -Value $v }
 }
 
+# backend\.env (not in git) wins over the user variables: KEY=VALUE per line, # for comments. See backend\.env.example.
+$dotenv = Join-Path $PSScriptRoot '..\backend\.env'
+if (Test-Path $dotenv) {
+    foreach ($line in Get-Content $dotenv) {
+        $t = $line.Trim()
+        if (-not $t -or $t.StartsWith('#') -or -not $t.Contains('=')) { continue }
+        $i = $t.IndexOf('=')
+        $key = $t.Substring(0, $i).Trim()
+        $val = $t.Substring($i + 1).Trim().Trim('"').Trim("'")
+        if ($key -and $val) { Set-Item -Path "env:$key" -Value $val }
+    }
+    Write-Host 'Loaded settings from backend\.env'
+}
+
 if ($env:TWILIO_ACCOUNT_SID -and $env:TWILIO_AUTH_TOKEN -and $env:TWILIO_FROM) {
     $env:SMS_PROVIDER = 'twilio'
     if ($env:SMS_REDIRECT_TO) { Write-Host "SMS: Twilio - every SMS goes to the testing number (SMS_REDIRECT_TO)" }
