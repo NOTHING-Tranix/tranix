@@ -1641,4 +1641,7 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get deleteRequested =>
       'अनुरोध भेजा गया। सहायता टीम यहीं पुष्टि करेगी।';
+
+  @override
+  String get searchPlace => 'जगह या पता खोजें';
 }

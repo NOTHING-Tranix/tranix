@@ -64,13 +64,25 @@ tranix:
     # Secret for signed, short-lived file view URLs.
     signing-secret: ${FILES_SIGNING_SECRET:}
     view-url-ttl: 5m
+  # Fake ↔ real switches (env vars). Dev testing: SMS_PROVIDER=twilio, PUSH_PROVIDER=fcm, MAPS_PROVIDER=osrm, GEOCODING_PROVIDER=nominatim.
   integrations:
-    sms: fake
-    push: fake
-    maps: fake
+    sms: ${SMS_PROVIDER:fake}
+    push: ${PUSH_PROVIDER:fake}
+    maps: ${MAPS_PROVIDER:fake}
+    geocoding: ${GEOCODING_PROVIDER:fake}
     payments: fake
     files: local
     aadhaar: disabled
+  # Twilio SMS: secrets only from the environment (never in git). SMS_REDIRECT_TO sends every SMS to one
+  # number while testing on a trial account; leave it empty in production.
+  twilio:
+    account-sid: ${TWILIO_ACCOUNT_SID:}
+    auth-token: ${TWILIO_AUTH_TOKEN:}
+    from: ${TWILIO_FROM:}
+  sms:
+    redirect-to: ${SMS_REDIRECT_TO:}
+  fcm:
+    service-account-file: ${FCM_SERVICE_ACCOUNT_FILE:}
 
 logging:
   pattern:

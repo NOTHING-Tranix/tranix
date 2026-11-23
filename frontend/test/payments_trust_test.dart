@@ -23,6 +23,8 @@ void main() {
     await tester.pumpAndSettle();
     await tester.scrollUntilVisible(find.text('Mark as paid'), 200);
     expect(find.text('Payment pending'), findsOneWidget);
+    await tester.ensureVisible(find.text('Mark as paid'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Mark as paid'));
     await tester.pumpAndSettle();
     expect(find.byKey(const Key('pay-amount')), findsOneWidget);

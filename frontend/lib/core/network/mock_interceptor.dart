@@ -128,6 +128,8 @@ class MockInterceptor extends Interceptor {
     MockRoute('POST', RegExp(r'^/tickets/[^/]+/(messages|reopen)$'), fixture: 'ticket.json'),
     MockRoute('GET', RegExp(r'^/legal/(privacy|terms)$'), fixture: 'legal.json'),
     MockRoute('POST', RegExp(r'^/me/deletion-request$'), fixture: 'ticket.json'),
+    MockRoute('GET', RegExp(r'^/map/geocode$'), fixture: 'geocode.json'),
+    MockRoute('GET', RegExp(r'^/map/reverse$'), fixture: 'reverse.json'),
   ];
 
   @override

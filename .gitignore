@@ -68,3 +68,6 @@ captures/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Firebase config per flavor (F-4) — never commit
+frontend/android/app/src/*/google-services.json

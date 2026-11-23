@@ -6,6 +6,10 @@ spring:
     show-sql: false
 
 tranix:
+  # Dev testing uses the free map services by default (OSRM routes, OpenStreetMap Nominatim search).
+  integrations:
+    maps: ${MAPS_PROVIDER:osrm}
+    geocoding: ${GEOCODING_PROVIDER:nominatim}
   admin:
     mobiles: 9000000006
   jwt:
@@ -14,8 +18,9 @@ tranix:
   files:
     signing-secret: ${FILES_SIGNING_SECRET:dev-only-files-secret-0123456789abcdef}
   dev:
-    # Fake SMS accepts this OTP in dev only (B-102).
-    otp: "123456"
+    # Fixed OTP in dev only (B-102). Set DEV_OTP to empty to get real random codes by SMS (Twilio).
+    # Leave 123456 so testers whose numbers are not verified on a Twilio trial can still sign in.
+    otp: ${DEV_OTP:123456}
 
 logging:
   level:

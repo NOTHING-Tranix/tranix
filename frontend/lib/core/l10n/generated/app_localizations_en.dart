@@ -1638,4 +1638,7 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get deleteRequested =>
       'Request sent. Tranix support will confirm here.';
+
+  @override
+  String get searchPlace => 'Search a place or address';
 }

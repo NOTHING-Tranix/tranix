@@ -3153,6 +3153,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Request sent. Tranix support will confirm here.'**
   String get deleteRequested;
+
+  /// No description provided for @searchPlace.
+  ///
+  /// In en, this message translates to:
+  /// **'Search a place or address'**
+  String get searchPlace;
 }
 
 class _AppLocalizationsDelegate

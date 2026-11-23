@@ -77,7 +77,9 @@ public class NotificationService implements Notifier, MeContributor {
             }
         }
         if (template.sms()) {
-            sms.send(user.mobile(), "NOTIFY_" + type, params, user.language());
+            java.util.Map<String, String> smsParams = new java.util.HashMap<>(params);
+            smsParams.put("text", text.body()); // for text-based SMS providers (Twilio)
+            sms.send(user.mobile(), "NOTIFY_" + type, smsParams, user.language());
         }
     }
 

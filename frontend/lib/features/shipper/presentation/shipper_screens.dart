@@ -23,6 +23,8 @@ import '../../../shared/models/models.dart';
 import '../../notifications/notifications_feature.dart';
 import '../../profile/presentation/profile_screens.dart';
 import '../../shared_shell/tab_screens.dart' show ProfileAvatarButton;
+import '../../../core/location/osm_map.dart';
+import 'package:flutter_map/flutter_map.dart' show MarkerLayer;
 import '../../payments/payments_feature.dart';
 import '../wishlist_feature.dart';
 import '../../farmers/farmers_feature.dart';
@@ -885,8 +887,29 @@ class _TrackingCardState extends ConsumerState<TrackingCard> {
       RouteStatus.normal => (l.routeNormal, c.success),
       _ => (null, c.neutral),
     };
+    final d = ref.watch(loadDetailProvider(widget.loadId)).value;
+    final truck = t.driverLocation == null ? null : GeoPoint(lat: t.driverLocation!.lat, lng: t.driverLocation!.lng);
     return Card(
-      child: ListTile(
+      clipBehavior: Clip.antiAlias,
+      child: Column(children: [
+        if (truck != null)
+          SizedBox(
+            height: 200,
+            child: OsmMap(
+              key: ValueKey(t.driverLocation!.at),
+              interactive: false, // inside a scrolling page: the page scrolls, the map does not
+              center: truck,
+              zoom: 12,
+              children: [
+                MarkerLayer(markers: [
+                  if (d != null) pin(GeoPoint(lat: d.pickup.lat, lng: d.pickup.lng), color: Colors.green, size: 30),
+                  if (d != null) pin(GeoPoint(lat: d.drop.lat, lng: d.drop.lng), color: Colors.red, size: 30),
+                  pin(truck, icon: Icons.local_shipping, color: Theme.of(context).colorScheme.primary, size: 34),
+                ]),
+              ],
+            ),
+          ),
+        ListTile(
         leading: const Icon(Icons.local_shipping),
         title: Text(l.liveTracking),
         subtitle: Text([
@@ -899,6 +922,7 @@ class _TrackingCardState extends ConsumerState<TrackingCard> {
             : () => launchUrl(Uri.parse('https://www.google.com/maps/search/?api=1&query=${t.driverLocation!.lat},${t.driverLocation!.lng}'),
                 mode: LaunchMode.externalApplication),
       ),
+      ]),
     );
   }
 }

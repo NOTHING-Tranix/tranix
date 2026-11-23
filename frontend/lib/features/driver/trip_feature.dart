@@ -22,6 +22,9 @@ import '../../shared/labels.dart';
 import '../../shared/models/models.dart';
 import '../notifications/notifications_feature.dart';
 import '../shared_shell/tab_screens.dart' show ProfileAvatarButton;
+import 'package:flutter_map/flutter_map.dart' show CircleLayer, CircleMarker, MarkerLayer;
+
+import '../../core/location/osm_map.dart';
 import 'driver_feature.dart';
 
 /// Contract §8 (trip execution).
@@ -514,6 +517,36 @@ class _MapLayersState extends ConsumerState<MapLayers> {
             },
           ),
       ]),
+      if (_items.isNotEmpty)
+        Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: SizedBox(
+              height: 220,
+              child: OsmMap(center: widget.center, zoom: 10, children: [
+                if (_layer == 'RESTRICTIONS')
+                  CircleLayer(circles: [
+                    for (final item in _items)
+                      CircleMarker(
+                        point: ll(GeoPoint(lat: (item['lat'] as num).toDouble(), lng: (item['lng'] as num).toDouble())),
+                        radius: ((item['radiusKm'] as num?) ?? 1).toDouble() * 1000,
+                        useRadiusInMeter: true,
+                        color: Colors.red.withValues(alpha: 0.2),
+                        borderColor: Colors.red,
+                        borderStrokeWidth: 2,
+                      ),
+                  ]),
+                MarkerLayer(markers: [
+                  pin(widget.center, icon: Icons.flag, color: Theme.of(context).colorScheme.primary, size: 30),
+                  for (final item in _items)
+                    pin(GeoPoint(lat: (item['lat'] as num).toDouble(), lng: (item['lng'] as num).toDouble()),
+                        icon: _layer == 'RESTRICTIONS' ? Icons.block : Icons.place, color: Colors.orange, size: 28, tooltip: '${item['name']}'),
+                ]),
+              ]),
+            ),
+          ),
+        ),
       for (final item in _items)
         ListTile(
           dense: true,

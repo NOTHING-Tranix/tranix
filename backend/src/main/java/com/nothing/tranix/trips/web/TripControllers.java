@@ -169,9 +169,26 @@ class LoadTripController {
 class MapController {
 
     private final MapLayerService layers;
+    private final com.nothing.tranix.shared.integrations.Geocoder geocoder;
 
-    MapController(MapLayerService layers) {
+    MapController(MapLayerService layers, com.nothing.tranix.shared.integrations.Geocoder geocoder) {
         this.layers = layers;
+        this.geocoder = geocoder;
+    }
+
+    /** Location picker search (free OpenStreetMap Nominatim in dev). */
+    @GetMapping("/geocode")
+    List<com.nothing.tranix.shared.integrations.Geocoder.Hit> geocode(@RequestParam String q) {
+        return q.length() > 120 ? List.of() : geocoder.search(q);
+    }
+
+    /** Address for a dropped pin. */
+    @GetMapping("/reverse")
+    Map<String, Object> reverse(@RequestParam double lat, @RequestParam double lng) {
+        if (lat < -90 || lat > 90 || lng < -180 || lng > 180) {
+            throw com.nothing.tranix.shared.error.ApiException.invalidField("lat", "Invalid location");
+        }
+        return Map.of("address", geocoder.reverse(com.nothing.tranix.shared.geo.GeoPoint.of(lat, lng)).orElse(""));
     }
 
     @GetMapping("/route-services")

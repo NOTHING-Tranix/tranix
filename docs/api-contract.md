@@ -191,6 +191,8 @@ LoadDetail = LoadSummary + { pickup, drop, senderName, senderMobile, receiverNam
 | `POST /driver/trips/{loadId}/payment/confirm` · `/dispute` | `{amountInr}` · `{reason}` |
 | `GET /driver/history?month=&page=` | `{summary{trips, agreedTotalInr, confirmedInr, pendingInr}, items[]}` |
 | `GET /driver/invitations` · `POST /driver/invitations/{id}/accept` · `/reject` | Organization invites |
+| `GET /map/geocode?q=` | Location picker search (≥ 3 chars): `[{name, lat, lng}]`, India only (dev: OpenStreetMap Nominatim, free) |
+| `GET /map/reverse?lat=&lng=` | Address for a dropped pin: `{address}` (empty when unknown) |
 | `GET /map/route-services?bbox=&types=` | Petrol bunks, weighbridges, puncture shops, tolls |
 | `GET /map/restrictions?bbox=` | Entry restrictions / no-entry timings `[{id, name, lat, lng, radiusKm, noEntryFrom, noEntryTo, vehicleTypes, note}]`. `bbox=minLng,minLat,maxLng,maxLat` (≤ 5°); route services `[{id, type, name, lat, lng}]` |
 

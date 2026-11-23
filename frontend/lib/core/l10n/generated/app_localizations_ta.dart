@@ -1654,4 +1654,7 @@ class AppLocalizationsTa extends AppLocalizations {
   @override
   String get deleteRequested =>
       'கோரிக்கை அனுப்பப்பட்டது. உதவி மையம் இங்கே உறுதிசெய்யும்.';
+
+  @override
+  String get searchPlace => 'இடம் அல்லது முகவரியைத் தேடு';
 }

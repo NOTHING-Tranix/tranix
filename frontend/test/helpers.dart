@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tranix_app/core/config/app_config.dart';
 import 'package:tranix_app/core/network/mock_interceptor.dart';
 import 'package:tranix_app/core/providers.dart';
+import 'package:tranix_app/core/location/osm_map.dart';
 
 /// Reads a fixture from `assets/mock/` on disk.
 Future<String> diskFixture(String name) => File('assets/mock/$name').readAsString();
@@ -15,6 +16,7 @@ Future<dynamic> fixtureJson(String name) async => jsonDecode(await diskFixture(n
 /// Overrides for a mock-mode app in widget tests: no latency, fixtures preloaded (real file I/O does not
 /// complete inside testWidgets' fake async zone), always online.
 Future<List<Override>> mockAppOverrides({Map<String, String> patch = const {}, Map<String, Object> initialPrefs = const {}}) async {
+  mapTilesEnabled = false; // no network in widget tests
   SharedPreferences.setMockInitialValues(initialPrefs);
   final prefs = await SharedPreferences.getInstance();
   final fixtures = {

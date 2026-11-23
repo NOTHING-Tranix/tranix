@@ -6,6 +6,11 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+// A-303: Firebase only when the flavor config files exist (they are not in git; CI builds without them).
+if (listOf("src/dev", "src/prod").all { file("$it/google-services.json").exists() }) {
+    apply(plugin = "com.google.gms.google-services")
+}
+
 android {
     namespace = "in.tranix.app"
     compileSdk = maxOf(flutter.compileSdkVersion, 37)
@@ -30,7 +35,6 @@ android {
         // flag during build.
         versionCode = flutter.versionCode
         versionName = flutter.versionName
-        manifestPlaceholders["MAPS_API_KEY"] = (project.findProperty("MAPS_API_KEY") as String?) ?: System.getenv("MAPS_API_KEY") ?: ""
     }
 
     buildFeatures {

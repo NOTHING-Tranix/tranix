@@ -559,5 +559,6 @@
   "deleteAccount": "Delete account",
   "deleteAccountBody": "Tranix will delete your account and personal data after any active trips and payments are closed. Records the law requires are kept.",
   "deleteReason": "Reason (optional)",
-  "deleteRequested": "Request sent. Tranix support will confirm here."
+  "deleteRequested": "Request sent. Tranix support will confirm here.",
+  "searchPlace": "Search a place or address"
 }
