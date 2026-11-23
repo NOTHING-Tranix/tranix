@@ -3159,6 +3159,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search a place or address'**
   String get searchPlace;
+
+  /// No description provided for @serverAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Server'**
+  String get serverAddress;
+
+  /// No description provided for @serverAddressHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Paste the address you were given, e.g. abc.ngrok-free.dev. Leave empty for the default.'**
+  String get serverAddressHint;
 }
 
 class _AppLocalizationsDelegate

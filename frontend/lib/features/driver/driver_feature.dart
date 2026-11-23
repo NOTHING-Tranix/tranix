@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -28,7 +29,9 @@ class DriverApi {
   Future<DriverHome> home() async =>
       DriverHome.fromJson((await guardApi(() => _dio.get<Map<String, dynamic>>('/driver/home'))).data!);
 
-  Future<void> setDuty(bool onDuty) => guardApi(() => _dio.put<void>('/driver/duty', data: {'onDuty': onDuty}));
+  /// Going on duty also sends the phone's position, so nearby loads are suggested before any trip.
+  Future<void> setDuty(bool onDuty, {double? lat, double? lng}) =>
+      guardApi(() => _dio.put<void>('/driver/duty', data: {'onDuty': onDuty, 'lat': ?lat, 'lng': ?lng}));
 
   Future<Truck?> truck() async {
     final res = await guardApi(() => _dio.get<dynamic>('/driver/truck'));
@@ -115,7 +118,19 @@ class DriverHomeScreen extends ConsumerWidget {
                   activeThumbColor: TranixColors.amber,
                   onChanged: (v) async {
                     try {
-                      await ref.read(driverApiProvider).setDuty(v);
+                      Position? here;
+                      if (v) {
+                        try {
+                          var p = await Geolocator.checkPermission();
+                          if (p == LocationPermission.denied) p = await Geolocator.requestPermission();
+                          if (p == LocationPermission.always || p == LocationPermission.whileInUse) {
+                            here = await Geolocator.getCurrentPosition().timeout(const Duration(seconds: 10));
+                          }
+                        } catch (_) {
+                          // no location: still go on duty; the last known position is used
+                        }
+                      }
+                      await ref.read(driverApiProvider).setDuty(v, lat: here?.latitude, lng: here?.longitude);
                       ref.invalidate(driverHomeProvider);
                     } catch (e) {
                       if (context.mounted) {

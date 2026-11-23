@@ -45,11 +45,52 @@ class LanguageController extends Notifier<Language> {
 
 final languageProvider = NotifierProvider<LanguageController, Language>(LanguageController.new);
 
-BaseOptions _options(AppConfig config) => BaseOptions(
-      baseUrl: config.apiBaseUrl,
+/// Testing builds can point at another server (e.g. an ngrok tunnel) without reinstalling; saved on the phone.
+/// Production builds always use the compiled address.
+class ServerUrlController extends Notifier<String> {
+  static const _key = 'tranix.server_url';
+
+  @override
+  String build() {
+    final config = ref.watch(appConfigProvider);
+    if (config.isProd || config.useMock) return config.apiBaseUrl;
+    return ref.watch(sharedPreferencesProvider).getString(_key) ?? config.apiBaseUrl;
+  }
+
+  /// Accepts a host (`abc.ngrok-free.dev`), a base URL or a full API URL; empty = back to the built-in address.
+  Future<void> set(String input) async {
+    final prefs = ref.read(sharedPreferencesProvider);
+    final url = normalizeServerUrl(input);
+    if (url == null) {
+      await prefs.remove(_key);
+      state = ref.read(appConfigProvider).apiBaseUrl;
+    } else {
+      await prefs.setString(_key, url);
+      state = url;
+    }
+  }
+}
+
+final serverUrlProvider = NotifierProvider<ServerUrlController, String>(ServerUrlController.new);
+
+String? normalizeServerUrl(String input) {
+  var s = input.trim();
+  if (s.isEmpty) return null;
+  if (!s.startsWith('http://') && !s.startsWith('https://')) s = 'https://$s';
+  while (s.endsWith('/')) {
+    s = s.substring(0, s.length - 1);
+  }
+  if (!s.endsWith('/api/v1')) s = '$s/api/v1';
+  return s;
+}
+
+BaseOptions _options(String baseUrl) => BaseOptions(
+      baseUrl: baseUrl,
       connectTimeout: const Duration(seconds: 10),
       receiveTimeout: const Duration(seconds: 20),
       contentType: Headers.jsonContentType,
+      // ngrok free tunnels show a browser warning page unless this header is sent
+      headers: const {'ngrok-skip-browser-warning': 'true'},
     );
 
 /// The API client. Interceptor order (architecture.md): Mock (when USE_MOCK, answers first) → Language → Auth →
@@ -57,8 +98,9 @@ BaseOptions _options(AppConfig config) => BaseOptions(
 final dioProvider = Provider<Dio>((ref) {
   final config = ref.watch(appConfigProvider);
   final tokens = ref.watch(tokenStoreProvider);
-  final dio = Dio(_options(config));
-  final refreshDio = Dio(_options(config));
+  final baseUrl = ref.watch(serverUrlProvider);
+  final dio = Dio(_options(baseUrl));
+  final refreshDio = Dio(_options(baseUrl));
   if (config.useMock) {
     final mock = ref.watch(mockInterceptorProvider);
     dio.interceptors.add(mock);

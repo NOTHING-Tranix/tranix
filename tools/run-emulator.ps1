@@ -32,7 +32,8 @@ if (-not $tranix) { Write-Host 'Emulator did not start.'; exit 1 }
 Write-Host "Emulator ready: $tranix"
 
 Set-Location (Join-Path $PSScriptRoot '..\frontend')
-if ($Clean) { flutter clean; flutter pub get }
+if ($Clean) { flutter clean }
+flutter pub get | Out-Null  # packages must be downloaded on this machine
 $mode = if ($DebugMode) { '--debug' } else { '--release' }
 if ($Backend) {
     flutter run $mode -d $tranix --dart-define=API_BASE_URL=http://10.0.2.2:8080/api/v1

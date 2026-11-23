@@ -560,5 +560,7 @@
   "deleteAccountBody": "Tranix will delete your account and personal data after any active trips and payments are closed. Records the law requires are kept.",
   "deleteReason": "Reason (optional)",
   "deleteRequested": "Request sent. Tranix support will confirm here.",
-  "searchPlace": "Search a place or address"
+  "searchPlace": "Search a place or address",
+  "serverAddress": "Server",
+  "serverAddressHint": "Paste the address you were given, e.g. abc.ngrok-free.dev. Leave empty for the default."
 }

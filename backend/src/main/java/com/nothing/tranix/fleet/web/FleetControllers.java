@@ -75,12 +75,13 @@ class DriverFleetController {
         this.wallet = wallet;
     }
 
-    record Duty(@NotNull Boolean onDuty) {
+    /** lat/lng: the phone's position when going on duty (so nearby loads can be suggested before any trip). */
+    record Duty(@NotNull Boolean onDuty, Double lat, Double lng) {
     }
 
     @PutMapping("/duty")
     Map<String, Object> duty(@Valid @RequestBody Duty req) {
-        return fleet.setDuty(CurrentUser.id(), req.onDuty());
+        return fleet.setDuty(CurrentUser.id(), req.onDuty(), req.lat(), req.lng());
     }
 
     @GetMapping("/home")

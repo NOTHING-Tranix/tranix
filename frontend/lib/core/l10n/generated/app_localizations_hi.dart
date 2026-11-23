@@ -1644,4 +1644,11 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get searchPlace => 'जगह या पता खोजें';
+
+  @override
+  String get serverAddress => 'सर्वर';
+
+  @override
+  String get serverAddressHint =>
+      'आपको दिया गया पता चिपकाएँ, जैसे abc.ngrok-free.dev. डिफ़ॉल्ट के लिए खाली छोड़ें।';
 }

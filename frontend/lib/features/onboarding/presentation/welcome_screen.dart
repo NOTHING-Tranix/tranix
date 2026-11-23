@@ -54,6 +54,16 @@ class WelcomeScreen extends ConsumerWidget {
             PrimaryButton(label: l.actionSignUp, onPressed: () => context.go(Routes.signUp)),
             const SizedBox(height: 12),
             OutlinedButton(onPressed: () => context.go(Routes.signIn), child: Text(l.actionSignIn)),
+            if (!ref.watch(appConfigProvider).isProd && !useMock) ...[
+              const SizedBox(height: 16),
+              // Testing builds: point the app at another server (e.g. an ngrok tunnel) without reinstalling.
+              TextButton.icon(
+                key: const Key('server-address'),
+                onPressed: () => _editServer(context, ref),
+                icon: const Icon(Icons.dns_outlined, size: 18),
+                label: Text('${l.serverAddress}: ${Uri.tryParse(ref.watch(serverUrlProvider))?.host ?? ''}'),
+              ),
+            ],
             if (useMock) ...[
               const SizedBox(height: 32),
               const Divider(),
@@ -98,4 +108,33 @@ class WelcomeScreen extends ConsumerWidget {
   }
 
   static String _roleValue(Role role) => role.name.replaceAllMapped(RegExp('[A-Z]'), (m) => '_${m[0]}').toUpperCase();
+
+  /// Testing builds only: set the server address (host like `abc.ngrok-free.dev` or a full URL); empty = default.
+  Future<void> _editServer(BuildContext context, WidgetRef ref) async {
+    final l = AppLocalizations.of(context);
+    var text = Uri.tryParse(ref.read(serverUrlProvider))?.host ?? '';
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (c) => AlertDialog(
+        title: Text(l.serverAddress),
+        content: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(l.serverAddressHint),
+          TextFormField(
+            key: const Key('server-input'),
+            initialValue: text,
+            keyboardType: TextInputType.url,
+            autocorrect: false,
+            onChanged: (v) => text = v,
+          ),
+        ]),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(c, false), child: Text(MaterialLocalizations.of(c).cancelButtonLabel)),
+          FilledButton(onPressed: () => Navigator.pop(c, true), child: Text(l.save)),
+        ],
+      ),
+    );
+    if (ok != true) return;
+    await ref.read(serverUrlProvider.notifier).set(text);
+    ref.invalidate(publicSettingsProvider);
+  }
 }

@@ -1657,4 +1657,11 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get searchPlace => 'இடம் அல்லது முகவரியைத் தேடு';
+
+  @override
+  String get serverAddress => 'சர்வர்';
+
+  @override
+  String get serverAddressHint =>
+      'உங்களுக்குக் கொடுத்த முகவரியை ஒட்டவும், எ.கா. abc.ngrok-free.dev. இயல்புநிலைக்கு காலியாக விடவும்.';
 }

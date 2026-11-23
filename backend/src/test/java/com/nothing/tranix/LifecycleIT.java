@@ -74,6 +74,9 @@ class LifecycleIT {
         api.get("/api/v1/map/geocode?q=koyambedu", user).andExpect(jsonPath("$[0].name").value(org.hamcrest.Matchers.containsString("Koyambedu")))
                 .andExpect(jsonPath("$[0].lat").value(13.0694));
         api.get("/api/v1/map/reverse?lat=10.49&lng=77.75", user).andExpect(jsonPath("$.address").value("Near 10.4900, 77.7500"));
+        // going on duty with the phone position sets the location used for suggestions
+        api.put("/api/v1/driver/duty", Map.of("onDuty", true, "lat", 12.97, "lng", 77.59), user).andExpect(status().isOk());
+        assertThat(jdbc.queryForObject("select last_lat from fleet_driver_state where driver_id = ?", Double.class, user.userId())).isEqualTo(12.97);
         api.send("/api/v1/me/deletion-request", Map.of("reason", "Leaving the business"), user)
                 .andExpect(jsonPath("$.type").value("OTHERS")).andExpect(jsonPath("$.otherText").value("Account deletion"));
     }

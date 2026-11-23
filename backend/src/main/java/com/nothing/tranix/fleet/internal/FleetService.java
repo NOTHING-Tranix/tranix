@@ -225,11 +225,14 @@ public class FleetService implements FleetApi {
     }
 
     @Transactional
-    public Map<String, Object> setDuty(UUID driverId, boolean onDuty) {
+    public Map<String, Object> setDuty(UUID driverId, boolean onDuty, Double lat, Double lng) {
         requireDriver(driverId);
         ensureState(driverId);
         jdbc.update("update fleet_driver_state set on_duty = ?, updated_at = ? where driver_id = ?", onDuty,
                 Timestamp.from(Instant.now(clock)), driverId);
+        if (onDuty && lat != null && lng != null && Math.abs(lat) <= 90 && Math.abs(lng) <= 180) {
+            updateLocation(driverId, GeoPoint.of(lat, lng), Instant.now(clock));
+        }
         return Map.of("onDuty", onDuty);
     }
 

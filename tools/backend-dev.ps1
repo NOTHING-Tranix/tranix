@@ -28,6 +28,13 @@ if (Test-Path $dotenv) {
     Write-Host 'Loaded settings from backend\.env'
 }
 
+# With an ngrok domain, links the server hands out (SMS tracking links, file links, top-up pages) use the tunnel.
+if ($env:NGROK_DOMAIN -and -not $env:PUBLIC_BASE_URL) {
+    $env:PUBLIC_BASE_URL = 'https://' + ($env:NGROK_DOMAIN -replace '^https?://', '' -replace '/.*$', '')
+}
+if ($env:PUBLIC_BASE_URL) { Write-Host "Public links: $($env:PUBLIC_BASE_URL)" }
+Remove-Item Env:NGROK_AUTHTOKEN -ErrorAction SilentlyContinue  # only the tunnel needs it
+
 if ($env:TWILIO_ACCOUNT_SID -and $env:TWILIO_AUTH_TOKEN -and $env:TWILIO_FROM) {
     $env:SMS_PROVIDER = 'twilio'
     if ($env:SMS_REDIRECT_TO) { Write-Host "SMS: Twilio - every SMS goes to the testing number (SMS_REDIRECT_TO)" }

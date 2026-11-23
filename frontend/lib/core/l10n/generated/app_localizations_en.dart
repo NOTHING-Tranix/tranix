@@ -1641,4 +1641,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get searchPlace => 'Search a place or address';
+
+  @override
+  String get serverAddress => 'Server';
+
+  @override
+  String get serverAddressHint =>
+      'Paste the address you were given, e.g. abc.ngrok-free.dev. Leave empty for the default.';
 }
