@@ -25,7 +25,7 @@ catch { Write-Host 'The backend is not running on localhost:8080. Start tools\ba
 $domain = $cfg.NGROK_DOMAIN -replace '^https?://', '' -replace '/.*$', ''
 Write-Host ''
 Write-Host "Public server address for the app:  $domain"
-Write-Host "Swagger (admin):                     https://$domain/swagger-ui.html"
+Write-Host "Admin website:                       https://$domain/admin"
 Write-Host 'Leave this window open while people are testing. Ctrl+C to stop.'
 Write-Host ''
 $env:NGROK_AUTHTOKEN = $cfg.NGROK_AUTHTOKEN

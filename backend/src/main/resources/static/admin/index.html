@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tranix Admin</title>
+<style>
+  :root { --bg:#f6f7f9; --card:#fff; --text:#1d2330; --muted:#667085; --line:#e4e7ec; --brand:#0b6e4f; --danger:#b42318; --chip:#eef2f6; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#12151b; --card:#1b1f27; --text:#e6e8ec; --muted:#98a2b3; --line:#2c323d; --brand:#3fbf8f; --danger:#f97066; --chip:#262c36; } }
+  * { box-sizing: border-box; }
+  body { margin:0; font:14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background:var(--bg); color:var(--text); }
+  header { display:flex; align-items:center; gap:12px; padding:10px 16px; background:var(--card); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:2; }
+  header b { font-size:16px; color:var(--brand); }
+  header .sp { flex:1; }
+  nav { display:flex; gap:4px; overflow-x:auto; padding:8px 16px; background:var(--card); border-bottom:1px solid var(--line); }
+  nav button { white-space:nowrap; }
+  nav button.on { background:var(--brand); color:#fff; border-color:var(--brand); }
+  main { padding:16px; max-width:1300px; margin:0 auto; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; margin-bottom:16px; }
+  button, input, select, textarea { font:inherit; color:inherit; }
+  button { background:var(--card); border:1px solid var(--line); border-radius:6px; padding:6px 10px; cursor:pointer; }
+  button:hover { border-color:var(--brand); }
+  a { color:var(--brand); } a button { color:var(--text); }
+  button.pri { background:var(--brand); color:#fff; border-color:var(--brand); }
+  button.bad { color:var(--danger); }
+  input, select, textarea { background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:6px 8px; }
+  .row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:12px; }
+  .tw { overflow-x:auto; }
+  table { border-collapse:collapse; width:100%; }
+  th, td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--muted); font-weight:600; font-size:12px; text-transform:uppercase; }
+  td { max-width:320px; overflow-wrap:anywhere; }
+  td.acts { white-space:nowrap; }
+  td.acts button { margin:0 4px 4px 0; }
+  .muted { color:var(--muted); }
+  .chip { display:inline-block; background:var(--chip); border-radius:10px; padding:1px 8px; font-size:12px; }
+  .tiles { display:grid; grid-template-columns:repeat(auto-fill, minmax(170px, 1fr)); gap:12px; }
+  .tile { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px; }
+  .tile .n { font-size:24px; font-weight:700; }
+  .tile .l { color:var(--muted); font-size:12px; }
+  pre { background:var(--bg); padding:10px; border-radius:6px; overflow:auto; max-height:60vh; }
+  #toast { position:fixed; bottom:16px; left:50%; transform:translateX(-50%); background:var(--text); color:var(--bg); padding:8px 14px; border-radius:6px; display:none; z-index:9; max-width:90vw; }
+  #login { max-width:360px; margin:10vh auto; }
+  #login input { width:100%; margin-bottom:10px; }
+  dialog { border:1px solid var(--line); border-radius:10px; background:var(--card); color:var(--text); max-width:min(800px, 95vw); width:100%; }
+  dialog::backdrop { background:rgba(0,0,0,.4); }
+  label.f { display:block; margin-bottom:8px; }
+  label.f span { display:block; color:var(--muted); font-size:12px; }
+  label.f input, label.f select, label.f textarea { width:100%; }
+</style>
+</head>
+<body>
+<div id="login" class="card" hidden>
+  <h2 style="margin-top:0">Tranix Admin</h2>
+  <p class="muted">Sign in with an admin mobile number.</p>
+  <input id="mobile" placeholder="Mobile (10 digits)" value="9000000006" inputmode="numeric">
+  <div class="row"><button id="sendOtp">Send OTP</button><span class="muted" id="otpHint"></span></div>
+  <input id="otp" placeholder="6-digit OTP" inputmode="numeric">
+  <button class="pri" id="signIn" style="width:100%">Sign in</button>
+</div>
+
+<div id="app" hidden>
+  <header><b>Tranix Admin</b><span class="muted" id="who"></span><span class="sp"></span><button id="signOut">Sign out</button></header>
+  <nav id="nav"></nav>
+  <main id="main"></main>
+</div>
+
+<dialog id="dlg"><div id="dlgBody"></div><div class="row" style="justify-content:flex-end;margin:12px 0 0"><button id="dlgClose">Close</button></div></dialog>
+<div id="toast"></div>
+
+<script>
+const API = location.origin + '/api/v1';
+const $ = s => document.querySelector(s);
+const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let tokens = null;
+try { tokens = JSON.parse(sessionStorage.getItem('tranix.admin') || 'null'); } catch (e) {}
+
+function toast(msg) { const t = $('#toast'); t.textContent = msg; t.style.display = 'block'; clearTimeout(t._h); t._h = setTimeout(() => t.style.display = 'none', 3500); }
+function save(t) { tokens = t; try { t ? sessionStorage.setItem('tranix.admin', JSON.stringify(t)) : sessionStorage.removeItem('tranix.admin'); } catch (e) {} }
+
+async function call(method, path, body, retry = true) {
+  const headers = { 'ngrok-skip-browser-warning': '1' };
+  if (body !== undefined) headers['Content-Type'] = 'application/json';
+  if (tokens) headers['Authorization'] = 'Bearer ' + tokens.accessToken;
+  const r = await fetch(API + path, { method, headers, body: body === undefined ? undefined : JSON.stringify(body) });
+  if (r.status === 401 && retry && tokens?.refreshToken) {
+    const rr = await fetch(API + '/auth/refresh', { method: 'POST', headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': '1' }, body: JSON.stringify({ refreshToken: tokens.refreshToken }) });
+    if (rr.ok) { save(await rr.json()); return call(method, path, body, false); }
+    save(null); show(); throw new Error('Signed out — please sign in again');
+  }
+  const text = await r.text();
+  let data = null; try { data = text ? JSON.parse(text) : null; } catch (e) { data = text; }
+  if (!r.ok) {
+    const msg = (data && (data.detail || data.title || data.code)) || ('HTTP ' + r.status);
+    const fields = data && data.errors ? ' — ' + JSON.stringify(data.errors) : '';
+    throw new Error(msg + fields);
+  }
+  return data;
+}
+async function act(fn, okMsg) { try { const r = await fn(); if (okMsg) toast(okMsg); return r; } catch (e) { toast(e.message); throw e; } }
+
+/* ---------- sign-in ---------- */
+$('#sendOtp').onclick = () => act(() => call('POST', '/auth/otp/send', { mobile: $('#mobile').value.trim(), purpose: 'SIGN_IN' }), 'OTP sent (dev code 123456)').catch(() => {});
+$('#signIn').onclick = async () => {
+  try {
+    const r = await call('POST', '/auth/sign-in', { mobile: $('#mobile').value.trim(), otp: $('#otp').value.trim(), deviceId: 'admin-web' });
+    if (r.user && r.user.role !== 'ADMIN') { toast('This number is not an admin'); return; }
+    save(r); show();
+  } catch (e) { toast(e.message); }
+};
+$('#otp').addEventListener('keydown', e => { if (e.key === 'Enter') $('#signIn').click(); });
+$('#signOut').onclick = async () => { try { await call('POST', '/auth/sign-out', { refreshToken: tokens.refreshToken }); } catch (e) {} save(null); show(); };
+$('#dlgClose').onclick = () => $('#dlg').close();
+
+/* ---------- helpers ---------- */
+function fmt(v) {
+  if (v === null || v === undefined || v === '') return '<span class="muted">—</span>';
+  if (typeof v === 'boolean') return v ? 'yes' : 'no';
+  if (typeof v === 'object') return '<span class="muted">' + esc(JSON.stringify(v)).slice(0, 200) + '</span>';
+  const s = String(v);
+  if (/^\d{4}-\d\d-\d\dT/.test(s)) return esc(new Date(s).toLocaleString());
+  if (/^[A-Z][A-Z_]+$/.test(s)) return '<span class="chip">' + esc(s) + '</span>';
+  return esc(s);
+}
+function items(data) { return Array.isArray(data) ? data : (data && Array.isArray(data.items) ? data.items : []); }
+function table(rows, actions, hide = []) {
+  if (!rows.length) return '<p class="muted">Nothing here.</p>';
+  const cols = [...new Set(rows.flatMap(r => Object.keys(r)))].filter(c => !hide.includes(c));
+  let h = '<div class="tw"><table><thead><tr>' + cols.map(c => '<th>' + esc(c) + '</th>').join('') + (actions ? '<th></th>' : '') + '</tr></thead><tbody>';
+  rows.forEach((r, i) => {
+    h += '<tr>' + cols.map(c => '<td>' + fmt(r[c]) + '</td>').join('');
+    if (actions) h += '<td class="acts">' + actions.filter(a => !a.when || a.when(r)).map((a, j) => `<button data-row="${i}" data-act="${actions.indexOf(a)}" class="${a.cls || ''}">${esc(a.label)}</button>`).join('') + '</td>';
+    h += '</tr>';
+  });
+  return h + '</tbody></table></div>';
+}
+function wire(el, rows, actions, reload) {
+  el.querySelectorAll('button[data-act]').forEach(b => b.onclick = async () => {
+    const a = actions[+b.dataset.act], r = rows[+b.dataset.row];
+    try { await a.run(r); if (a.ok) toast(a.ok); if (a.reload !== false) reload(); } catch (e) { if (e.message !== 'cancelled') toast(e.message); }
+  });
+}
+function ask(q, def = '') { const v = prompt(q, def); if (v === null || !v.trim()) throw new Error('cancelled'); return v.trim(); }
+function pager(data, page, go) {
+  if (!data || data.total === undefined) return '';
+  const pages = Math.max(1, Math.ceil(data.total / (data.size || 20)));
+  const d = document.createElement('div'); d.className = 'row';
+  d.innerHTML = `<button ${page <= 0 ? 'disabled' : ''}>‹ Prev</button><span class="muted">Page ${page + 1} of ${pages} · ${data.total} total</span><button ${page + 1 >= pages ? 'disabled' : ''}>Next ›</button>`;
+  const [p, n] = d.querySelectorAll('button'); p.onclick = () => go(page - 1); n.onclick = () => go(page + 1);
+  return d;
+}
+function showJson(title, obj) { $('#dlgBody').innerHTML = '<h3 style="margin-top:0">' + esc(title) + '</h3><pre>' + esc(JSON.stringify(obj, null, 2)) + '</pre>'; $('#dlg').showModal(); }
+const qs = o => { const p = Object.entries(o).filter(([, v]) => v !== '' && v !== undefined && v !== null); return p.length ? '?' + p.map(([k, v]) => k + '=' + encodeURIComponent(v)).join('&') : ''; };
+
+/* A generic list section: filters + table + actions + paging. */
+function listSection({ title, filters = [], path, loader, hide = [], actions = [], paged = false, top }) {
+  return async (main) => {
+    const state = { page: 0 }; filters.forEach(f => state[f.key] = f.def ?? '');
+    main.innerHTML = `<div class="card"><h2 style="margin-top:0">${esc(title)}</h2><div class="row" id="flt"></div><div id="top"></div><div id="res" class="muted">Loading…</div><div id="pg"></div></div>`;
+    const flt = main.querySelector('#flt');
+    filters.forEach(f => {
+      let el;
+      if (f.options) { el = document.createElement('select'); el.innerHTML = f.options.map(o => `<option value="${esc(o)}">${esc(o || 'All ' + f.label)}</option>`).join(''); }
+      else { el = document.createElement('input'); el.placeholder = f.label; }
+      el.value = state[f.key]; el.onchange = () => { state[f.key] = el.value.trim(); state.page = 0; load(); };
+      if (!f.options) el.addEventListener('keydown', e => { if (e.key === 'Enter') el.onchange(); });
+      flt.appendChild(el);
+    });
+    const rb = document.createElement('button'); rb.textContent = 'Refresh'; rb.onclick = () => load(); flt.appendChild(rb);
+    if (top) top(main.querySelector('#top'), () => load());
+    async function load() {
+      const res = main.querySelector('#res'), pg = main.querySelector('#pg');
+      try {
+        const q = {}; filters.forEach(f => q[f.key] = state[f.key]); if (paged) q.page = state.page;
+        const data = loader ? await loader(state) : await call('GET', path + qs(q));
+        const rows = items(data);
+        res.className = ''; res.innerHTML = table(rows, actions.length ? actions : null, hide);
+        wire(res, rows, actions, load);
+        pg.innerHTML = ''; if (paged) { const p = pager(data, state.page, n => { state.page = n; load(); }); if (p) pg.appendChild(p); }
+      } catch (e) { res.className = 'muted'; res.textContent = e.message; }
+    }
+    load();
+  };
+}
+
+/* ---------- sections ---------- */
+const S = {};
+S.Dashboard = async (main) => {
+  main.innerHTML = '<div class="card"><h2 style="margin-top:0">Dashboard</h2><div id="d" class="muted">Loading…</div></div>';
+  try {
+    const d = await call('GET', '/admin/dashboard');
+    const flat = {}, nested = {};
+    Object.entries(d || {}).forEach(([k, v]) => (v !== null && typeof v === 'object' ? nested : flat)[k] = v);
+    let h = '<div class="tiles">' + Object.entries(flat).map(([k, v]) => `<div class="tile"><div class="n">${esc(v)}</div><div class="l">${esc(k)}</div></div>`).join('') + '</div>';
+    Object.entries(nested).forEach(([k, v]) => {
+      h += `<h3>${esc(k)}</h3>`;
+      h += Array.isArray(v) ? table(v) : '<div class="tiles">' + Object.entries(v).map(([a, b]) => `<div class="tile"><div class="n">${esc(typeof b === 'object' ? JSON.stringify(b) : b)}</div><div class="l">${esc(a)}</div></div>`).join('') + '</div>';
+    });
+    $('#d').className = ''; $('#d').innerHTML = h;
+  } catch (e) { $('#d').textContent = e.message; }
+};
+
+S.Verifications = listSection({
+  title: 'Verification queue', path: '/admin/verifications',
+  filters: [{ key: 'tab', label: 'queues', def: '', options: ['', 'DRIVER', 'VEHICLE', 'FARMER_NETWORK', 'ORGANIZATION', 'IDENTITY'] }],
+  loader: async st => {
+    const tabs = st.tab ? [st.tab] : ['DRIVER', 'VEHICLE', 'FARMER_NETWORK', 'ORGANIZATION', 'IDENTITY'];
+    const all = await Promise.all(tabs.map(t => call('GET', '/admin/verifications?tab=' + t).then(rs => items(rs).map(r => ({ queue: t, ...r })))));
+    return all.flat().map(r => ({ ...r, documents: docList(r).map(d => d.type + ':' + d.status).join(', ') || r.documents, _raw: r }));
+  },
+  hide: ['_raw'],
+  actions: [
+    { label: 'Review documents', cls: 'pri', reload: false, run: r => showDocs(r._raw || r) },
+  ],
+});
+function docList(r) {
+  const out = [];
+  (function walk(v) {
+    if (Array.isArray(v)) v.forEach(walk);
+    else if (v && typeof v === 'object') { if (v.id && (v.viewUrl !== undefined || v.type) && v.status) out.push(v); else Object.values(v).forEach(walk); }
+  })(r);
+  return out;
+}
+function showDocs(r) {
+  const docs = docList(r);
+  const body = $('#dlgBody');
+  const render = () => {
+    body.innerHTML = '<h3 style="margin-top:0">Documents</h3>' + (docs.length ? '' : '<p class="muted">No documents in this entry.</p>');
+    docs.forEach(d => {
+      const div = document.createElement('div'); div.className = 'card';
+      div.innerHTML = `<b>${esc(d.type)}</b> <span class="chip">${esc(d.status)}</span> <span class="muted">${esc(d.numberMasked || '')} ${d.expiresOn ? 'expires ' + esc(d.expiresOn) : ''}</span>
+        ${d.rejectReason ? '<div class="muted">Rejected: ' + esc(d.rejectReason) + '</div>' : ''}
+        <div class="row" style="margin:8px 0 0">${d.viewUrl ? `<a href="${esc(d.viewUrl)}" target="_blank" rel="noopener"><button>View file</button></a>` : ''}
+        <button class="pri">Approve</button><button class="bad">Reject</button></div>`;
+      const [ap, rj] = [div.querySelector('.pri'), div.querySelector('.bad')];
+      ap.onclick = () => act(() => call('POST', `/admin/documents/${d.id}/approve`, {}), 'Approved').then(() => { d.status = 'APPROVED'; render(); }).catch(() => {});
+      rj.onclick = () => { let reason; try { reason = ask('Reason for rejecting (shown to the user)'); } catch (e) { return; }
+        act(() => call('POST', `/admin/documents/${d.id}/reject`, { reason }), 'Rejected').then(() => { d.status = 'REJECTED'; d.rejectReason = reason; render(); }).catch(() => {}); };
+      body.appendChild(div);
+    });
+    const raw = document.createElement('details'); raw.innerHTML = '<summary class="muted">Full entry</summary><pre>' + esc(JSON.stringify(r, null, 2)) + '</pre>'; body.appendChild(raw);
+  };
+  render(); $('#dlg').showModal();
+  $('#dlg').onclose = () => { if ($('#nav .on')?.textContent === 'Verifications') go('Verifications'); };
+}
+
+S.Users = listSection({
+  title: 'Users', path: '/admin/users', paged: true,
+  filters: [{ key: 'q', label: 'Search name / mobile' }, { key: 'role', label: 'roles', options: ['', 'LOAD_PROVIDER', 'FARMER_NETWORK', 'DRIVER', 'ORGANIZATION', 'RECEIVER', 'ADMIN'] }],
+  actions: [
+    { label: 'Suspend', cls: 'bad', when: r => !r.suspended, ok: 'Suspended', run: r => call('POST', `/admin/users/${r.id}/suspend`, { reason: ask('Reason for suspending') }) },
+    { label: 'Reactivate', when: r => r.suspended, ok: 'Reactivated', run: r => call('POST', `/admin/users/${r.id}/reactivate`, { reason: ask('Reason for reactivating') }) },
+    { label: 'Credit ₹', ok: 'Wallet credited', run: r => call('POST', `/admin/wallet/${r.id}/credit`, { amountInr: +ask('Amount in ₹ to credit'), reason: ask('Reason') }) },
+  ],
+});
+
+S.Loads = listSection({
+  title: 'Loads', path: '/admin/loads', paged: true,
+  filters: [{ key: 'q', label: 'Search' }, { key: 'status', label: 'statuses', options: ['', 'NOT_ACCEPTED', 'ACCEPTED', 'AMOUNT_NEGOTIATION', 'WAITING_FOR_PICKUP', 'LOCATION_REACHED', 'PICKED_UP', 'TRAVELING', 'ARRIVED_DESTINATION', 'DELIVERED', 'CANCELLED'] }],
+  actions: [
+    { label: 'Details', reload: false, run: async r => showJson('Load ' + (r.code || r.id), await call('GET', `/admin/loads/${r.id}`)) },
+    { label: 'OTP override', ok: 'OTP step overridden', run: r => call('POST', `/admin/loads/${r.id}/otp-override`, { purpose: ask('PICKUP or DELIVERY', 'PICKUP').toUpperCase(), reason: ask('Reason') }) },
+    { label: 'Cancel', cls: 'bad', ok: 'Load cancelled', run: r => call('POST', `/admin/loads/${r.id}/cancel`, { reason: ask('Reason for cancelling') }) },
+  ],
+});
+
+S.Fleet = listSection({ title: 'Fleet (trucks)', path: '/admin/fleet', paged: true, filters: [{ key: 'q', label: 'Search number / owner' }] });
+
+S.Support = listSection({
+  title: 'Support tickets', path: '/admin/tickets',
+  filters: [{ key: 'status', label: 'statuses', def: 'OPEN', options: ['', 'OPEN', 'CLOSED'] }],
+  actions: [
+    { label: 'Open', reload: false, run: async r => showJson('Ticket', await call('GET', `/admin/tickets/${r.id}`)) },
+    { label: 'Reply', ok: 'Reply sent', run: r => { const body = ask('Reply to the user'); return call('POST', `/admin/tickets/${r.id}/reply`, { body, close: confirm('Close the ticket too?') }); } },
+    { label: 'Ignore', cls: 'bad', ok: 'Ignored', run: r => call('POST', `/admin/tickets/${r.id}/ignore`, { reason: ask('Reason for ignoring') }) },
+  ],
+});
+
+S.Cancellations = listSection({
+  title: 'Cancellation reviews', path: '/admin/cancellations',
+  filters: [{ key: 'pending', label: 'pending', def: 'true', options: ['true', 'false'] }],
+  actions: [
+    { label: 'Uphold', ok: 'Upheld', run: r => call('POST', `/admin/cancellations/${r.id}/decide`, { decision: 'UPHOLD', reason: ask('Reason') }) },
+    { label: 'Reverse', ok: 'Reversed', run: r => call('POST', `/admin/cancellations/${r.id}/decide`, { decision: 'REVERSE', reason: ask('Reason') }) },
+  ],
+});
+
+S['Location checks'] = listSection({
+  title: 'Location exceptions', path: '/admin/location-exceptions',
+  filters: [{ key: 'status', label: 'status', def: 'PENDING', options: ['PENDING', 'OK', 'FLAGGED'] }],
+  actions: [
+    { label: 'OK', ok: 'Marked OK', when: r => r.status === 'PENDING' || !r.status, run: r => call('POST', `/admin/location-exceptions/${r.id}/review`, { decision: 'OK', note: prompt('Note (optional)') || null }) },
+    { label: 'Flag', cls: 'bad', ok: 'Flagged', when: r => r.status === 'PENDING' || !r.status, run: r => call('POST', `/admin/location-exceptions/${r.id}/review`, { decision: 'FLAGGED', note: prompt('Note (optional)') || null }) },
+  ],
+});
+
+S['Payment disputes'] = listSection({
+  title: 'Payment disputes', path: '/admin/payment-disputes',
+  actions: [{ label: 'Refund ₹', ok: 'Refunded', run: r => {
+    const userId = ask('User id to refund', r.shipperId || r.userId || r.payerId || '');
+    return call('POST', `/admin/wallet/${userId}/refund`, { amountInr: +ask('Amount in ₹'), reason: ask('Reason'), loadId: r.loadId || null });
+  } }],
+});
+
+S.Settings = listSection({
+  title: 'Settings', path: '/admin/settings',
+  actions: [{ label: 'Edit', ok: 'Saved', run: r => call('PUT', `/admin/settings/${encodeURIComponent(r.key)}`, { value: ask('New value for ' + r.key, String(r.value ?? '')), reason: ask('Reason for the change') }) }],
+  top: (el, reload) => {
+    el.innerHTML = '<div class="row"><span class="muted">Remote testing tip:</span><button>Let every on-duty driver see every load (3000 km)</button></div>';
+    el.querySelector('button').onclick = () => act(async () => {
+      for (const k of ['matching.initial_radius_km', 'matching.max_radius_km']) await call('PUT', '/admin/settings/' + k, { value: '3000', reason: 'remote testing' });
+    }, 'Search radius set to 3000 km').then(reload).catch(() => {});
+  },
+});
+
+S.Broadcasts = async (main) => {
+  main.innerHTML = `<div class="card"><h2 style="margin-top:0">New broadcast</h2>
+    <label class="f"><span>Title</span><input id="bt" maxlength="80"></label>
+    <label class="f"><span>Message</span><textarea id="bb" rows="3" maxlength="500"></textarea></label>
+    <div class="row">
+      <label class="f"><span>Audience</span><select id="ba"><option>ALL</option><option>ROLE</option><option>DISTRICT</option><option>USER</option></select></label>
+      <label class="f" id="brw" hidden><span>Role</span><select id="br"><option>LOAD_PROVIDER</option><option>FARMER_NETWORK</option><option>DRIVER</option><option>ORGANIZATION</option><option>RECEIVER</option></select></label>
+      <label class="f" id="bdw" hidden><span>District</span><input id="bd"></label>
+      <label class="f" id="buw" hidden><span>User id</span><input id="bu"></label>
+      <label class="f"><span>Send at (empty = now)</span><input id="bs" type="datetime-local"></label>
+    </div>
+    <button class="pri" id="bsend">Send</button></div>
+    <div class="card"><h2 style="margin-top:0">Sent</h2><div id="bl" class="muted">Loading…</div></div>`;
+  const aud = $('#ba');
+  aud.onchange = () => { $('#brw').hidden = aud.value !== 'ROLE'; $('#bdw').hidden = aud.value !== 'DISTRICT'; $('#buw').hidden = aud.value !== 'USER'; };
+  const list = async () => { try { const d = await call('GET', '/admin/broadcasts'); $('#bl').className = ''; $('#bl').innerHTML = table(items(d)); } catch (e) { $('#bl').textContent = e.message; } };
+  $('#bsend').onclick = () => {
+    const a = aud.value, sendAt = $('#bs').value;
+    const body = { title: $('#bt').value.trim(), body: $('#bb').value.trim(), audience: a,
+      role: a === 'ROLE' ? $('#br').value : null, district: a === 'DISTRICT' ? $('#bd').value.trim() : null,
+      userId: a === 'USER' ? $('#bu').value.trim() : null, sendAt: sendAt ? new Date(sendAt).toISOString() : null };
+    if (!confirm(`Send "${body.title}" to ${a}?`)) return;
+    act(() => call('POST', '/admin/broadcasts', body), 'Broadcast queued').then(() => { $('#bt').value = ''; $('#bb').value = ''; list(); }).catch(() => {});
+  };
+  list();
+};
+
+S.Audit = listSection({
+  title: 'Audit log', path: '/admin/audit', paged: true,
+  filters: [{ key: 'entity', label: 'Entity (e.g. USER)' }, { key: 'action', label: 'Action' }, { key: 'actorId', label: 'Actor id' }],
+});
+
+/* ---------- shell ---------- */
+function go(name) {
+  document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('on', b.textContent === name));
+  try { sessionStorage.setItem('tranix.admin.tab', name); } catch (e) {}
+  S[name]($('#main'));
+}
+function show() {
+  const on = !!tokens;
+  $('#login').hidden = on; $('#app').hidden = !on;
+  if (!on) return;
+  const u = tokens.user || {};
+  $('#who').textContent = (u.name || '') + ' · ' + (u.mobileMasked || u.mobile || '');
+  $('#nav').innerHTML = '';
+  Object.keys(S).forEach(n => { const b = document.createElement('button'); b.textContent = n; b.onclick = () => go(n); $('#nav').appendChild(b); });
+  let tab = 'Dashboard'; try { tab = sessionStorage.getItem('tranix.admin.tab') || tab; } catch (e) {}
+  go(S[tab] ? tab : 'Dashboard');
+}
+show();
+</script>
+</body>
+</html>

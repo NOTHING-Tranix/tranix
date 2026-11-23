@@ -50,6 +50,7 @@ public class SecurityConfig {
             "/api/v1/files/*/content",
             "/api/v1/webhooks/**",
             "/p/**",
+            "/admin", "/admin/", "/admin/index.html",
             "/actuator/health/**",
             "/v3/api-docs/**",
             "/swagger-ui/**",

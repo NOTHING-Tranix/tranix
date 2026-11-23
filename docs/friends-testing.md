@@ -37,11 +37,11 @@ Close both windows (Ctrl+C) when testing is over — while they run, anyone with
 | Friend 2 | 9000000003 | Driver (has a truck) | Go **On duty**, accept a suggestion, Reached → OTP, deliver, confirm payment |
 | Friend 3 | 9000000004 | Organization | Add a truck, invite a driver, allocate, watch trips |
 | Friend 4 | 9000000005 | Receiver | Track the load, see the delivery OTP, upload a receipt |
-| Host (browser) | 9000000006 | Admin | `https://<NGROK_DOMAIN>/swagger-ui.html` → sign in → approve users, settings |
+| Host (browser) | 9000000006 | Admin | `https://<NGROK_DOMAIN>/admin` (or `http://localhost:8080/admin`) → OTP 123456 → approve users, settings |
 
 Want to use your real number instead? Tap **Sign up** with it (OTP 123456), fill the profile and submit
-verification; the host approves you as admin in Swagger (`GET /api/v1/admin/verifications`, then
-`POST /api/v1/admin/documents/{id}/approve`). A new driver also needs a truck and documents.
+verification; the host approves you on the admin website (**Verifications → Review documents → Approve**).
+A new driver also needs a truck and documents.
 
 ## Making a trip happen between people in different cities
 
@@ -49,7 +49,7 @@ Drivers only get loads near them: the search starts at 25 km from the pickup and
 - The **driver goes On duty** (the app sends their current location), then
 - the **shipper posts a load with the pickup near the driver** (search the driver's town in the pickup map).
 
-Or, for testing, the admin widens the search in Swagger:
+Or, for testing, the admin widens the search on the admin website (**Settings → "Let every on-duty driver see every load"**), or by hand:
 `PUT /api/v1/admin/settings/matching.initial_radius_km` with `{"value":"3000","reason":"remote testing"}`
 (and `matching.max_radius_km` the same) — every on-duty driver in India then sees every load.
 
