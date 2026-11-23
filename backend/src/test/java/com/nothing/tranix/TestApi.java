@@ -31,11 +31,11 @@ public class TestApi {
     private final JdbcTemplate jdbc;
     private final com.nothing.tranix.wallet.internal.WalletService wallet;
 
-    public TestApi(MockMvc mvc, FakeSmsSender sms, JsonMapper json, JdbcTemplate jdbc,
+    public TestApi(MockMvc mvc, org.springframework.beans.factory.ObjectProvider<FakeSmsSender> sms, JsonMapper json, JdbcTemplate jdbc,
                    com.nothing.tranix.wallet.internal.WalletService wallet) {
         this.wallet = wallet;
         this.mvc = mvc;
-        this.sms = sms;
+        this.sms = sms.getIfAvailable(); // absent when a test switches SMS to a real provider
         this.json = json;
         this.jdbc = jdbc;
     }

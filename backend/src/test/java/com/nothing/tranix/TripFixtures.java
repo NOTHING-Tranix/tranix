@@ -28,10 +28,10 @@ public class TripFixtures {
     private final JdbcTemplate jdbc;
     private final FakeSmsSender sms;
 
-    public TripFixtures(TestApi api, JdbcTemplate jdbc, FakeSmsSender sms) {
+    public TripFixtures(TestApi api, JdbcTemplate jdbc, org.springframework.beans.factory.ObjectProvider<FakeSmsSender> sms) {
         this.api = api;
         this.jdbc = jdbc;
-        this.sms = sms;
+        this.sms = sms.getIfAvailable();
     }
 
     public record Trip(TestApi.Session shipper, TestApi.Session driver, String loadId, double[] pickup, double[] drop,
