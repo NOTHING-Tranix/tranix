@@ -43,7 +43,8 @@ Open a new PowerShell afterwards. Production: leave `SMS_REDIRECT_TO` unset so S
 ## Run
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File tools\backend-dev.ps1              # fixed OTP 123456, also sent by SMS
+powershell -ExecutionPolicy Bypass -File tools\backend-dev.ps1              # fixed OTP 123456, no SMS sent (saves Twilio credit)
+powershell -ExecutionPolicy Bypass -File tools\backend-dev.ps1 -Sms         # fixed OTP 123456, real SMS through Twilio
 powershell -ExecutionPolicy Bypass -File tools\backend-dev.ps1 -RandomOtp   # real random OTPs by SMS only
 powershell -ExecutionPolicy Bypass -File tools\run-emulator.ps1 -Backend    # app on the emulator against it
 ```

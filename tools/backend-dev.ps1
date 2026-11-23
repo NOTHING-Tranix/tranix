@@ -3,8 +3,11 @@
 # Secrets are NOT in this file. Set them once as Windows user environment variables (see docs/dev-testing.md):
 #   TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_FROM, SMS_REDIRECT_TO, FCM_SERVICE_ACCOUNT_FILE
 # Usage:  powershell -ExecutionPolicy Bypass -File tools\backend-dev.ps1          (needs PostgreSQL running)
-#         add -RandomOtp to send real random OTPs by SMS instead of the fixed dev code 123456
-param([switch]$RandomOtp)
+#         SMS is OFF by default (saves Twilio credit; the dev OTP is always 123456).
+#         add -Sms to send real SMS through Twilio (OTPs, tracking links, notifications)
+#         add -RandomOtp to send real random OTPs by SMS instead of the fixed dev code 123456 (turns -Sms on)
+param([switch]$Sms, [switch]$RandomOtp)
+if ($RandomOtp) { $Sms = $true }
 
 function UserVar($name) { [Environment]::GetEnvironmentVariable($name, 'User') }
 
@@ -35,7 +38,10 @@ if ($env:NGROK_DOMAIN -and -not $env:PUBLIC_BASE_URL) {
 if ($env:PUBLIC_BASE_URL) { Write-Host "Public links: $($env:PUBLIC_BASE_URL)" }
 Remove-Item Env:NGROK_AUTHTOKEN -ErrorAction SilentlyContinue  # only the tunnel needs it
 
-if ($env:TWILIO_ACCOUNT_SID -and $env:TWILIO_AUTH_TOKEN -and $env:TWILIO_FROM) {
+if (-not $Sms) {
+    $env:SMS_PROVIDER = 'fake'
+    Write-Host 'SMS: off - nothing is sent (use -Sms to send real SMS through Twilio)'
+} elseif ($env:TWILIO_ACCOUNT_SID -and $env:TWILIO_AUTH_TOKEN -and $env:TWILIO_FROM) {
     $env:SMS_PROVIDER = 'twilio'
     if ($env:SMS_REDIRECT_TO) { Write-Host "SMS: Twilio - every SMS goes to the testing number (SMS_REDIRECT_TO)" }
     else { Write-Host 'SMS: Twilio - sent to the real recipients' }
@@ -55,7 +61,7 @@ if ($RandomOtp) {
     $extra = @('-Dspring-boot.run.arguments=--tranix.dev.otp=')
     Write-Host 'OTP: random codes by SMS'
 } else {
-    Write-Host 'OTP: fixed dev code 123456 (also sent by SMS)'
+    Write-Host 'OTP: fixed dev code 123456'
 }
 
 Set-Location (Join-Path $PSScriptRoot '..\backend')

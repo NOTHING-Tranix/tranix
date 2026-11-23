@@ -27,7 +27,7 @@ Close both windows (Ctrl+C) when testing is over — while they run, anyone with
 
 1. Open `Tranix-test.apk`, allow "Install unknown apps", install, open **Tranix Dev**.
 2. Tap **Sign in**, enter your number from the table, tap Send OTP, enter **123456**.
-   (The real SMS goes to the host's phone while testing — 123456 always works.)
+   (No SMS is sent while testing — 123456 always works.)
 3. Allow location when asked (needed for pickup pins and for drivers).
 
 | Tester | Number | Role | What to try |
