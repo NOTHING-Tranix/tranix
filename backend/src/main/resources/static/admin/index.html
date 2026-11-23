@@ -53,6 +53,9 @@
 <div id="login" class="card" hidden>
   <h2 style="margin-top:0">Tranix Admin</h2>
   <p class="muted">Sign in with an admin mobile number.</p>
+  <p id="fileWarn" hidden style="color:var(--danger)">This page was opened as a file, so it can't reach the server.
+    Open it from the running backend instead: <a href="http://localhost:8080/admin">http://localhost:8080/admin</a>
+    (or <b>https://&lt;your ngrok domain&gt;/admin</b>).</p>
   <input id="mobile" placeholder="Mobile (10 digits)" value="9000000006" inputmode="numeric">
   <div class="row"><button id="sendOtp">Send OTP</button><span class="muted" id="otpHint"></span></div>
   <input id="otp" placeholder="6-digit OTP" inputmode="numeric">
@@ -69,7 +72,8 @@
 <div id="toast"></div>
 
 <script>
-const API = location.origin + '/api/v1';
+const SERVED = location.protocol === 'http:' || location.protocol === 'https:';
+const API = (SERVED ? location.origin : 'http://localhost:8080') + '/api/v1';
 const $ = s => document.querySelector(s);
 const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let tokens = null;
@@ -352,6 +356,7 @@ function go(name) {
   S[name]($('#main'));
 }
 function show() {
+  $('#fileWarn').hidden = SERVED;
   const on = !!tokens;
   $('#login').hidden = on; $('#app').hidden = !on;
   if (!on) return;
