@@ -28,6 +28,20 @@ class FakeAdaptersTest {
         assertThat(r.driveMinutes()).isBetween(810, 835);
     }
 
+    /** B-1607: the area drivers see before accepting never contains the street, a door number or a PIN. */
+    @Test
+    void areaNeverShowsStreetLevelText() {
+        FakeMapsService maps = new FakeMapsService();
+        GeoPoint p = GeoPoint.of(11.6234, 92.7265);
+        assertThat(maps.area(p, "Haddo Wharf, Port Blair")).isEqualTo("Port Blair");
+        assertThat(maps.area(p, "Door 12 Kumar Street, Vellore")).isEqualTo("Vellore");
+        assertThat(maps.area(p, "12, Main Road, Gandhi Nagar, Vellore, Tamil Nadu, 632001")).isEqualTo("Vellore, Tamil Nadu");
+        assertThat(maps.area(p, "Gandhi Market, Oddanchatram, Dindigul")).isEqualTo("Oddanchatram, Dindigul");
+        assertThat(maps.area(p, "Kumar Street near bus stand")).isEqualTo("Near 11.6, 92.7");
+        assertThat(maps.area(p, "")).isEqualTo("Near 11.6, 92.7");
+        assertThat(maps.area(p, null)).isEqualTo("Near 11.6, 92.7");
+    }
+
     @Test
     void fakeSmsKeepsMessages() {
         FakeSmsSender sms = new FakeSmsSender();

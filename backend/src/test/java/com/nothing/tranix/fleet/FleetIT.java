@@ -115,6 +115,11 @@ class FleetIT {
         api.get("/api/v1/driver/home", d1).andExpect(jsonPath("$.orgName").value("Sri Transports"))
                 .andExpect(jsonPath("$.truck.ownedByMe").value(false)).andExpect(jsonPath("$.walletBalanceInr").doesNotExist());
         assertThat(fleet.driver(d1.userId(), LocalDate.now()).orElseThrow().payerUserId()).isEqualTo(org.userId());
+        // B-1608: an Org driver has no own wallet to look at or top up (money there could never be used)
+        api.get("/api/v1/wallet", d1).andExpect(status().isForbidden())
+                .andExpect(jsonPath("$.detail").value("Your Organization's wallet pays your trip charges"));
+        api.send("/api/v1/wallet/topup-link", Map.of("amountInr", 500), d1).andExpect(status().isForbidden());
+        api.get("/api/v1/me", d1).andExpect(jsonPath("$.walletBalanceInr").doesNotExist());
         assertThat(fleet.driversForTruck(UUID.fromString(t1))).containsExactly(d1.userId());
         api.send("/api/v1/driver/truck", Map.of("number", plate(), "vehicleType", "OPEN_BODY", "capacityTonnes", 9), d1)
                 .andExpect(status().isConflict());

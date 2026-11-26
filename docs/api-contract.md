@@ -114,7 +114,7 @@ Language: en | ta | hi
 | --- | --- |
 | `GET /wallet` | `{balanceInr, postingChargeInr, tripChargeInr, lowBalance}` |
 | `GET /wallet/transactions?type=&month=YYYY-MM&page=&size=` | Paged `[{txnId, at, amountInr, direction: CREDIT\|DEBIT, type, loadId?, note?}]` |
-| `POST /wallet/topup-link` | `{amountInr}` (₹100–₹50,000, settings) → `{url, expiresAt}` — app opens `url` in the browser (server page `/p/wallet/topup?t=...`, 15 min). `RECEIVER`/`ADMIN` have no wallet → `403 FORBIDDEN` |
+| `POST /wallet/topup-link` | `{amountInr}` (₹100–₹50,000, settings) → `{url, expiresAt}` — app opens `url` in the browser (server page `/p/wallet/topup?t=...`, 15 min). `RECEIVER`/`ADMIN` have no wallet → `403 FORBIDDEN`; neither has a driver who belongs to an Organization (its wallet pays their trip charges; `Me.walletBalanceInr` is null) |
 | `POST /webhooks/payments` | Gateway webhook, header `X-Razorpay-Signature` (Razorpay, HMAC-SHA256 of the raw body) or `X-Signature` (fake gateway); signature-verified, idempotent by event and order. Not called by the app |
 | `GET /p/wallet/topup/done?lang=` | Server page the gateway returns to after checkout ("payment received, return to the app"); the wallet is credited only by the webhook |
 | `GET /wallet/statement?month=YYYY-MM` | PDF download (JWT) |
@@ -177,7 +177,7 @@ LoadDetail = LoadSummary + { pickup, drop, senderName, senderMobile, receiverNam
 | `PUT /driver/duty` | `{onDuty, lat?, lng?}`; going on duty with the phone position updates the driver location used for suggestions |
 | `GET /driver/home` | `{onDuty, truck?, walletBalanceInr?, orgName?, currentLoadId?, suggestionsCount, trustScore, expiringDocuments[]}` |
 | `GET/POST/PUT /driver/truck` | Owner-driver only: `{number, vehicleType, capacityTonnes}`; truck documents via `POST /driver/truck/documents {type: RC|INSURANCE|NATIONAL_PERMIT, fileIds, number, expiresOn}`. Truck view `{id, number, vehicleType, capacityTonnes, status, documents[], allocatedDriver?, ownedByMe}` |
-| `GET /driver/suggestions?sort=NEAREST\|AMOUNT\|EARLIEST` | `[Suggestion{loadId, goodsType, description, quantity, unit, weightTonnes, pickupArea, dropArea, pickupWindowStart, distanceToPickupKm, minutesToPickup, deliveryEta, amountInr, shipperTrustScore, preferredByShipper}]` (poll 30 s while open). Empty list when off duty, not verified or the payer wallet is below the trip charge |
+| `GET /driver/suggestions?sort=NEAREST\|AMOUNT\|EARLIEST` | `[Suggestion{loadId, goodsType, description, quantity, unit, weightTonnes, pickupArea, dropArea, pickupWindowStart, distanceToPickupKm, minutesToPickup, deliveryEta, amountInr, shipperTrustScore, preferredByShipper}]` (poll 30 s while open). Empty list when off duty, not verified or the payer wallet is below the trip charge. `pickupArea`/`dropArea` are town/district level only (never the street, door number or PIN) |
 | `POST /driver/suggestions/{loadId}/accept` | → `LoadDetail` or `LOAD_TAKEN` / `INSUFFICIENT_BALANCE` |
 | `POST /driver/suggestions/{loadId}/reject` | `{reason?: TOO_FAR\|LOW_AMOUNT\|WRONG_TRUCK\|OTHER}` |
 | `GET /driver/current-trip` | `LoadDetail` with exact locations, contacts; `204` when there is no active trip |

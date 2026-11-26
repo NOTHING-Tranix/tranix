@@ -21,11 +21,13 @@ import com.nothing.tranix.shared.settings.SettingKeys;
 import com.nothing.tranix.shared.settings.Settings;
 import com.nothing.tranix.shared.types.Role;
 import com.nothing.tranix.shared.types.TxnType;
+import com.nothing.tranix.wallet.api.OrganizationPays;
 import com.nothing.tranix.wallet.api.WalletApi;
 import com.nothing.tranix.wallet.api.WalletEvents;
 
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -46,15 +48,26 @@ public class WalletService implements WalletApi, MeContributor {
     private final AuditLog audit;
     private final ApplicationEventPublisher events;
     private final Clock clock;
+    private final ObjectProvider<OrganizationPays> organizationPays;
 
     WalletService(JdbcTemplate jdbc, Settings settings, UserDirectory users, AuditLog audit,
-                  ApplicationEventPublisher events, Clock clock) {
+                  ApplicationEventPublisher events, Clock clock, ObjectProvider<OrganizationPays> organizationPays) {
         this.jdbc = jdbc;
         this.settings = settings;
         this.users = users;
         this.audit = audit;
         this.events = events;
         this.clock = clock;
+        this.organizationPays = organizationPays;
+    }
+
+    /** B-1608: an Organization's driver has no own wallet; the Organization's wallet pays their trip charges. */
+    boolean paidByOrganization(UUID userId, Role role) {
+        if (role != Role.DRIVER) {
+            return false;
+        }
+        OrganizationPays org = organizationPays.getIfAvailable();
+        return org != null && org.forDriver(userId);
     }
 
     static boolean hasWallet(Role role) {
@@ -195,6 +208,9 @@ public class WalletService implements WalletApi, MeContributor {
         if (!hasWallet(u.role())) {
             throw new ApiException(ErrorCode.FORBIDDEN, "This account has no wallet");
         }
+        if (paidByOrganization(userId, u.role())) {
+            throw new ApiException(ErrorCode.FORBIDDEN, "Your Organization's wallet pays your trip charges");
+        }
         return u;
     }
 
@@ -275,7 +291,7 @@ public class WalletService implements WalletApi, MeContributor {
     @Override
     public Map<String, Object> contribute(UUID userId, Role role) {
         Map<String, Object> m = new HashMap<>();
-        m.put("walletBalanceInr", hasWallet(role) ? balance(userId) : null);
+        m.put("walletBalanceInr", hasWallet(role) && !paidByOrganization(userId, role) ? balance(userId) : null);
         return m;
     }
 

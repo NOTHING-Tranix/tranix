@@ -124,3 +124,6 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 
 ## Phase 11 — Contract sync fixes
 - [x] **A-1101** Privacy policy / Terms screens and "Delete account" in the profile menu (opens a deletion request ticket); legal pages readable signed out; profile menu scrolls on small screens. (2026-11-21)
+
+## Phase 12 — Test fixes (2026-11-27)
+- [ ] **A-1201** Profile menu: show the Wallet item only when `Me.walletBalanceInr` is not null (Receivers and Organization drivers have no wallet — B-1608).

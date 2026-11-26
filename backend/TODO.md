@@ -21,7 +21,7 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 | 12 Admin API | 12 | 0 |
 | 13 Real integrations | 7 | 0 |
 | 14 Hardening and release | 8 | 0 |
-| 16 BE-1 test fixes | 6 | 3 |
+| 16 Test fixes (BE-1, BE-3) | 10 | 5 |
 
 ## Phase 0 — Foundation
 - [x] **B-001** Verify the existing Spring Boot project against CLAUDE.md (Java 21, Boot 3, base package, Maven wrapper); fix differences or update CLAUDE.md. (2026-11-21)
@@ -192,10 +192,14 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 - [x] **B-1502** Contract §14: `/legal/{privacy|terms}`, `POST /me/deletion-request`. (2026-11-21)
 - [x] **B-1503** Contract: `X-Request-Id`, rate limits, `X-Razorpay-Signature`, `/p/wallet/topup/done`. (2026-11-21)
 
-## Phase 16 — BE-1 test fixes (from the BE-1 test report, 2026-11-26)
+## Phase 16 — Test fixes (from the BE-1 and BE-3 test reports, 2026-11-26/27)
 - [x] **B-1601** Rate limit: trust `X-Forwarded-For` only from our own proxies (`TRUSTED_PROXIES`) and only its last entry, so a client can't dodge the limit with its own header. (2026-11-26)
 - [x] **B-1602** No rejected values (mobiles, OTPs) in logs: Spring's "Resolved [...]" warning off; `GlobalExceptionHandler` logs code + field names only. (2026-11-26)
 - [x] **B-1603** Suspended user's access token is refused at once (JWT validator asks identity via `shared.security.AccountStatus`). (2026-11-26)
 - [ ] **B-1604** Audit entity names in one style (UPPERCASE): `user`, `broadcast`, `cancellation`, `load`, `ticket`, `setting`, `map_restriction`, `location_exception`.
 - [ ] **B-1605** `GET /admin/loads?status=` rejects unknown statuses with 400 (use the LoadStatus enum).
 - [ ] **B-1606** `GET /legal/{doc}` returns 404 NOT_FOUND for unknown documents (now 400).
+- [x] **B-1607** Suggestion area never shows street-level text (first address part and parts with digits dropped; else rough position). (2026-11-27)
+- [x] **B-1608** An Organization's driver has no own wallet: `/wallet`, top-up link, statement → 403; `Me.walletBalanceInr` null. (2026-11-27)
+- [ ] **B-1609** Admin VEHICLE verification queue: add truck number, vehicle type, owner name and mobile to each entry.
+- [ ] **B-1610** `GET /org/trucks/{id}/location` for a truck not on a trip → `200 {onTrip:false}` instead of 409.

@@ -81,7 +81,7 @@ class LoadsIT {
                 .andExpect(jsonPath("$.code").value(org.hamcrest.Matchers.startsWith("TRX-")))
                 .andExpect(jsonPath("$.status").value("NOT_ACCEPTED"))
                 .andExpect(jsonPath("$.pickupArea").value("Oddanchatram, Dindigul"))
-                .andExpect(jsonPath("$.dropArea").value("Koyambedu Market, Chennai"))
+                .andExpect(jsonPath("$.dropArea").value("Chennai"))
                 .andExpect(jsonPath("$.canEdit").value(true))
                 .andExpect(jsonPath("$.cancelInfo.chargesKept").value(false))
                 .andExpect(jsonPath("$.timeline[0].status").value("NOT_ACCEPTED")));
