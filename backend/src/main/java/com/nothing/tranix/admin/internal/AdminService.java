@@ -139,14 +139,14 @@ public class AdminService {
     @Transactional
     public Map<String, Object> cancelLoad(UUID adminId, UUID loadId, String reason) {
         Map<String, Object> out = loads.adminCancel(loadId, adminId, reason);
-        audit.record(adminId, "LOAD_CANCEL", "load", loadId, null, "CANCELLED", reason);
+        audit.record(adminId, "LOAD_CANCEL", "LOAD", loadId, null, "CANCELLED", reason);
         return out;
     }
 
     @Transactional
     public Map<String, Object> otpOverride(UUID adminId, UUID loadId, String purpose, String reason) {
         Map<String, Object> out = trips.otpOverride(loadId, purpose, adminId);
-        audit.record(adminId, "OTP_OVERRIDE", "load", loadId, null, purpose, reason);
+        audit.record(adminId, "OTP_OVERRIDE", "LOAD", loadId, null, purpose, reason);
         return out;
     }
 
@@ -201,7 +201,7 @@ public class AdminService {
     @Transactional
     public void suspend(UUID adminId, UUID userId, boolean suspend, String reason) {
         users.setSuspended(userId, suspend);
-        audit.record(adminId, suspend ? "USER_SUSPEND" : "USER_REACTIVATE", "user", userId, null, null, reason);
+        audit.record(adminId, suspend ? "USER_SUSPEND" : "USER_REACTIVATE", "USER", userId, null, null, reason);
     }
 
     // ------------------------------------------------------------------ cancellations, disputes, exceptions (B-1208, B-1209)
@@ -232,7 +232,7 @@ public class AdminService {
             trust.record((UUID) c.get("by_user_id"), (UUID) c.get("load_id"), "ADMIN_ADJUSTMENT", penalty.negate(),
                     "Cancellation penalty reversed by Tranix: " + reason, adminId);
         }
-        audit.record(adminId, "CANCELLATION_DECIDE", "cancellation", id, null, decision, reason);
+        audit.record(adminId, "CANCELLATION_DECIDE", "CANCELLATION", id, null, decision, reason);
         return cancellations(false).stream().filter(x -> id.equals(x.get("id"))).findFirst().orElseThrow();
     }
 
@@ -256,7 +256,7 @@ public class AdminService {
     @Transactional
     public Map<String, Object> reviewException(UUID adminId, UUID id, String decision, String note) {
         Map<String, Object> out = trips.reviewLocationException(id, decision, note);
-        audit.record(adminId, "LOCATION_EXCEPTION_REVIEW", "location_exception", id, "PENDING", decision, note);
+        audit.record(adminId, "LOCATION_EXCEPTION_REVIEW", "LOCATION_EXCEPTION", id, "PENDING", decision, note);
         return out;
     }
 
@@ -284,7 +284,7 @@ public class AdminService {
         }
         jdbc.update("update admin_setting set value = ?, updated_by = ?, updated_at = ? where key = ?", v, adminId, Timestamp.from(Instant.now(clock)), key);
         settings.reload();
-        audit.record(adminId, "SETTING_UPDATE", "setting", key, (String) s.get("value"), v, reason);
+        audit.record(adminId, "SETTING_UPDATE", "SETTING", key, (String) s.get("value"), v, reason);
         return settingsList().stream().filter(r -> key.equals(r.get("key"))).findFirst().orElseThrow();
     }
 
@@ -351,7 +351,7 @@ public class AdminService {
                 r.active() == null || r.active(), id) == 0) {
             throw ApiException.notFound("Restriction");
         }
-        audit.record(adminId, id == null ? "RESTRICTION_CREATE" : "RESTRICTION_UPDATE", "map_restriction", rid, null, r.name(), null);
+        audit.record(adminId, id == null ? "RESTRICTION_CREATE" : "RESTRICTION_UPDATE", "MAP_RESTRICTION", rid, null, r.name(), null);
         return restrictions().stream().filter(x -> rid.equals(x.get("id"))).findFirst().orElseThrow();
     }
 
@@ -360,7 +360,7 @@ public class AdminService {
         if (jdbc.update("update admin_map_restriction set active = false where id = ?", id) == 0) {
             throw ApiException.notFound("Restriction");
         }
-        audit.record(adminId, "RESTRICTION_DEACTIVATE", "map_restriction", id, "active", "inactive", null);
+        audit.record(adminId, "RESTRICTION_DEACTIVATE", "MAP_RESTRICTION", id, "active", "inactive", null);
     }
 
     // ------------------------------------------------------------------ audit (B-1212)
@@ -370,7 +370,7 @@ public class AdminService {
         StringBuilder where = new StringBuilder(" from admin_audit where 1 = 1");
         List<Object> args = new ArrayList<>();
         if (entity != null && !entity.isBlank()) {
-            where.append(" and entity = ?");
+            where.append(" and upper(entity) = upper(?)"); // B-1604: older rows were saved in lowercase
             args.add(entity);
         }
         if (actorId != null) {

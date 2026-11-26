@@ -20,8 +20,10 @@ public class AuditLog {
         this.clock = clock;
     }
 
+    /** B-1604: entity names are stored in one style (UPPERCASE, e.g. USER, LOAD, TICKET) so the audit filter finds them. */
     public void record(UUID actorId, String action, String entity, Object entityId, String before, String after,
                        String reason) {
+        entity = entity == null ? null : entity.toUpperCase(java.util.Locale.ROOT);
         jdbc.update("""
                 insert into admin_audit (id, actor_id, action, entity, entity_id, before, after, reason, at)
                 values (?, ?, ?, ?, ?, ?, ?, ?, ?)""",

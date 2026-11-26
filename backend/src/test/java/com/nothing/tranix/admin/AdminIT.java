@@ -77,6 +77,30 @@ class AdminIT {
         assertThat(audits("LOAD_CANCEL")).isPositive();
     }
 
+    /** B-1604 / B-1605 / B-1606: audit entity names in one style; unknown filter values and pages are proper errors. */
+    @Test
+    void auditEntityStyleAndProperErrors() throws Exception {
+        TestApi.Session admin = api.admin();
+        TestApi.Session user = api.verified("LOAD_PROVIDER");
+        api.send("/api/v1/admin/users/" + user.userId() + "/suspend", Map.of("reason", "Audit style test"), admin).andExpect(status().isNoContent());
+        api.send("/api/v1/admin/users/" + user.userId() + "/reactivate", Map.of("reason", "Audit style test"), admin).andExpect(status().isNoContent());
+        Long stored = jdbc.queryForObject("select count(*) from admin_audit where entity = 'USER' and entity_id = ? and action like 'USER_%'",
+                Long.class, user.userId().toString());
+        assertThat(stored).isEqualTo(2);
+        for (String entity : List.of("USER", "user")) {
+            api.get("/api/v1/admin/audit?entity=" + entity, admin)
+                    .andExpect(jsonPath("$.items[*].action", hasItem("USER_SUSPEND")))
+                    .andExpect(jsonPath("$.items[*].action", hasItem("USER_REACTIVATE")));
+        }
+
+        api.get("/api/v1/admin/loads?status=BAD", admin).andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("VALIDATION_FAILED"));
+        api.get("/api/v1/admin/loads?status=CANCELLED", admin).andExpect(status().isOk());
+
+        api.get("/api/v1/legal/other", null).andExpect(status().isNotFound()).andExpect(jsonPath("$.code").value("NOT_FOUND"));
+        api.get("/api/v1/legal/terms", null).andExpect(status().isOk());
+    }
+
     @Test
     void usersSuspendFleetCancellationExceptionAndAudit() throws Exception {
         TestApi.Session admin = api.admin();

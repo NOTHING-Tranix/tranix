@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import com.nothing.tranix.shared.error.ApiException;
 import com.nothing.tranix.shared.security.CurrentUser;
 import com.nothing.tranix.shared.types.TicketType;
 import com.nothing.tranix.support.internal.SupportService;
@@ -127,7 +128,10 @@ class LegalController {
     }
 
     @GetMapping("/api/v1/legal/{doc}")
-    Map<String, Object> legal(@PathVariable @Pattern(regexp = "privacy|terms") String doc) {
+    Map<String, Object> legal(@PathVariable String doc) {
+        if (!"privacy".equals(doc) && !"terms".equals(doc)) {
+            throw ApiException.notFound("Document"); // B-1606: unknown page → 404, not a validation error
+        }
         return Map.of("doc", doc, "version", "draft-2026-11-21", "status", "DRAFT_PENDING_LEGAL_REVIEW",
                 "text", "privacy".equals(doc) ? PRIVACY : TERMS);
     }

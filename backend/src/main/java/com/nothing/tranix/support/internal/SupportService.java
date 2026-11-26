@@ -169,7 +169,7 @@ public class SupportService {
         jdbc.update("update support_ticket set unread_for_user = true, unread_for_admin = false, updated_at = ?"
                 + (close ? ", status = 'CLOSED', closed_at = ?, close_reason = 'Resolved' where id = ?" : " where id = ?"),
                 close ? new Object[] {now, now, ticketId} : new Object[] {now, ticketId});
-        audit.record(adminId, close ? "TICKET_REPLY_CLOSE" : "TICKET_REPLY", "ticket", ticketId, null, null, null);
+        audit.record(adminId, close ? "TICKET_REPLY_CLOSE" : "TICKET_REPLY", "TICKET", ticketId, null, null, null);
         notifier.notify((UUID) t.get("user_id"), NotificationTab.TRANIX, "SUPPORT_REPLY",
                 Map.of("ticket", (String) t.get("code"), "body", body.length() > 120 ? body.substring(0, 117) + "…" : body), "/support/" + ticketId);
         return adminDetail(ticketId);
@@ -185,7 +185,7 @@ public class SupportService {
         Timestamp now = Timestamp.from(Instant.now(clock));
         jdbc.update("update support_ticket set status = 'CLOSED', closed_at = ?, close_reason = ?, unread_for_user = true, unread_for_admin = false, updated_at = ? where id = ?",
                 now, reason.trim(), now, ticketId);
-        audit.record(adminId, "TICKET_IGNORE", "ticket", ticketId, "OPEN", "CLOSED", reason.trim());
+        audit.record(adminId, "TICKET_IGNORE", "TICKET", ticketId, "OPEN", "CLOSED", reason.trim());
         notifier.notify((UUID) t.get("user_id"), NotificationTab.TRANIX, "TICKET_CLOSED",
                 Map.of("ticket", (String) t.get("code"), "reason", reason.trim()), "/support/" + ticketId);
         return adminDetail(ticketId);

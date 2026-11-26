@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import com.nothing.tranix.admin.internal.AdminService;
 import com.nothing.tranix.shared.security.CurrentUser;
+import com.nothing.tranix.shared.types.LoadStatus;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -67,9 +68,10 @@ class AdminControllers {
     }
 
     @GetMapping("/loads")
-    Map<String, Object> loads(@RequestParam(required = false) String status, @RequestParam(required = false) String q,
+    Map<String, Object> loads(@RequestParam(required = false) LoadStatus status, @RequestParam(required = false) String q,
                               @RequestParam(defaultValue = "0") @Min(0) int page) {
-        return admin.loads(status, q, page);
+        // B-1605: an unknown status is a 400 (enum binding), not an empty list
+        return admin.loads(status == null ? null : status.name(), q, page);
     }
 
     @GetMapping("/loads/{id}")

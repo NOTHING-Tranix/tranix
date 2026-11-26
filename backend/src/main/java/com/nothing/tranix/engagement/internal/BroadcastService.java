@@ -58,7 +58,7 @@ public class BroadcastService {
                 insert into engagement_broadcast (id, title, body, audience, role, district, user_id, send_at, created_by, created_at)
                 values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", id, in.title().trim(), in.body().trim(), in.audience(),
                 in.role() == null ? null : in.role().name(), in.district(), in.userId(), Timestamp.from(sendAt), adminId, Timestamp.from(now));
-        audit.record(adminId, "BROADCAST_CREATE", "broadcast", id, null, in.audience() + " " + sendAt, null);
+        audit.record(adminId, "BROADCAST_CREATE", "BROADCAST", id, null, in.audience() + " " + sendAt, null);
         if (!sendAt.isAfter(now)) {
             send(id);
         }

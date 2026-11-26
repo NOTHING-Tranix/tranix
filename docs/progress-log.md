@@ -17,7 +17,8 @@ Newest first. Claude adds an entry at the end of every session and at every mile
 - Tested BE-3 (wallet, payments, trust, fleet, receiver): 22/22 automated tests, 128/132 live checks over 3 real trips (test loads in Port Blair); report BE-3-Test-Report.docx.
 - Done: B-1607 (suggestion area could show the exact street address), B-1608 (Organization drivers had an unused own wallet they could top up).
 - Then also done: B-1609 (vehicle queue shows truck number, type, owner), B-1610 (idle truck location → `{onTrip:false}`).
-- Open: A-1201 (hide Wallet menu item when there is no wallet); B-1604–B-1606 from BE-1.
+- Also done: B-1604 (audit entity names UPPERCASE, case-insensitive filter), B-1605 (admin loads status filter → 400 for unknown), B-1606 (unknown legal page → 404).
+- Open: A-1201 (hide Wallet menu item when there is no wallet).
 - Question for the founder: may freight be marked paid before delivery (now allowed)?
 
 ## 2026-11-26 — BE-1 testing and security fixes
