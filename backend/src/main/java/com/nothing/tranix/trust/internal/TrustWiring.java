@@ -1,5 +1,6 @@
 package com.nothing.tranix.trust.internal;
 
+import com.nothing.tranix.shared.config.AsyncConfig;
 import com.nothing.tranix.loads.api.LoadDirectory;
 import com.nothing.tranix.loads.api.LoadEvents;
 import com.nothing.tranix.payments.api.PaymentEvents;
@@ -9,6 +10,7 @@ import com.nothing.tranix.shared.types.Role;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 /** Trust events from trips, cancellations and payments (§12 points table). Runs after commit. */
@@ -23,6 +25,7 @@ class TrustListeners {
         this.loads = loads;
     }
 
+    @Async(AsyncConfig.AFTER_COMMIT)
     @TransactionalEventListener(fallbackExecution = true)
     void on(LoadEvents.StatusChanged e) {
         if (e.to() == LoadStatus.DELIVERED) {
@@ -32,6 +35,7 @@ class TrustListeners {
         }
     }
 
+    @Async(AsyncConfig.AFTER_COMMIT)
     @TransactionalEventListener(fallbackExecution = true)
     void on(LoadEvents.LoadCancelled e) {
         if (e.penaltyPoints() != null && e.penaltyPoints().signum() < 0) {
@@ -46,6 +50,7 @@ class TrustListeners {
         }
     }
 
+    @Async(AsyncConfig.AFTER_COMMIT)
     @TransactionalEventListener(fallbackExecution = true)
     void on(PaymentEvents.PaymentConfirmed e) {
         if (e.onTime() && e.payerUserId() != null) {
@@ -54,6 +59,7 @@ class TrustListeners {
         }
     }
 
+    @Async(AsyncConfig.AFTER_COMMIT)
     @TransactionalEventListener(fallbackExecution = true)
     void on(PaymentEvents.DisputeDecided e) {
         if (e.againstUserId() != null) {

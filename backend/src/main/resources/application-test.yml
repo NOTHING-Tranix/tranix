@@ -7,6 +7,8 @@ spring:
     locations: classpath:db/migration
 
 tranix:
+  async:
+    after-commit: false   # B-1611: listeners run right away in tests (BurstIT turns async on)
   jwt:
     secret: test-only-jwt-secret-0123456789abcdef0123
   files:

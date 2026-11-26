@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
+import com.nothing.tranix.shared.config.AsyncConfig;
 import com.nothing.tranix.engagement.api.Notifier;
 import com.nothing.tranix.loads.api.LoadDirectory;
 import com.nothing.tranix.payments.api.PaymentEvents;
@@ -28,6 +29,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 /** B-1104, B-1105, B-1005: tickets with a conversation, unread flags, reopen window, admin reply/ignore, automatic tickets. */
@@ -193,6 +195,7 @@ public class SupportService {
 
     // ------------------------------------------------------------------ automatic tickets
 
+    @Async(AsyncConfig.AFTER_COMMIT)
     @TransactionalEventListener(fallbackExecution = true)
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void on(PaymentEvents.PaymentDisputed e) {
@@ -203,6 +206,7 @@ public class SupportService {
     }
 
     /** B-1005: shortage/damage on a receipt opens a complaint for the receiver (or the shipper when the receiver has no account). */
+    @Async(AsyncConfig.AFTER_COMMIT)
     @TransactionalEventListener(fallbackExecution = true)
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void on(ReceiverEvents.ReceiptRecorded e) {

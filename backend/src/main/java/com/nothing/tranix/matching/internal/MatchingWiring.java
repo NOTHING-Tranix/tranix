@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import com.nothing.tranix.shared.config.AsyncConfig;
 import com.nothing.tranix.fleet.api.DriverHomeContributor;
 import com.nothing.tranix.fleet.api.FleetApi;
 import com.nothing.tranix.identity.api.UserDirectory;
@@ -14,6 +15,7 @@ import com.nothing.tranix.shared.files.FileService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 /** Starts/stops matching on load events (after commit). */
@@ -26,16 +28,19 @@ class MatchingListeners {
         this.matching = matching;
     }
 
+    @Async(AsyncConfig.AFTER_COMMIT)
     @TransactionalEventListener(fallbackExecution = true)
     void on(LoadEvents.LoadPosted e) {
         matching.start(e.loadId());
     }
 
+    @Async(AsyncConfig.AFTER_COMMIT)
     @TransactionalEventListener(fallbackExecution = true)
     void on(LoadEvents.LoadUpdated e) {
         matching.restart(e.loadId());
     }
 
+    @Async(AsyncConfig.AFTER_COMMIT)
     @TransactionalEventListener(fallbackExecution = true)
     void on(LoadEvents.LoadCancelled e) {
         matching.stop(e.loadId(), "EXPIRED");

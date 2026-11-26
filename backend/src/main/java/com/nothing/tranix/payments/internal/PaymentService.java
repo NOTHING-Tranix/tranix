@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import com.nothing.tranix.shared.config.AsyncConfig;
 import com.nothing.tranix.engagement.api.Notifier;
 import com.nothing.tranix.loads.api.LoadDirectory;
 import com.nothing.tranix.loads.api.LoadEvents;
@@ -28,6 +29,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 /** B-801, B-802, B-807: freight payment records (paid outside Tranix) and driver earnings history. */
@@ -237,6 +239,7 @@ class PaymentWiring implements LoadEvents.DetailContributor {
         this.payments = payments;
     }
 
+    @Async(AsyncConfig.AFTER_COMMIT)
     @TransactionalEventListener(fallbackExecution = true)
     void on(LoadEvents.StatusChanged e) {
         if (e.from() == LoadStatus.NOT_ACCEPTED && e.to() == LoadStatus.WAITING_FOR_PICKUP) {

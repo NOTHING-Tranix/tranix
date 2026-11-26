@@ -3,6 +3,7 @@ package com.nothing.tranix.trips.internal;
 import java.util.List;
 import java.util.Map;
 
+import com.nothing.tranix.shared.config.AsyncConfig;
 import com.nothing.tranix.engagement.api.Notifier;
 import com.nothing.tranix.loads.api.LoadDirectory;
 import com.nothing.tranix.loads.api.LoadEvents;
@@ -12,6 +13,7 @@ import com.nothing.tranix.shared.types.Role;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 /** Adds revisions, OTP events and location exceptions to LoadDetail (all viewers that see the detail). */
@@ -71,6 +73,7 @@ class TripCancelListener {
         this.loads = loads;
     }
 
+    @Async(AsyncConfig.AFTER_COMMIT)
     @TransactionalEventListener(fallbackExecution = true)
     void on(LoadEvents.LoadCancelled e) {
         if (e.driverId() == null) {

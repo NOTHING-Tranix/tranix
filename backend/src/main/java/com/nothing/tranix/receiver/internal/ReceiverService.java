@@ -15,6 +15,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
+import com.nothing.tranix.shared.config.AsyncConfig;
 import com.nothing.tranix.fleet.api.FleetApi;
 import com.nothing.tranix.identity.api.UserDirectory;
 import com.nothing.tranix.loads.api.LoadDirectory;
@@ -40,6 +41,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.event.TransactionalEventListener;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -93,6 +95,7 @@ public class ReceiverService {
 
     // ------------------------------------------------------------------ links (B-1001)
 
+    @Async(AsyncConfig.AFTER_COMMIT)
     @TransactionalEventListener(fallbackExecution = true)
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void on(LoadEvents.StatusChanged e) {

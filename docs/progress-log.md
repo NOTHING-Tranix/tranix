@@ -13,6 +13,12 @@ Newest first. Claude adds an entry at the end of every session and at every mile
 
 ---
 
+## 2026-11-27 — Complete backend test + B-1611
+- Complete backend test (all modules): automated 100/100; BE-1 155/159, BE-2 133/140 + intense 114/123, BE-3 130/132, whole backend 27/32 (151 APIs × 6 roles, 2,623 calls), timers OK. Report: Tranix-Backend-Complete-Test-Report.docx.
+- Done: B-1611 — ~10+ simultaneous writes used up the 10 database connections (after-commit listeners opened a 2nd connection) → 30 s stall and 500s. Listeners now run on a background pool; pool 20. Live: 20 credits at once 20/20 (was 12/20).
+- Behaviour note: notifications, matching, Trust Score events and automatic tickets now happen a fraction of a second after the request (the app polls, so no visible change).
+- Open from the report: busy driver still sees suggestions; 4 small 500s (empty location item, upload without file, errors on CSV/PDF downloads, simultaneous same-mobile sign-up); double ticket reopen; drivers can call the shipper estimate. Founder: repost scope, paid before delivery, Q-11.
+
 ## 2026-11-27 — BE-3 testing and fixes
 - Tested BE-3 (wallet, payments, trust, fleet, receiver): 22/22 automated tests, 128/132 live checks over 3 real trips (test loads in Port Blair); report BE-3-Test-Report.docx.
 - Done: B-1607 (suggestion area could show the exact street address), B-1608 (Organization drivers had an unused own wallet they could top up).
