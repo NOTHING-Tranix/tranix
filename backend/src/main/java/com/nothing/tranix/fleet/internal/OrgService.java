@@ -119,17 +119,18 @@ public class OrgService {
         return documents.submit(DocumentRegistry.Owner.TRUCK, truckId, orgId, type, fileIds, number, expiresOn);
     }
 
-    /** B-508: live location while the truck is on a trip. */
+    /** B-508: live location while the truck is on a trip; B-1610: {@code {onTrip:false}} (not an error) otherwise. */
     @Transactional(readOnly = true)
     public Map<String, Object> truckLocation(UUID orgId, UUID truckId) {
         requireOrg(orgId);
         orgTruck(orgId, truckId);
         List<LoadDirectory.LoadInfo> active = loads.activeForTruck(truckId);
         if (active.isEmpty()) {
-            throw new ApiException(ErrorCode.INVALID_STATE, "Truck is not on a trip");
+            return Map.of("onTrip", false);
         }
         LoadDirectory.LoadInfo load = active.getFirst();
         Map<String, Object> m = new HashMap<>();
+        m.put("onTrip", true);
         m.put("loadId", load.id());
         m.put("loadCode", load.code());
         fleet.driver(load.driverId(), fleet.today()).filter(d -> d.lastLocation() != null).ifPresentOrElse(d -> {

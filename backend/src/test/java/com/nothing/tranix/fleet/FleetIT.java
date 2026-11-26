@@ -48,6 +48,29 @@ class FleetIT {
         jdbc.update("update identity_document set status = 'APPROVED' where user_id = ? and owner_type = 'TRUCK'", as.userId());
     }
 
+    /** B-1609 / B-1610: the admin sees which truck is waiting; an idle truck's location is a normal answer. */
+    @Test
+    void vehicleQueueNamesTheTruckAndIdleTruckLocationIsNotAnError() throws Exception {
+        TestApi.Session d = api.verified("DRIVER");
+        String plate = plate();
+        String truckId = JsonPath.read(api.body(api.send("/api/v1/driver/truck", Map.of("number", plate, "vehicleType", "TANKER",
+                "capacityTonnes", 14), d).andExpect(status().isOk())), "$.id");
+        api.send("/api/v1/driver/truck/documents", Map.of("type", "RC", "fileIds", List.of(api.uploadPng(d)), "number", "RC77",
+                "expiresOn", LocalDate.now().plusYears(1).toString()), d).andExpect(status().isOk());
+        api.get("/api/v1/admin/verifications?tab=VEHICLE", api.admin())
+                .andExpect(jsonPath("$[?(@.truckId=='" + truckId + "')].truckNumber").value(plate))
+                .andExpect(jsonPath("$[?(@.truckId=='" + truckId + "')].vehicleType").value("TANKER"))
+                .andExpect(jsonPath("$[?(@.truckId=='" + truckId + "')].ownerRole").value("DRIVER"))
+                .andExpect(jsonPath("$[?(@.truckId=='" + truckId + "')].ownerMobile").value(d.mobile()))
+                .andExpect(jsonPath("$[?(@.truckId=='" + truckId + "')].documents[0].type").value("RC"));
+
+        TestApi.Session org = api.verified("ORGANIZATION");
+        String t = JsonPath.read(api.body(api.send("/api/v1/org/trucks", Map.of("number", plate(), "vehicleType", "OPEN_BODY",
+                "capacityTonnes", 9), org).andExpect(status().isOk())), "$.id");
+        api.get("/api/v1/org/trucks/" + t + "/location", org).andExpect(status().isOk())
+                .andExpect(jsonPath("$.onTrip").value(false)).andExpect(jsonPath("$.lat").doesNotExist());
+    }
+
     @Test
     void ownerDriverHasOneTruckAndDutyAndHome() throws Exception {
         TestApi.Session d = api.verified("DRIVER");
@@ -137,7 +160,7 @@ class FleetIT {
         api.put("/api/v1/org/allocations/" + alloc, Map.of("status", "PAUSED"), org)
                 .andExpect(status().isConflict()).andExpect(jsonPath("$.code").value("ALLOCATION_CONFLICT"));
         api.get("/api/v1/org/trucks", org).andExpect(jsonPath("$[?(@.id=='" + t1 + "')].status").value("ON_TRIP"));
-        api.get("/api/v1/org/trucks/" + t1 + "/location", org).andExpect(status().isOk());
+        api.get("/api/v1/org/trucks/" + t1 + "/location", org).andExpect(status().isOk()).andExpect(jsonPath("$.onTrip").value(true));
         api.get("/api/v1/org/dashboard", org).andExpect(jsonPath("$.trucks.total").value(2))
                 .andExpect(jsonPath("$.drivers.onTrip").value(1)).andExpect(jsonPath("$.activeTrips").value(1));
         api.get("/api/v1/org/trips?by=DRIVER&id=" + d1.userId(), org).andExpect(jsonPath("$.length()").value(1));

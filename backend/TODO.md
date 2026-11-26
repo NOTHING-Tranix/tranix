@@ -21,7 +21,7 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 | 12 Admin API | 12 | 0 |
 | 13 Real integrations | 7 | 0 |
 | 14 Hardening and release | 8 | 0 |
-| 16 Test fixes (BE-1, BE-3) | 10 | 5 |
+| 16 Test fixes (BE-1, BE-3) | 10 | 7 |
 
 ## Phase 0 — Foundation
 - [x] **B-001** Verify the existing Spring Boot project against CLAUDE.md (Java 21, Boot 3, base package, Maven wrapper); fix differences or update CLAUDE.md. (2026-11-21)
@@ -201,5 +201,5 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 - [ ] **B-1606** `GET /legal/{doc}` returns 404 NOT_FOUND for unknown documents (now 400).
 - [x] **B-1607** Suggestion area never shows street-level text (first address part and parts with digits dropped; else rough position). (2026-11-27)
 - [x] **B-1608** An Organization's driver has no own wallet: `/wallet`, top-up link, statement → 403; `Me.walletBalanceInr` null. (2026-11-27)
-- [ ] **B-1609** Admin VEHICLE verification queue: add truck number, vehicle type, owner name and mobile to each entry.
-- [ ] **B-1610** `GET /org/trucks/{id}/location` for a truck not on a trip → `200 {onTrip:false}` instead of 409.
+- [x] **B-1609** Admin VEHICLE verification queue: add truck number, vehicle type, owner name and mobile to each entry. (2026-11-27)
+- [x] **B-1610** `GET /org/trucks/{id}/location` for a truck not on a trip → `200 {onTrip:false}` instead of 409. (2026-11-27)
