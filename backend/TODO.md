@@ -21,6 +21,7 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 | 12 Admin API | 12 | 0 |
 | 13 Real integrations | 7 | 0 |
 | 14 Hardening and release | 8 | 0 |
+| 16 BE-1 test fixes | 6 | 3 |
 
 ## Phase 0 — Foundation
 - [x] **B-001** Verify the existing Spring Boot project against CLAUDE.md (Java 21, Boot 3, base package, Maven wrapper); fix differences or update CLAUDE.md. (2026-11-21)
@@ -190,3 +191,11 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 - [x] **B-1501** Repair garbled contract lines (LoadStatus, suggestions, reject reasons, wallet transactions); add TxnDirection, SuggestionRejectReason. (2026-11-21)
 - [x] **B-1502** Contract §14: `/legal/{privacy|terms}`, `POST /me/deletion-request`. (2026-11-21)
 - [x] **B-1503** Contract: `X-Request-Id`, rate limits, `X-Razorpay-Signature`, `/p/wallet/topup/done`. (2026-11-21)
+
+## Phase 16 — BE-1 test fixes (from the BE-1 test report, 2026-11-26)
+- [x] **B-1601** Rate limit: trust `X-Forwarded-For` only from our own proxies (`TRUSTED_PROXIES`) and only its last entry, so a client can't dodge the limit with its own header. (2026-11-26)
+- [x] **B-1602** No rejected values (mobiles, OTPs) in logs: Spring's "Resolved [...]" warning off; `GlobalExceptionHandler` logs code + field names only. (2026-11-26)
+- [x] **B-1603** Suspended user's access token is refused at once (JWT validator asks identity via `shared.security.AccountStatus`). (2026-11-26)
+- [ ] **B-1604** Audit entity names in one style (UPPERCASE): `user`, `broadcast`, `cancellation`, `load`, `ticket`, `setting`, `map_restriction`, `location_exception`.
+- [ ] **B-1605** `GET /admin/loads?status=` rejects unknown statuses with 400 (use the LoadStatus enum).
+- [ ] **B-1606** `GET /legal/{doc}` returns 404 NOT_FOUND for unknown documents (now 400).

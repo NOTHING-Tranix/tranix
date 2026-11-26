@@ -86,8 +86,13 @@ class AdminIT {
         api.send("/api/v1/admin/users/" + user.userId() + "/suspend", Map.of("reason", "Fraud report"), admin).andExpect(status().isNoContent());
         assertThat(users.get(user.userId()).suspended()).isTrue();
         api.send("/api/v1/auth/refresh", Map.of("refreshToken", user.refreshToken()), null).andExpect(status().is4xxClientError());
+        // B-1603: the access token the user already has stops working at once (not only after it expires)
+        api.get("/api/v1/me", user).andExpect(status().isUnauthorized())
+                .andExpect(jsonPath("$.code").value("TOKEN_EXPIRED"))
+                .andExpect(jsonPath("$.detail").value("Account suspended. Contact support."));
         api.send("/api/v1/admin/users/" + user.userId() + "/reactivate", Map.of("reason", "Cleared"), admin).andExpect(status().isNoContent());
         assertThat(users.get(user.userId()).suspended()).isFalse();
+        api.get("/api/v1/me", user).andExpect(status().isOk());
 
         TripFixtures.Trip t = trips.accepted("LOAD_PROVIDER", "SHIPPER", null);
         api.get("/api/v1/admin/fleet?q=" + JsonPath.read(api.body(api.get("/api/v1/driver/truck", t.driver())), "$.number"), admin)

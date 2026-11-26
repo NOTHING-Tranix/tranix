@@ -4,12 +4,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,10 +23,15 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
+import org.springframework.security.oauth2.core.OAuth2Error;
+import org.springframework.security.oauth2.core.OAuth2TokenValidator;
+import org.springframework.security.oauth2.core.OAuth2TokenValidatorResult;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
+import org.springframework.security.oauth2.jwt.JwtValidators;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
@@ -90,9 +97,32 @@ public class SecurityConfig {
     }
 
     @Bean
-    JwtDecoder jwtDecoder(SecretKey jwtSecretKey) {
-        return NimbusJwtDecoder.withSecretKey(jwtSecretKey).macAlgorithm(MacAlgorithm.HS256).build();
+    JwtDecoder jwtDecoder(SecretKey jwtSecretKey, ObjectProvider<AccountStatus> accounts) {
+        NimbusJwtDecoder decoder = NimbusJwtDecoder.withSecretKey(jwtSecretKey).macAlgorithm(MacAlgorithm.HS256).build();
+        decoder.setJwtValidator(new DelegatingOAuth2TokenValidator<>(JwtValidators.createDefault(), accountNotBlocked(accounts)));
+        return decoder;
     }
+
+    /** B-1603: a valid token of a suspended user is refused at once ("signs the user out", contract §13). */
+    static OAuth2TokenValidator<Jwt> accountNotBlocked(ObjectProvider<AccountStatus> accounts) {
+        return jwt -> {
+            AccountStatus status = accounts.getIfAvailable();
+            if (status == null || jwt.getSubject() == null) {
+                return OAuth2TokenValidatorResult.success();
+            }
+            UUID userId;
+            try {
+                userId = UUID.fromString(jwt.getSubject());
+            } catch (IllegalArgumentException e) {
+                return OAuth2TokenValidatorResult.failure(new OAuth2Error("invalid_token", "Unknown user", null));
+            }
+            return status.isBlocked(userId)
+                    ? OAuth2TokenValidatorResult.failure(new OAuth2Error("invalid_token", ACCOUNT_SUSPENDED, null))
+                    : OAuth2TokenValidatorResult.success();
+        };
+    }
+
+    static final String ACCOUNT_SUSPENDED = "Account suspended";
 
     @Bean
     JwtEncoder jwtEncoder(SecretKey jwtSecretKey) {

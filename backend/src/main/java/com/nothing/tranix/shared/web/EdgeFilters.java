@@ -3,9 +3,12 @@ package com.nothing.tranix.shared.web;
 import java.io.IOException;
 import java.time.Clock;
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -60,12 +63,16 @@ class RateLimitFilter extends OncePerRequestFilter {
     private final Clock clock;
     private final int authPerMinute;
     private final int publicPerMinute;
+    private final Set<String> trustedProxies;
 
     RateLimitFilter(Clock clock, @Value("${tranix.rate-limit.auth-per-minute:20}") int authPerMinute,
-                    @Value("${tranix.rate-limit.public-per-minute:120}") int publicPerMinute) {
+                    @Value("${tranix.rate-limit.public-per-minute:120}") int publicPerMinute,
+                    @Value("${tranix.rate-limit.trusted-proxies:127.0.0.1,0:0:0:0:0:0:0:1,::1}") String trustedProxies) {
         this.clock = clock;
         this.authPerMinute = authPerMinute;
         this.publicPerMinute = publicPerMinute;
+        this.trustedProxies = Arrays.stream(trustedProxies.split(",")).map(String::trim).filter(s -> !s.isEmpty())
+                .collect(Collectors.toUnmodifiableSet());
     }
 
     @Override
@@ -95,8 +102,19 @@ class RateLimitFilter extends OncePerRequestFilter {
         chain.doFilter(request, response);
     }
 
-    private static String clientIp(HttpServletRequest request) {
-        String fwd = request.getHeader("X-Forwarded-For"); // set by the load balancer in production
-        return fwd != null && !fwd.isBlank() ? fwd.split(",")[0].trim() : request.getRemoteAddr();
+    /**
+     * B-1601: X-Forwarded-For is only believed when the request comes from one of our own proxies (ngrok agent or the
+     * load balancer, {@code tranix.rate-limit.trusted-proxies}), and then only its LAST entry — the one that proxy
+     * added. Earlier entries are written by the client and could be anything, so they are never used.
+     */
+    String clientIp(HttpServletRequest request) {
+        String remote = request.getRemoteAddr();
+        String fwd = request.getHeader("X-Forwarded-For");
+        if (fwd == null || fwd.isBlank() || !trustedProxies.contains(remote)) {
+            return remote;
+        }
+        String[] hops = fwd.split(",");
+        String last = hops[hops.length - 1].trim();
+        return last.isEmpty() ? remote : last;
     }
 }

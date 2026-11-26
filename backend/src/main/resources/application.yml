@@ -28,6 +28,8 @@ spring:
   mvc:
     problemdetails:
       enabled: false
+    # B-1602: Spring's "Resolved [...]" warning prints rejected values (mobiles, OTPs). GlobalExceptionHandler logs a safe line instead.
+    log-resolved-exception: false
 
 server:
   port: ${SERVER_PORT:8080}
@@ -54,6 +56,9 @@ tranix:
     mobiles: ${ADMIN_MOBILES:}
   # Base URL used in links the server hands out (signed file URLs, top-up and tracking pages).
   public-base-url: ${PUBLIC_BASE_URL:http://localhost:8080}
+  rate-limit:
+    # B-1601: X-Forwarded-For is believed only from these proxies (ngrok agent locally; add the load balancer address in production).
+    trusted-proxies: ${TRUSTED_PROXIES:127.0.0.1,0:0:0:0:0:0:0:1,::1}
   jwt:
     # HS256 secret, at least 32 bytes. Set JWT_SECRET outside dev/test.
     secret: ${JWT_SECRET:}

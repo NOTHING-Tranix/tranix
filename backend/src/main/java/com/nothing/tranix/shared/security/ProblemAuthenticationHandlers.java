@@ -37,8 +37,11 @@ public class ProblemAuthenticationHandlers implements AuthenticationEntryPoint, 
             throws IOException {
         boolean expired = ex instanceof InvalidBearerTokenException
                 && ex.getMessage() != null && ex.getMessage().toLowerCase().contains("expired");
-        ErrorCode code = expired ? ErrorCode.TOKEN_EXPIRED : ErrorCode.UNAUTHENTICATED;
-        write(response, code, expired ? "Access token expired" : "Sign in required");
+        // B-1603: a suspended user's session has ended → TOKEN_EXPIRED, so the app tries a refresh, which fails
+        // (suspension revoked it) and the app signs the user out.
+        boolean suspended = ex.getMessage() != null && ex.getMessage().contains(SecurityConfig.ACCOUNT_SUSPENDED);
+        ErrorCode code = expired || suspended ? ErrorCode.TOKEN_EXPIRED : ErrorCode.UNAUTHENTICATED;
+        write(response, code, expired ? "Access token expired" : suspended ? "Account suspended. Contact support." : "Sign in required");
     }
 
     @Override

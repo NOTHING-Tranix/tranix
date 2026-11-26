@@ -98,7 +98,17 @@ public class GlobalExceptionHandler {
                 .contentType(MediaType.APPLICATION_PROBLEM_JSON).body(Problems.internal(500));
     }
 
+    /**
+     * B-1602: one safe log line per refused request — the code, our own message and the names of the bad fields, never
+     * the values the client sent (they can be mobiles or OTPs; hard rule 14). Spring's own "Resolved [...]" warning,
+     * which prints rejected values, is switched off (spring.mvc.log-resolved-exception=false).
+     */
     private static ResponseEntity<Problems.Problem> respond(Problems.Problem problem) {
+        if (log.isInfoEnabled()) {
+            String fields = problem.fields() == null || problem.fields().isEmpty() ? ""
+                    : " fields=" + problem.fields().stream().map(ApiException.FieldError::field).toList();
+            log.info("Refused {} {}: {}{}", problem.status(), problem.code(), problem.detail(), fields);
+        }
         return ResponseEntity.status(problem.status()).contentType(MediaType.APPLICATION_PROBLEM_JSON).body(problem);
     }
 

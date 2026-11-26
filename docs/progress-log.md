@@ -13,6 +13,13 @@ Newest first. Claude adds an entry at the end of every session and at every mile
 
 ---
 
+## 2026-11-26 — BE-1 testing and security fixes
+- Tested BE-1 (identity, admin, support, engagement): 43/43 automated tests, 151/159 live API checks; 6 bugs found (report: BE-1-Test-Report.docx).
+- Done: B-1601 (rate-limit bypass via X-Forwarded-For), B-1602 (mobiles/OTPs in validation warnings), B-1603 (suspended user's access token kept working up to 15 min).
+- Open: B-1604–B-1606 (small: audit entity names, admin loads status filter, legal 404).
+- Config: new `TRUSTED_PROXIES` (default localhost = the ngrok agent); in production add the load balancer address.
+- Also earlier this week: simple admin website at `/admin`; SMS off by default in `tools/backend-dev.ps1` (`-Sms` turns Twilio on).
+
 ## 2026-11-21 — Contract sync fixes (after /sync-check)
 - Done: B-1501…B-1503, A-1101.
 - Contract: repaired four garbled lines from an M6 text replacement (LoadStatus enum, driver suggestions row, reject reasons, wallet transactions); added TxnDirection and SuggestionRejectReason; new §14 legal + account deletion; documented `X-Request-Id`, rate limits, `X-Razorpay-Signature` and the top-up return page.
