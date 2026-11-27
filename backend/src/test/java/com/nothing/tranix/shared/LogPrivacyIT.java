@@ -40,4 +40,29 @@ class LogPrivacyIT {
         assertThat(output).contains("Refused 400 VALIDATION_FAILED").contains("fields=[mobile]");
         assertThat(output).doesNotContain("1234598765").doesNotContain("9876501234").doesNotContain("98765\"");
     }
+
+    /** B-1618: a duplicate-key race must not log the database detail "Key (mobile)=(…) already exists". */
+    @Test
+    void duplicateSignUpRaceDoesNotLogTheMobile(CapturedOutput output) throws Exception {
+        String mobile = TestApi.newMobile();
+        api.send("/api/v1/auth/otp/send", Map.of("mobile", mobile, "purpose", "SIGN_UP"), null).andExpect(status().isNoContent());
+        String otp = api.lastOtp(mobile);
+        java.util.concurrent.CountDownLatch start = new java.util.concurrent.CountDownLatch(1);
+        java.util.concurrent.ExecutorService pool = java.util.concurrent.Executors.newFixedThreadPool(4);
+        java.util.List<java.util.concurrent.Future<Integer>> fs = new java.util.ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            int k = i;
+            fs.add(pool.submit(() -> {
+                start.await();
+                return api.send("/api/v1/auth/sign-up", Map.of("mobile", mobile, "otp", otp, "name", "Race " + k,
+                        "role", "RECEIVER", "consent", true), null).andReturn().getResponse().getStatus();
+            }));
+        }
+        start.countDown();
+        for (java.util.concurrent.Future<Integer> f : fs) {
+            assertThat(f.get()).isIn(200, 409, 400);
+        }
+        pool.shutdown();
+        assertThat(output).doesNotContain(mobile);
+    }
 }

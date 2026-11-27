@@ -98,3 +98,7 @@ logging:
     level: "%5p [%X{requestId:-}]"
   level:
     org.flywaydb: INFO
+    # B-1618: Hibernate's SQL-error warnings print the database detail, e.g. "Key (mobile)=(98…)" — never log values.
+    # GlobalExceptionHandler logs the constraint name instead.
+    org.hibernate.orm.jdbc.error: ERROR
+    org.hibernate.engine.jdbc.spi.SqlExceptionHelper: ERROR

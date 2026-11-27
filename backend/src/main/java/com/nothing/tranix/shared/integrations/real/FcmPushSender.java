@@ -71,6 +71,10 @@ public class FcmPushSender implements PushSender {
         try {
             fcm.post().uri("/v1/projects/{p}/messages:send", projectId).contentType(MediaType.APPLICATION_JSON)
                     .header("Authorization", "Bearer " + accessToken()).body(message).retrieve().toBodilessEntity();
+        } catch (org.springframework.web.client.RestClientResponseException e) {
+            // B-1618: say why (HTTP status + FCM error, e.g. UNREGISTERED for an old app install) — never the token
+            java.util.regex.Matcher m = java.util.regex.Pattern.compile("\"status\":\\s*\"([A-Z_]+)\"").matcher(e.getResponseBodyAsString());
+            log.warn("[fcm] push failed: HTTP {} {}", e.getStatusCode().value(), m.find() ? m.group(1) : "");
         } catch (RuntimeException e) {
             log.warn("[fcm] push failed: {}", e.getClass().getSimpleName()); // a stale device token must not break the caller
         }
