@@ -36,6 +36,7 @@ On this Windows machine use `mvnw.cmd` in `backend/`, with `JAVA_HOME` = JDK 21 
 5. Tests must pass before anything is marked done: backend `./mvnw verify` (in `backend/`), frontend `flutter analyze && flutter test` (in `frontend/`).
 6. Never commit secrets (`.env`, `application-local.yml`, keystores, `google-services.json` for prod).
 7. Never run destructive commands (dropping databases, deleting folders, force-push, rewriting git history) without asking.
+8. **`main` is protected: never commit to or push `main` directly.** All changes go through a branch and a pull request (see §4 Git workflow) — for Claude and for every team member.
 
 ## 4. How Claude works here (autopilot with checkpoints)
 
@@ -43,10 +44,19 @@ The founder wants Claude to drive the work. Use this loop:
 
 1. **Start of session:** read `ROADMAP.md`, the latest `docs/progress-log.md` entry, and the TODO of the side(s) in the current milestone. Say in 3 lines where things stand and what you will do next.
 2. **Milestone plan (checkpoint):** at the start of a milestone, show one plan for the whole milestone (backend tasks, frontend tasks, contract changes, tests) and wait for "go".
-3. **Execute without asking per task:** after "go", work through the milestone's tasks in order — backend first, then frontend for the same feature — marking each `[~]` then `[x] (date)`, running tests, and committing after each task (`feat(backend): B-403 …`, `feat(frontend): A-402 …`).
+3. **Execute without asking per task:** after "go", work through the milestone's tasks in order — backend first, then frontend for the same feature — marking each `[~]` then `[x] (date)`, running tests, and committing after each task (`feat(backend): B-403 …`, `feat(frontend): A-402 …`) **on the work branch, never on `main`**.
 4. **Stop and ask only when:** an open question blocks you; the contract needs a change not covered by the spec; tests keep failing after 3 honest attempts; a destructive or paid action is needed (cloud resources, real SMS/payment keys); or the milestone is done.
 5. **End of milestone (checkpoint):** run both test suites, run `/sync-check`, update `ROADMAP.md` status, write a progress-log entry, and give the founder a short demo script (what to tap/call to see it working).
 6. Keep each commit small and working. If the session ends mid-task, leave `[~]` and a progress-log note so the next session resumes.
+
+### Git workflow (main is protected)
+
+1. Start from an up-to-date `main`: `git checkout main && git pull`.
+2. Make a branch: `be/B-xxx-short-name`, `fe/A-xxx-short-name`, `docs/…`, `chore/…` — one per task, or one per milestone when the founder says "go" for a whole milestone (one commit per task on it).
+3. Commit on the branch; run the side's tests before each push (§3 rule 5).
+4. Push the branch and open a pull request (`gh pr create`): what changed, task IDs, how it was tested, anything the reviewer should look at. Contract changes get their own PR first (§3 rule 1).
+5. CI must be green. The founder (or a teammate from the same side) reviews and merges — **Claude never merges its own PR** and never pushes to `main`.
+6. After the merge: `git checkout main && git pull`, delete the branch.
 
 ## 5. Running things
 

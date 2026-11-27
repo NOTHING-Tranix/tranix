@@ -74,7 +74,7 @@ lib/
 2. Pick the task the user names, or the first `[ ]` whose dependencies are done (check that backend endpoints exist or use the mock API). Mark `[~]`.
 3. For non-trivial tasks show a plan (files, providers, routes, API calls, tests) and wait for approval.
 4. Implement; `flutter analyze` clean and `flutter test` green.
-5. Mark `[x] (YYYY-MM-DD)`, update counts, add a line to `../docs/progress-log.md`, commit.
+5. Mark `[x] (YYYY-MM-DD)`, update counts, add a line to `../docs/progress-log.md`, commit on the task branch and open a pull request (root `CLAUDE.md` §4 Git workflow — never push to `main`).
 6. Blocked → `[!]` with reason (e.g. "backend B-605 not ready").
 
 **Mock API:** until an endpoint exists, use `MockInterceptor` fixtures (`assets/mock/*.json`) behind `--dart-define=USE_MOCK=true`. Fixtures must follow the contract exactly.
