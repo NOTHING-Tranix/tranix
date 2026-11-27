@@ -13,6 +13,11 @@ Newest first. Claude adds an entry at the end of every session and at every mile
 
 ---
 
+## 2026-11-27 — Push notifications on
+- Push: the server key for Firebase project tranix-7c812 is stored outside the project (C:/Users/shero/secrets/tranix-firebase.json) and FCM_SERVICE_ACCOUNT_FILE in backend/.env points to it; backend-dev.ps1 reports "Push: Firebase". Google accepts the key (a made-up device gets HTTP 400 INVALID_ARGUMENT, not 401/403).
+- The test APK (23 Nov) already contains the app's Firebase files, so phones get push without a new APK (allow notifications on first start). Test push sent to user 6381385481 (admin broadcast) with no FCM error.
+- Done: B-1618 (a duplicate-key race printed a full mobile through Hibernate's SQL warning; off now, test added; push failures log HTTP status + FCM error).
+
 ## 2026-11-27 — Founder decisions D-34…D-36
 - D-34 repost only for cancelled or delivered loads (B-1617, done; the app already showed Repost only there). D-35 freight may be marked paid before delivery (no change). D-36 / Q-11 closed: no amount request after Reached at pickup (no change).
 - Push: the server key on the PC belongs to Firebase project tranix-b187a, the app uses tranix-7c812 — a service-account key from tranix-7c812 is needed (FCM_SERVICE_ACCOUNT_FILE in backend/.env).

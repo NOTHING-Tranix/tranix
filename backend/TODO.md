@@ -171,7 +171,7 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 ## Phase 13 — Real integrations
 - [!] **B-1301** SMS provider (MSG91, DLT templates en/ta/hi) — Q-03. — adapter built + unit-tested behind the switch; needs founder keys (docs/founder-review.md)
 - [!] **B-1302** Payment gateway (Razorpay) checkout + webhook — Q-02. — adapter built + unit-tested behind the switch; needs founder keys (docs/founder-review.md)
-- [!] **B-1303** FCM push with service account. — adapter built + unit-tested behind the switch; needs founder keys (docs/founder-review.md)
+- [x] **B-1303** FCM push with service account. (2026-11-27: server key for Firebase project tranix-7c812 via FCM_SERVICE_ACCOUNT_FILE; Google accepts it; test push sent to a real phone)
 - [!] **B-1304** Maps (routes, ETA, places) with caching and budget guard — Q-05. — adapter built + unit-tested behind the switch; needs founder keys (docs/founder-review.md)
 - [!] **B-1305** S3 storage with signed URLs. — blocked: founder account needed (docs/founder-review.md)
 - [!] **B-1306** Aadhaar offline verification / DigiLocker — Q-04. — blocked: founder account needed (docs/founder-review.md)
@@ -210,3 +210,4 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 - [x] **B-1615** Clear 4xx instead of 500: empty location item, upload without a file, errors on CSV/PDF downloads (406 / 403), simultaneous same-mobile sign-up (409 MOBILE_IN_USE). (2026-11-27)
 - [x] **B-1616** Refused payment webhook returns a problem body with a code. (2026-11-27)
 - [x] **B-1617** Repost only for CANCELLED or DELIVERED loads (D-34). (2026-11-27)
+- [x] **B-1618** No database values in logs (Hibernate SQL-error warnings off; duplicate race tested in LogPrivacyIT); FCM failures log HTTP status + FCM error. (2026-11-27)
