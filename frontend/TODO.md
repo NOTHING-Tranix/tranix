@@ -52,7 +52,7 @@ Markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropp
 ## Phase 3 — Wallet, notifications, support (needs B-301…B-304, B-1101…B-1104)
 - [x] **A-301** Wallet screen (S-08) + transactions with filters. (2026-11-21)
 - [x] **A-302** Top-up via external browser link; refresh on resume. (2026-11-21)
-- [!] **A-303** FCM setup, token registration, foreground notifications, tap routing. — code done (PushService); needs Firebase project + google-services.json (founder-review F-4)
+- [x] **A-303** FCM setup, token registration, foreground notifications, tap routing. (2026-11-27: Firebase project tranix-7c812; push confirmed on a real phone)
 - [x] **A-304** Notifications screen with tabs (S-09) + home cards. (2026-11-21)
 - [x] **A-305** Support new ticket, list, thread, reopen (S-10). (2026-11-21)
 - [x] **A-306** Home cards: latest Tranix message and trip update. (2026-11-21)
