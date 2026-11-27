@@ -10,6 +10,7 @@ import '../../core/l10n/generated/app_localizations.dart';
 import '../../core/network/interceptors.dart';
 import '../../core/providers.dart';
 import '../../core/router/routes.dart';
+import '../../core/utils/field_limits.dart';
 import '../../core/utils/validators.dart';
 import '../../core/widgets/widgets.dart';
 import '../../shared/models/models.dart';
@@ -88,6 +89,7 @@ class _FarmersScreenState extends ConsumerState<FarmersScreen> {
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
           child: TextField(
             key: const Key('farmer-search'),
+            inputFormatters: Inputs.text(FieldLimits.search),
             decoration: InputDecoration(prefixIcon: const Icon(Icons.search), labelText: l.searchFarmers),
             onSubmitted: (v) => setState(() => _q = v.trim()),
           ),
@@ -253,6 +255,7 @@ class _FarmerFormState extends ConsumerState<_FarmerForm> {
                 key: const Key('f-name'),
                 controller: _name,
                 textCapitalization: TextCapitalization.words,
+                inputFormatters: Inputs.text(FieldLimits.name),
                 decoration: InputDecoration(labelText: l.nameLabel, errorText: fe('name')),
                 validator: (v) => Validators.name(v) ? null : l.nameInvalid,
               ),
@@ -269,6 +272,7 @@ class _FarmerFormState extends ConsumerState<_FarmerForm> {
                 key: const Key('f-village'),
                 controller: _village,
                 textCapitalization: TextCapitalization.words,
+                inputFormatters: Inputs.text(FieldLimits.place),
                 decoration: InputDecoration(labelText: l.village, errorText: fe('village')),
                 validator: (v) => v == null || v.trim().isEmpty ? l.fieldRequired : null,
               ),
@@ -285,6 +289,7 @@ class _FarmerFormState extends ConsumerState<_FarmerForm> {
                 key: const Key('f-land'),
                 controller: _land,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                inputFormatters: Inputs.decimal(),
                 decoration: InputDecoration(labelText: l.landAcresOptional, errorText: fe('landAcres')),
               ),
               if (widget.farmer == null)

@@ -7,6 +7,7 @@ import '../../core/l10n/generated/app_localizations.dart';
 import '../../core/network/interceptors.dart';
 import '../../core/providers.dart';
 import '../../core/settings_provider.dart';
+import '../../core/utils/field_limits.dart';
 import '../../core/utils/formatters.dart';
 import '../../core/widgets/widgets.dart';
 import '../../shared/labels.dart';
@@ -274,6 +275,7 @@ class _OrgSearchState extends ConsumerState<_OrgSearch> {
         key: const Key('org-search'),
         controller: _q,
         textInputAction: TextInputAction.search,
+        inputFormatters: Inputs.text(FieldLimits.search),
         onSubmitted: (_) => _search(),
         decoration: InputDecoration(
           labelText: l.searchOrgHint,

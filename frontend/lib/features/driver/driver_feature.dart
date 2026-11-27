@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
@@ -12,6 +11,7 @@ import '../../core/network/interceptors.dart';
 import '../../core/providers.dart';
 import '../../core/router/routes.dart';
 import '../../core/theme/app_theme.dart';
+import '../../core/utils/field_limits.dart';
 import '../../core/widgets/widgets.dart';
 import '../../shared/labels.dart';
 import '../../shared/models/models.dart';
@@ -334,6 +334,7 @@ class _TruckFormScreenState extends ConsumerState<TruckFormScreen> {
                     key: const Key('truck-number'),
                     controller: _number,
                     textCapitalization: TextCapitalization.characters,
+                    inputFormatters: Inputs.text(FieldLimits.truckNumber),
                     decoration: InputDecoration(labelText: l.truckNumber, errorText: _error?.fieldError('number')),
                     validator: (v) => v == null || v.trim().length < 6 ? l.fieldRequired : null,
                   ),
@@ -352,7 +353,7 @@ class _TruckFormScreenState extends ConsumerState<TruckFormScreen> {
                     key: const Key('truck-capacity'),
                     controller: _capacity,
                     keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                    inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9.]'))],
+                    inputFormatters: Inputs.decimal(),
                     decoration: InputDecoration(labelText: l.capacityTonnes, errorText: _error?.fieldError('capacityTonnes')),
                     validator: (v) => (num.tryParse(v ?? '') ?? 0) > 0 ? null : l.fieldRequired,
                   ),

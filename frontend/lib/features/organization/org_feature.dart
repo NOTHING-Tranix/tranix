@@ -12,6 +12,7 @@ import '../../core/network/interceptors.dart';
 import '../../core/providers.dart';
 import '../../core/router/routes.dart';
 import '../../core/theme/app_theme.dart';
+import '../../core/utils/field_limits.dart';
 import '../../core/utils/formatters.dart';
 import '../../core/utils/validators.dart';
 import '../../core/widgets/widgets.dart';
@@ -272,6 +273,7 @@ class _TruckFormState extends ConsumerState<_TruckForm> {
               key: const Key('ot-number'),
               controller: _number,
               textCapitalization: TextCapitalization.characters,
+              inputFormatters: Inputs.text(FieldLimits.truckNumber),
               decoration: InputDecoration(labelText: l.truckNumber, errorText: _error?.fieldError('number')),
               validator: (v) => v == null || v.trim().length < 6 ? l.fieldRequired : null,
             ),
@@ -288,6 +290,7 @@ class _TruckFormState extends ConsumerState<_TruckForm> {
               key: const Key('ot-capacity'),
               controller: _capacity,
               keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              inputFormatters: Inputs.decimal(),
               decoration: InputDecoration(labelText: l.capacityTonnes, errorText: _error?.fieldError('capacityTonnes')),
               validator: (v) => (num.tryParse(v ?? '') ?? 0) > 0 ? null : l.fieldRequired,
             ),
@@ -458,6 +461,7 @@ class OrgDriversScreen extends ConsumerWidget {
           child: Column(mainAxisSize: MainAxisSize.min, children: [
             TextFormField(
               key: const Key('inv-name'),
+              inputFormatters: Inputs.text(FieldLimits.name),
               decoration: InputDecoration(labelText: l.nameLabel),
               onChanged: (v) => name = v,
               validator: (v) => Validators.name(v) ? null : l.nameInvalid,

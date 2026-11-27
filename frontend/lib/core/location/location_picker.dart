@@ -9,6 +9,7 @@ import '../../shared/models/models.dart';
 import '../l10n/generated/app_localizations.dart';
 import '../network/interceptors.dart';
 import '../providers.dart';
+import '../utils/field_limits.dart';
 import '../widgets/widgets.dart';
 import 'osm_map.dart';
 
@@ -181,6 +182,7 @@ class _LocationPickerScreenState extends ConsumerState<LocationPickerScreen> {
                   key: const Key('loc-search'),
                   controller: _search,
                   textInputAction: TextInputAction.search,
+                  inputFormatters: Inputs.text(FieldLimits.search),
                   onSubmitted: (_) => _find(),
                   decoration: InputDecoration(
                     labelText: l.searchPlace,
@@ -213,11 +215,16 @@ class _LocationPickerScreenState extends ConsumerState<LocationPickerScreen> {
                   key: const Key('loc-address'),
                   controller: _address,
                   maxLines: 2,
+                  inputFormatters: Inputs.text(FieldLimits.address),
                   onChanged: (_) => _addressTouched = true,
                   decoration: InputDecoration(labelText: l.addressLabel),
                 ),
                 const SizedBox(height: 12),
-                TextField(controller: _landmark, decoration: InputDecoration(labelText: l.landmarkOptional)),
+                TextField(
+                  controller: _landmark,
+                  inputFormatters: Inputs.text(FieldLimits.landmark),
+                  decoration: InputDecoration(labelText: l.landmarkOptional),
+                ),
                 if (_error != null)
                   Padding(
                     padding: const EdgeInsets.only(top: 12),

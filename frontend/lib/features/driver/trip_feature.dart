@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
@@ -16,6 +15,7 @@ import '../../core/network/interceptors.dart';
 import '../../core/providers.dart';
 import '../../core/router/routes.dart';
 import '../../core/settings_provider.dart';
+import '../../core/utils/field_limits.dart';
 import '../../core/utils/formatters.dart';
 import '../../core/widgets/widgets.dart';
 import '../../shared/labels.dart';
@@ -188,7 +188,12 @@ class _CurrentTripScreenState extends ConsumerState<CurrentTripScreen> {
         title: Text(title),
         content: Column(mainAxisSize: MainAxisSize.min, children: [
           Text(body),
-          TextField(key: const Key('ask-text'), controller: c, decoration: InputDecoration(labelText: label ?? l.reasonLabel)),
+          TextField(
+            key: const Key('ask-text'),
+            controller: c,
+            inputFormatters: Inputs.text(FieldLimits.note),
+            decoration: InputDecoration(labelText: label ?? l.reasonLabel),
+          ),
         ]),
         actions: [
           TextButton(onPressed: () => Navigator.pop(d), child: Text(l.actionCancel)),
@@ -252,10 +257,15 @@ class _CurrentTripScreenState extends ConsumerState<CurrentTripScreen> {
             key: const Key('rev-amount'),
             controller: amount,
             keyboardType: TextInputType.number,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            inputFormatters: Inputs.amount(),
             decoration: InputDecoration(labelText: l.newAmount),
           ),
-          TextField(key: const Key('rev-reason'), controller: reason, decoration: InputDecoration(labelText: l.reasonLabel)),
+          TextField(
+            key: const Key('rev-reason'),
+            controller: reason,
+            inputFormatters: Inputs.text(FieldLimits.note),
+            decoration: InputDecoration(labelText: l.reasonLabel),
+          ),
         ]),
         actions: [
           TextButton(onPressed: () => Navigator.pop(d, false), child: Text(l.actionCancel)),

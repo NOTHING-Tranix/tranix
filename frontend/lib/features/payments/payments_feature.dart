@@ -7,6 +7,7 @@ import '../../core/l10n/generated/app_localizations.dart';
 import '../../core/network/interceptors.dart';
 import '../../core/providers.dart';
 import '../../core/theme/app_theme.dart';
+import '../../core/utils/field_limits.dart';
 import '../../core/utils/formatters.dart';
 import '../../core/widgets/widgets.dart';
 import '../../shared/labels.dart';
@@ -146,6 +147,7 @@ class PaymentCard extends ConsumerWidget {
                   initialValue: amountText,
                   onChanged: (v) => amountText = v,
                   keyboardType: TextInputType.number,
+                  inputFormatters: Inputs.amount(),
                   decoration: InputDecoration(labelText: l.amountInr),
                 ),
                 const SizedBox(height: 8),
@@ -159,6 +161,7 @@ class PaymentCard extends ConsumerWidget {
                 ),
                 TextFormField(
                   onChanged: (v) => referenceText = v,
+                  inputFormatters: Inputs.text(FieldLimits.reference),
                   decoration: InputDecoration(labelText: l.referenceOptional),
                 ),
                 const SizedBox(height: 16),
@@ -316,6 +319,7 @@ class _HistoryTile extends ConsumerWidget {
         content: TextField(
           key: const Key('dispute-reason'),
           onChanged: (v) => reasonText = v,
+          inputFormatters: Inputs.text(FieldLimits.note),
           decoration: InputDecoration(labelText: l.disputeReason),
         ),
         actions: [

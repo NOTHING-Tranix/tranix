@@ -13,6 +13,7 @@ import '../../core/network/interceptors.dart';
 import '../../core/providers.dart';
 import '../../core/settings_provider.dart';
 import '../../core/theme/app_theme.dart';
+import '../../core/utils/field_limits.dart';
 import '../../core/utils/formatters.dart';
 import '../../core/widgets/widgets.dart';
 import '../../shared/models/models.dart';
@@ -156,7 +157,7 @@ class _WalletScreenState extends ConsumerState<WalletScreen> {
           controller: controller,
           autofocus: true,
           keyboardType: TextInputType.number,
-          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          inputFormatters: Inputs.amount(),
           decoration: InputDecoration(labelText: l.otherAmount),
         ),
         actions: [

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
@@ -13,6 +12,7 @@ import '../../../core/providers.dart';
 import '../../../core/router/routes.dart';
 import '../../../core/session/session_controller.dart';
 import '../../../core/settings_provider.dart';
+import '../../../core/utils/field_limits.dart';
 import '../../../core/utils/formatters.dart';
 import '../../../core/utils/validators.dart';
 import '../../support/support_feature.dart' show requestAccountDeletion;
@@ -277,6 +277,14 @@ class _EditBasicsScreenState extends ConsumerState<EditBasicsScreen> {
           controller: _c[key],
           keyboardType: type,
           maxLength: max,
+          inputFormatters: key == 'pin'
+              ? Inputs.digits(FieldLimits.pin)
+              : Inputs.text(switch (key) {
+                  'name' => FieldLimits.name,
+                  'email' => FieldLimits.email,
+                  'line' => FieldLimits.address,
+                  _ => FieldLimits.place,
+                }),
           decoration: InputDecoration(labelText: label, counterText: '', errorText: _error?.fieldError(key == 'name' || key == 'email' ? key : 'address.$key')),
           validator: validator,
         ),
@@ -417,8 +425,18 @@ class _RoleProfileScreenState extends ConsumerState<RoleProfileScreen> {
             controller: c(key),
             keyboardType: type,
             textCapitalization: caps ? TextCapitalization.characters : TextCapitalization.words,
-            inputFormatters: type == TextInputType.phone ? [FilteringTextInputFormatter.digitsOnly] : null,
-            decoration: InputDecoration(labelText: label, errorText: _error?.fieldError(key)),
+            inputFormatters: type == TextInputType.phone
+                ? Inputs.digits(FieldLimits.mobile)
+                : Inputs.text(switch (key) {
+                    'businessName' || 'networkName' || 'orgName' => FieldLimits.businessName,
+                    'contactPerson' => FieldLimits.name,
+                    'state' || 'district' => FieldLimits.place,
+                    'gstin' => 15,
+                    'pan' => 10,
+                    'vehicleClasses' => 50,
+                    _ => FieldLimits.idNumber, // registration, id and licence numbers
+                  }),
+            decoration: InputDecoration(labelText: label, counterText: '', errorText: _error?.fieldError(key)),
             validator: validator ?? (required ? req : null),
           ),
         );
@@ -652,7 +670,8 @@ class _DocumentFormScreenState extends ConsumerState<DocumentFormScreen> {
               key: const Key('doc-number'),
               controller: _number,
               textCapitalization: TextCapitalization.characters,
-              decoration: InputDecoration(labelText: l.docNumber, errorText: _error?.fieldError('number')),
+              inputFormatters: Inputs.text(FieldLimits.idNumber),
+              decoration: InputDecoration(counterText: '', labelText: l.docNumber, errorText: _error?.fieldError('number')),
             ),
           ],
           if (_type != null && _needsExpiry.contains(_type)) ...[

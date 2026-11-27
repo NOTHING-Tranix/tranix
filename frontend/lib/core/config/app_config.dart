@@ -17,10 +17,12 @@ class AppConfig {
     return AppConfig(
       apiBaseUrl: const String.fromEnvironment(
         'API_BASE_URL',
-        defaultValue: 'http://10.0.2.2:8080/api/v1',
+        defaultValue: 'http://13.204.64.25:8080/api/v1',
       ),
       useMock: const bool.fromEnvironment('USE_MOCK'),
-      env: AppEnv.parse(const String.fromEnvironment('ENV', defaultValue: 'dev')),
+      env: AppEnv.parse(
+        const String.fromEnvironment('ENV', defaultValue: 'dev'),
+      ),
     );
   }
 
@@ -36,6 +38,8 @@ enum AppEnv {
   staging,
   prod;
 
-  static AppEnv parse(String value) =>
-      AppEnv.values.firstWhere((e) => e.name == value, orElse: () => AppEnv.dev);
+  static AppEnv parse(String value) => AppEnv.values.firstWhere(
+    (e) => e.name == value,
+    orElse: () => AppEnv.dev,
+  );
 }

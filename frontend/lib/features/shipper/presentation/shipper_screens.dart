@@ -1,7 +1,6 @@
 
 import 'dart:async';
 
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
@@ -15,6 +14,7 @@ import '../../../core/router/routes.dart';
 import '../../../core/session/session_controller.dart';
 import '../../../core/settings_provider.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/field_limits.dart';
 import '../../../core/utils/formatters.dart';
 import '../../../core/utils/validators.dart';
 import '../../../core/widgets/widgets.dart';
@@ -308,7 +308,13 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
             enabled: enabled,
             keyboardType: type,
             maxLength: maxLength,
-            inputFormatters: type == TextInputType.phone ? [FilteringTextInputFormatter.digitsOnly] : null,
+            inputFormatters: switch (key) {
+              'senderMobile' || 'receiverMobile' => Inputs.digits(FieldLimits.mobile),
+              'quantity' || 'weight' => Inputs.decimal(),
+              'amount' => Inputs.amount(),
+              'senderName' || 'receiverName' => Inputs.text(FieldLimits.name),
+              _ => Inputs.text(FieldLimits.note), // description
+            },
             decoration: InputDecoration(labelText: label, counterText: ''),
             onChanged: onChanged,
             validator: validator,
@@ -522,7 +528,10 @@ class _ReviewLoadScreenState extends ConsumerState<ReviewLoadScreen> {
       ref.invalidate(loadListProvider(true));
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l.posted)));
-      context.go(Routes.loadDetail(load.id));
+      // Land on the new load with the role home underneath, so Back and Home both work.
+      final session = ref.read(sessionProvider);
+      if (session is SignedIn) context.go(Routes.homeFor(session.me.role));
+      unawaited(context.push(Routes.loadDetail(load.id)));
     } on AppException catch (e) {
       setState(() => _error = e);
       if (!mounted) return;
@@ -592,7 +601,7 @@ class LoadDetailScreen extends ConsumerWidget {
     final l = AppLocalizations.of(context);
     final detail = ref.watch(loadDetailProvider(id));
     return Scaffold(
-      appBar: AppBar(title: Text(detail.value?.code ?? l.loadDetails)),
+      appBar: AppBar(title: Text(detail.value?.code ?? l.loadDetails), actions: const [HomeButton()]),
       body: AsyncView(
         value: detail,
         onRetry: () => ref.invalidate(loadDetailProvider(id)),
@@ -705,7 +714,12 @@ class LoadDetailScreen extends ConsumerWidget {
                       ChoiceChip(label: Text(cancelReasonLabel(l, r)), selected: reason == r, onSelected: (_) => setState(() => reason = r)),
                   ],
                 ),
-                if (reason == 'OTHER') TextField(controller: note, decoration: InputDecoration(labelText: l.noteLabel)),
+                if (reason == 'OTHER')
+                  TextField(
+                    controller: note,
+                    inputFormatters: Inputs.text(FieldLimits.note),
+                    decoration: InputDecoration(labelText: l.noteLabel),
+                  ),
                 const SizedBox(height: 16),
                 PrimaryButton(label: l.cancelLoad, onPressed: reason == null ? null : () => Navigator.pop(c, true)),
               ],

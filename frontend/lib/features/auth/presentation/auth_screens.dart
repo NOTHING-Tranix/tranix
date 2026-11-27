@@ -10,6 +10,7 @@ import '../../../core/errors/error_messages.dart';
 import '../../../core/l10n/generated/app_localizations.dart';
 import '../../../core/router/routes.dart';
 import '../../../core/settings_provider.dart';
+import '../../../core/utils/field_limits.dart';
 import '../../../core/utils/validators.dart';
 import '../../../core/widgets/widgets.dart';
 import '../../../shared/models/models.dart';
@@ -104,6 +105,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 key: const Key('name'),
                 controller: _name,
                 textCapitalization: TextCapitalization.words,
+                inputFormatters: Inputs.text(FieldLimits.name),
                 decoration: InputDecoration(labelText: l.nameLabel, errorText: _error?.fieldError('name')),
                 validator: (v) => Validators.name(v) ? null : l.nameInvalid,
               ),

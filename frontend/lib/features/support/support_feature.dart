@@ -152,6 +152,10 @@ class _NewTicketScreenState extends ConsumerState<NewTicketScreen> {
 
   bool get _tripRequired => _type == 'COMPLAINT' || _type == 'PAYMENT_DISPUTE';
 
+  /// The chosen load only counts while it is still in the trip list; the dropdown asserts otherwise.
+  String? _validLoadId(List<(String, String)> trips) =>
+      trips.any((t) => t.$1 == _loadId) ? _loadId : null;
+
   @override
   void dispose() {
     _other.dispose();
@@ -172,7 +176,7 @@ class _NewTicketScreenState extends ConsumerState<NewTicketScreen> {
       final t = await api.create({
         'type': _type,
         if (_type == 'OTHERS') 'otherText': _other.text.trim(),
-        'loadId': ?_loadId,
+        'loadId': ?_validLoadId(ref.read(recentTripsProvider).value ?? const <(String, String)>[]),
         'description': _description.text.trim(),
         'fileIds': ids,
       });
@@ -217,7 +221,7 @@ class _NewTicketScreenState extends ConsumerState<NewTicketScreen> {
             ),
           DropdownButtonFormField<String?>(
             key: ValueKey('t-trip-${trips.length}'),
-            initialValue: _loadId,
+            initialValue: _validLoadId(trips),
             decoration: InputDecoration(labelText: _tripRequired ? l.tripRequired : l.tripOptional),
             items: [
               const DropdownMenuItem<String?>(value: null, child: Text('—')),
@@ -297,7 +301,7 @@ class _TicketScreenState extends ConsumerState<TicketScreen> {
     final value = ref.watch(ticketProvider(widget.id));
     final scheme = Theme.of(context).colorScheme;
     return Scaffold(
-      appBar: AppBar(title: Text(value.value?.code ?? l.support)),
+      appBar: AppBar(title: Text(value.value?.code ?? l.support), actions: const [HomeButton()]),
       body: AsyncView(
         value: value,
         onRetry: () => ref.invalidate(ticketProvider(widget.id)),

@@ -10,6 +10,7 @@ import '../../../core/providers.dart';
 import '../../../core/router/routes.dart';
 import '../../../core/session/session_controller.dart';
 import '../../../core/settings_provider.dart';
+import '../../../core/utils/field_limits.dart';
 import '../../../core/widgets/widgets.dart';
 import '../../../shared/models/models.dart';
 import '../../shared_shell/tab_screens.dart';
@@ -124,6 +125,7 @@ class WelcomeScreen extends ConsumerWidget {
             initialValue: text,
             keyboardType: TextInputType.url,
             autocorrect: false,
+            inputFormatters: Inputs.text(FieldLimits.url),
             onChanged: (v) => text = v,
           ),
         ]),
