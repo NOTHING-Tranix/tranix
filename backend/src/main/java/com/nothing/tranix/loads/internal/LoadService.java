@@ -91,7 +91,12 @@ public class LoadService implements LoadDirectory {
     }
 
     @Transactional(readOnly = true)
-    public Estimate estimate(GeoPoint pickup, GeoPoint drop, Instant pickupWindowStart, VehicleType vehicleType) {
+    public Estimate estimate(UUID userId, GeoPoint pickup, GeoPoint drop, Instant pickupWindowStart, VehicleType vehicleType) {
+        requireShipper(userId);   // B-1614: a shipper tool (can include the suggested price range)
+        return estimate(pickup, drop, pickupWindowStart, vehicleType);
+    }
+
+    Estimate estimate(GeoPoint pickup, GeoPoint drop, Instant pickupWindowStart, VehicleType vehicleType) {
         MapsService.RouteEstimate r = maps.route(pickup, drop);
         Instant eta = pickupWindowStart.plus(Duration.ofMinutes(r.driveMinutes() + settings.getInt("loads.loading_buffer_minutes")));
         return new Estimate(r.distanceKm(), r.driveMinutes(), eta, suggestedRange(r.distanceKm(), vehicleType));

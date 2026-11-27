@@ -6,19 +6,26 @@ import jakarta.validation.ConstraintViolationException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.web.HttpMediaTypeNotAcceptableException;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
+import org.springframework.web.multipart.MultipartException;
+import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
@@ -91,8 +98,39 @@ public class GlobalExceptionHandler {
         return respond(Problems.of(ErrorCode.UNAUTHENTICATED, "Sign in required"));
     }
 
+    /** B-1615: wrong Content-Type (e.g. a file upload sent as JSON) is the client's mistake, not a server error. */
+    @ExceptionHandler({HttpMediaTypeNotSupportedException.class, MultipartException.class})
+    ResponseEntity<Problems.Problem> wrongContentType(Exception ex) {
+        return respond(Problems.of(ErrorCode.VALIDATION_FAILED,
+                "Send this request in the expected format (files as multipart/form-data with a 'file' part)"));
+    }
+
+    /** B-1615: the caller does not accept what this API returns (e.g. a CSV/PDF download asked for as JSON). */
+    @ExceptionHandler(HttpMediaTypeNotAcceptableException.class)
+    ResponseEntity<Problems.Problem> notAcceptable(HttpMediaTypeNotAcceptableException ex) {
+        return respond(new Problems.Problem("about:blank", "Not acceptable", 406, ErrorCode.VALIDATION_FAILED.name(),
+                "This API returns a file - send Accept: */* (or the file type)", List.of()));
+    }
+
+    /**
+     * B-1615: two requests creating the same thing at the same moment (e.g. one mobile signing up twice). The database
+     * keeps only one; the other gets a clear conflict instead of a crash. The message is not logged (it holds values).
+     */
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    ResponseEntity<Problems.Problem> conflict(DataIntegrityViolationException ex) {
+        String msg = String.valueOf(ex.getMostSpecificCause().getMessage());
+        java.util.regex.Matcher m = java.util.regex.Pattern.compile("constraint \"([a-z0-9_]+)\"").matcher(msg);
+        String constraint = m.find() ? m.group(1) : "unknown";
+        log.warn("Data conflict on constraint {}", constraint);
+        if ("identity_user_mobile_key".equals(constraint)) {
+            return respond(Problems.of(ErrorCode.MOBILE_IN_USE, "This mobile number is already registered"));
+        }
+        return respond(Problems.of(ErrorCode.INVALID_STATE, "This was changed at the same moment by another request - please try again"));
+    }
+
     @ExceptionHandler(Exception.class)
     ResponseEntity<Problems.Problem> unexpected(Exception ex) {
+        allowJsonError();
         log.error("Unhandled error", ex);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .contentType(MediaType.APPLICATION_PROBLEM_JSON).body(Problems.internal(500));
@@ -104,12 +142,23 @@ public class GlobalExceptionHandler {
      * which prints rejected values, is switched off (spring.mvc.log-resolved-exception=false).
      */
     private static ResponseEntity<Problems.Problem> respond(Problems.Problem problem) {
+        allowJsonError();
         if (log.isInfoEnabled()) {
             String fields = problem.fields() == null || problem.fields().isEmpty() ? ""
                     : " fields=" + problem.fields().stream().map(ApiException.FieldError::field).toList();
             log.info("Refused {} {}: {}{}", problem.status(), problem.code(), problem.detail(), fields);
         }
         return ResponseEntity.status(problem.status()).contentType(MediaType.APPLICATION_PROBLEM_JSON).body(problem);
+    }
+
+    /**
+     * B-1615: APIs that return a file (CSV export, PDF statement) declare {@code produces}; without this an error from
+     * them (403, 404…) could not be written as problem JSON and became a 500.
+     */
+    private static void allowJsonError() {
+        if (RequestContextHolder.getRequestAttributes() instanceof ServletRequestAttributes a) {
+            a.getRequest().removeAttribute(HandlerMapping.PRODUCIBLE_MEDIA_TYPES_ATTRIBUTE);
+        }
     }
 
     private static String lastNode(String path) {

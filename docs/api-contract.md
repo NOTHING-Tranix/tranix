@@ -38,6 +38,8 @@
 | `WISHLIST_FULL` | 409 | Wish list limit reached |
 | `WISHLIST_EMPTY` | 409 | Posting with WISHLIST_FIRST/ONLY but no usable entries |
 | `RATE_LIMITED` | 429 | |
+
+File downloads (`/wallet/statement` PDF, `/org/trips/export` CSV) need `Accept: */*` (or the file type); `Accept: application/json` only → `406` with code `VALIDATION_FAILED`. Two requests creating the same record at the same moment (e.g. one mobile signing up twice) → `409` (`MOBILE_IN_USE` / `INVALID_STATE`), never 500.
 | `LINK_EXPIRED` | 410 | Public tracking link expired (no load data returned) |
 
 ## 2. Enums
@@ -123,7 +125,7 @@ Language: en | ta | hi
 
 | Method & path | Notes |
 | --- | --- |
-| `POST /loads/estimate` | `{pickup:{lat,lng}, drop:{lat,lng}, pickupWindowStart, vehicleType?}` → `{distanceKm, driveMinutes, deliveryEta, suggestedAmountRange?: {minInr, maxInr}}` |
+| `POST /loads/estimate` | `{pickup:{lat,lng}, drop:{lat,lng}, pickupWindowStart, vehicleType?}` → `{distanceKm, driveMinutes, deliveryEta, suggestedAmountRange?: {minInr, maxInr}}`. LOAD_PROVIDER / FARMER_NETWORK only (`403` otherwise) |
 | `POST /loads` | `LoadCreate` → `Load`. Checks `NOT_VERIFIED`, `INSUFFICIENT_BALANCE` |
 | `GET /loads?scope=ONGOING\|HISTORY&farmerId=&q=&page=` | `[LoadSummary]` |
 | `GET /loads/{id}` | `LoadDetail` |
@@ -177,7 +179,7 @@ LoadDetail = LoadSummary + { pickup, drop, senderName, senderMobile, receiverNam
 | `PUT /driver/duty` | `{onDuty, lat?, lng?}`; going on duty with the phone position updates the driver location used for suggestions |
 | `GET /driver/home` | `{onDuty, truck?, walletBalanceInr?, orgName?, currentLoadId?, suggestionsCount, trustScore, expiringDocuments[]}` |
 | `GET/POST/PUT /driver/truck` | Owner-driver only: `{number, vehicleType, capacityTonnes}`; truck documents via `POST /driver/truck/documents {type: RC|INSURANCE|NATIONAL_PERMIT, fileIds, number, expiresOn}`. Truck view `{id, number, vehicleType, capacityTonnes, status, documents[], allocatedDriver?, ownedByMe}` |
-| `GET /driver/suggestions?sort=NEAREST\|AMOUNT\|EARLIEST` | `[Suggestion{loadId, goodsType, description, quantity, unit, weightTonnes, pickupArea, dropArea, pickupWindowStart, distanceToPickupKm, minutesToPickup, deliveryEta, amountInr, shipperTrustScore, preferredByShipper}]` (poll 30 s while open). Empty list when off duty, not verified or the payer wallet is below the trip charge. `pickupArea`/`dropArea` are town/district level only (never the street, door number or PIN) |
+| `GET /driver/suggestions?sort=NEAREST\|AMOUNT\|EARLIEST` | `[Suggestion{loadId, goodsType, description, quantity, unit, weightTonnes, pickupArea, dropArea, pickupWindowStart, distanceToPickupKm, minutesToPickup, deliveryEta, amountInr, shipperTrustScore, preferredByShipper}]` (poll 30 s while open). Empty list when off duty, not verified, already on a trip, or the payer wallet is below the trip charge. `pickupArea`/`dropArea` are town/district level only (never the street, door number or PIN) |
 | `POST /driver/suggestions/{loadId}/accept` | → `LoadDetail` or `LOAD_TAKEN` / `INSUFFICIENT_BALANCE` |
 | `POST /driver/suggestions/{loadId}/reject` | `{reason?: TOO_FAR\|LOW_AMOUNT\|WRONG_TRUCK\|OTHER}` |
 | `GET /driver/current-trip` | `LoadDetail` with exact locations, contacts; `204` when there is no active trip |

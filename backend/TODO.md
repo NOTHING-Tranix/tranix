@@ -21,7 +21,7 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 | 12 Admin API | 12 | 0 |
 | 13 Real integrations | 7 | 0 |
 | 14 Hardening and release | 8 | 0 |
-| 16 Test fixes (BE-1, BE-3, whole backend) | 11 | 11 |
+| 16 Test fixes (BE-1, BE-3, whole backend) | 16 | 16 |
 
 ## Phase 0 — Foundation
 - [x] **B-001** Verify the existing Spring Boot project against CLAUDE.md (Java 21, Boot 3, base package, Maven wrapper); fix differences or update CLAUDE.md. (2026-11-21)
@@ -204,3 +204,8 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 - [x] **B-1609** Admin VEHICLE verification queue: add truck number, vehicle type, owner name and mobile to each entry. (2026-11-27)
 - [x] **B-1610** `GET /org/trucks/{id}/location` for a truck not on a trip → `200 {onTrip:false}` instead of 409. (2026-11-27)
 - [x] **B-1611** Database pool exhaustion under ~10+ simultaneous writes: the 19 after-commit listeners run on a background pool (`AsyncConfig`, `tranix.async.*`), pool 10 → 20 (`DB_POOL_SIZE`); `BurstIT` = 20 credits at once on a 10-connection pool. (2026-11-27)
+- [x] **B-1612** A driver who is on a trip gets no suggestions. (2026-11-27)
+- [x] **B-1613** A ticket reopened twice at the same moment is reopened once (conditional update). (2026-11-27)
+- [x] **B-1614** `POST /loads/estimate` for shippers only. (2026-11-27)
+- [x] **B-1615** Clear 4xx instead of 500: empty location item, upload without a file, errors on CSV/PDF downloads (406 / 403), simultaneous same-mobile sign-up (409 MOBILE_IN_USE). (2026-11-27)
+- [x] **B-1616** Refused payment webhook returns a problem body with a code. (2026-11-27)

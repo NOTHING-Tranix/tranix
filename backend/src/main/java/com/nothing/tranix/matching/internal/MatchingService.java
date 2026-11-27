@@ -270,7 +270,8 @@ public class MatchingService {
         FleetApi.DriverContext d = fleet.driver(driverId, LocalDate.now(clock.withZone(IST)))
                 .orElseThrow(() -> new ApiException(ErrorCode.FORBIDDEN, "Drivers only"));
         if (!d.onDuty() || !users.get(driverId).verified()
-                || wallet.balance(d.payerUserId()) < wallet.chargeAmount(WalletApi.ChargeType.TRIP_CHARGE)) {
+                || wallet.balance(d.payerUserId()) < wallet.chargeAmount(WalletApi.ChargeType.TRIP_CHARGE)
+                || !loads.activeForDriver(driverId).isEmpty()) {   // B-1612: a driver on a trip gets no suggestions
             return List.of();
         }
         List<Map<String, Object>> out = new ArrayList<>();

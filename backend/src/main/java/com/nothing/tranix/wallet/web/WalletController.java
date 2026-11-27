@@ -1,6 +1,7 @@
 package com.nothing.tranix.wallet.web;
 
 import java.time.YearMonth;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -79,12 +80,15 @@ class WalletController {
     @PostMapping("/api/v1/webhooks/payments")
     @Operation(summary = "Gateway webhook (signature-verified, idempotent). Not called by the app")
     @SecurityRequirements
-    ResponseEntity<Map<String, String>> webhook(@RequestBody String rawBody,
+    ResponseEntity<Map<String, Object>> webhook(@RequestBody String rawBody,
                                                 @RequestHeader(value = "X-Signature", required = false) String signature,
                                                 @RequestHeader(value = "X-Razorpay-Signature", required = false) String razorpaySignature) {
         TopupService.WebhookResult r = topups.handleWebhook(rawBody, razorpaySignature != null ? razorpaySignature : signature);
+        // B-1616: a refused webhook is a normal problem body with a code (result kept for the gateway logs)
         return r == TopupService.WebhookResult.BAD_SIGNATURE
-                ? ResponseEntity.badRequest().body(Map.of("result", r.name()))
+                ? ResponseEntity.badRequest().contentType(MediaType.APPLICATION_PROBLEM_JSON).body(Map.of(
+                        "type", "about:blank", "title", "Validation failed", "status", 400, "code", "VALIDATION_FAILED",
+                        "detail", "Bad or missing signature", "fields", List.of(), "result", r.name()))
                 : ResponseEntity.ok(Map.of("result", r.name()));
     }
 

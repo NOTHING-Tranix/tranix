@@ -117,7 +117,7 @@ class DriverTripController {
     }
 
     @PostMapping("/trips/{id}/locations")
-    Map<String, Object> locations(@PathVariable UUID id, @Valid @RequestBody @NotEmpty List<TripBodies.Point> points) {
+    Map<String, Object> locations(@PathVariable UUID id, @Valid @RequestBody @NotEmpty List<TripBodies.@NotNull @Valid Point> points) {
         return Map.of("accepted", trips.locations(CurrentUser.id(), id,
                 points.stream().map(p -> new TripService.Point(p.lat(), p.lng(), p.speed(), p.at())).toList()));
     }

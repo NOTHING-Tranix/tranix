@@ -135,8 +135,12 @@ public class SupportService {
                 || closedAt.toInstant().plus(Duration.ofDays(settings.getInt("support.reopen_days"))).isBefore(Instant.now(clock))) {
             throw new ApiException(ErrorCode.INVALID_STATE, "This ticket can no longer be reopened — please raise a new one");
         }
-        jdbc.update("update support_ticket set status = 'OPEN', closed_at = null, close_reason = null, unread_for_admin = true, updated_at = ? where id = ?",
+        // B-1613: only the request that actually changes CLOSED → OPEN wins; a simultaneous second reopen is refused
+        int changed = jdbc.update("update support_ticket set status = 'OPEN', closed_at = null, close_reason = null, unread_for_admin = true, updated_at = ? where id = ? and status = 'CLOSED'",
                 Timestamp.from(Instant.now(clock)), ticketId);
+        if (changed == 0) {
+            throw new ApiException(ErrorCode.INVALID_STATE, "This ticket is already open");
+        }
         return detail(userId, ticketId);
     }
 

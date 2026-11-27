@@ -88,7 +88,7 @@ class LoadsController {
     @PostMapping("/estimate")
     @Operation(summary = "Distance, drive time and delivery estimate (+ suggested amount range when history exists)")
     LoadService.Estimate estimate(@Valid @RequestBody EstimateRequest req) {
-        return loads.estimate(req.pickup(), req.drop(), req.pickupWindowStart(), req.vehicleType());
+        return loads.estimate(CurrentUser.id(), req.pickup(), req.drop(), req.pickupWindowStart(), req.vehicleType());
     }
 
     @PostMapping
