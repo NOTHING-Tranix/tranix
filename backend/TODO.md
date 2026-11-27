@@ -209,3 +209,4 @@ The app team needs endpoints in this order: **Phase 1 → 2 → 3 → 4** unbloc
 - [x] **B-1614** `POST /loads/estimate` for shippers only. (2026-11-27)
 - [x] **B-1615** Clear 4xx instead of 500: empty location item, upload without a file, errors on CSV/PDF downloads (406 / 403), simultaneous same-mobile sign-up (409 MOBILE_IN_USE). (2026-11-27)
 - [x] **B-1616** Refused payment webhook returns a problem body with a code. (2026-11-27)
+- [x] **B-1617** Repost only for CANCELLED or DELIVERED loads (D-34). (2026-11-27)

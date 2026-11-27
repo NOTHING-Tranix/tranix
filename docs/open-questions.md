@@ -14,6 +14,6 @@ Not yet decided. One copy at `docs/open-questions.md` in the project root. If a 
 | Q-08 | Legal review: Aadhaar handling, location data retention, privacy policy, terms | Launch | Keep location detail 90 days (setting) | Open |
 | Q-09 | Ranking weights, suggestion batch sizes, radius steps, grace time for "late" | Tuning | Values in product spec; all in settings | Open (tune) |
 | Q-10 | Vision and mission | Docs | — | Open |
-| Q-11 | Can the driver still request a new amount after tapping Reached at pickup (status `LOCATION_REACHED`), or only while `WAITING_FOR_PICKUP`? | B-702, A-509 | Only while `WAITING_FOR_PICKUP` | Open |
+| Q-11 | Can the driver still request a new amount after tapping Reached at pickup (status `LOCATION_REACHED`), or only while `WAITING_FOR_PICKUP`? | B-702, A-509 | Only while `WAITING_FOR_PICKUP` | Closed — D-36 (only while WAITING_FOR_PICKUP) |
 | Q-12 | Wish list settings: ranking bonus size, Wish-list-first window (15 min), Wish-list-only notify time (30 min), max entries (20), relaxed radius (100 km) | B-650s, A-408 | Values as listed; all admin settings | Open (tune) |
 | Q-13 | Goods type list for the posting dropdown | LP-02, FN-03 | Vegetables, Fruits, Grains, Pulses, Spices, Fertilizer, Building material, FMCG, Other (admin setting `lists.goods_types`) | **Closed** (founder 2026-11-21: keep default list; admin-editable) |

@@ -128,7 +128,7 @@ Every status change is stored with its time (timeline). A trip is **closed** (`c
 | Driver | After acceptance, before pickup | Kept; Admin may refund | −5 unless shipper changed details or emergency |
 | Anyone | After pickup | Only through Support; Admin decides | Admin decides |
 
-Cancelled loads can be **reposted** with one tap.
+Cancelled and delivered loads can be **reposted** with one tap ("post the same again", D-34); open or running trips can not.
 
 ## 12. Trust Score and ratings — confirmed (no change)
 

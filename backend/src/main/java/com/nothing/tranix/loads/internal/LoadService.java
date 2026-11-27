@@ -383,8 +383,10 @@ public class LoadService implements LoadDirectory {
     @Transactional
     public Map<String, Object> repost(UUID shipperId, UUID loadId) {
         Load o = owned(shipperId, loadId);
-        if (o.getStatus() == LoadStatus.NOT_ACCEPTED) {
-            throw new ApiException(ErrorCode.INVALID_STATE, "This load is still open");
+        // D-34: repost = "post the same again" for a cancelled or delivered load; never a copy of an open or running trip
+        if (o.getStatus() != LoadStatus.CANCELLED && o.getStatus() != LoadStatus.DELIVERED) {
+            throw new ApiException(ErrorCode.INVALID_STATE, o.getStatus() == LoadStatus.NOT_ACCEPTED
+                    ? "This load is still open" : "This trip is still running - repost it after delivery or cancellation");
         }
         Instant now = Instant.now(clock);
         Duration window = Duration.between(o.getPickupWindowStart(), o.getPickupWindowEnd());

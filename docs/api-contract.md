@@ -131,7 +131,7 @@ Language: en | ta | hi
 | `GET /loads/{id}` | `LoadDetail` |
 | `PUT /loads/{id}` | Only `NOT_ACCEPTED` |
 | `POST /loads/{id}/cancel` | `{reason, note?}` → `LoadDetail`. `reason` from settings `lists.cancel_reasons_shipper` (note required for OTHER). After pickup → `INVALID_STATE` (support only). `LoadDetail.cancelInfo = {chargesKept, trustScorePenalty, supportOnly}` shows the outcome before confirming |
-| `POST /loads/{id}/repost` | → new `Load` |
+| `POST /loads/{id}/repost` | → new `Load`. Only for CANCELLED or DELIVERED loads (D-34); otherwise `INVALID_STATE` |
 | `GET /loads/{id}/tracking` | `{driverLocation{lat,lng,at}, etaAt, routeStatus}` (poll 30 s) |
 | `GET /loads/{id}/otp` | `{purpose, code, expiresAt}` — only for the sender (pickup) / registered receiver (delivery) while active |
 | `POST /loads/{id}/revisions/{revisionId}/confirm` · `/reject` | Shipper answers an amount request |

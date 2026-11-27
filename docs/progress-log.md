@@ -13,6 +13,10 @@ Newest first. Claude adds an entry at the end of every session and at every mile
 
 ---
 
+## 2026-11-27 — Founder decisions D-34…D-36
+- D-34 repost only for cancelled or delivered loads (B-1617, done; the app already showed Repost only there). D-35 freight may be marked paid before delivery (no change). D-36 / Q-11 closed: no amount request after Reached at pickup (no change).
+- Push: the server key on the PC belongs to Firebase project tranix-b187a, the app uses tranix-7c812 — a service-account key from tranix-7c812 is needed (FCM_SERVICE_ACCOUNT_FILE in backend/.env).
+
 ## 2026-11-27 — Complete backend test + B-1611
 - Complete backend test (all modules): automated 100/100; BE-1 155/159, BE-2 133/140 + intense 114/123, BE-3 130/132, whole backend 27/32 (151 APIs × 6 roles, 2,623 calls), timers OK. Report: Tranix-Backend-Complete-Test-Report.docx.
 - Done: B-1611 — ~10+ simultaneous writes used up the 10 database connections (after-commit listeners opened a 2nd connection) → 30 s stall and 500s. Listeners now run on a background pool; pool 20. Live: 20 credits at once 20/20 (was 12/20).

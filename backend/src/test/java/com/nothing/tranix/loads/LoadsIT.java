@@ -166,6 +166,14 @@ class LoadsIT {
         api.send("/api/v1/loads/" + picked + "/cancel", Map.of("reason", "PLANS_CHANGED"), lp)
                 .andExpect(status().isConflict()).andExpect(jsonPath("$.code").value("INVALID_STATE"));
 
+        // D-34: a running trip can not be reposted (no duplicates); a delivered one can ("post the same again")
+        api.send("/api/v1/loads/" + picked + "/repost", Map.of(), lp)
+                .andExpect(status().isConflict()).andExpect(jsonPath("$.code").value("INVALID_STATE"));
+        String done = post(lp);
+        jdbc.update("update loads_load set status = 'DELIVERED' where id = ?", UUID.fromString(done));
+        api.send("/api/v1/loads/" + done + "/repost", Map.of(), lp).andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("NOT_ACCEPTED"));
+
         // repost creates a new open load
         api.send("/api/v1/loads/" + id + "/repost", Map.of(), lp).andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("NOT_ACCEPTED"))
