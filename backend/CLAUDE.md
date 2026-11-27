@@ -83,7 +83,7 @@ Each module: `api/` (public service interfaces + DTOs), `internal/` (entities, r
 2. Pick the task the user names, or the first `[ ]` whose dependencies are done. Mark `[~]`.
 3. For anything non-trivial, show a plan (migrations, entities, endpoints, tests) and wait for approval.
 4. Implement in small steps. `./mvnw verify` must pass.
-5. Mark `[x] (YYYY-MM-DD)`, update the phase count, add a line to `../docs/progress-log.md`, commit.
+5. Mark `[x] (YYYY-MM-DD)`, update the phase count, add a line to `../docs/progress-log.md`, commit on the task branch and open a pull request (root `CLAUDE.md` §4 Git workflow — never push to `main`).
 6. Blocked by an open question → mark `[!]`, note the question ID, tell the user.
 
 Status markers: `[ ]` todo · `[~]` doing · `[x]` done · `[!]` blocked · `[-]` dropped.

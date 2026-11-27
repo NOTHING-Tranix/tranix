@@ -8,4 +8,4 @@ description: Verify, close, log and commit the current task
 4. Update today's entry in `docs/progress-log.md` (Done / In progress / Blocked / Contract changes / Notes).
 5. If `docs/api-contract.md` changed, make sure the other side has a task for it.
 6. New decisions → `docs/decisions.md`; new questions → `docs/open-questions.md`.
-7. Commit (`feat(backend|frontend): <ID> <title>`) and give me a 3-line summary.
+7. Commit on the task branch, never on `main` (`feat(backend|frontend): <ID> <title>`), push the branch and open or update its pull request (CLAUDE.md §4 Git workflow). Give me a 3-line summary with the PR link.

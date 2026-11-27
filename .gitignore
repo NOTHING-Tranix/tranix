@@ -69,5 +69,8 @@ captures/
 Thumbs.db
 desktop.ini
 
+# Uploaded files: users' ID documents, licences, photos and receipts (FILES_DIR in dev) — never commit
+backend/data/
+
 # Firebase config per flavor (F-4) — never commit
 frontend/android/app/src/*/google-services.json
